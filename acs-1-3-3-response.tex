@@ -22,7 +22,7 @@
 \SUBCONCEPT{The Convolution Equation}
 
 \begin{frame}{Response to an impulse}
-For state space system:
+For a state space system:
 \begin{align}
 \dot x &= Ax + Bu & y &= Cx+Du
 \end{align}
@@ -59,7 +59,7 @@ This is the \alert{convolution equation}; it describes
 \end{align}
 Define transformation $z=Tx$: \footnote{Watch out for $x=Tz$ used elsewhere}
 \begin{align}
-\dot z &= TAx + TBu & y &= Cx+Du \\ 
+\dot z &= TAx + TBu & y &= Cx+Du \\
        &= TAT^{-1}z + TBu & y &= CT^{-1}z + Du \\
        &\coloneq \tilde A z + \tilde B u & y &\coloneq \tilde C z + Du
 \end{align}
@@ -138,7 +138,7 @@ z +
 u
 \]
 \begin{align}
-\tilde A &= TAT^{-1} = 
+\tilde A &= TAT^{-1} =
 \begin{bmatrix}
 0 & 1 & 0 & 0 \\
 -\frac{k}{m} & -\frac{c}{m} & 0 & 0 \\
@@ -208,14 +208,14 @@ u(t) &= \StepInput(t)\,, & y(t) &= \StepResponse(t) = \underbrace{CA^{-1} \ee^{A
 
 \begin{align}
 u(t) &= \ee^{st}, \qquad s=\ii\ww\,,\\
-y(t) &= \underbrace{C \ee^{At} \left( x(0)-(sI-A)^{-1}B \right)}_{\text{transient}} + \underbrace{\left(C(sI-A)^{-1}B+D\right)\ee^{st}}_{\text{steady-state}} & 
+y(t) &= \underbrace{C \ee^{At} \left( x(0)-(sI-A)^{-1}B \right)}_{\text{transient}} + \underbrace{\left(C(sI-A)^{-1}B+D\right)\ee^{st}}_{\text{steady-state}} &
 \end{align}
 Consider just steady-state:
 \begin{align}
 y_{ss}(t) &= \left(C(sI-A)^{-1}B+D\right)\ee^{st} \\
         &= G(s) \ee^{st}
 \end{align}
-For real sinusoidal input, 
+For real sinusoidal input,
 \begin{align}
   u(t)&=\cos\ww t \,, &  y_{ss}(t)&= M \cos(\ww t + \theta)
 \end{align}
