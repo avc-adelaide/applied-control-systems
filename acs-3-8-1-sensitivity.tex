@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Sensitivity Functions}
 \begin{document}
@@ -78,11 +78,11 @@
 
 \begin{frame}{Select transfer functions}
 \begin{itemize}
-\item The Gang of Six transfer functions are
+\item The \alert{Gang of Six} transfer functions are
 \[ G_{yr} = \frac{PCF}{1+PC}, \quad -G_{uv} = \frac{PC}{1+PC}, \quad G_{yv} = \frac{P}{1+PC},\]
 \[G_{ur} = \frac{CF}{1+PC}, \quad -G_{uw} = \frac{C}{1+PC}, \quad G_{yw} = \frac{1}{1+PC}.\]
 
-\item The response of the system to load disturbances and measurement noise is of importance for robustness in practice and these transfer functions are known as the sensitivity functions (or the Gang of Four)
+\item The response of the system to load disturbances and measurement noise is of importance for robustness in practice and these transfer functions are known as the sensitivity functions (or the \alert{Gang of Four})
 \end{itemize}
 \end{frame}
 
@@ -103,7 +103,7 @@
 \begin{itemize}
 	\item The Gang of Four captures the response of the system to disturbances, which assists in the design of the controller $C$
 	\item The remaining two transfer functions of the Gang of Six capture the relationship between the reference signal and hte measured output, which can be designed by $F$
-	\item If all of the Gang of Four transfer functions are stable, the feedback system is said to be \textit{internally stable}
+	\item If all of the Gang of Four transfer functions are stable, the feedback system is said to be \alert{internally stable}
 \end{itemize}
 \end{frame}
 

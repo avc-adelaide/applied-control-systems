@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Implementation}
 \begin{document}
@@ -17,7 +17,7 @@
 
 
 
-\SUBCONCEPT{Implentation considerations}
+\SUBCONCEPT{Implementation considerations}
 
 \begin{frame}{Filtering the derivative}
 \begin{itemize}
@@ -48,7 +48,7 @@
 	\item This form of PID controller is 
 	\[u=k_p(\beta r - y) + k_i \int^t_0 \left( r(\tau)-y(\tau) \right) \, \mathrm{d} \tau + k_d\left(\gamma \frac{\mathrm{d}r}{\mathrm{d} t} -\frac{\mathrm{d}y}{\mathrm{d} t}\right)\]
 	where the proportional and derivative actions act on fractions $\beta$ and $\gamma$ of the reference signal
-	\item These parameters are known as the \textit{setpoint weights} and the resulting controller is called a two degree-of-freedom PID controller
+	\item These parameters are known as the \alert{setpoint weights} and the resulting controller is called a two degree-of-freedom PID controller
 	\item The response of the controller to a reference signal is dependent on $\beta$ and $\gamma$ but the response to load disturbances and measurement noise is the same
 \end{itemize}
 \end{frame}

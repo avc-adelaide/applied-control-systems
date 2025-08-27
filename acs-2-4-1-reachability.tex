@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Reachability}
 \begin{document}
@@ -26,15 +26,15 @@ Consider a system where the state evolution is given by the linear state space e
 \[\frac{\mathrm{d} x}{\mathrm{d} t} = Ax+Bu\]
 where $x$ is n-dimensional
 \begin{itemize}
-\item An important question is, is it possible to find a control signal $u(t)$ such that we can reach any state $x$ in the state space given an initial state $x_0$
-\item The set of states that can be reached by steering the system with control input $u(t)$ for $0\leq t\leq T$ from an initial state $x_0$ is known as the \textit{reachable set}, $\mathcal{R}(x_0,\leq T)$
+\item An important question is, is it possible to find a control signal $u(t)$ such that we can reach any state $x$ in the state space given an initial state $x_0$?
+\item The set of states that can be reached by steering the system with control input $u(t)$ for $0\leq t\leq T$ from an initial state $x_0$ is known as the \alert{reachable set}, $\mathcal{R}(x_0,\leq T)$
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Reachability}
 \begin{itemize}
-	\item A linear system is \textit{reachable} if,for any initial state $x_0$ and final state $x_f$, there exists a $T>0$ and control $u(t)$ such that $x(0)=x_0$ and $x(T)=x_f$
+	\item A linear system is \alert{reachable} if,for any initial state $x_0$ and final state $x_f$, there exists a $T>0$ and control $u(t)$ such that $x(0)=x_0$ and $x(T)=x_f$
 	\item In other words, the reachable set $\mathcal{R}(x_0,\leq T)$ is our whole state space
 	\item This is essentially saying, we can get anywhere in our state space in finite time, no matter where we start!
 \end{itemize}
@@ -51,7 +51,7 @@ where $x$ is n-dimensional
 
 \begin{frame}{Controllability}
 	\begin{itemize}
-		\item Reachability is related to a similar property called \textit{controllability}
+		\item Reachability is related to a similar property called \alert{controllability}
 		\item Rather than asking can we reach any state $x$ given an initial state $x_0$, controllability tackles the problem of controlling our system to a desired position $x_f$ based on a general starting position $x$
 		\item These are subtly different but for linear systems, as we study in this course, reachability and controllability are equivalent
 	\end{itemize}
@@ -73,10 +73,10 @@ where $x$ is n-dimensional
 
 \begin{frame}{Example}
 	Consider the simplified balance system (which is a model for many examples which the centre of mass is above a pivot point i.e. segway, inverted pendulum)
-	\begin{align*}
+	\begin{align}
 		(M+m)\ddot{p}-ml\cos \theta \ddot{\theta} &= -ml\sin\theta \dot{\theta}^2+F,\\
 		(J_ml^2)\ddot{\theta} -ml\cos \theta \ddot{p} &= mgl\sin \theta.
-	\end{align*}
+	\end{align}
 	Linearising around $(p,0,0,0)$ gives us the state space matrices
 	\[ A=\begin{bmatrix}
 		0 & 0 & 1 & 0\\
@@ -91,7 +91,7 @@ where $x$ is n-dimensional
 
 \begin{frame}{Example continued}
 The reachability matrix is
-\begin{align*}
+\begin{align}
 	W_r&= \begin{bmatrix}
 		B & AB & A^2 B & A^3B
 	\end{bmatrix} \\ 
@@ -101,7 +101,7 @@ The reachability matrix is
 		J_t/\mu & 0 & gl^3m^3/\mu^2 & 0 \\
 		lm/\mu & 0 & g^2l^2m^2M_t/\mu^2 & 0 
 	\end{bmatrix}
-\end{align*}
+\end{align}
 The determinant of this matrix is $\operatorname{det}(W_r)=-\frac{g^2l^4m^4}{\mu^6}(MJ+mJ+Mml^2)^2\neq 0$ and therefore, the reachability matrix is invertible and so the balance system is reachable!
 \end{frame}
 
@@ -109,7 +109,7 @@ The determinant of this matrix is $\operatorname{det}(W_r)=-\frac{g^2l^4m^4}{\mu
 
 \begin{frame}{Coordinate transformation}
 \begin{itemize}
-	\item Changing the coordinates and writing dynamics in this transformed coordinate system $z=Tx$ often makes calculation more convient
+	\item Changing the coordinates and writing dynamics in this transformed coordinate system $z=Tx$ often makes calculation more convenient
 	\item Reachable canonical form is given by 
 	\[\frac{\mathrm{d}z}{\mathrm{d}t} = \begin{bmatrix}
 		-a_1 & -a_2 & -a_3 &  \cdots & -a_n	\\

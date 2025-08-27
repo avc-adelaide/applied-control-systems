@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Basic Control Functions}
 \begin{document}
@@ -16,23 +16,33 @@
 \end{SUMMARY}
 
 
-
+	
 \SUBCONCEPT{PID controller structure}
 
 \begin{frame}{Control without a model}
+The PID controller is composed of three terms:
 \begin{itemize}
-\item The PID controller is composed of three terms -- the proportional term (P) which depends on the present error, the integral term (I) which depends on the past error, and the derivative term (D) which depends on the future errors
+\item \alert{\textbf{P}}roportional term -- depends on the present error,
+\item \alert{\textbf{I}}ntegral term  -- depends on the past error, and 
+\item \alert{\textbf{D}}erivative term -- depends on the future error.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Control without a model}
+\begin{itemize}
 \item Rather using a full state feedback controller based on a prediction of the future state of a system using a mathematical model, the PID controller uses linear extrapolation of the measured output for control
 \item PID controllers are ubiquitous in industrial applications due to their wide applicability, ease of implementation, and avoidance of using a model
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{figurePID1}
+	\includegraphics{figure1.15}
 	\\
-	\textbf{Figure:} Diagram describing the role of the three PID terms. 
+	\textbf{Figure 1.15}: Action of a PID controller.
 \end{figure}
 \end{frame}
 

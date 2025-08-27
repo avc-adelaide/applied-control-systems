@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{The Bode Plot}
 \begin{document}
@@ -47,19 +47,19 @@ We can visualise $M$ and $\theta$ versus frequency --- the Bode Plot
 \end{frame}
 
 \begin{frame}{Example}
-  \begin{align*}
+  \begin{align}
   G &= \frac{10}{s+5}
     = \frac{10}{5+\jj\ww}
      = \frac{10(5-\jj\ww)}{(5+\jj\ww)(5-\jj\ww)}
      = \frac{50}{25+\ww^2} + \jj\frac{-10\ww}{25+\ww^2}
-  \end{align*}
+  \end{align}
   \bigskip
-  \begin{align*}
+  \begin{align}
   \Real(G(\ww)) & = \frac{50}{25+\ww^2} &
   \lvert G(\ww)\rvert & = \frac{\sqrt{2500+100\ww^2}}{25+\omega^2} \\
   \Imag(G(\ww)) & = \frac{-10\ww}{25+\ww^2} &
   \measuredangle G(\ww) & = \arctan(-10\ww/50)
-  \end{align*}
+  \end{align}
 \end{frame}
 
 \begin{frame}

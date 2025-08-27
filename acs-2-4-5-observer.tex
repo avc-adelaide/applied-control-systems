@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Output Feedback Basics}
 \begin{document}
@@ -32,12 +32,12 @@ the system is observable if for every $T>0$, it is possible to determine the sta
 
 \begin{frame}{Observability matrix}
 	\begin{itemize}
-		\item In a similar way to the reachability condition, for linear systems the \textit{observability} matrix tells us when it is possible to infer the state from observations of the output
+		\item In a similar way to the reachability condition, for linear systems the \alert{observability} matrix tells us when it is possible to infer the state from observations of the output
 		\item The observability matrix is defined as 
 		\[W_o = \begin{bmatrix}
 			C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1}
 		\end{bmatrix}\]
-		\item A linear system is observable if and only if the observability matrix $W_o$ is full row rank (it has $n$ independent rows)
+		\item A linear system is \alert{observable} if and only if the observability matrix $W_o$ is full row rank (it has $n$ independent rows)
 	\end{itemize}
 \end{frame}
 
@@ -80,10 +80,10 @@ so the error between our estimate and the true state goes to zero if $(A-LC)$ ha
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Eigenvalue assignment}
+\begin{frame}{Duality}
 \begin{itemize}
 	\item The problem of assigning eigenvalues for our observer is similar to the problem of assigning eigenvalues for a state feedback controller 
-	\item Both problems are \textit{dual} with the following equivalences
+	\item Both problems are \alert{dual} with the following equivalences
 	\[A \leftrightarrow A^T, \quad B \leftrightarrow C^T, \quad K \leftrightarrow L^T, \quad W_{\mathrm{r}} \leftrightarrow W_{\mathrm{o}}^T \]
 	\item This means we can use the same algorithms to design  linear observers and linear controllers
 \end{itemize}

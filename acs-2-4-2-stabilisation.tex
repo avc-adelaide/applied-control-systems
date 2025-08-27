@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Stabilisation by State Feedback}
 \begin{document}
@@ -23,7 +23,7 @@
 \begin{frame}{Controller structure}
 \begin{itemize}
 \item We will assume we have a system with a linear state model that has a single input for control
-\item How do we design the dynamics of a system through feedback of the state
+\item How do we design the dynamics of a system through feedback of the state?
 \item The goal of a feedback controller is to control the output state $y$ to a desired state given by the input $r$
 \end{itemize}
 \begin{figure}
@@ -78,7 +78,7 @@
 \[  y=\tilde{C} z=\begin{bmatrix}
 	b_1 & b_2 & \cdots & b_n
 \end{bmatrix}z \]
-\item From the Reachability lecture slides, the open loop system has characteristic polynomial
+\item From the \alert{Reachability} lecture slides, the open loop system has characteristic polynomial
 \[\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n\]
 \end{itemize}
 \end{frame}
@@ -103,9 +103,9 @@
 			b_1 & b_2 & \cdots & b_n
 		\end{bmatrix}z\]
 		\item The closed loop system has characteristic polynomial
-		\begin{align*}
+		\begin{align}
 		\operatorname{det}(sI-A+BK) &= s^n+\left(a_1+\tilde{k}_1\right) s^{n-1}+\left(a_2+\tilde{k}_2\right) s^{n-2}\\
-		&+\cdots+\left(a_{n-1}+\tilde{k}_{n-1}\right) s+a_n+\tilde{k}_n   \end{align*}
+		&+\cdots+\left(a_{n-1}+\tilde{k}_{n-1}\right) s+a_n+\tilde{k}_n   \end{align}
 	\end{itemize}
 \end{frame}
 

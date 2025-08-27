@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Frequency Domain Modeling}
 \begin{document}
@@ -52,11 +52,11 @@ where $\omega_f$ is the \emph{fundamental frequency} of the periodic input (i.e.
 \frametitle{Frequency domain --- single frequency}
 \begin{itemize}
 \item We have sinusoidal input $u(t)$ and sinusoidal output $y(t)$
-\item Gain $M$ and phase $\theta$ from input to output given at each frequency $\ww$ by
+\item Gain $M$ and phase $\theta$ from input to output given at each freq.\,$\ww$ by
 \begin{align}
 G(\ii\ww) &= C(\ii\ww I - A)^{-1}B + D = M\ee^{\ii\theta}
 \end{align}
-where we set $\ww=k \omega_f$ for $k=1,2,\dots$
+where we set $\ww=k \omega_f$ for $k=0,1,2,\dots$
 \item See topic 3.4 / \AMref{§6.3}
 \item \alert{This equation generalises for complex exponential inputs as well: $u(t) = \ee^{st}$:
 \begin{align}

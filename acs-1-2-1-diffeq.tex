@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Solving Differential Equations}
 \begin{document}
@@ -7,7 +7,7 @@
 \begin{SUMMARY}
 \begin{itemize}
 \item A little more formal treatment of ODEs
-\item Different solution types 
+\item Different solution types
 \end{itemize}
 \vfill References:
 \begin{itemize}
@@ -24,9 +24,9 @@ Recall our ODE:
 \end{align}
 Let's be more formal:
 \begin{align}
-x &= \Matr{x_1\\x_2\\\vdots\\x_n} \in \Reals^n & 
-u &= \Matr{u_1\\u_2\\\vdots\\u_p} \in \Reals^p & 
-y &= \Matr{y_1\\y_2\\\vdots\\y_q} \in \Reals^q 
+x &= \Matr{x_1\\x_2\\\vdots\\x_n} \in \Reals^n &
+u &= \Matr{u_1\\u_2\\\vdots\\u_p} \in \Reals^p &
+y &= \Matr{y_1\\y_2\\\vdots\\y_q} \in \Reals^q
 \end{align}
 Smooth maps:
 \begin{align}
@@ -41,7 +41,7 @@ When we design a controller, the input $u$ is generally determined by the state:
 \begin{align}
 u &= \alpha(x) & \Deriv{x}{t} &= f(x,u) = f(x,\alpha(x)) \coloneq F(x) \label{eq:Fx}
 \end{align}
-At this point, $\alpha\colon\Reals^n \to \Reals^p$ could be any smooth nonlinear function 
+At this point, $\alpha\colon\Reals^n \to \Reals^p$ could be any smooth nonlinear function
 \bigskip
 
 If we can solve $\dot x=F(x)$ we know how the system behaves---what types of solution are possible?

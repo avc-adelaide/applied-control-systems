@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Integral Action}
 \begin{document}
@@ -23,8 +23,7 @@
 \begin{itemize}
 \item When a perfect model is available, state feedback allows systems in closed-loop to track command signals
 \item In cases where our model is only approximately accurate, our controller may have non-zero steady-state error
-\item It may be beneficial then, to use integral feedback by feeding back the integral of the error signal
-\item When integral feedback is applied, even if we have errors in our model parameters or disturbances to our system, the controller will compensate and result in perfect tracking
+\item When \alert{integral feedback} is introduced, even if we have errors in our model parameters or disturbances to our system, the controller will compensate and result in perfect tracking
 \end{itemize}
 \end{frame}
 

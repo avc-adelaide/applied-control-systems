@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Stability Margins}
 \begin{document}
@@ -33,9 +33,9 @@
 \begin{frame}{Different margins}
 There are three types of margin to assess stability
 \begin{itemize}
-	\item The stability margin $s_m$ describes the shortest distance of the Nyquist curve to the critical point
-	\item As increasing the controller gain expands the Nyquist curve radially, the gain margin $g_m$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<g_m<5$)
-	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the phase margin $\varphi_m$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \varphi_m < 60^\circ$)
+	\item The \alert{stability margin} $s_m$ describes the shortest distance of the Nyquist curve to the critical point
+	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $g_m$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<g_m<5$)
+	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\varphi_m$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \varphi_m < 60^\circ$)
 \end{itemize}
 The gain and phase margins may also be determined from the Bode plots
 	
@@ -45,9 +45,9 @@ The gain and phase margins may also be determined from the Bode plots
 
 \begin{frame}{Margins from Nyquist}
 \begin{itemize}
-	\item The stability margin $s_m$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
-	\item The gain margin $g_m$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
-	\item The phase margin $\varphi_m$ is the angle between the the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
+	\item The \alert{stability margin} $s_m$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
+	\item The \alert{gain margin} $g_m$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
+	\item The \alert{phase margin} $\varphi_m$ is the angle between the the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
 \end{itemize}
 \end{frame}
 

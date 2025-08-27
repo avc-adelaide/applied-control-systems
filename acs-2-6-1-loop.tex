@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{The Loop Transfer Function}
 \begin{document}
@@ -28,7 +28,7 @@
 \end{frame}
 
 \begin{frame}{Loop transfer function}
-Rather than calculating the characteristic polynomial of the closed loop system (which is limited in aiding design of a controller), we may instead analyse the \textit{loop transfer function}
+Rather than calculating the characteristic polynomial of the closed loop system (which is limited in aiding design of a controller), we may instead analyse the \alert{loop transfer function}
 \[L(s)=P(s)C(s)\]
 which represents the transfer function from input at A to output at B multiplied by $-1$ (to account for negative feedback).
 
@@ -45,9 +45,9 @@ which represents the transfer function from input at A to output at B multiplied
 \begin{itemize}
 	\item Consider inputting a sinusoidal input of frequency $\omega_0$ at A
 	\item To maintain the oscillation, the signal at B will also be a sinusoid with frequency $\omega_0$ and therefore
-	\[L(i\omega_0)=-1.\]
-	\item This condition says that our frequency response passes through the value of $-1$, known as the \textit{critical point}
-	\item If we require stability at a frequency $\omega_c$ such that $\angle L\left(i \omega_{\mathrm{c}}\right)=180^{\circ}$, we therefore want our signal at B to have a smaller amplitude than the input at A and so $|L(i\omega_c)|<1$
+	\[L(\jj\omega_0)=-1.\]
+	\item This condition says that our frequency response passes through the value of $-1$, known as the \alert{critical point}
+	\item If we require stability at a frequency $\omega_c$ such that $\angle L\left(\jj \omega_{\mathrm{c}}\right)=180^{\circ}$, we therefore want our signal at B to have a smaller amplitude than the input at A and so $|L(\jj\omega_c)|<1$
 \end{itemize}
 \end{frame}
 
@@ -73,7 +73,7 @@ which represents the transfer function from input at A to output at B multiplied
 \item We can use the Bode plots of the loop transfer function to assess what the magnitude of the output signal of the loop transfer function is corresponding to a phase of $180^\circ$
 \item If $\theta_0$ is the phase of the undelayed system at a frequency $\omega_0$, then a time delay of 
 \[\tau_c=\frac{\pi+\theta_0}{\omega_0}\]
-will cause $L(i\omega_0)$ to be equal to $-1$
+will cause $L(\jj\omega_0)$ to be equal to $-1$
 \end{itemize}
 \end{frame}
 

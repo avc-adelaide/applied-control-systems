@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{State Space Models}
 \begin{document}
@@ -51,7 +51,7 @@ In the previous concept, we wrote:
 \end{align}
 Let's now linearise with $c(\dot q) \eqdef c q$:
 \begin{align}
-\dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- cq/m - kq/m\end{bmatrix} 
+\dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- cq/m - kq/m\end{bmatrix}
               = \begin{bmatrix}0 & 1\\- c/m & - k/m\end{bmatrix}\begin{bmatrix} q\\\dot q\end{bmatrix} = Ax
 \end{align}
 \end{frame}
@@ -80,7 +80,7 @@ Bu = \begin{bmatrix} 0\\ 1/m\end{bmatrix}\begin{bmatrix} f\end{bmatrix} = \begin
   (0,0) to[sV, l=$v_s$] (0,3)
         to[R, l=$R$] (3,3)
         to[L, l=$L$] (6,3)
-        to[C, l=$C$] (6,0) 
+        to[C, l=$C$] (6,0)
         -- (0,0);
 \end{circuitikz}
 \end{center}
@@ -99,7 +99,7 @@ General mechanical dynamics:
 \underbrace{M(q)}_{\text{\tiny inertia matrix}}\ddot q + \underbrace{C(q,\dot q)}_{\text{\tiny coriolis, damping}} + \underbrace{K(q)}_{\text{\tiny potential}} = \underbrace{B(q)u}_{\text{\tiny external}}
 \end{align}
 `Then it can be shown that' for a Segway-style system:
-\begin{equation}
+\begin{align}
 \begin{bmatrix}
 (M + m) & -ml \cos\theta \\
 -ml \cos\theta & (J + ml^2)
@@ -119,7 +119,7 @@ F \\
 0
 \end{bmatrix}
 \label{eq:segway}
-\end{equation}
+\end{align}
 \end{frame}
 
 
@@ -130,7 +130,7 @@ Defining some shorthands:
 M_t &= M+m & J_t&=J+ml^2 & c_\theta&=\cos\theta & s_\theta &= \cos\theta
 \end{align}
 Equation \eqref{segway} becomes:
-\begin{equation}
+\begin{align}
 \Deriv{}{t}
 \begin{pmatrix}
 q \\
@@ -147,7 +147,7 @@ q \\
 \frac{-ml^2 s_\theta c_\theta \dot{\theta}^2 + M_t gl s_\theta - cl c_\theta \dot{q} - \gamma(M_t/m) \dot{\theta} + lc_\theta u}
 {J_t (M_t/m) - m(lc_\theta)^2}
 \end{pmatrix}
-\end{equation}
+\end{align}
 Output equation:
 \begin{align}
 y = \begin{bmatrix}
@@ -160,7 +160,7 @@ q\\\theta
 \begin{frame}
 \frametitle{Small angle approximations}
 With $\mu = M_tJ_t - m^2l^2$:
-\begin{equation}
+\begin{align}
 \Deriv{}{t}
 \begin{bmatrix}
 q \\
@@ -189,7 +189,7 @@ J_t / \mu \\
 l m / \mu
 \end{bmatrix}
 u
-\end{equation}
+\end{align}
 
 Output:
 \begin{align}
@@ -246,7 +246,7 @@ Comments:
 \item
 These are easier and more natural to calculate than continuous ODEs, but they are an approximation
 \item
-For discrete systems, $A$, $B$, \dots, change depending on the time step 
+For discrete systems, $A$, $B$, \dots, change depending on the time step
 \item
 You can learn control entirely from the discrete perspective; we want to consider both but are `continuous by default'
 \end{itemize}
@@ -301,7 +301,7 @@ Lyapunov stability analysis:
 \end{itemize}
 \begin{align}
 V(x) &= \frac12kx_1^2 + \frac12mx_2^2 & \hspace{5cm}\\
-\Deriv{V(x)}{t} &= 
+\Deriv{V(x)}{t} &=
 \end{align}
 \vfill
 \vspace*{1cm}

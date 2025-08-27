@@ -3,8 +3,8 @@
 %% MATHS %%
 %%%%%%%%%%%
 
-\newcommand\ii{\mathbb{i}} % imaginary number
-\newcommand\jj{\mathbb{i}} % imaginary number
+\newcommand\ii{\mathfrak{i}} % imaginary number
+\newcommand\jj{\ii} % imaginary number
 \newcommand\ee{\mathrm{e}} % exponential e
 
 \newcommand\TimeDel{\tau}
@@ -81,3 +81,7 @@
 \newcommand\Real{\operatorname{Re}}
 \newcommand\Imag{\operatorname{Im}}
 \newcommand\Reals{\mathbb{R}}
+
+% this is a surprising awful hack, can't believe it works:
+% https://tex.stackexchange.com/questions/32526/use-displaymath-shorthand-for-align-and-other-amsmath-environments
+\def\[#1\]{\begin{align}#1\end{align}}

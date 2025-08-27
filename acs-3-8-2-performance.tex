@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Performance Specifications}
 \begin{document}
@@ -100,15 +100,15 @@
 \begin{frame}{The sensitivity function}
 \begin{itemize}
 \item The sensitivity function $S$ shows how feedback influences the reponse of the output to both load disturbances and measurement noise
-\item Disturbances with frequencies such that $|S(i\omega)|<1$ are attenuated and disturbances with frequencies with $|S(i\omega)|>1$ are amplified by feedback
-\item The sensitivity crossover frequency $\omega_{sc}$ is the lowest frequency where $|S(i\omega)=1$
+\item Disturbances with frequencies such that $|S(\ii\omega)|<1$ are attenuated and disturbances with frequencies with $|S(\ii\omega)|>1$ are amplified by feedback
+\item The sensitivity crossover frequency $\omega_{sc}$ is the lowest frequency where $|S(\ii\omega)=1$
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Relation to Nyquist}
 \begin{itemize}
 	\item As we have $S=\tfrac{1}{1+L}$, disturbance rejection can be visualised on a Nyquist plot of the loop transfer function
-	\item The complex number $1+L(i\omega)$ is the inverse of $S(i\omega)$ and can be viewed as the vector from $-1$ to the point $L(i\omega)$ on the Nyquist curve
+	\item The complex number $1+L(\ii\omega)$ is the inverse of $S(\ii\omega)$ and can be viewed as the vector from $-1$ to the point $L(\ii\omega)$ on the Nyquist curve
 	\item The sensitivity is less than 1 for points outside a circle with radius 1 centred at -1 (attenuation of disturbances)
 \end{itemize}
 \begin{figure}

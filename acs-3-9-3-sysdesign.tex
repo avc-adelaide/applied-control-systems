@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{System Design Considerations}
 \begin{document}
@@ -91,7 +91,7 @@
 	\item The Pad\'{e} approximation of a time delay provides a unity gain, rational transfer function whose phase approximates the time delay
 	\item The first and second order Pad\'{e} approximations are
 	\[G_1(s)=\frac{1-s\tau/2}{1+s\tau/2}, \quad G_2(s)=\frac{1-\tau s/2 + \tau^2 s^2/12}{1+\tau s/2 + \tau^2 s^2/12}\]
-	\item The first order approximation has a right half-plane at $s=2/\tau$ and the second order approximation has a complex conjugate pair of right half-plane zeros at $s=(3\pm i\sqrt{3})/\tau$
+	\item The first order approximation has a right half-plane at $s=2/\tau$ and the second order approximation has a complex conjugate pair of right half-plane zeros at $s=(3\pm \ii\sqrt{3})/\tau$
 \end{itemize}
 \end{frame}
 
@@ -101,7 +101,7 @@
 \begin{frame}{Limits of improvement}
 \begin{itemize}
 	\item Another limitation to controller design is that it is not possible to uniformly improve certain closed loop performance characteristics
-	\item Recall the sensitivity function $S$ that attenuates disturbances of frequency $\omega$ if $|S(i\omega)|<1$ and amplifies disturbances if $|S(i\omega)|>1$
+	\item Recall the sensitivity function $S$ that attenuates disturbances of frequency $\omega$ if $|S(\ii\omega)|<1$ and amplifies disturbances if $|S(\ii\omega)|>1$
 	\item The sensitivity function cannot be made small over a wide frequency range
 	\item Bode's Integral Formula is a conserved quantity that implies that reducing the sensitivity at one frequency increases it at another
 	\item Control design is always a compromise
@@ -112,7 +112,7 @@
 \begin{frame}{The integral formula}
 	\begin{itemize}
 		\item Let $S(s)$ be the sensitivity function of an internally stable closed loop system with loop transfer function $L(s)$, assume that $sL(s)$ goes to zero as $s\rightarrow \infty$ then Bode's Integral Formula says
-		\[\int^\infty_0 \log |S(i\omega)|\, \mathrm{d}\omega  = \int^\infty_0 \log \frac{1}{|1+L(i\omega)|}\, \mathrm{d}\omega = \pi \sum p_k\]
+		\[\int^\infty_0 \log |S(\ii\omega)|\, \mathrm{d}\omega  = \int^\infty_0 \log \frac{1}{|1+L(\ii\omega)|}\, \mathrm{d}\omega = \pi \sum p_k\]
 		where $p_k$ are the right half-plane poles of $L(s)$
 		\item This integral is therefore constant and can be regarded as a conservation law
 	\end{itemize}

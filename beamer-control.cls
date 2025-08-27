@@ -100,6 +100,16 @@
 \usepackage{beamer-control-maths}
 
 %%%%%%%%%%%%%%%%%
+%% COLOURS
+%%%%%%%%%%%%%%%%%
+
+\definecolor{NorthTce}{rgb}{0.5,0.42,0.97}
+\definecolor{AUHighlight}{rgb}{0.141,0.278,0.965}
+\definecolor{AUBlue}{rgb}{0.0745,0.0627,0.302}
+\setbeamercolor{structure}{fg=NorthTce}
+\setbeamercolor{alerted text}{fg=NorthTce}
+
+%%%%%%%%%%%%%%%%%
 %% BIBLIOGRAPHY
 %%%%%%%%%%%%%%%%%
 
@@ -123,14 +133,19 @@
 %% FONTS
 %%%%%%%%%%%%
 
-\setmainfont{texgyrepagella}[
-  Extension = .otf ,
-  UprightFont = *-regular ,
-  ItalicFont = *-italic ,
-  BoldFont = *-bold ,
-  BoldItalicFont = *-bolditalic ,
-]
-\setmathfont{texgyrepagella-math.otf}
+
+\IfFontExistsTF{AldusNovaPro-Book.otf}{
+  \setmainfont{aldus-nova}
+}{
+  \setmainfont{texgyrepagella}[
+    Extension = .otf ,
+    UprightFont = *-regular ,
+    ItalicFont = *-italic ,
+    BoldFont = *-bold ,
+    BoldItalicFont = *-bolditalic ,
+  ]
+}
+\setmathfont{latinmodern-math.otf}
 
 %%%%%%%%%%%%
 %% TIKZ
@@ -193,14 +208,6 @@
     \frametitle{References}
     \printbibliography[heading=none]
   \end{frame}
-}
-
-\newcommand\PPTSLIDE[2][\PPTWD]{%
-  {\includegraphics[page=#2,width=#1,trim=50 40 50 40,clip]{Advanced_Control_PPT}}
-}
-
-\newcommand\PPTSLIDECLIP[3][\PPTWD]{%
-  {\includegraphics[page=#2,width=#1,trim=#3,clip]{Advanced_Control_PPT}}
 }
 
 %%%%%%%%%%%%
@@ -286,11 +293,6 @@
 
 \usefonttheme{serif}
 \beamertemplatenavigationsymbolsempty
-\definecolor{NorthTce}{rgb}{0.5,0.42,0.97}
-\definecolor{AUHighlight}{rgb}{0.141,0.278,0.965}
-\definecolor{AUBlue}{rgb}{0.0745,0.0627,0.302}
-\setbeamercolor{structure}{fg=NorthTce}
-\setbeamercolor{alerted text}{fg=NorthTce}
 
 \setbeamertemplate{headline}
   {%
@@ -458,4 +460,4 @@
   {\vskip0.5em}
   {}
   {}
-\makeatother  
+\makeatother

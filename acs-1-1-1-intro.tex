@@ -1,4 +1,4 @@
-\documentclass{beamer-control}
+\documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
 \INCLUDEONLY{Introduction}
 \begin{document}
@@ -110,7 +110,11 @@ Control systems are truly multidisciplinary:
 \begin{frame}
 \frametitle{Simple Forms of Feedback \AMref{§1.6}}
 \framesubtitle{On-Off Control}
-\fbox{\includegraphics[width=\linewidth,trim=0 41 0 0,clip]{figure1.14}}
+\begin{figure}
+	\includegraphics{figure1.14} \\
+	\textbf{Figure 1.14}: Input/output characteristics of on-oﬀ controllers.
+\end{figure}
+\vfil
 \begin{gather}
 u(t) = \operatorfont{sign}(e)\, u_{\mathrm{max}}
 \end{gather}
@@ -119,7 +123,10 @@ u(t) = \operatorfont{sign}(e)\, u_{\mathrm{max}}
 \begin{frame}
 \frametitle{Simple Forms of Feedback \AMref{§1.6}}
 \framesubtitle{PID Control}
-\fbox{\includegraphics[width=\linewidth,trim=0 52 0 0,clip]{figure1.15}}
+\begin{figure}
+	\includegraphics{figure1.15} \\
+	\textbf{Figure 1.15}: Action of a PID controller.
+\end{figure}
 \vfil
 \begin{gather}
 u(t) = k_p e(t) + k_i \int_0^t e(\tau) \mathrm d\tau + k_d \frac{\mathrm d e(t)}{\mathrm d t}
