@@ -3,7 +3,7 @@
 \PassOptionsToClass{aspectratio=43}{beamer}
 \LoadClassWithOptions{beamer}
 
-\title{{\large ENGM\,X004}\\\bigskip {\huge \emph{Applied Control Systems}}\\\bigskip \textsc{Course Notes}}
+\title{\textsc{\large engm\,x304}\\\bigskip {\huge \emph{Applied Control Systems}}\\\bigskip \textsc{Course Notes}}
 \author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
 \date{\small \emph{Document compiled \the\year/\the\month/\the\day}}
 
@@ -85,7 +85,9 @@
 }
 
 \newcommand\astrom[1][]{KJ Åström \& RM Murray (2020), 2nd Ed. #1}
-\newcommand\AMref[1]{(\AA\&M: #1)}
+\NewDocumentCommand\AMref{s m}{%
+  \IfBooleanTF{#1}{\AA\&M: #2}{(\AA\&M: #2)}%
+}
 
 \newcommand\QUIZ[1]{\fbox{Q:\em #1}}
 
@@ -340,7 +342,7 @@
 \setbeamertemplate{subsection page}{
   \centering
   \includegraphics{au-logo}\par\bigskip
-  {\large \scshape Applied Control Systems --- {ENGM\,X004}\par}
+  {\large \scshape Applied Control Systems --- engm\,x304\par}
   \bigskip\bigskip
   \ifdefined\currMODULE
   \begingroup

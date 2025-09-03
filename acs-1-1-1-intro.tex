@@ -25,16 +25,16 @@
 
 Dynamical systems have variables (or \emph{states}) $\mathbf{x}$ which change over time:
 \begin{align}
-\dot \mathbf{x}(t) = f(\mathbf{x},t)
+\dot {x}(t) = f(\mathbf{x},t)
 \end{align}
 They generally do not exist alone, and include inputs $\mathbf{u}$:
 \begin{align}
-\dot \mathbf{x}(t) = f(\mathbf{x},t) + \mathbf{u}(t)
+\dot {x}(t) = f(\mathbf{x},t) + \mathbf{u}(t)
 \end{align}
 Dynamical systems can be linear or nonlinear, solvable analytically or only numerically.
 
 \bigskip
-\uncover<2>{\emph{\alert{We must understand dynamical systems before control systems.}}}
+\emph{\alert{We must understand dynamical systems before control systems.}}
 \end{frame}
 
 \begin{frame}{What is Feedback? \AMref{§1.1}}
@@ -60,7 +60,7 @@ Augmenting a system to change/improve its dynamics:
 \end{frame}
 
 \begin{frame}
-\frametitle{The cruise control feedback system}
+\frametitle{The canonical control block diagram}
 
 \end{frame}
 
@@ -74,6 +74,20 @@ Control systems are truly multidisciplinary:
 \item Economics (tariffs!)
 \item Biology, Ecology, Climate Change \dots
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Simple control systems examples}
+
+\begin{itemize}
+\item  Cruise control in a car -- controls velocity
+\item  Active noise control headphones -- controls sound pressure level
+\item  Voltage regulator circuit -- controls voltage
+\item  Hydraulic valve circuit -- controls flow rate
+\item  Thermostat (house/oven/sous vide) -- controls temperature
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
@@ -101,18 +115,13 @@ Control systems are truly multidisciplinary:
 \end{frame}
 
 
-\begin{frame}
-\frametitle{The canonical control block diagram}
-
-\end{frame}
-
 
 \begin{frame}
 \frametitle{Simple Forms of Feedback \AMref{§1.6}}
 \framesubtitle{On-Off Control}
 \begin{figure}
 	\includegraphics{figure1.14} \\
-	\textbf{Figure 1.14}: Input/output characteristics of on-oﬀ controllers.
+	\textbf{Figure 1.14}: Input/output characteristics of on-off controllers.
 \end{figure}
 \vfil
 \begin{gather}
