@@ -6,6 +6,7 @@ on:
     paths:
       - 'worked-examples/**'
       - 'worked-examples-template.sty'
+      - 'beamer-control-maths.sty'
       - '.github/workflows/compile-examples.yml'
   workflow_dispatch:
 
@@ -15,11 +16,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "examples-pages"
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
-  compile:
+  compile-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,7 +32,7 @@ jobs:
           sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science
 
       - name: Create build directory
-        run: mkdir -p _site/examples
+        run: mkdir -p _site
 
       - name: Compile worked examples
         run: |
@@ -61,7 +62,7 @@ jobs:
             
             # Copy PDF to site directory if it was created
             if [ -f "$filename.pdf" ]; then
-              cp "$filename.pdf" ../_site/examples/
+              cp "$filename.pdf" ../_site/
               echo "✓ Successfully compiled $filename.pdf"
             else
               echo "✗ Failed to compile $filename.pdf"
@@ -73,7 +74,7 @@ jobs:
 
       - name: Create index page
         run: |
-          cat > _site/examples/index.html << 'EOF'
+          cat > _site/index.html << 'EOF'
           <!DOCTYPE html>
           <html lang="en">
           <head>
@@ -204,16 +205,9 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: '_site/examples'
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: compile
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

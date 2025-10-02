@@ -62,3 +62,5 @@ The worked examples are automatically compiled and published to GitHub Pages via
 - Manual workflow dispatch
 
 View the published examples at: [GitHub Pages URL will be available after first deployment]
+
+**Note:** The `compile-examples.yml` workflow will compile all LaTeX files and deploy them to GitHub Pages. If the repository has Jekyll enabled, you may need to disable the `jekyll-gh-pages.yml` workflow or configure it to work alongside the examples workflow.
