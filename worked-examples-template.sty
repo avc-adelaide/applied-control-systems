@@ -1,0 +1,110 @@
+
+\ProvidesPackage{worked-examples-template}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amssymb,array,booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+% TikZ and related packages
+\usepackage{tikz}
+\usepackage[american]{circuitikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows,arrows.meta,calc}
+\usetikzlibrary{patterns,decorations.pathmorphing}
+
+% Load consistent mathematical symbols from slides template
+\usepackage{beamer-control-maths}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fontspec,unicode-math}
+
+\newfontfamily\titlefont[
+  UprightFont = *-regular ,
+  ItalicFont = *-italic ,
+  BoldFont = *-bold ,
+  BoldItalicFont = *-bolditalic ,
+]{lmroman10}
+
+\setmathfont{latinmodern-math.otf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PAGE SETUP %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\geometry{
+  a4paper,
+  margin=2.5cm,
+  headheight=14pt
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PATHS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\PATHSETUP#1{
+  \def\input@path{#1}
+  \graphicspath{#1}
+}
+\PATHSETUP{
+  {../figures/}
+  {../pracs/}
+  {../topic1/}
+  {../topic2/}
+  {../topic3/}
+  {../topic4/}
+  {../topic5/}
+  {../topic6/}
+  {../topic7/}
+  {../topic8/}
+  {../topic9/}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLORS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{NorthTce}{rgb}{0.5,0.42,0.97}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HYPERLINK SETUP %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=NorthTce,
+  urlcolor=blue,
+  citecolor=NorthTce,
+  bookmarksnumbered=true,
+  pdfstartview=FitH
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE FORMATTING %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\coursetitle}{Applied Control Systems}
+\newcommand{\coursesubtitle}{ENGM X304}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SECTION NUMBERING %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
