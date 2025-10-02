@@ -11,17 +11,20 @@ notesrc  = applied-control-systems.tex
 topcsrc  = $(wildcard acs-0-*.tex) $(wildcard acs-1-*.tex) $(wildcard acs-2-*.tex) $(wildcard acs-3-*.tex)
 pracsrc  = $(wildcard acs-prac*.tex)
 worksrc  = $(wildcard acs-workshop*.tex)
+examplesrc = $(wildcard worked-examples/we-*.tex)
 extrafiles = $(notdir $(wildcard extra/*.*))
 
 notepdf = $(notesrc:.tex=.pdf)
 topcpdf = $(topcsrc:.tex=.pdf)
 workpdf = $(worksrc:.tex=.pdf)
 pracpdf = $(pracsrc:.tex=.pdf)
+examplepdf = $(examplesrc:.tex=.pdf)
 
 buildnotepdf  = $(addprefix $(BUILD)/,$(notepdf))
 buildtopcpdf  = $(addprefix $(BUILD)/,$(topcpdf))
 buildworkpdf  = $(addprefix $(BUILD)/,$(workpdf))
 buildpracpdf  = $(addprefix $(BUILD)/,$(pracpdf))
+buildexamplepdf = $(addprefix $(BUILD)/,$(examplepdf))
 
 uploadnotepdf = $(addprefix $(UPLOAD)/,$(notepdf))
 uploadtopcpdf = $(addprefix $(UPLOAD)/,$(topcpdf))
@@ -29,7 +32,7 @@ uploadworkpdf = $(addprefix $(UPLOAD)/,$(workpdf))
 uploadpracpdf = $(addprefix $(UPLOAD)/,$(pracpdf))
 uploadextra   = $(addprefix $(EXTRA)/,$(extrafiles))
 
-.PHONY: help edit topics pracs workshops notes all upload uploadnotes clean figures
+.PHONY: help edit topics pracs workshops notes examples all upload uploadnotes clean figures
 
 help:
 	@echo 'APPL CONTROL SLIDES MAKEFILE:'
@@ -38,6 +41,7 @@ help:
 	@echo '       pracs - PDFs for each prac'
 	@echo '   workshops - PDFs for each workshops'
 	@echo '       notes - Combined lecture notes'
+	@echo '    examples - PDFs for worked examples'
 	@echo '         all - All of the above'
 	@echo '   upload[*] - Make [*] as above (e.g. "uploadpracs" reqs "pracs") and upload the results'
 	@echo '       extra - Upload all files in extra/ to Canvas'
@@ -54,7 +58,8 @@ topics: $(buildtopcpdf)
 pracs: $(buildpracpdf)
 workshops: $(buildworkpdf)
 notes: $(buildnotepdf)
-all: topics pracs workshops notes
+examples: $(buildexamplepdf)
+all: topics pracs workshops notes examples
 extra: $(uploadextra)
 
 uploadtopics: $(uploadtopcpdf)
@@ -88,6 +93,16 @@ $(BUILD)/%.pdf: %.tex
 	cd $(BUILD); xelatex $*
 	cd $(BUILD); bibtex  $* || echo "BibTeX may have failed."
 	cd $(BUILD); xelatex $*
+	echo "\n\nDone!\n\n"
+
+$(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.sty
+	mkdir -p $(BUILD)/worked-examples
+	cp -f $< $(BUILD)/worked-examples/
+	cp -f worked-examples-template.sty $(BUILD)/
+	cp -f beamer-control-maths.sty $(BUILD)/
+	@echo "\n\nCOMPILE WORKED EXAMPLE\n\n"
+	cd $(BUILD)/worked-examples; xelatex $(notdir $<)
+	cd $(BUILD)/worked-examples; xelatex $(notdir $<)
 	echo "\n\nDone!\n\n"
 
 $(BUILD)/applied-control-systems.pdf: applied-control-systems.tex $(topcsrc)

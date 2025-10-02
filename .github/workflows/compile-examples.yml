@@ -1,0 +1,219 @@
+name: Compile Worked Examples
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'worked-examples/**'
+      - 'worked-examples-template.sty'
+      - '.github/workflows/compile-examples.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "examples-pages"
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science
+
+      - name: Create build directory
+        run: mkdir -p _site/examples
+
+      - name: Compile worked examples
+        run: |
+          for texfile in worked-examples/we-*.tex; do
+            echo "Compiling $texfile"
+            filename=$(basename "$texfile" .tex)
+            
+            # Create temporary build directory
+            mkdir -p _build_temp
+            cd _build_temp
+            
+            # Copy necessary files
+            cp ../"$texfile" .
+            cp ../worked-examples-template.sty .
+            cp ../beamer-control-maths.sty .
+            
+            # Copy resource directories if they exist
+            if [ -d ../figures ]; then cp -r ../figures .; fi
+            for i in {1..9}; do
+              if [ -d ../topic$i ]; then cp -r ../topic$i .; fi
+            done
+            if [ -d ../pracs ]; then cp -r ../pracs .; fi
+            
+            # Compile twice for TOC
+            xelatex -interaction=nonstopmode "$filename.tex" || true
+            xelatex -interaction=nonstopmode "$filename.tex" || true
+            
+            # Copy PDF to site directory if it was created
+            if [ -f "$filename.pdf" ]; then
+              cp "$filename.pdf" ../_site/examples/
+              echo "✓ Successfully compiled $filename.pdf"
+            else
+              echo "✗ Failed to compile $filename.pdf"
+            fi
+            
+            cd ..
+            rm -rf _build_temp
+          done
+
+      - name: Create index page
+        run: |
+          cat > _site/examples/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Applied Control Systems - Worked Examples</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                      max-width: 900px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      line-height: 1.6;
+                      background-color: #f5f5f5;
+                  }
+                  .container {
+                      background-color: white;
+                      padding: 30px;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  }
+                  h1 {
+                      color: #333;
+                      border-bottom: 3px solid #7969f5;
+                      padding-bottom: 10px;
+                  }
+                  h2 {
+                      color: #555;
+                      margin-top: 30px;
+                      font-size: 1.5em;
+                  }
+                  .module {
+                      margin-bottom: 40px;
+                  }
+                  .topic-list {
+                      list-style: none;
+                      padding: 0;
+                  }
+                  .topic-item {
+                      margin: 15px 0;
+                      padding: 15px;
+                      background-color: #f8f9fa;
+                      border-left: 4px solid #7969f5;
+                      border-radius: 4px;
+                      transition: transform 0.2s, box-shadow 0.2s;
+                  }
+                  .topic-item:hover {
+                      transform: translateX(5px);
+                      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                  }
+                  .topic-item a {
+                      text-decoration: none;
+                      color: #333;
+                      font-weight: 500;
+                      font-size: 1.1em;
+                      display: flex;
+                      align-items: center;
+                  }
+                  .topic-item a:before {
+                      content: "📄";
+                      margin-right: 10px;
+                      font-size: 1.3em;
+                  }
+                  .topic-item a:hover {
+                      color: #7969f5;
+                  }
+                  .intro {
+                      background-color: #e8f4f8;
+                      padding: 15px;
+                      border-radius: 5px;
+                      margin-bottom: 20px;
+                  }
+                  footer {
+                      margin-top: 40px;
+                      text-align: center;
+                      color: #666;
+                      font-size: 0.9em;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>Applied Control Systems<br><small style="font-size: 0.6em; color: #666;">ENGM X304</small></h1>
+                  
+                  <div class="intro">
+                      <p><strong>Worked Examples</strong></p>
+                      <p>This page contains worked examples organized by topic. Each PDF includes detailed solutions and explanations for concepts covered in the course.</p>
+                  </div>
+
+                  <div class="module">
+                      <h2>Module 1: Dynamical Systems</h2>
+                      <ul class="topic-list">
+                          <li class="topic-item"><a href="we-1-1-intro-modelling.pdf">Topic 1.1: Introduction and System Modelling</a></li>
+                          <li class="topic-item"><a href="we-1-2-dynamic-behaviour.pdf">Topic 1.2: Dynamic Behaviour</a></li>
+                          <li class="topic-item"><a href="we-1-3-linear-systems.pdf">Topic 1.3: Linear Systems</a></li>
+                      </ul>
+                  </div>
+
+                  <div class="module">
+                      <h2>Module 2: Control System Concepts</h2>
+                      <ul class="topic-list">
+                          <li class="topic-item"><a href="we-2-4-state-feedback.pdf">Topic 2.4: State Feedback</a></li>
+                          <li class="topic-item"><a href="we-2-5-transfer-functions.pdf">Topic 2.5: Transfer Functions</a></li>
+                          <li class="topic-item"><a href="we-2-6-frequency-domain-analysis.pdf">Topic 2.6: Frequency Domain Analysis</a></li>
+                      </ul>
+                  </div>
+
+                  <div class="module">
+                      <h2>Module 3: Control System Design</h2>
+                      <ul class="topic-list">
+                          <li class="topic-item"><a href="we-3-7-pid-control.pdf">Topic 3.7: PID Control</a></li>
+                          <li class="topic-item"><a href="we-3-8-frequency-domain-design.pdf">Topic 3.8: Frequency Domain Design</a></li>
+                          <li class="topic-item"><a href="we-3-9-robust-performance.pdf">Topic 3.9: Robust Performance &amp; Fundamental Limits</a></li>
+                      </ul>
+                  </div>
+
+                  <footer>
+                      <p>Applied Control Systems &copy; Assoc. Prof. William Robertson &amp; Dr Sean McGowan</p>
+                      <p>University of Adelaide</p>
+                  </footer>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site/examples'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: compile
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
