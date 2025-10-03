@@ -2,13 +2,14 @@
 
 # Applied Control Systems
 
-Course notes for Applied Control Systems at Adelaide University.
+Course materials for Applied Control Systems at Adelaide University. Some of the build artefacts for the course are available [here on Github](https://avc-adelaide.github.io/applied-control-systems/).
 
 ## Textbook
 
 These course notes are not a comprehensive reference or set of lecture notes;
 they are written to introduce and supplement the excellent text by Åström and Murray:
 *[Feedback Systems: An Introduction for Scientists and Engineers](https://fbswiki.org/wiki/index.php/Feedback_Systems:_An_Introduction_for_Scientists_and_Engineers)*.
+We owe Åström and Murray a huge debt of gratitude for their generosity in making the text freely available.
 
 ## Open source?
 
