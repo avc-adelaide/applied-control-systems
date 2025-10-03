@@ -26,13 +26,263 @@ This section will contain worked examples for the Linear Systems concept.
 
 \section{Concept 1.3.2: Matrix Exponentials}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Why Matrix Exponential is NOT Element-wise}
 
-This section will contain worked examples for the Matrix Exponentials concept.
+One of the most common misconceptions about the matrix exponential is that it can be computed by simply taking the exponential of each element in the matrix. This example demonstrates why this approach is incorrect.
 
-\paragraph{Problem:} Example problem statement will be added here.
+\paragraph{Problem:} 
+Consider the matrix 
+\[
+A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+\]
+Compare the \emph{true} matrix exponential $\ee^A$ with the \emph{element-wise} exponential of $A$.
 
-\paragraph{Solution:} Example solution will be added here.
+\paragraph{Solution:}
+
+\textbf{Step 1: Element-wise approach (INCORRECT)}
+
+If we naively take the exponential of each element:
+\[
+\text{Element-wise: } \begin{bmatrix} \ee^1 & \ee^1 \\ \ee^0 & \ee^1 \end{bmatrix} = \begin{bmatrix} \ee & \ee \\ 1 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 1 & 2.718 \end{bmatrix}
+\]
+
+\textbf{Step 2: Correct approach using Taylor series}
+
+The matrix exponential is defined as:
+\[
+\ee^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots = \sum_{k=0}^{\infty} \frac{1}{k!}A^k
+\]
+
+Let's compute the first few powers of $A$:
+\[
+A^0 = I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
+A^1 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+\]
+\[
+A^2 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}
+\]
+\[
+A^3 = A^2 \cdot A = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 3 \\ 0 & 1 \end{bmatrix}
+\]
+
+We can see a pattern: $A^k = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$
+
+\textbf{Step 3: Apply Taylor series}
+
+Now substitute into the series:
+\[
+\ee^A = \sum_{k=0}^{\infty} \frac{1}{k!}\begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} \sum_{k=0}^{\infty} \frac{1}{k!} & \sum_{k=0}^{\infty} \frac{k}{k!} \\ 0 & \sum_{k=0}^{\infty} \frac{1}{k!} \end{bmatrix}
+\]
+
+For the diagonal terms: $\sum_{k=0}^{\infty} \frac{1}{k!} = \ee^1 = \ee$
+
+For the off-diagonal term: $\sum_{k=0}^{\infty} \frac{k}{k!} = \sum_{k=1}^{\infty} \frac{1}{(k-1)!} = \ee$
+
+Therefore, the \textbf{correct} matrix exponential is:
+\[
+\ee^A = \begin{bmatrix} \ee & \ee \\ 0 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 0 & 2.718 \end{bmatrix}
+\]
+
+\textbf{Step 4: Verification}
+
+We can verify that $\ee^A$ satisfies the differential equation. If $\Deriv{X}{t} = AX$ with $X(0) = I$, then $X(t) = \ee^{At}$.
+
+\textbf{Key Insight:} The element-wise exponential gave us $(2,2)$ entry as $\ee$, but the correct answer has $(2,2)$ entry as $\ee$ and $(1,2)$ entry as $\ee$ (not element-wise). The bottom-left entry is different: element-wise gives $1$, but the correct answer is $0$. This shows that matrix exponential is fundamentally different from element-wise exponential because \emph{matrix multiplication is not commutative}, so the cross-terms in the Taylor series matter.
+
+
+\subsection{Example 2: Computing System Response with Matrix Exponential}
+
+This example demonstrates the complete process of using the matrix exponential to solve a linear time-invariant dynamical system.
+
+\paragraph{Problem:}
+Consider a mass-spring-damper system described by:
+\[
+\ddot{q} + 2\zz\ww_0\dot{q} + \ww_0^2 q = 0
+\]
+with parameters $\ww_0 = 2$ rad/s (natural frequency) and $\zz = 0.2$ (damping ratio).
+
+Given initial conditions $q(0) = 1$ m and $\dot{q}(0) = 0$ m/s, find the position $q(t)$ and velocity $\dot{q}(t)$ at time $t = 1$ second.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Convert to state-space form}
+
+Define state variables: $x_1 = q$ and $x_2 = \dot{q}$
+
+The system becomes:
+\[
+\Deriv{}{t}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -\ww_0^2 & -2\zz\ww_0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+\]
+
+Substituting the parameter values $\ww_0 = 2$ and $\zz = 0.2$:
+\[
+A = \begin{bmatrix} 0 & 1 \\ -4 & -0.8 \end{bmatrix}
+\]
+
+\textbf{Step 2: Find eigenvalues of $A$}
+
+The characteristic equation is:
+\[
+\det(A - \lambda I) = \det\begin{bmatrix} -\lambda & 1 \\ -4 & -0.8-\lambda \end{bmatrix} = \lambda^2 + 0.8\lambda + 4 = 0
+\]
+
+Using the quadratic formula:
+\[
+\lambda = \frac{-0.8 \pm \sqrt{0.64 - 16}}{2} = \frac{-0.8 \pm \sqrt{-15.36}}{2} = -0.4 \pm 1.96\ii
+\]
+
+We can write these as $\lambda_{1,2} = -\zz\ww_0 \pm \ii\wdamp$ where $\wdamp = \ww_0\sqrt{1-\zz^2} = 2\sqrt{1-0.04} = 1.96$ rad/s.
+
+\textbf{Step 3: Use the formula for matrix exponential}
+
+For a system with complex eigenvalues $\lambda = \sigma \pm \ii\ww$ where $\sigma = -\zz\ww_0 = -0.4$ and $\ww = \wdamp = 1.96$, the matrix exponential for a damped oscillator has the form:
+\[
+\ee^{At} = \ee^{\sigma t}\begin{bmatrix} \cos(\ww t) + \frac{\sigma}{\ww}\sin(\ww t) & \frac{1}{\ww}\sin(\ww t) \\ -\frac{\ww_0^2}{\ww}\sin(\ww t) & \cos(\ww t) - \frac{\sigma}{\ww}\sin(\ww t) \end{bmatrix}
+\]
+
+\textbf{Step 4: Evaluate at $t = 1$ second}
+
+First calculate the trigonometric and exponential terms:
+\begin{align*}
+\ww t &= 1.96 \text{ rad} \\
+\cos(1.96) &\approx -0.423 \\
+\sin(1.96) &\approx 0.906 \\
+\ee^{\sigma t} = \ee^{-0.4} &\approx 0.670
+\end{align*}
+
+Now construct the matrix:
+\[
+\ee^{A} = 0.670\begin{bmatrix} -0.423 + \frac{-0.4}{1.96}(0.906) & \frac{1}{1.96}(0.906) \\ -\frac{4}{1.96}(0.906) & -0.423 - \frac{-0.4}{1.96}(0.906) \end{bmatrix}
+\]
+\[
+= 0.670\begin{bmatrix} -0.423 - 0.185 & 0.462 \\ -1.848 & -0.423 + 0.185 \end{bmatrix}
+= 0.670\begin{bmatrix} -0.608 & 0.462 \\ -1.848 & -0.238 \end{bmatrix}
+\]
+\[
+\ee^{A} \approx \begin{bmatrix} -0.407 & 0.310 \\ -1.238 & -0.159 \end{bmatrix}
+\]
+
+\textbf{Step 5: Compute the state at $t=1$ second}
+
+The solution is $x(t) = \ee^{At}x(0)$:
+\[
+x(1) = \begin{bmatrix} -0.407 & 0.310 \\ -1.238 & -0.159 \end{bmatrix}\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} -0.407 \\ -1.238 \end{bmatrix}
+\]
+
+Therefore, at $t = 1$ second:
+\begin{itemize}
+\item Position: $q(1) = x_1(1) = -0.407$ m
+\item Velocity: $\dot{q}(1) = x_2(1) = -1.238$ m/s
+\end{itemize}
+
+\textbf{Physical interpretation:} The negative position indicates the mass has moved past equilibrium to the opposite side. The negative velocity shows it's still moving in that direction but being slowed by damping.
+
+
+\subsection{Example 3: Jordan Form Factorisation}
+
+This example demonstrates how to compute the Jordan form of a matrix and use it to find the matrix exponential, particularly for the case of repeated eigenvalues.
+
+\paragraph{Problem:}
+Find the Jordan form of the matrix
+\[
+A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}
+\]
+and use it to compute $\ee^{At}$.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Find eigenvalues}
+
+The characteristic polynomial is:
+\[
+\det(A - \lambda I) = \det\begin{bmatrix} 2-\lambda & 1 & 0 \\ 0 & 2-\lambda & 0 \\ 0 & 0 & 3-\lambda \end{bmatrix} = (2-\lambda)^2(3-\lambda)
+\]
+
+Eigenvalues: $\lambda_1 = 2$ (with multiplicity 2) and $\lambda_2 = 3$ (with multiplicity 1).
+
+\textbf{Step 2: Find eigenvectors and generalized eigenvectors}
+
+For $\lambda_1 = 2$:
+\[
+(A - 2I)v = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v = 0
+\]
+This gives us only one eigenvector: $v_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$
+
+Since we have a repeated eigenvalue but only one eigenvector, we need a generalized eigenvector $v_2$ satisfying:
+\[
+(A - 2I)v_2 = v_1
+\]
+\[
+\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v_2 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+\]
+This gives $v_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$
+
+For $\lambda_2 = 3$:
+\[
+(A - 3I)v = \begin{bmatrix} -1 & 1 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix}v = 0
+\]
+This gives $v_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$
+
+\textbf{Step 3: Construct transformation matrix and Jordan form}
+
+The transformation matrix is:
+\[
+T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = I
+\]
+
+Wait, let me recalculate. Using $v_1, v_2, v_3$ as columns:
+\[
+T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\]
+
+The Jordan form is:
+\[
+J = T\Inv AT = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix} = A
+\]
+
+Notice that $A$ is already in Jordan form! This happens when the matrix is upper triangular.
+
+\textbf{Step 4: Compute $\ee^{Jt}$ using block structure}
+
+For a Jordan block with eigenvalue $\lambda$ and size $2 \times 2$:
+\[
+J_1 = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}, \quad \ee^{J_1 t} = \ee^{2t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
+\]
+
+For a $1 \times 1$ Jordan block:
+\[
+J_2 = [3], \quad \ee^{J_2 t} = [\ee^{3t}]
+\]
+
+Therefore:
+\[
+\ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
+\]
+
+\textbf{Step 5: Transform back (if needed)}
+
+Since $A = J$ (the matrix was already in Jordan form), we have:
+\[
+\ee^{At} = \ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
+\]
+
+\textbf{Key observations:}
+\begin{itemize}
+\item The repeated eigenvalue $\lambda = 2$ leads to a Jordan block with a $1$ on the super-diagonal
+\item This produces a polynomial term ($t$) multiplied by the exponential in the $(1,2)$ entry
+\item The distinct eigenvalue $\lambda = 3$ produces a simple exponential term $\ee^{3t}$
+\item All eigenvalues have positive real parts, so the system is unstable (all terms grow exponentially)
+\end{itemize}
+
+\textbf{General formula for $2\times 2$ Jordan blocks:}
+For a Jordan block $J = \begin{bmatrix} \lambda & 1 \\ 0 & \lambda \end{bmatrix}$, the exponential is:
+\[
+\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
+\]
+For an $n \times n$ Jordan block with eigenvalue $\lambda$:
+\[
+\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\ 0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\ \vdots & \ddots & \ddots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & 1 \end{bmatrix}
+\]
 
 \section{Concept 1.3.3: System Response}
 
