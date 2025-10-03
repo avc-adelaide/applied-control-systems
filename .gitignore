@@ -18,6 +18,7 @@
 /*.pdf 
 
 _*
+!_config.yml
 */src/*
 */html/*
 

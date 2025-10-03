@@ -1,0 +1,29 @@
+# Jekyll configuration for Applied Control Systems worked examples
+title: Applied Control Systems - Worked Examples
+description: Worked examples for Applied Control Systems course at Adelaide University
+theme: minima
+
+# Include PDF files in the build
+include:
+  - "we-*.pdf"
+
+# Exclude build artifacts and LaTeX source files
+exclude:
+  - "*.tex"
+  - "*.sty"
+  - "*.bib"
+  - "*.cls"
+  - "*.lua"
+  - "_build"
+  - "_upload"
+  - "_extra"
+  - "Makefile"
+  - "worked-examples"
+  - "topic*"
+  - "figures"
+  - "pracs"
+  - "canvas"
+  - "extra"
+  - ".github"
+  - "CHANGELOG.md"
+  - "LICENSE"
