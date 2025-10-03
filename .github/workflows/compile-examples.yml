@@ -1,4 +1,6 @@
 name: Compile Worked Examples
+# This workflow compiles worked examples and deploys them to GitHub Pages
+# The conflicting jekyll-gh-pages.yml workflow has been disabled to prevent overwriting this deployment
 
 on:
   push:
