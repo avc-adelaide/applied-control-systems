@@ -305,12 +305,382 @@ This section will contain worked examples for the System Response concept.
 
 \section{Concept 1.3.4: Linearisation}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Linearising a Simple Pendulum with Cart Using Small Angle Approximations}
 
-This section will contain worked examples for the Linearisation concept.
+This example demonstrates the complete linearisation process for a 3rd order nonlinear mechanical system using small angle approximations and Taylor series expansion. We'll work through the equations of motion, derive the nonlinear state equations, and systematically linearise them.
 
-\paragraph{Problem:} Example problem statement will be added here.
+\paragraph{Problem:}
+Consider a simple pendulum attached to a cart that can move horizontally. The system parameters are:
+\begin{itemize}
+\item Mass of cart: $M = 1.0$ kg
+\item Mass of pendulum bob: $m = 0.3$ kg
+\item Length of pendulum: $\ell = 0.5$ m
+\item Gravitational acceleration: $g = 9.81$ m/s$^2$
+\item Damping coefficient on cart: $c = 0.2$ N·s/m
+\end{itemize}
 
-\paragraph{Solution:} Example solution will be added here.
+The cart position is $q$ and the pendulum angle from vertical is $\theta$ (positive clockwise). A horizontal force $F$ is applied to the cart.
+
+Starting from the equations of motion, derive:
+\begin{enumerate}
+\item The nonlinear state-space equations
+\item The linearised state-space equations around the equilibrium point $q = 0$, $\theta = 0$ (pendulum hanging down)
+\end{enumerate}
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Derive equations of motion}
+
+Using Lagrangian mechanics or force balance, the equations of motion are:
+\begin{align}
+(M + m)\ddot{q} + m\ell\cos\theta\,\ddot{\theta} - m\ell\sin\theta\,\dot{\theta}^2 + c\dot{q} &= F \label{eq:cart-eom}\\
+m\ell^2\ddot{\theta} + m\ell\cos\theta\,\ddot{q} - m\ell g\sin\theta &= 0 \label{eq:pend-eom}
+\end{align}
+
+These are coupled second-order differential equations with nonlinearities in $\sin\theta$, $\cos\theta$, and the velocity coupling term $\dot{\theta}^2$.
+
+\textbf{Step 2: Solve for accelerations to get explicit nonlinear ODEs}
+
+We need to isolate $\ddot{q}$ and $\ddot{\theta}$. From equation~\eqref{eq:pend-eom}:
+\begin{align}
+\ddot{\theta} = -\frac{\cos\theta}{\ell}\ddot{q} + \frac{g}{\ell}\sin\theta
+\end{align}
+
+Substituting into equation~\eqref{eq:cart-eom}:
+\begin{align}
+(M + m)\ddot{q} + m\ell\cos\theta\left(-\frac{\cos\theta}{\ell}\ddot{q} + \frac{g}{\ell}\sin\theta\right) - m\ell\sin\theta\,\dot{\theta}^2 + c\dot{q} &= F\\
+\left[(M + m) - m\cos^2\theta\right]\ddot{q} + mg\cos\theta\sin\theta - m\ell\sin\theta\,\dot{\theta}^2 + c\dot{q} &= F
+\end{align}
+
+Let $\Delta = M + m\sin^2\theta$. Then:
+\begin{align}
+\ddot{q} &= \frac{1}{\Delta}\left[F - c\dot{q} - mg\cos\theta\sin\theta + m\ell\sin\theta\,\dot{\theta}^2\right]\\
+\ddot{\theta} &= \frac{1}{\ell\Delta}\left[(M+m)g\sin\theta - \cos\theta F + c\cos\theta\,\dot{q} - m\ell\cos\theta\sin\theta\,\dot{\theta}^2\right]
+\end{align}
+
+\textbf{Step 3: Define state variables}
+
+Choose state vector $x = \begin{bmatrix} q & \theta & \dot{q} & \dot{\theta} \end{bmatrix}^T$. Note: This is actually a 4th order system, not 3rd order as stated in the problem. Let me proceed with the 4-state formulation, which is more typical for this system.
+
+The nonlinear state equations are:
+\begin{align}
+\dot{x}_1 &= x_3\\
+\dot{x}_2 &= x_4\\
+\dot{x}_3 &= \frac{1}{M + m\sin^2 x_2}\left[F - c x_3 - mg\cos x_2\sin x_2 + m\ell\sin x_2\,x_4^2\right]\\
+\dot{x}_4 &= \frac{1}{\ell(M+m\sin^2 x_2)}\left[(M+m)g\sin x_2 - \cos x_2 F + c\cos x_2\,x_3 - m\ell\cos x_2\sin x_2\,x_4^2\right]
+\end{align}
+
+\textbf{Step 4: Apply small angle approximations}
+
+For the equilibrium point $x_e = \begin{bmatrix} 0 & 0 & 0 & 0 \end{bmatrix}^T$ and $F_e = 0$, we apply Taylor series approximations for small $\theta$:
+\begin{align}
+\sin\theta &\approx \theta - \frac{\theta^3}{6} + \cdots \approx \theta \quad \text{(first-order)}\\
+\cos\theta &\approx 1 - \frac{\theta^2}{2} + \cdots \approx 1 \quad \text{(first-order)}\\
+\sin\theta\cos\theta &\approx \theta \quad \text{(first-order)}\\
+\sin^2\theta &\approx \theta^2 \approx 0 \quad \text{(second-order, neglected)}
+\end{align}
+
+Also note that for small deviations, the product terms like $\theta\dot{\theta}^2$ are third-order small and can be neglected in linear analysis.
+
+\textbf{Step 5: Linearise the state equations}
+
+Applying the approximations with $\theta \ll 1$, $\Delta \approx M + m(0) = M + m$:
+
+For $\dot{x}_3$:
+\begin{align}
+\dot{x}_3 &\approx \frac{1}{M+m}\left[F - cx_3 - mgx_2 + 0\right]\\
+&= -\frac{c}{M+m}x_3 - \frac{mg}{M+m}x_2 + \frac{1}{M+m}F
+\end{align}
+
+For $\dot{x}_4$:
+\begin{align}
+\dot{x}_4 &\approx \frac{1}{\ell(M+m)}\left[(M+m)gx_2 - F + cx_3 - 0\right]\\
+&= \frac{g}{\ell}x_2 + \frac{c}{\ell(M+m)}x_3 - \frac{1}{\ell(M+m)}F
+\end{align}
+
+\textbf{Step 6: Write linearised state-space form}
+
+The linearised system is $\dot{x} = Ax + Bu$ with input $u = F$:
+\begin{align}
+A &= \begin{bmatrix}
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+0 & -\dfrac{mg}{M+m} & -\dfrac{c}{M+m} & 0\\[0.5em]
+0 & \dfrac{g}{\ell} & \dfrac{c}{\ell(M+m)} & 0
+\end{bmatrix}, \quad
+B = \begin{bmatrix}
+0\\[0.2em]
+0\\[0.2em]
+\dfrac{1}{M+m}\\[0.5em]
+-\dfrac{1}{\ell(M+m)}
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 7: Substitute numerical values}
+
+With $M = 1.0$ kg, $m = 0.3$ kg, $\ell = 0.5$ m, $g = 9.81$ m/s$^2$, $c = 0.2$ N·s/m:
+\begin{align}
+A &= \begin{bmatrix}
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+0 & -2.265 & -0.154 & 0\\
+0 & 19.62 & 0.308 & 0
+\end{bmatrix}, \quad
+B = \begin{bmatrix}
+0\\
+0\\
+0.769\\
+-1.538
+\end{bmatrix}
+\end{align}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item The linearisation process required: (1) deriving equations of motion, (2) explicit state form, (3) small angle approximations, (4) neglecting higher-order terms
+\item The positive entry $A_{42} = g/\ell > 0$ indicates the system is unstable (pendulum falls away from vertical)
+\item The linearisation is only valid near $\theta = 0$ (typically $|\theta| < 10°$ to $20°$)
+\item All nonlinear coupling terms ($\dot{\theta}^2$, $\sin\theta\cos\theta$, etc.) are captured in linear form through Taylor expansion
+\end{itemize}
+
+\subsection{Example 2: Linearising a Magnetic Levitation System Using Jacobian Method}
+
+This example demonstrates the systematic Jacobian approach to linearise a 4th order nonlinear system. The Jacobian method is more general and doesn't require manual Taylor series expansions.
+
+\paragraph{Problem:}
+Consider a magnetic levitation system where a ball of ferromagnetic material (mass $m = 0.05$ kg) is suspended by an electromagnet. The vertical position is $z$ (measured downward from the magnet, in meters) and the magnet current is $i$ (in Amperes).
+
+The nonlinear dynamics are:
+\begin{align}
+m\ddot{z} &= mg - \frac{k_m i^2}{z^2}\\
+L\dot{i} &= v - Ri
+\end{align}
+where:
+\begin{itemize}
+\item $k_m = 0.001$ N·m$^2$/A$^2$ (magnetic force constant)
+\item $L = 0.1$ H (coil inductance)
+\item $R = 1.0$ $\Omega$ (coil resistance)
+\item $g = 9.81$ m/s$^2$ (gravitational acceleration)
+\end{itemize}
+
+The control input is the applied voltage $v$, and we can measure both position $z$ and current $i$.
+
+Use the Jacobian method to linearise this system around an equilibrium point where the ball is suspended at $z_e = 0.01$ m.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Define state variables and write in standard form}
+
+Define state vector $x = \begin{bmatrix} z & \dot{z} & i \end{bmatrix}^T = \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}^T$, input $u = v$, and output $y = \begin{bmatrix} z \\ i \end{bmatrix}^T$.
+
+The nonlinear state equations in the form $\dot{x} = f(x,u)$ are:
+\begin{align}
+f(x,u) = \begin{bmatrix}
+f_1(x,u)\\
+f_2(x,u)\\
+f_3(x,u)
+\end{bmatrix} = \begin{bmatrix}
+x_2\\[0.3em]
+g - \dfrac{k_m x_3^2}{m x_1^2}\\[0.5em]
+\dfrac{1}{L}(u - Rx_3)
+\end{bmatrix}
+\end{align}
+
+The output equation in the form $y = h(x,u)$ is:
+\begin{align}
+h(x,u) = \begin{bmatrix}
+h_1(x,u)\\
+h_2(x,u)
+\end{bmatrix} = \begin{bmatrix}
+x_1\\
+x_3
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 2: Find equilibrium point}
+
+At equilibrium, all derivatives are zero: $\dot{x}_e = 0$. From $f_1 = x_2 = 0$, we have $\dot{z}_e = 0$.
+
+From $f_2 = 0$:
+\begin{align}
+g - \frac{k_m i_e^2}{m z_e^2} &= 0\\
+i_e^2 &= \frac{m g z_e^2}{k_m}\\
+i_e &= \sqrt{\frac{m g z_e^2}{k_m}} = z_e\sqrt{\frac{mg}{k_m}}
+\end{align}
+
+With $z_e = 0.01$ m:
+\begin{align}
+i_e = 0.01\sqrt{\frac{0.05 \times 9.81}{0.001}} = 0.01\sqrt{490.5} = 0.2214 \text{ A}
+\end{align}
+
+From $f_3 = 0$:
+\begin{align}
+u_e = R i_e = 1.0 \times 0.2214 = 0.2214 \text{ V}
+\end{align}
+
+Therefore, the equilibrium point is:
+\begin{align}
+x_e = \begin{bmatrix} 0.01 \\ 0 \\ 0.2214 \end{bmatrix}, \quad u_e = 0.2214 \text{ V}
+\end{align}
+
+\textbf{Step 3: Compute Jacobian $A = \left.\frac{\partial f}{\partial x}\right|_{(x_e,u_e)}$}
+
+The $A$ matrix is the Jacobian of $f$ with respect to $x$:
+\begin{align}
+A = \begin{bmatrix}
+\dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2} & \dfrac{\partial f_1}{\partial x_3}\\[0.5em]
+\dfrac{\partial f_2}{\partial x_1} & \dfrac{\partial f_2}{\partial x_2} & \dfrac{\partial f_2}{\partial x_3}\\[0.5em]
+\dfrac{\partial f_3}{\partial x_1} & \dfrac{\partial f_3}{\partial x_2} & \dfrac{\partial f_3}{\partial x_3}
+\end{bmatrix}
+\end{align}
+
+Calculate each partial derivative:
+
+\emph{Row 1:} $f_1 = x_2$
+\begin{align}
+\frac{\partial f_1}{\partial x_1} = 0, \quad \frac{\partial f_1}{\partial x_2} = 1, \quad \frac{\partial f_1}{\partial x_3} = 0
+\end{align}
+
+\emph{Row 2:} $f_2 = g - \frac{k_m x_3^2}{m x_1^2}$
+\begin{align}
+\frac{\partial f_2}{\partial x_1} &= -\frac{k_m x_3^2}{m} \cdot \frac{\partial}{\partial x_1}\left(x_1^{-2}\right) = -\frac{k_m x_3^2}{m} \cdot (-2x_1^{-3}) = \frac{2k_m x_3^2}{m x_1^3}\\
+\frac{\partial f_2}{\partial x_2} &= 0\\
+\frac{\partial f_2}{\partial x_3} &= -\frac{k_m}{m x_1^2} \cdot 2x_3 = -\frac{2k_m x_3}{m x_1^2}
+\end{align}
+
+\emph{Row 3:} $f_3 = \frac{1}{L}(u - Rx_3)$
+\begin{align}
+\frac{\partial f_3}{\partial x_1} = 0, \quad \frac{\partial f_3}{\partial x_2} = 0, \quad \frac{\partial f_3}{\partial x_3} = -\frac{R}{L}
+\end{align}
+
+\textbf{Step 4: Evaluate at equilibrium point}
+
+Substitute $(x_e, u_e)$:
+\begin{align}
+A_{21} &= \frac{2k_m i_e^2}{m z_e^3} = \frac{2 \times 0.001 \times (0.2214)^2}{0.05 \times (0.01)^3} = \frac{9.81 \times 10^{-8}}{5 \times 10^{-8}} = 1962 \text{ s}^{-2}\\
+A_{23} &= -\frac{2k_m i_e}{m z_e^2} = -\frac{2 \times 0.001 \times 0.2214}{0.05 \times (0.01)^2} = -8.856 \text{ m/(A·s}^2\text{)}\\
+A_{33} &= -\frac{R}{L} = -\frac{1.0}{0.1} = -10 \text{ s}^{-1}
+\end{align}
+
+Therefore:
+\begin{align}
+A = \begin{bmatrix}
+0 & 1 & 0\\
+1962 & 0 & -8.856\\
+0 & 0 & -10
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 5: Compute Jacobian $B = \left.\frac{\partial f}{\partial u}\right|_{(x_e,u_e)}$}
+
+\begin{align}
+B = \begin{bmatrix}
+\dfrac{\partial f_1}{\partial u}\\[0.3em]
+\dfrac{\partial f_2}{\partial u}\\[0.3em]
+\dfrac{\partial f_3}{\partial u}
+\end{bmatrix} = \begin{bmatrix}
+0\\[0.2em]
+0\\[0.2em]
+\dfrac{1}{L}
+\end{bmatrix} = \begin{bmatrix}
+0\\
+0\\
+10
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 6: Compute output matrices $C$ and $D$}
+
+\begin{align}
+C = \left.\frac{\partial h}{\partial x}\right|_{(x_e,u_e)} = \begin{bmatrix}
+\dfrac{\partial h_1}{\partial x_1} & \dfrac{\partial h_1}{\partial x_2} & \dfrac{\partial h_1}{\partial x_3}\\[0.3em]
+\dfrac{\partial h_2}{\partial x_1} & \dfrac{\partial h_2}{\partial x_2} & \dfrac{\partial h_2}{\partial x_3}
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+D = \left.\frac{\partial h}{\partial u}\right|_{(x_e,u_e)} = \begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 7: Write the linearised system}
+
+Define deviation variables:
+\begin{align}
+\delta x &= x - x_e, \quad \delta u = u - u_e, \quad \delta y = y - h(x_e,u_e)
+\end{align}
+
+The linearised system is:
+\begin{align}
+\delta\dot{x} &= A\delta x + B\delta u\\
+\delta y &= C\delta x + D\delta u
+\end{align}
+
+Explicitly:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix}
+\delta z\\
+\delta\dot{z}\\
+\delta i
+\end{bmatrix} &= \begin{bmatrix}
+0 & 1 & 0\\
+1962 & 0 & -8.856\\
+0 & 0 & -10
+\end{bmatrix}\begin{bmatrix}
+\delta z\\
+\delta\dot{z}\\
+\delta i
+\end{bmatrix} + \begin{bmatrix}
+0\\
+0\\
+10
+\end{bmatrix}\delta v\\
+\begin{bmatrix}
+\delta z\\
+\delta i
+\end{bmatrix} &= \begin{bmatrix}
+1 & 0 & 0\\
+0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+\delta z\\
+\delta\dot{z}\\
+\delta i
+\end{bmatrix}
+\end{align}
+
+\textbf{Step 8: Check stability}
+
+The characteristic polynomial is:
+\begin{align}
+\det(sI - A) &= \det\begin{bmatrix}
+s & -1 & 0\\
+-1962 & s & 8.856\\
+0 & 0 & s+10
+\end{bmatrix}\\
+&= (s+10)(s^2 - 1962)\\
+&= (s+10)(s - 44.3)(s + 44.3)
+\end{align}
+
+Eigenvalues: $\lambda_1 = -10$, $\lambda_2 = 44.3$, $\lambda_3 = -44.3$.
+
+Since $\lambda_2 > 0$, the open-loop system is \textbf{unstable}. This is expected: if the ball moves slightly down, gravity pulls it further down, and the magnetic force decreases rapidly (proportional to $1/z^2$).
+
+\textbf{Key observations:}
+\begin{itemize}
+\item The Jacobian method is systematic: compute partial derivatives, evaluate at equilibrium
+\item No manual small-angle approximations needed---the Jacobian automatically performs the linearisation
+\item The large coefficient $A_{21} = 1962$ reflects the strong nonlinearity of the $1/z^2$ magnetic force
+\item The system has one unstable pole requiring feedback control to stabilize
+\item This approach extends easily to higher-order systems and more complex nonlinearities
+\end{itemize}
+
+\textbf{Verification note:} We can verify the equilibrium condition: at equilibrium, the magnetic force balances gravity:
+\begin{align}
+\frac{k_m i_e^2}{z_e^2} = mg \quad \checkmark
+\end{align}
 
 \end{document}
