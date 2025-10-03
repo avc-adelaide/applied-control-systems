@@ -1,6 +1,4 @@
-name: Compile Worked Examples
-# This workflow compiles worked examples and deploys them to GitHub Pages
-# The conflicting jekyll-gh-pages.yml workflow has been disabled to prevent overwriting this deployment
+name: Compile Worked Examples and Deploy with Jekyll
 
 on:
   push:
@@ -11,7 +9,8 @@ on:
       - 'beamer-control-maths.sty'
       - '.github/workflows/compile-examples.yml'
       - '.github/scripts/compile-examples.sh'
-      - '.github/scripts/generate-index.sh'
+      - 'index.md'
+      - '_config.yml'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  compile-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,13 +35,16 @@ jobs:
           sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science
 
       - name: Compile worked examples
-        run: ./.github/scripts/compile-examples.sh _site
-
-      - name: Generate index page
-        run: ./.github/scripts/generate-index.sh _site
+        run: ./.github/scripts/compile-examples.sh .
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -50,5 +52,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}

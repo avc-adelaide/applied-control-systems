@@ -1,11 +1,9 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-# DISABLED: This workflow conflicts with compile-examples.yml which deploys worked examples to GitHub Pages
-# Both workflows use the same "pages" concurrency group and deployment target.
-# See WORKED_EXAMPLES_SETUP.md for details.
+# NOTE: This workflow is replaced by compile-examples.yml which combines PDF compilation with Jekyll
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Disabled to prevent conflicts with compile-examples workflow
+  # Disabled - functionality moved to compile-examples.yml
   # push:
   #   branches: ["main"]
 
