@@ -108,21 +108,12 @@ For each controller, find the closed-loop transfer function and steady-state err
 T_P(s) = \frac{C(s)P(s)}{1 + C(s)P(s)} = \frac{4/[s(s+2)]}{1 + 4/[s(s+2)]} = \frac{4}{s^2 + 2s + 4}
 \end{align}
 
-Using the final value theorem for unit step input $R(s) = 1/s$:
-\begin{align}
-y_{ss} &= \lim_{s \to 0} s \cdot T_P(s) \cdot \frac{1}{s} = \lim_{s \to 0} \frac{4}{s^2 + 2s + 4} = \frac{4}{4} = 1
-\end{align}
-
-Steady-state error: $e_{ss} = 1 - 1 = 0$
-
-Wait, this is wrong because the plant has an integrator. Let me recalculate.
-
-Actually, for a Type-1 system (one integrator in the loop), the steady-state error to a step is:
+For a Type-1 system (one integrator in the loop), the steady-state error to a step is:
 \begin{align}
 e_{ss} = \lim_{s \to 0} \frac{sR(s)}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{1}{1 + 4/[s(s+2)]}
 \end{align}
 
-As $s \to 0$, the denominator goes to infinity, so $e_{ss} = 0$ ✓
+As $s \to 0$, the denominator goes to infinity, so $e_{ss} = 0$.
 
 \textbf{Part (b): PI Controller}
 
