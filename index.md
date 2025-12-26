@@ -7,6 +7,8 @@ title: Worked Examples
 
 This page contains worked examples organized by topic. Each PDF includes detailed solutions and explanations for concepts covered in the course.
 
+**Work in progress**: *this material is being co-developed using GenAI and needs thorough review and correction before being production ready.*
+
 ## Module 1: Dynamical Systems
 
 - [Topic 1.1: Introduction and System Modelling](we-1-1-intro-modelling.pdf)
