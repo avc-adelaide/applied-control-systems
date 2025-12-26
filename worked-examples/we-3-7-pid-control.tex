@@ -16,52 +16,458 @@
 
 \section{Concept 3.7.1: Feedback Control}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Basic Feedback Control Design}
 
-This section will contain worked examples for the Feedback Control concept.
+\paragraph{Problem:} A temperature control system has the plant transfer function:
+\begin{align}
+P(s) = \frac{2}{s+1}
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+Design a proportional controller $C(s) = K_p$ for a unity feedback configuration such that the closed-loop system has:
+\begin{itemize}
+\item Steady-state error less than 10\% for a unit step input
+\item Settling time (2\% criterion) less than 4 seconds
+\end{itemize}
 
-\paragraph{Solution:} Example solution will be added here.
+\paragraph{Solution:}
+
+For unity feedback with controller $C(s) = K_p$ and plant $P(s)$:
+
+The closed-loop transfer function is:
+\begin{align}
+T(s) = \frac{K_pP(s)}{1 + K_pP(s)} = \frac{2K_p}{s + 1 + 2K_p}
+\end{align}
+
+\textbf{Requirement 1: Steady-State Error}
+
+For a unit step input, the steady-state error is:
+\begin{align}
+e_{ss} = \frac{1}{1 + K_pP(0)} = \frac{1}{1 + 2K_p}
+\end{align}
+
+For $e_{ss} < 0.1$ (10\%):
+\begin{align}
+\frac{1}{1 + 2K_p} < 0.1 \quad \Rightarrow \quad 1 + 2K_p > 10 \quad \Rightarrow \quad K_p > 4.5
+\end{align}
+
+\textbf{Requirement 2: Settling Time}
+
+The closed-loop pole is at:
+\begin{align}
+s = -(1 + 2K_p)
+\end{align}
+
+For a first-order system, the settling time (2\% criterion) is:
+\begin{align}
+T_s = \frac{4}{|s|} = \frac{4}{1 + 2K_p}
+\end{align}
+
+For $T_s < 4$ seconds:
+\begin{align}
+\frac{4}{1 + 2K_p} < 4 \quad \Rightarrow \quad 1 + 2K_p > 1 \quad \Rightarrow \quad K_p > 0
+\end{align}
+
+This is always satisfied for positive $K_p$.
+
+\textbf{Design Choice:}
+
+The binding constraint is $K_p > 4.5$. Choose $K_p = 5$ for some margin.
+
+With $K_p = 5$:
+\begin{itemize}
+\item Closed-loop transfer function: $T(s) = \frac{10}{s+11}$
+\item Steady-state error: $e_{ss} = \frac{1}{1+10} = 0.091 = 9.1\%$ ✓
+\item Settling time: $T_s = \frac{4}{11} \approx 0.36$ seconds ✓
+\end{itemize}
+
+\textbf{Result:} The proportional controller $C(s) = 5$ meets both design requirements.
 
 \section{Concept 3.7.2: Simple Controllers}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Comparing P, PI, and PD Controllers}
 
-This section will contain worked examples for the Simple Controllers concept.
+\paragraph{Problem:} For the plant:
+\begin{align}
+P(s) = \frac{1}{s(s+2)}
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+Compare the closed-loop performance with three different controllers:
+\begin{itemize}
+\item[(a)] Proportional (P): $C(s) = K_p = 4$
+\item[(b)] Proportional-Integral (PI): $C(s) = K_p + \frac{K_i}{s} = 4 + \frac{2}{s}$
+\item[(c)] Proportional-Derivative (PD): $C(s) = K_p + K_d s = 4 + 2s$
+\end{itemize}
 
-\paragraph{Solution:} Example solution will be added here.
+For each controller, find the closed-loop transfer function and steady-state error to a unit step input.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Proportional Controller}
+
+\begin{align}
+T_P(s) = \frac{C(s)P(s)}{1 + C(s)P(s)} = \frac{4/[s(s+2)]}{1 + 4/[s(s+2)]} = \frac{4}{s^2 + 2s + 4}
+\end{align}
+
+Using the final value theorem for unit step input $R(s) = 1/s$:
+\begin{align}
+y_{ss} &= \lim_{s \to 0} s \cdot T_P(s) \cdot \frac{1}{s} = \lim_{s \to 0} \frac{4}{s^2 + 2s + 4} = \frac{4}{4} = 1
+\end{align}
+
+Steady-state error: $e_{ss} = 1 - 1 = 0$
+
+Wait, this is wrong because the plant has an integrator. Let me recalculate.
+
+Actually, for a Type-1 system (one integrator in the loop), the steady-state error to a step is:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{sR(s)}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{1}{1 + 4/[s(s+2)]}
+\end{align}
+
+As $s \to 0$, the denominator goes to infinity, so $e_{ss} = 0$ ✓
+
+\textbf{Part (b): PI Controller}
+
+\begin{align}
+C(s) = 4 + \frac{2}{s} = \frac{4s + 2}{s}
+\end{align}
+
+The loop transfer function:
+\begin{align}
+C(s)P(s) = \frac{4s+2}{s} \cdot \frac{1}{s(s+2)} = \frac{4s+2}{s^2(s+2)}
+\end{align}
+
+Closed-loop transfer function:
+\begin{align}
+T_{PI}(s) = \frac{4s+2}{s^2(s+2) + 4s + 2} = \frac{4s+2}{s^3 + 2s^2 + 4s + 2}
+\end{align}
+
+For steady-state error to step:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{s}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{s^2(s+2)}{s^2(s+2) + 4s + 2} = \frac{0}{2} = 0
+\end{align}
+
+\textbf{Part (c): PD Controller}
+
+\begin{align}
+C(s) = 4 + 2s
+\end{align}
+
+The loop transfer function:
+\begin{align}
+C(s)P(s) = (4 + 2s) \cdot \frac{1}{s(s+2)} = \frac{2s+4}{s(s+2)}
+\end{align}
+
+Closed-loop transfer function:
+\begin{align}
+T_{PD}(s) = \frac{2s+4}{s(s+2) + 2s + 4} = \frac{2s+4}{s^2 + 4s + 4} = \frac{2s+4}{(s+2)^2}
+\end{align}
+
+For steady-state error:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{s}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{s(s+2)}{s(s+2) + 2s + 4} = \frac{0}{4} = 0
+\end{align}
+
+\textbf{Summary Comparison:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Controller & Closed-Loop Poles & $e_{ss}$ (step) \\
+\hline
+P: $K_p = 4$ & $s = -1 \pm j\sqrt{3}$ & 0 \\
+PI: $K_p = 4, K_i = 2$ & $s^3 + 2s^2 + 4s + 2 = 0$ & 0 \\
+PD: $K_p = 4, K_d = 2$ & $s = -2$ (double) & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Observations:}
+\begin{itemize}
+\item All achieve zero steady-state error (plant has integrator)
+\item PD gives critically damped response (fastest settling, no overshoot)
+\item PI adds extra pole, making system third-order (may be slower)
+\item P gives oscillatory response with some overshoot
+\end{itemize}
 
 \section{Concept 3.7.3: PID Control}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: PID Controller Tuning using Ziegler-Nichols}
 
-This section will contain worked examples for the PID Control concept.
+\paragraph{Problem:} A process has the First-Order Time-Delay (FOTD) model:
+\begin{align}
+P(s) = \frac{2}{1+5s}e^{-s}
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+Use the Ziegler-Nichols time-domain method to design a PID controller for this system. The parameters are $K = 2$, $T = 5$, and $\tau = 1$.
 
-\paragraph{Solution:} Example solution will be added here.
+\paragraph{Solution:}
+
+For the FOTD model $P(s) = \frac{K}{1+Ts}e^{-\tau s}$, the Ziegler-Nichols method uses the ITD approximation with:
+\begin{itemize}
+\item Slope parameter: $a = \frac{K}{T} = \frac{2}{5} = 0.4$
+\item Time delay: $\tau = 1$
+\end{itemize}
+
+The standard PID controller form is:
+\begin{align}
+C(s) = K_p\left(1 + \frac{1}{T_i s} + T_d s\right)
+\end{align}
+
+According to Ziegler-Nichols tuning rules for PID control (time-domain method):
+\begin{align}
+K_p &= \frac{1.2}{a\tau} = \frac{1.2}{0.4 \times 1} = 3 \\
+T_i &= 2\tau = 2 \times 1 = 2 \\
+T_d &= 0.5\tau = 0.5 \times 1 = 0.5
+\end{align}
+
+Therefore, the PID controller is:
+\begin{align}
+C(s) = 3\left(1 + \frac{1}{2s} + 0.5s\right) = 3 + \frac{3}{2s} + 1.5s
+\end{align}
+
+In standard form:
+\begin{align}
+C(s) = K_p + \frac{K_i}{s} + K_d s
+\end{align}
+
+where:
+\begin{itemize}
+\item Proportional gain: $K_p = 3$
+\item Integral gain: $K_i = \frac{K_p}{T_i} = \frac{3}{2} = 1.5$
+\item Derivative gain: $K_d = K_p T_d = 3 \times 0.5 = 1.5$
+\end{itemize}
+
+\textbf{Controller Transfer Function:}
+\begin{align}
+C(s) = 3 + \frac{1.5}{s} + 1.5s = \frac{1.5s^2 + 3s + 1.5}{s}
+\end{align}
+
+\textbf{Expected Performance:}
+\begin{itemize}
+\item The Ziegler-Nichols method typically gives $\approx$ 25\% overshoot
+\item Provides good disturbance rejection
+\item May need fine-tuning for specific performance requirements
+\end{itemize}
+
+\textbf{Practical Implementation Note:}
+
+In practice, the derivative term is often implemented with a low-pass filter to avoid noise amplification:
+\begin{align}
+C(s) = K_p + \frac{K_i}{s} + \frac{K_d s}{1 + \frac{T_d s}{N}}
+\end{align}
+
+where $N = 10$ is typical (giving filter pole at $s = -10/T_d = -20$).
 
 \section{Concept 3.7.4: Anti-Windup}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Integrator Windup Problem and Solution}
 
-This section will contain worked examples for the Anti-Windup concept.
+\paragraph{Problem:} A PI controller is used to control a motor with position output. The controller is:
+\begin{align}
+u(t) = K_p e(t) + K_i \int_0^t e(\tau) d\tau
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+with $K_p = 5$ and $K_i = 2$. The control signal is limited to $|u| \leq 10$ volts.
 
-\paragraph{Solution:} Example solution will be added here.
+(a) Explain what happens when a large step reference is applied that causes $u(t)$ to saturate.
+
+(b) Design an anti-windup scheme using back-calculation with time constant $T_t = 1$ second.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Windup Problem}
+
+When a large step reference is applied:
+
+\begin{enumerate}
+\item The error $e(t) = r(t) - y(t)$ is initially large
+\item The controller output $u(t)$ quickly exceeds the limit and saturates at $u = 10$ V
+\item While $u$ is saturated, the error remains large (output hasn't caught up to reference)
+\item The integral term continues to accumulate: $\int e(\tau) d\tau$ keeps growing
+\item This is called \textbf{integrator windup}
+\item When the output finally approaches the reference, the integral has become very large
+\item The controller output stays saturated even after the error becomes negative
+\item This causes large overshoot and poor transient response
+\end{enumerate}
+
+\textbf{Part (b): Anti-Windup with Back-Calculation}
+
+The anti-windup scheme adds a feedback path that prevents the integrator from winding up:
+
+\begin{align}
+\frac{dx}{dt} = K_i e - \frac{1}{T_t}(u_{sat} - u)
+\end{align}
+
+where:
+\begin{itemize}
+\item $x$ is the integral state
+\item $u = K_p e + x$ is the controller output before saturation
+\item $u_{sat} = \text{sat}(u)$ is the saturated control signal
+\item $T_t = 1$ s is the tracking time constant
+\end{itemize}
+
+The saturated control is:
+\begin{align}
+u_{sat} = \begin{cases}
+10 & \text{if } u > 10 \\
+u & \text{if } -10 \leq u \leq 10 \\
+-10 & \text{if } u < -10
+\end{cases}
+\end{align}
+
+\textbf{How it works:}
+
+\begin{itemize}
+\item When $u$ is within limits: $u_{sat} = u$, so $\frac{dx}{dt} = K_i e$ (normal operation)
+\item When $u$ saturates: The difference $(u_{sat} - u)$ is non-zero
+\item This difference reduces the integration rate: $\frac{dx}{dt} = K_i e - \frac{1}{T_t}(u_{sat} - u)$
+\item The integrator state is "tracked back" to a value consistent with the saturation limit
+\item The time constant $T_t$ determines how quickly the tracking occurs
+\item With $T_t = 1$ s, the integrator adjusts relatively quickly
+\end{itemize}
+
+\textbf{Implementation:}
+
+The complete controller with anti-windup is:
+\begin{align}
+u &= K_p e + x \\
+u_{sat} &= \text{sat}(u, -10, 10) \\
+\frac{dx}{dt} &= K_i e - \frac{1}{1}(u_{sat} - u) = 2e - (u_{sat} - u)
+\end{align}
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Prevents large overshoot caused by integrator windup
+\item Maintains good tracking during saturation
+\item Minimal impact on performance when not saturating
+\item Simple to implement in both analog and digital systems
+\end{itemize}
 
 \section{Concept 3.7.5: Implementation}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Discrete-Time PID Implementation}
 
-This section will contain worked examples for the Implementation concept.
+\paragraph{Problem:} A continuous PID controller:
+\begin{align}
+u(t) = K_p e(t) + K_i \int_0^t e(\tau)d\tau + K_d \frac{de(t)}{dt}
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+with $K_p = 2$, $K_i = 0.5$, $K_d = 1$ needs to be implemented digitally with sampling period $T_s = 0.1$ seconds.
 
-\paragraph{Solution:} Example solution will be added here.
+(a) Derive the discrete-time implementation using:
+\begin{itemize}
+\item Forward Euler for the integral
+\item Backward difference for the derivative
+\end{itemize}
+
+(b) Write the resulting difference equation.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Discretization}
+
+Let $e_k = e(kT_s)$ denote the error at time step $k$.
+
+\textbf{Proportional term:} No approximation needed
+\begin{align}
+u_P[k] = K_p e_k = 2e_k
+\end{align}
+
+\textbf{Integral term:} Using forward Euler (rectangular rule)
+\begin{align}
+\int_0^{kT_s} e(\tau)d\tau \approx T_s \sum_{j=0}^{k} e_j
+\end{align}
+
+Define the accumulated sum:
+\begin{align}
+I_k = I_{k-1} + T_s e_k
+\end{align}
+
+Then:
+\begin{align}
+u_I[k] = K_i I_k = 0.5 I_k
+\end{align}
+
+\textbf{Derivative term:} Using backward difference
+\begin{align}
+\frac{de}{dt}\bigg|_{t=kT_s} \approx \frac{e_k - e_{k-1}}{T_s}
+\end{align}
+
+Therefore:
+\begin{align}
+u_D[k] = K_d \frac{e_k - e_{k-1}}{T_s} = 1 \cdot \frac{e_k - e_{k-1}}{0.1} = 10(e_k - e_{k-1})
+\end{align}
+
+\textbf{Part (b): Complete Difference Equation}
+
+The total control signal is:
+\begin{align}
+u_k = u_P[k] + u_I[k] + u_D[k]
+\end{align}
+
+Substituting:
+\begin{align}
+u_k = 2e_k + 0.5I_k + 10(e_k - e_{k-1})
+\end{align}
+
+With the integral update:
+\begin{align}
+I_k = I_{k-1} + 0.1e_k
+\end{align}
+
+Combining:
+\begin{align}
+u_k = 2e_k + 0.5(I_{k-1} + 0.1e_k) + 10e_k - 10e_{k-1}
+\end{align}
+
+Simplifying:
+\begin{align}
+u_k = 0.5I_{k-1} + (2 + 0.05 + 10)e_k - 10e_{k-1}
+\end{align}
+
+\begin{align}
+u_k = 0.5I_{k-1} + 12.05e_k - 10e_{k-1}
+\end{align}
+
+\textbf{Algorithm:}
+
+\begin{verbatim}
+Initialize: I = 0, e_prev = 0
+
+At each time step k:
+1. Read measurement y_k
+2. Compute error: e_k = r_k - y_k
+3. Compute control:
+   u_k = 0.5*I + 12.05*e_k - 10*e_prev
+4. Update integral: I = I + 0.1*e_k
+5. Update previous error: e_prev = e_k
+6. Apply control signal: u_k (with saturation if needed)
+\end{verbatim}
+
+\textbf{Alternative Velocity Form:}
+
+For better numerical properties and easier anti-windup:
+\begin{align}
+\Delta u_k = u_k - u_{k-1} = q_0 e_k + q_1 e_{k-1} + q_2 e_{k-2}
+\end{align}
+
+where:
+\begin{align}
+q_0 &= K_p + K_i T_s + \frac{K_d}{T_s} = 2 + 0.05 + 10 = 12.05 \\
+q_1 &= -K_p - 2\frac{K_d}{T_s} = -2 - 20 = -22 \\
+q_2 &= \frac{K_d}{T_s} = 10
+\end{align}
+
+This form computes the change in control signal:
+\begin{align}
+u_k = u_{k-1} + 12.05e_k - 22e_{k-1} + 10e_{k-2}
+\end{align}
+
+\textbf{Practical Considerations:}
+\begin{itemize}
+\item Add low-pass filter on derivative to reduce noise sensitivity
+\item Implement anti-windup for integral term
+\item Use appropriate data types (floating-point for better precision)
+\item Consider derivative on measurement rather than error to avoid derivative kick
+\end{itemize}
 
 \end{document}
