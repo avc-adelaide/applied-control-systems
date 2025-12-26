@@ -186,7 +186,11 @@ Setting $|L(j\omega_{gc})| = 1$:
 \frac{10}{\omega_{gc}\sqrt{1+\omega_{gc}^2}\sqrt{25+\omega_{gc}^2}} = 1
 \end{align}
 
-This is transcendental and typically solved numerically. For approximation, try $\omega_{gc} \approx 1.4$ rad/s:
+This is a transcendental equation typically solved numerically (e.g., using bisection or Newton's method). We can find an approximate solution by trial:
+
+Starting with an initial guess based on the DC gain: at low frequency $\omega \ll 1$, $|L(j\omega)| \approx \frac{10}{\omega \cdot 1 \cdot 5} = \frac{2}{\omega}$, suggesting $\omega_{gc} \approx 2$ rad/s as a rough starting point.
+
+Refining by iteration, try $\omega_{gc} \approx 1.4$ rad/s:
 \begin{align}
 |L(j1.4)| = \frac{10}{1.4\sqrt{1+1.96}\sqrt{25+1.96}} = \frac{10}{1.4 \times 1.72 \times 5.19} \approx 0.8
 \end{align}
