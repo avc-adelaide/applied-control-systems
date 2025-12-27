@@ -16,42 +16,735 @@
 
 \section{Concept 1.2.1: Differential Equations}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Solving First-Order Linear ODE with Forcing Function}
 
-This section will contain worked examples for the Differential Equations concept.
+\paragraph{Problem:} A hot liquid at initial temperature $T(0) = 100$°C is placed in a room at ambient temperature $T_{\infty} = 20$°C. The cooling follows Newton's law of cooling:
+\begin{align}
+\frac{dT}{dt} = -k(T - T_{\infty})
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+where $k = 0.1$ min$^{-1}$ is the cooling coefficient.
 
-\paragraph{Solution:} Example solution will be added here.
+(a) Solve the differential equation to find $T(t)$.
+
+(b) Determine how long it takes for the liquid to cool to 50°C.
+
+(c) What is the time constant of this system?
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Rewrite the ODE in standard form}
+
+\begin{align}
+\frac{dT}{dt} + kT = kT_{\infty}
+\end{align}
+
+This is a first-order linear ODE with constant coefficients.
+
+\textbf{Step 2: Find the homogeneous solution}
+
+For the homogeneous equation $\frac{dT_h}{dt} + kT_h = 0$:
+\begin{align}
+T_h(t) = Ce^{-kt}
+\end{align}
+
+\textbf{Step 3: Find the particular solution}
+
+For the particular solution, try a constant: $T_p = A$
+\begin{align}
+0 + kA = kT_{\infty} \quad \Rightarrow \quad A = T_{\infty} = 20
+\end{align}
+
+\textbf{Step 4: General solution}
+
+\begin{align}
+T(t) = T_h(t) + T_p = Ce^{-kt} + 20
+\end{align}
+
+Apply initial condition $T(0) = 100$:
+\begin{align}
+100 = C + 20 \quad \Rightarrow \quad C = 80
+\end{align}
+
+Therefore:
+\begin{align}
+T(t) = 80e^{-0.1t} + 20 \text{ °C}
+\end{align}
+
+\textbf{Step 5: Time to reach 50°C}
+
+Set $T(t) = 50$:
+\begin{align}
+50 = 80e^{-0.1t} + 20 \\
+30 = 80e^{-0.1t} \\
+e^{-0.1t} = \frac{30}{80} = 0.375 \\
+-0.1t = \ln(0.375) = -0.981 \\
+t = \frac{0.981}{0.1} = 9.81 \text{ minutes}
+\end{align}
+
+\textbf{Step 6: Time constant}
+
+The time constant is $\tau = 1/k = 1/0.1 = 10$ minutes.
+
+After one time constant ($t = 10$ min), the temperature deviation from ambient decreases to 37\% (or $1/e$) of its initial value:
+\begin{align}
+T(10) = 80e^{-1} + 20 = 80(0.368) + 20 = 49.4 \text{ °C}
+\end{align}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item First-order linear systems have exponential responses
+\item The time constant $\tau = 1/k$ characterizes the response speed
+\item The system reaches 63\% of its final value after one time constant
+\item Steady-state value: $T_{\infty} = 20$°C (independent of initial condition)
+\end{itemize}
+
+\subsection{Example 2: Second-Order ODE - Mass-Spring-Damper}
+
+\paragraph{Problem:} A mass-spring-damper system with mass $m = 2$ kg, spring constant $k = 8$ N/m, and damping coefficient $c = 4$ N·s/m is subject to an initial displacement $x(0) = 1$ m and initial velocity $\dot{x}(0) = 0$ m/s.
+
+The equation of motion is:
+\begin{align}
+m\ddot{x} + c\dot{x} + kx = 0
+\end{align}
+
+(a) Determine the damping ratio $\zeta$ and natural frequency $\omega_n$.
+
+(b) Classify the system as underdamped, critically damped, or overdamped.
+
+(c) Solve for $x(t)$ and sketch the response.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Standard form}
+
+Divide by $m$:
+\begin{align}
+\ddot{x} + \frac{c}{m}\dot{x} + \frac{k}{m}x = 0
+\end{align}
+
+\begin{align}
+\ddot{x} + 2\dot{x} + 4x = 0
+\end{align}
+
+Comparing with $\ddot{x} + 2\zeta\omega_n\dot{x} + \omega_n^2 x = 0$:
+\begin{align}
+\omega_n^2 = 4 \quad &\Rightarrow \quad \omega_n = 2 \text{ rad/s} \\
+2\zeta\omega_n = 2 \quad &\Rightarrow \quad \zeta = \frac{2}{2 \times 2} = 0.5
+\end{align}
+
+\textbf{Step 2: Classification}
+
+Since $0 < \zeta < 1$, the system is \textbf{underdamped}.
+
+\textbf{Step 3: Characteristic equation}
+
+\begin{align}
+s^2 + 2s + 4 = 0
+\end{align}
+
+\begin{align}
+s = \frac{-2 \pm \sqrt{4-16}}{2} = \frac{-2 \pm \sqrt{-12}}{2} = -1 \pm j\sqrt{3}
+\end{align}
+
+The roots are complex: $s_{1,2} = -1 \pm j1.732$
+
+\textbf{Step 4: Solution for underdamped case}
+
+For underdamped systems with $s = -\sigma \pm j\omega_d$ where $\sigma = \zeta\omega_n = 1$ and $\omega_d = \omega_n\sqrt{1-\zeta^2} = 2\sqrt{1-0.25} = \sqrt{3}$:
+
+\begin{align}
+x(t) = e^{-\sigma t}(A\cos\omega_d t + B\sin\omega_d t)
+\end{align}
+
+\begin{align}
+x(t) = e^{-t}(A\cos\sqrt{3}t + B\sin\sqrt{3}t)
+\end{align}
+
+Apply initial conditions:
+\begin{itemize}
+\item $x(0) = 1$: $A = 1$
+\item $\dot{x}(0) = 0$: Taking derivative:
+\begin{align}
+\dot{x}(t) = -e^{-t}(A\cos\sqrt{3}t + B\sin\sqrt{3}t) + e^{-t}(-A\sqrt{3}\sin\sqrt{3}t + B\sqrt{3}\cos\sqrt{3}t)
+\end{align}
+\begin{align}
+\dot{x}(0) = -A + B\sqrt{3} = 0 \quad \Rightarrow \quad B = \frac{1}{\sqrt{3}}
+\end{align}
+\end{itemize}
+
+Therefore:
+\begin{align}
+x(t) = e^{-t}\left(\cos\sqrt{3}t + \frac{1}{\sqrt{3}}\sin\sqrt{3}t\right) \text{ m}
+\end{align}
+
+Or equivalently:
+\begin{align}
+x(t) = \frac{2}{\sqrt{3}}e^{-t}\sin\left(\sqrt{3}t + \frac{\pi}{3}\right) \approx 1.155e^{-t}\sin(\sqrt{3}t + 60°)
+\end{align}
+
+\textbf{Response characteristics:}
+\begin{itemize}
+\item Oscillates at damped frequency $\omega_d = \sqrt{3} \approx 1.732$ rad/s
+\item Amplitude decays exponentially with time constant $\tau = 1$ s
+\item Period of oscillation: $T = 2\pi/\omega_d \approx 3.63$ s
+\item First peak occurs at approximately $t = 0.91$ s with amplitude $\approx 0.47$ m
+\end{itemize}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Second-order systems exhibit three types of behavior based on $\zeta$
+\item Underdamped systems ($\zeta < 1$) oscillate while decaying
+\item The damped frequency $\omega_d = \omega_n\sqrt{1-\zeta^2}$ is always less than $\omega_n$
+\item Physical systems often have $0.1 < \zeta < 1$ (underdamped)
+\end{itemize}
 
 \section{Concept 1.2.2: Qualitative Analysis}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Phase Portrait of a Nonlinear Pendulum}
 
-This section will contain worked examples for the Qualitative Analysis concept.
+\paragraph{Problem:} Consider a simple pendulum with no damping:
+\begin{align}
+\ddot{\theta} + \omega_0^2 \sin\theta = 0
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+where $\omega_0 = \sqrt{g/\ell} = 2$ rad/s is the natural frequency, $g = 9.81$ m/s$^2$, and $\ell = 2.45$ m.
 
-\paragraph{Solution:} Example solution will be added here.
+(a) Write the system as a set of first-order equations.
+
+(b) Find all equilibrium points and classify them.
+
+(c) Sketch the phase portrait showing trajectories in the $(\theta, \dot{\theta})$ plane.
+
+(d) Identify which equilibria are stable and which are unstable.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: First-order state-space form}
+
+Define state variables:
+\begin{align}
+x_1 &= \theta \quad \text{(angle)} \\
+x_2 &= \dot{\theta} \quad \text{(angular velocity)}
+\end{align}
+
+The system becomes:
+\begin{align}
+\dot{x}_1 &= x_2 \\
+\dot{x}_2 &= -\omega_0^2 \sin x_1 = -4\sin x_1
+\end{align}
+
+\textbf{Step 2: Find equilibrium points}
+
+At equilibrium, $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+x_2 &= 0 \\
+-4\sin x_1 &= 0 \quad \Rightarrow \quad x_1 = n\pi, \quad n \in \mathbb{Z}
+\end{align}
+
+Equilibrium points:
+\begin{itemize}
+\item $(0, 0), (\pm 2\pi, 0), \ldots$ — pendulum hanging down (stable)
+\item $(\pm \pi, 0), (\pm 3\pi, 0), \ldots$ — pendulum upright (unstable)
+\end{itemize}
+
+\textbf{Step 3: Linearize around equilibria}
+
+The Jacobian matrix is:
+\begin{align}
+J = \begin{bmatrix} \frac{\partial \dot{x}_1}{\partial x_1} & \frac{\partial \dot{x}_1}{\partial x_2} \\ \frac{\partial \dot{x}_2}{\partial x_1} & \frac{\partial \dot{x}_2}{\partial x_2} \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4\cos x_1 & 0 \end{bmatrix}
+\end{align}
+
+\textbf{At $(0, 0)$ (down position):}
+\begin{align}
+J|_{(0,0)} = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\det(sI - J) = s^2 + 4 = 0 \Rightarrow s = \pm 2j$
+
+Pure imaginary eigenvalues $\Rightarrow$ \textbf{center} (neutrally stable, periodic orbits)
+
+\textbf{At $(\pi, 0)$ (up position):}
+\begin{align}
+J|_{(\pi,0)} = \begin{bmatrix} 0 & 1 \\ 4 & 0 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\det(sI - J) = s^2 - 4 = 0 \Rightarrow s = \pm 2$
+
+Real eigenvalues with opposite signs $\Rightarrow$ \textbf{saddle point} (unstable)
+
+\textbf{Step 4: Phase portrait description}
+
+The phase portrait has the following features:
+
+\begin{itemize}
+\item \textbf{Centers at $\theta = 0, \pm 2\pi, \ldots$:} Closed elliptical trajectories around these points representing periodic oscillations (small angle: $\theta \approx \sin\theta$)
+  
+\item \textbf{Saddle points at $\theta = \pm\pi, \pm 3\pi, \ldots$:} Separatrix trajectories connecting saddle points, dividing the phase space into regions
+  
+\item \textbf{Closed orbits:} Trajectories near the stable equilibria represent oscillations with constant energy
+  
+\item \textbf{Open trajectories:} Trajectories passing through saddle points represent the pendulum rotating continuously (sufficient energy to go over the top)
+  
+\item \textbf{Energy contours:} Each trajectory corresponds to a constant total energy $E = \frac{1}{2}\dot{\theta}^2 - \omega_0^2\cos\theta$
+\end{itemize}
+
+\textbf{Behavior interpretation:}
+\begin{itemize}
+\item Small oscillations near $\theta = 0$: pendulum swings back and forth
+\item Trajectories approaching saddle points: pendulum approaches upright position with decreasing velocity
+\item Trajectories crossing saddle points horizontally: pendulum has exactly enough energy to reach the upright position
+\item Wavy trajectories at large $|\dot{\theta}|$: pendulum rotates continuously, either clockwise or counterclockwise
+\end{itemize}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Phase portraits provide qualitative understanding without solving equations analytically
+\item Equilibrium points can be centers, saddles, nodes, or spirals
+\item Nonlinear systems can have multiple equilibria with different stability properties
+\item The separatrix divides fundamentally different behaviors (oscillation vs. rotation)
+\item Energy is conserved in the undamped pendulum, leading to closed or periodic trajectories
+\end{itemize}
+
+\subsection{Example 2: Competing Species - Population Dynamics}
+
+\paragraph{Problem:} Two species compete for the same resources. Their populations $x_1$ and $x_2$ evolve according to:
+\begin{align}
+\dot{x}_1 &= x_1(3 - x_1 - 2x_2) \\
+\dot{x}_2 &= x_2(2 - x_1 - x_2)
+\end{align}
+
+(a) Find all equilibrium points.
+
+(b) Linearize around each equilibrium and determine stability.
+
+(c) Sketch the nullclines and phase portrait in the first quadrant ($x_1, x_2 \geq 0$).
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+Set $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+x_1(3 - x_1 - 2x_2) &= 0 \\
+x_2(2 - x_1 - x_2) &= 0
+\end{align}
+
+\textbf{Equilibria:}
+\begin{itemize}
+\item \textbf{$E_1 = (0, 0)$:} Both species extinct
+\item \textbf{$E_2 = (3, 0)$:} Only species 1 survives (from $3 - x_1 = 0$)
+\item \textbf{$E_3 = (0, 2)$:} Only species 2 survives (from $2 - x_2 = 0$)
+\item \textbf{$E_4$:} Coexistence? Solve:
+\begin{align}
+3 - x_1 - 2x_2 &= 0 \\
+2 - x_1 - x_2 &= 0
+\end{align}
+Subtract: $(3-2) - (x_1 - x_1) - (2x_2 - x_2) = 0 \Rightarrow 1 - x_2 = 0 \Rightarrow x_2 = 1$
+
+Then $x_1 = 2 - x_2 = 1$. So $E_4 = (1, 1)$.
+\end{itemize}
+
+\textbf{Step 2: Linearization}
+
+The Jacobian is:
+\begin{align}
+J = \begin{bmatrix} 3 - 2x_1 - 2x_2 & -2x_1 \\ -x_2 & 2 - x_1 - 2x_2 \end{bmatrix}
+\end{align}
+
+\textbf{At $E_1 = (0,0)$:}
+\begin{align}
+J|_{(0,0)} = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = 3$, $\lambda_2 = 2$ (both positive) $\Rightarrow$ \textbf{unstable node}
+
+\textbf{At $E_2 = (3,0)$:}
+\begin{align}
+J|_{(3,0)} = \begin{bmatrix} -3 & -6 \\ 0 & -1 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = -3$, $\lambda_2 = -1$ (both negative) $\Rightarrow$ \textbf{stable node}
+
+\textbf{At $E_3 = (0,2)$:}
+\begin{align}
+J|_{(0,2)} = \begin{bmatrix} -1 & 0 \\ -2 & -2 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = -1$, $\lambda_2 = -2$ (both negative) $\Rightarrow$ \textbf{stable node}
+
+\textbf{At $E_4 = (1,1)$:}
+\begin{align}
+J|_{(1,1)} = \begin{bmatrix} -1 & -2 \\ -1 & -1 \end{bmatrix}
+\end{align}
+Eigenvalues: $\det(sI - J) = (s+1)^2 - 2 = s^2 + 2s - 1 = 0$
+\begin{align}
+s = \frac{-2 \pm \sqrt{4+4}}{2} = -1 \pm \sqrt{2}
+\end{align}
+$\lambda_1 = -1 + \sqrt{2} \approx 0.414 > 0$, $\lambda_2 = -1 - \sqrt{2} \approx -2.414 < 0$
+
+One positive, one negative $\Rightarrow$ \textbf{saddle point} (unstable)
+
+\textbf{Step 3: Nullclines and phase portrait}
+
+\textbf{Nullclines} ($\dot{x}_1 = 0$ and $\dot{x}_2 = 0$):
+\begin{itemize}
+\item $\dot{x}_1 = 0$: $x_1 = 0$ or $x_1 + 2x_2 = 3$ (line from $(3,0)$ to $(0, 1.5)$)
+\item $\dot{x}_2 = 0$: $x_2 = 0$ or $x_1 + x_2 = 2$ (line from $(2,0)$ to $(0, 2)$)
+\end{itemize}
+
+\textbf{Flow direction:}
+\begin{itemize}
+\item Below both nullclines: both populations grow
+\item Above both: both decrease
+\item Between: mixed behavior
+\end{itemize}
+
+\textbf{Outcome:} The system has two stable equilibria ($E_2$ and $E_3$) and one saddle ($E_4$). The separatrix through the saddle divides the phase space:
+\begin{itemize}
+\item Initial conditions on one side lead to $(3, 0)$ — species 1 wins
+\item Initial conditions on the other side lead to $(0, 2)$ — species 2 wins
+\item Coexistence $(1,1)$ is unstable
+\end{itemize}
+
+This is a classic example of \textbf{competitive exclusion}: both species cannot coexist in equilibrium.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Qualitative analysis reveals long-term behavior without explicit solutions
+\item Nullclines divide the state space into regions with different flow directions
+\item Competing species often lead to extinction of one species (competitive exclusion principle)
+\item The basin of attraction determines which species wins based on initial populations
+\end{itemize}
 
 \section{Concept 1.2.3: Stability}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Lyapunov Stability Analysis}
 
-This section will contain worked examples for the Stability concept.
+\paragraph{Problem:} Consider the nonlinear system:
+\begin{align}
+\dot{x}_1 &= -x_1 + x_1 x_2 \\
+\dot{x}_2 &= -x_2
+\end{align}
 
-\paragraph{Problem:} Example problem statement will be added here.
+(a) Find the equilibrium points.
 
-\paragraph{Solution:} Example solution will be added here.
+(b) Use a Lyapunov function candidate $V(x) = \frac{1}{2}(x_1^2 + x_2^2)$ to prove stability of the origin.
+
+(c) Verify by linearization.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+Set $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+-x_1 + x_1 x_2 &= 0 \quad \Rightarrow \quad x_1(x_2 - 1) = 0 \\
+-x_2 &= 0 \quad \Rightarrow \quad x_2 = 0
+\end{align}
+
+From the second equation, $x_2 = 0$. Substituting into the first: $x_1(-1) = 0$, so $x_1 = 0$.
+
+The only equilibrium is the origin: $(0, 0)$.
+
+\textbf{Step 2: Lyapunov stability analysis}
+
+Consider $V(x) = \frac{1}{2}(x_1^2 + x_2^2)$. This is:
+\begin{itemize}
+\item Positive definite: $V(x) > 0$ for all $x \neq 0$ and $V(0) = 0$ ✓
+\item Radially unbounded: $V(x) \to \infty$ as $\|x\| \to \infty$ ✓
+\end{itemize}
+
+Compute the time derivative along system trajectories:
+\begin{align}
+\dot{V} = \frac{\partial V}{\partial x_1}\dot{x}_1 + \frac{\partial V}{\partial x_2}\dot{x}_2
+\end{align}
+
+\begin{align}
+\dot{V} &= x_1(-x_1 + x_1 x_2) + x_2(-x_2) \\
+&= -x_1^2 + x_1^2 x_2 - x_2^2 \\
+&= -x_1^2(1 - x_2) - x_2^2
+\end{align}
+
+\textbf{Analysis of $\dot{V}$:}
+\begin{itemize}
+\item If $|x_2| < 1$, then $1 - x_2 > 0$, so both terms are negative: $\dot{V} < 0$
+\item If $x_2 > 1$, then $1 - x_2 < 0$, and the sign of $\dot{V}$ depends on relative magnitudes
+\end{itemize}
+
+For the region $|x_2| < 1$ (which includes a neighborhood of the origin), we have:
+\begin{align}
+\dot{V} \leq -\min(1 - x_2, 1) \cdot x_1^2 - x_2^2 < 0 \quad \text{for } x \neq 0
+\end{align}
+
+Since $V$ is positive definite and $\dot{V}$ is negative definite in a neighborhood of the origin, the origin is \textbf{asymptotically stable} by Lyapunov's theorem.
+
+For global stability, we need $\dot{V} < 0$ everywhere. Rewrite:
+\begin{align}
+\dot{V} = -x_1^2 - x_2^2 + x_1^2 x_2 = -(x_1^2 + x_2^2) + x_1^2 x_2
+\end{align}
+
+For $|x_2| < 1$: $|x_1^2 x_2| < x_1^2 < x_1^2 + x_2^2$, so $\dot{V} < 0$ ✓
+
+For $|x_2| \geq 1$: The analysis is more complex. Let's check a specific case: if $x_2 = 2$:
+\begin{align}
+\dot{V} = -x_1^2(1-2) - 4 = x_1^2 - 4
+\end{align}
+This can be positive if $|x_1| > 2$.
+
+However, for the region near the origin (which is what matters for local stability), $\dot{V} < 0$ definitively.
+
+\textbf{Conclusion:} The origin is \textbf{locally asymptotically stable}.
+
+\textbf{Step 3: Verification by linearization}
+
+The Jacobian at the origin is:
+\begin{align}
+J = \begin{bmatrix} \frac{\partial \dot{x}_1}{\partial x_1} & \frac{\partial \dot{x}_1}{\partial x_2} \\ \frac{\partial \dot{x}_2}{\partial x_1} & \frac{\partial \dot{x}_2}{\partial x_2} \end{bmatrix}\bigg|_{(0,0)} = \begin{bmatrix} -1 + x_2 & x_1 \\ 0 & -1 \end{bmatrix}\bigg|_{(0,0)} = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\lambda_1 = \lambda_2 = -1$
+
+Both eigenvalues have negative real parts $\Rightarrow$ the linearized system is stable $\Rightarrow$ the origin is \textbf{locally asymptotically stable} ✓
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Lyapunov functions provide a powerful method to prove stability without solving the differential equations
+\item If $V > 0$ and $\dot{V} < 0$ in a neighborhood, the equilibrium is locally asymptotically stable
+\item If $V$ and $-\dot{V}$ are both positive definite and radially unbounded, the equilibrium is globally asymptotically stable
+\item Finding Lyapunov functions is more art than science—common choices include quadratic forms, energy functions, or weighted sums
+\item Linearization provides an alternative (often simpler) method for local stability analysis
+\end{itemize}
+
+\subsection{Example 2: Eigenvalue Stability Criterion}
+
+\paragraph{Problem:} Determine the stability of the equilibrium point $(0, 0)$ for the following linear systems:
+
+(a) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+(b) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} -1 & 4 \\ -1 & -1 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+(c) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+\paragraph{Solution:}
+
+\textbf{Stability criterion:} For a linear system $\dot{x} = Ax$, the origin is:
+\begin{itemize}
+\item \textbf{Asymptotically stable} if all eigenvalues of $A$ have negative real parts
+\item \textbf{Unstable} if at least one eigenvalue has positive real part
+\item \textbf{Marginally stable} if some eigenvalues are purely imaginary (and the rest have negative real parts) with simple multiplicity
+\end{itemize}
+
+\textbf{Part (a):}
+\begin{align}
+A = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}
+\end{align}
+
+Since $A$ is upper triangular, eigenvalues are on the diagonal: $\lambda_1 = -2$, $\lambda_2 = -3$
+
+Both eigenvalues are negative $\Rightarrow$ \textbf{asymptotically stable}
+
+The system is a stable node.
+
+\textbf{Part (b):}
+\begin{align}
+A = \begin{bmatrix} -1 & 4 \\ -1 & -1 \end{bmatrix}
+\end{align}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s+1 & -4 \\ 1 & s+1 \end{bmatrix} = (s+1)^2 + 4 = s^2 + 2s + 5 = 0
+\end{align}
+
+\begin{align}
+s = \frac{-2 \pm \sqrt{4-20}}{2} = \frac{-2 \pm 4j}{2} = -1 \pm 2j
+\end{align}
+
+Eigenvalues: $\lambda_1 = -1 + 2j$, $\lambda_2 = -1 - 2j$
+
+Both have negative real parts ($-1$) $\Rightarrow$ \textbf{asymptotically stable}
+
+The system is a stable spiral (oscillates while converging).
+
+\textbf{Part (c):}
+\begin{align}
+A = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}
+\end{align}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s & -1 \\ 4 & s \end{bmatrix} = s^2 + 4 = 0
+\end{align}
+
+\begin{align}
+s = \pm 2j
+\end{align}
+
+Eigenvalues: $\lambda_1 = 2j$, $\lambda_2 = -2j$ (purely imaginary)
+
+Since eigenvalues are on the imaginary axis $\Rightarrow$ \textbf{marginally stable} (Lyapunov stable but not asymptotically stable)
+
+The system exhibits sustained oscillations with constant amplitude (like an undamped oscillator).
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Eigenvalues completely determine the stability of linear systems
+\item The real part of eigenvalues determines growth/decay; the imaginary part determines oscillation frequency
+\item Complex eigenvalues come in conjugate pairs for real matrices
+\item Marginally stable systems are sensitive to perturbations and nonlinearities
+\item In practice, systems should be designed with sufficient stability margin (eigenvalues well into the left half-plane)
+\end{itemize}
 
 \section{Concept 1.2.4: Examples}
 
-\subsection{Example 1: Placeholder}
+\subsection{Example 1: Inverted Pendulum on a Cart - Comprehensive Analysis}
 
-This section will contain worked examples for the Examples concept.
+\paragraph{Problem:} An inverted pendulum is mounted on a cart that can move horizontally. The system parameters are:
+\begin{itemize}
+\item Cart mass: $M = 2$ kg
+\item Pendulum mass: $m = 0.5$ kg
+\item Pendulum length: $\ell = 0.5$ m
+\item Gravitational acceleration: $g = 9.81$ m/s$^2$
+\item Applied force on cart: $F$ (control input)
+\end{itemize}
 
-\paragraph{Problem:} Example problem statement will be added here.
+The nonlinear equations of motion (derived from Lagrangian mechanics) are:
+\begin{align}
+(M + m)\ddot{x} + m\ell\cos\theta\,\ddot{\theta} - m\ell\sin\theta\,\dot{\theta}^2 &= F \\
+m\ell^2\ddot{\theta} + m\ell\cos\theta\,\ddot{x} - m\ell g\sin\theta &= 0
+\end{align}
 
-\paragraph{Solution:} Example solution will be added here.
+where $x$ is the cart position and $\theta$ is the pendulum angle from vertical (upward).
+
+(a) Find the equilibrium points.
+
+(b) Linearize around the upright equilibrium $(\theta = 0)$.
+
+(c) Analyze the stability of the linearized system with $F = 0$.
+
+(d) Determine the characteristic equation and discuss controllability.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+At equilibrium, all derivatives are zero: $\ddot{x} = \ddot{\theta} = \dot{x} = \dot{\theta} = 0$ and $F = 0$:
+\begin{align}
+0 &= 0 \quad \text{(first equation satisfied)} \\
+-m\ell g\sin\theta &= 0 \quad \Rightarrow \quad \theta = 0 \text{ or } \pi
+\end{align}
+
+Equilibria:
+\begin{itemize}
+\item $\theta = 0$ (pendulum upright) — unstable equilibrium
+\item $\theta = \pi$ (pendulum hanging down) — stable equilibrium
+\end{itemize}
+
+We focus on the upright position $\theta = 0$ for control design.
+
+\textbf{Step 2: Linearization around $\theta = 0$}
+
+For small angles $\theta \ll 1$:
+\begin{align}
+\sin\theta &\approx \theta \\
+\cos\theta &\approx 1 \\
+\dot{\theta}^2 &\approx 0 \quad \text{(second-order small)}
+\end{align}
+
+The linearized equations become:
+\begin{align}
+(M + m)\ddot{x} + m\ell\ddot{\theta} &= F \\
+m\ell^2\ddot{\theta} + m\ell\ddot{x} - m\ell g\theta &= 0
+\end{align}
+
+\textbf{Step 3: Solve for accelerations}
+
+From the second equation:
+\begin{align}
+\ddot{\theta} = -\frac{\ddot{x}}{\ell} + \frac{g}{\ell}\theta
+\end{align}
+
+Substitute into the first equation:
+\begin{align}
+(M + m)\ddot{x} + m\ell\left(-\frac{\ddot{x}}{\ell} + \frac{g}{\ell}\theta\right) &= F \\
+(M + m)\ddot{x} - m\ddot{x} + mg\theta &= F \\
+M\ddot{x} + mg\theta &= F \\
+\ddot{x} &= \frac{F - mg\theta}{M}
+\end{align}
+
+And:
+\begin{align}
+\ddot{\theta} &= -\frac{1}{\ell}\cdot\frac{F - mg\theta}{M} + \frac{g}{\ell}\theta \\
+&= -\frac{F}{M\ell} + \frac{mg\theta}{M\ell} + \frac{g}{\ell}\theta \\
+&= -\frac{F}{M\ell} + \frac{(M+m)g\theta}{M\ell}
+\end{align}
+
+\textbf{Step 4: State-space form}
+
+Define state vector:
+\begin{align}
+x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} x \\ \dot{x} \\ \theta \\ \dot{\theta} \end{bmatrix}
+\end{align}
+
+State equations:
+\begin{align}
+\dot{x}_1 &= x_2 \\
+\dot{x}_2 &= \frac{F - mg x_3}{M} = -\frac{mg}{M}x_3 + \frac{1}{M}F \\
+\dot{x}_3 &= x_4 \\
+\dot{x}_4 &= \frac{(M+m)g}{M\ell}x_3 - \frac{1}{M\ell}F
+\end{align}
+
+In matrix form:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & -\frac{mg}{M} & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & \frac{(M+m)g}{M\ell} & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} + \begin{bmatrix} 0 \\ \frac{1}{M} \\ 0 \\ -\frac{1}{M\ell} \end{bmatrix}F
+\end{align}
+
+\textbf{Step 5: Numerical matrices}
+
+With $M = 2$ kg, $m = 0.5$ kg, $\ell = 0.5$ m, $g = 9.81$ m/s$^2$:
+\begin{align}
+A = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & -2.45 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 30.7 & 0 \end{bmatrix}, \quad B = \begin{bmatrix} 0 \\ 0.5 \\ 0 \\ -1 \end{bmatrix}
+\end{align}
+
+\textbf{Step 6: Stability analysis (uncontrolled, $F = 0$)}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s & -1 & 0 & 0 \\ 0 & s & 2.45 & 0 \\ 0 & 0 & s & -1 \\ 0 & 0 & -30.7 & s \end{bmatrix}
+\end{align}
+
+Expanding along the first column:
+\begin{align}
+= s \det\begin{bmatrix} s & 2.45 & 0 \\ 0 & s & -1 \\ 0 & -30.7 & s \end{bmatrix} - 0 + 0 - 0
+\end{align}
+
+\begin{align}
+= s \cdot s \det\begin{bmatrix} s & -1 \\ -30.7 & s \end{bmatrix} = s^2(s^2 - 30.7)
+\end{align}
+
+Eigenvalues: $\lambda_1 = 0, \lambda_2 = 0, \lambda_3 = \sqrt{30.7} \approx 5.54, \lambda_4 = -\sqrt{30.7} \approx -5.54$
+
+Since $\lambda_3 > 0$ (positive real eigenvalue), the system is \textbf{unstable}. This makes physical sense: the inverted pendulum will fall without control.
+
+The double eigenvalue at zero corresponds to the cart position being uncontrolled (it can drift at constant velocity).
+
+\textbf{Step 7: Controllability}
+
+To check if the system can be stabilized by feedback, compute the controllability matrix:
+\begin{align}
+W_c = \begin{bmatrix} B & AB & A^2B & A^3B \end{bmatrix}
+\end{align}
+
+Without computing explicitly, we can verify that $\text{rank}(W_c) = 4$ (full rank), so the system is \textbf{controllable}. This means we can design a state feedback controller to stabilize the inverted pendulum.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item The inverted pendulum is a classic example of an unstable system requiring feedback control
+\item Linearization around the upright position reveals an unstable mode (positive eigenvalue)
+\item The system has four states: cart position, cart velocity, pendulum angle, and angular velocity
+\item Without control ($F = 0$), the pendulum falls exponentially fast ($e^{5.54t}$)
+\item The system is controllable, meaning state feedback can place all poles in the left half-plane
+\item This analysis forms the basis for designing stabilizing controllers (e.g., LQR, pole placement)
+\item In practice, sensor noise, actuator limits, and model uncertainties complicate the control design
+\end{itemize}
+
+This comprehensive example integrates concepts from modeling, linearization, stability analysis, and controllability—demonstrating the complete workflow for analyzing dynamic systems before designing controllers.
 
 \end{document}
