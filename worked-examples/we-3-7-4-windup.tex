@@ -1,0 +1,101 @@
+% Worked Examples: Concept 3.7.4 - Integrator Windup
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.7.4: Integrator Windup\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.7.4: Anti-Windup}
+
+\subsection{Example 1: Integrator Windup Problem and Solution}
+
+\paragraph{Problem:} A PI controller is used to control a motor with position output. The controller is:
+\begin{align}
+u(t) = K_p e(t) + K_i \int_0^t e(\tau) d\tau
+\end{align}
+
+with $K_p = 5$ and $K_i = 2$. The control signal is limited to $|u| \leq 10$ volts.
+
+(a) Explain what happens when a large step reference is applied that causes $u(t)$ to saturate.
+
+(b) Design an anti-windup scheme using back-calculation with time constant $T_t = 1$ second.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Windup Problem}
+
+When a large step reference is applied:
+
+\begin{enumerate}
+\item The error $e(t) = r(t) - y(t)$ is initially large
+\item The controller output $u(t)$ quickly exceeds the limit and saturates at $u = 10$ V
+\item While $u$ is saturated, the error remains large (output hasn't caught up to reference)
+\item The integral term continues to accumulate: $\int e(\tau) d\tau$ keeps growing
+\item This is called \textbf{integrator windup}
+\item When the output finally approaches the reference, the integral has become very large
+\item The controller output stays saturated even after the error becomes negative
+\item This causes large overshoot and poor transient response
+\end{enumerate}
+
+\textbf{Part (b): Anti-Windup with Back-Calculation}
+
+The anti-windup scheme adds a feedback path that prevents the integrator from winding up:
+
+\begin{align}
+\frac{dx}{dt} = K_i e - \frac{1}{T_t}(u_{sat} - u)
+\end{align}
+
+where:
+\begin{itemize}
+\item $x$ is the integral state
+\item $u = K_p e + x$ is the controller output before saturation
+\item $u_{sat} = \text{sat}(u)$ is the saturated control signal
+\item $T_t = 1$ s is the tracking time constant
+\end{itemize}
+
+The saturated control is:
+\begin{align}
+u_{sat} = \begin{cases}
+10 & \text{if } u > 10 \\
+u & \text{if } -10 \leq u \leq 10 \\
+-10 & \text{if } u < -10
+\end{cases}
+\end{align}
+
+\textbf{How it works:}
+
+\begin{itemize}
+\item When $u$ is within limits: $u_{sat} = u$, so $\frac{dx}{dt} = K_i e$ (normal operation)
+\item When $u$ saturates: The difference $(u_{sat} - u)$ is non-zero
+\item This difference reduces the integration rate: $\frac{dx}{dt} = K_i e - \frac{1}{T_t}(u_{sat} - u)$
+\item The integrator state is "tracked back" to a value consistent with the saturation limit
+\item The time constant $T_t$ determines how quickly the tracking occurs
+\item With $T_t = 1$ s, the integrator adjusts relatively quickly
+\end{itemize}
+
+\textbf{Implementation:}
+
+The complete controller with anti-windup is:
+\begin{align}
+u &= K_p e + x \\
+u_{sat} &= \text{sat}(u, -10, 10) \\
+\frac{dx}{dt} &= K_i e - \frac{1}{1}(u_{sat} - u) = 2e - (u_{sat} - u)
+\end{align}
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Prevents large overshoot caused by integrator windup
+\item Maintains good tracking during saturation
+\item Minimal impact on performance when not saturating
+\item Simple to implement in both analog and digital systems
+\end{itemize}
+\end{document}

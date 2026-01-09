@@ -1,0 +1,234 @@
+% Worked Examples: Concept 1.2.2 - Qualitative Analysis
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.2.2: Qualitative Analysis\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.2.2: Qualitative Analysis}
+
+\subsection{Example 1: Phase Portrait of a Nonlinear Pendulum}
+
+\paragraph{Problem:} Consider a simple pendulum with no damping:
+\begin{align}
+\ddot{\theta} + \omega_0^2 \sin\theta = 0
+\end{align}
+
+where $\omega_0 = \sqrt{g/\ell} = 2$ rad/s is the natural frequency, $g = 9.81$ m/s$^2$, and $\ell = 2.45$ m.
+
+(a) Write the system as a set of first-order equations.
+
+(b) Find all equilibrium points and classify them.
+
+(c) Sketch the phase portrait showing trajectories in the $(\theta, \dot{\theta})$ plane.
+
+(d) Identify which equilibria are stable and which are unstable.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: First-order state-space form}
+
+Define state variables:
+\begin{align}
+x_1 &= \theta \quad \text{(angle)} \\
+x_2 &= \dot{\theta} \quad \text{(angular velocity)}
+\end{align}
+
+The system becomes:
+\begin{align}
+\dot{x}_1 &= x_2 \\
+\dot{x}_2 &= -\omega_0^2 \sin x_1 = -4\sin x_1
+\end{align}
+
+\textbf{Step 2: Find equilibrium points}
+
+At equilibrium, $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+x_2 &= 0 \\
+-4\sin x_1 &= 0 \quad \Rightarrow \quad x_1 = n\pi, \quad n \in \mathbb{Z}
+\end{align}
+
+Equilibrium points:
+\begin{itemize}
+\item $(0, 0), (\pm 2\pi, 0), \ldots$ — pendulum hanging down (stable)
+\item $(\pm \pi, 0), (\pm 3\pi, 0), \ldots$ — pendulum upright (unstable)
+\end{itemize}
+
+\textbf{Step 3: Linearize around equilibria}
+
+The Jacobian matrix is:
+\begin{align}
+J = \begin{bmatrix} \frac{\partial \dot{x}_1}{\partial x_1} & \frac{\partial \dot{x}_1}{\partial x_2} \\ \frac{\partial \dot{x}_2}{\partial x_1} & \frac{\partial \dot{x}_2}{\partial x_2} \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4\cos x_1 & 0 \end{bmatrix}
+\end{align}
+
+\textbf{At $(0, 0)$ (down position):}
+\begin{align}
+J|_{(0,0)} = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\det(sI - J) = s^2 + 4 = 0 \Rightarrow s = \pm 2j$
+
+Pure imaginary eigenvalues $\Rightarrow$ \textbf{center} (neutrally stable, periodic orbits)
+
+\textbf{At $(\pi, 0)$ (up position):}
+\begin{align}
+J|_{(\pi,0)} = \begin{bmatrix} 0 & 1 \\ 4 & 0 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\det(sI - J) = s^2 - 4 = 0 \Rightarrow s = \pm 2$
+
+Real eigenvalues with opposite signs $\Rightarrow$ \textbf{saddle point} (unstable)
+
+\textbf{Step 4: Phase portrait description}
+
+The phase portrait has the following features:
+
+\begin{itemize}
+\item \textbf{Centers at $\theta = 0, \pm 2\pi, \ldots$:} Closed elliptical trajectories around these points representing periodic oscillations (small angle: $\theta \approx \sin\theta$)
+  
+\item \textbf{Saddle points at $\theta = \pm\pi, \pm 3\pi, \ldots$:} Separatrix trajectories connecting saddle points, dividing the phase space into regions
+  
+\item \textbf{Closed orbits:} Trajectories near the stable equilibria represent oscillations with constant energy
+  
+\item \textbf{Open trajectories:} Trajectories passing through saddle points represent the pendulum rotating continuously (sufficient energy to go over the top)
+  
+\item \textbf{Energy contours:} Each trajectory corresponds to a constant total energy $E = \frac{1}{2}\dot{\theta}^2 - \omega_0^2\cos\theta$
+\end{itemize}
+
+\textbf{Behavior interpretation:}
+\begin{itemize}
+\item Small oscillations near $\theta = 0$: pendulum swings back and forth
+\item Trajectories approaching saddle points: pendulum approaches upright position with decreasing velocity
+\item Trajectories crossing saddle points horizontally: pendulum has exactly enough energy to reach the upright position
+\item Wavy trajectories at large $|\dot{\theta}|$: pendulum rotates continuously, either clockwise or counterclockwise
+\end{itemize}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Phase portraits provide qualitative understanding without solving equations analytically
+\item Equilibrium points can be centers, saddles, nodes, or spirals
+\item Nonlinear systems can have multiple equilibria with different stability properties
+\item The separatrix divides fundamentally different behaviors (oscillation vs. rotation)
+\item Energy is conserved in the undamped pendulum, leading to closed or periodic trajectories
+\end{itemize}
+
+\subsection{Example 2: Competing Species - Population Dynamics}
+
+\paragraph{Problem:} Two species compete for the same resources. Their populations $x_1$ and $x_2$ evolve according to:
+\begin{align}
+\dot{x}_1 &= x_1(3 - x_1 - 2x_2) \\
+\dot{x}_2 &= x_2(2 - x_1 - x_2)
+\end{align}
+
+(a) Find all equilibrium points.
+
+(b) Linearize around each equilibrium and determine stability.
+
+(c) Sketch the nullclines and phase portrait in the first quadrant ($x_1, x_2 \geq 0$).
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+Set $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+x_1(3 - x_1 - 2x_2) &= 0 \\
+x_2(2 - x_1 - x_2) &= 0
+\end{align}
+
+\textbf{Equilibria:}
+\begin{itemize}
+\item \textbf{$E_1 = (0, 0)$:} Both species extinct
+\item \textbf{$E_2 = (3, 0)$:} Only species 1 survives (from $3 - x_1 = 0$)
+\item \textbf{$E_3 = (0, 2)$:} Only species 2 survives (from $2 - x_2 = 0$)
+\item \textbf{$E_4$:} Coexistence? Solve:
+\begin{align}
+3 - x_1 - 2x_2 &= 0 \\
+2 - x_1 - x_2 &= 0
+\end{align}
+From the second equation: $x_1 = 2 - x_2$. Substitute into the first:
+\begin{align}
+3 - (2 - x_2) - 2x_2 = 0 \quad \Rightarrow \quad 1 + x_2 - 2x_2 = 0 \quad \Rightarrow \quad x_2 = 1
+\end{align}
+
+Then $x_1 = 2 - 1 = 1$. So $E_4 = (1, 1)$.
+\end{itemize}
+
+\textbf{Step 2: Linearization}
+
+The Jacobian is:
+\begin{align}
+J = \begin{bmatrix} 3 - 2x_1 - 2x_2 & -2x_1 \\ -x_2 & 2 - x_1 - 2x_2 \end{bmatrix}
+\end{align}
+
+\textbf{At $E_1 = (0,0)$:}
+\begin{align}
+J|_{(0,0)} = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = 3$, $\lambda_2 = 2$ (both positive) $\Rightarrow$ \textbf{unstable node}
+
+\textbf{At $E_2 = (3,0)$:}
+\begin{align}
+J|_{(3,0)} = \begin{bmatrix} -3 & -6 \\ 0 & -1 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = -3$, $\lambda_2 = -1$ (both negative) $\Rightarrow$ \textbf{stable node}
+
+\textbf{At $E_3 = (0,2)$:}
+\begin{align}
+J|_{(0,2)} = \begin{bmatrix} -1 & 0 \\ -2 & -2 \end{bmatrix}
+\end{align}
+Eigenvalues: $\lambda_1 = -1$, $\lambda_2 = -2$ (both negative) $\Rightarrow$ \textbf{stable node}
+
+\textbf{At $E_4 = (1,1)$:}
+\begin{align}
+J|_{(1,1)} = \begin{bmatrix} -1 & -2 \\ -1 & -1 \end{bmatrix}
+\end{align}
+Eigenvalues: $\det(sI - J) = (s+1)^2 - 2 = s^2 + 2s - 1 = 0$
+\begin{align}
+s = \frac{-2 \pm \sqrt{4+4}}{2} = -1 \pm \sqrt{2}
+\end{align}
+$\lambda_1 = -1 + \sqrt{2} \approx 0.414 > 0$, $\lambda_2 = -1 - \sqrt{2} \approx -2.414 < 0$
+
+One positive, one negative $\Rightarrow$ \textbf{saddle point} (unstable)
+
+\textbf{Step 3: Nullclines and phase portrait}
+
+\textbf{Nullclines} ($\dot{x}_1 = 0$ and $\dot{x}_2 = 0$):
+\begin{itemize}
+\item $\dot{x}_1 = 0$: $x_1 = 0$ or $x_1 + 2x_2 = 3$ (line from $(3,0)$ to $(0, 1.5)$)
+\item $\dot{x}_2 = 0$: $x_2 = 0$ or $x_1 + x_2 = 2$ (line from $(2,0)$ to $(0, 2)$)
+\end{itemize}
+
+\textbf{Flow direction:}
+\begin{itemize}
+\item Below both nullclines: both populations grow
+\item Above both: both decrease
+\item Between: mixed behavior
+\end{itemize}
+
+\textbf{Outcome:} The system has two stable equilibria ($E_2$ and $E_3$) and one saddle ($E_4$). The separatrix through the saddle divides the phase space:
+\begin{itemize}
+\item Initial conditions on one side lead to $(3, 0)$ — species 1 wins
+\item Initial conditions on the other side lead to $(0, 2)$ — species 2 wins
+\item Coexistence $(1,1)$ is unstable
+\end{itemize}
+
+This is a classic example of \textbf{competitive exclusion}: both species cannot coexist in equilibrium.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Qualitative analysis reveals long-term behavior without explicit solutions
+\item Nullclines divide the state space into regions with different flow directions
+\item Competing species often lead to extinction of one species (competitive exclusion principle)
+\item The basin of attraction determines which species wins based on initial populations
+\end{itemize}
+\end{document}

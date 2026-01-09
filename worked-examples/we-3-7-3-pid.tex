@@ -1,0 +1,85 @@
+% Worked Examples: Concept 3.7.3 - PID Tuning
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.7.3: PID Tuning\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.7.3: PID Control}
+
+\subsection{Example 1: PID Controller Tuning using Ziegler-Nichols}
+
+\paragraph{Problem:} A process has the First-Order Time-Delay (FOTD) model:
+\begin{align}
+P(s) = \frac{2}{1+5s}e^{-s}
+\end{align}
+
+Use the Ziegler-Nichols time-domain method to design a PID controller for this system. The parameters are $K = 2$, $T = 5$, and $\tau = 1$.
+
+\paragraph{Solution:}
+
+For the FOTD model $P(s) = \frac{K}{1+Ts}e^{-\tau s}$, the Ziegler-Nichols method uses the ITD approximation with:
+\begin{itemize}
+\item Slope parameter: $a = \frac{K}{T} = \frac{2}{5} = 0.4$
+\item Time delay: $\tau = 1$
+\end{itemize}
+
+The standard PID controller form is:
+\begin{align}
+C(s) = K_p\left(1 + \frac{1}{T_i s} + T_d s\right)
+\end{align}
+
+According to Ziegler-Nichols tuning rules for PID control (time-domain method):
+\begin{align}
+K_p &= \frac{1.2}{a\tau} = \frac{1.2}{0.4 \times 1} = 3 \\
+T_i &= 2\tau = 2 \times 1 = 2 \\
+T_d &= 0.5\tau = 0.5 \times 1 = 0.5
+\end{align}
+
+Therefore, the PID controller is:
+\begin{align}
+C(s) = 3\left(1 + \frac{1}{2s} + 0.5s\right) = 3 + \frac{3}{2s} + 1.5s
+\end{align}
+
+In standard form:
+\begin{align}
+C(s) = K_p + \frac{K_i}{s} + K_d s
+\end{align}
+
+where:
+\begin{itemize}
+\item Proportional gain: $K_p = 3$
+\item Integral gain: $K_i = \frac{K_p}{T_i} = \frac{3}{2} = 1.5$
+\item Derivative gain: $K_d = K_p T_d = 3 \times 0.5 = 1.5$
+\end{itemize}
+
+\textbf{Controller Transfer Function:}
+\begin{align}
+C(s) = 3 + \frac{1.5}{s} + 1.5s = \frac{1.5s^2 + 3s + 1.5}{s}
+\end{align}
+
+\textbf{Expected Performance:}
+\begin{itemize}
+\item The Ziegler-Nichols method typically gives $\approx$ 25\% overshoot
+\item Provides good disturbance rejection
+\item May need fine-tuning for specific performance requirements
+\end{itemize}
+
+\textbf{Practical Implementation Note:}
+
+In practice, the derivative term is often implemented with a low-pass filter to avoid noise amplification:
+\begin{align}
+C(s) = K_p + \frac{K_i}{s} + \frac{K_d s}{1 + \frac{T_d s}{N}}
+\end{align}
+
+where $N = 10$ is typical (giving filter pole at $s = -10/T_d = -20$).
+\end{document}

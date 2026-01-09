@@ -1,0 +1,89 @@
+% Worked Examples: Concept 2.5.3 - Laplace Transforms
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.5.3: Laplace Transforms\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.5.3: Laplace Transform}
+
+\subsection{Example 1: Solving an ODE using Laplace Transforms}
+
+\paragraph{Problem:} Use Laplace transforms to solve the differential equation:
+\begin{align}
+\ddot{y} + 5\dot{y} + 6y = 2u(t)
+\end{align}
+
+where $u(t)$ is a unit step function and initial conditions are $y(0) = 0$, $\dot{y}(0) = 0$.
+
+\paragraph{Solution:}
+
+Taking the Laplace transform of both sides (assuming zero initial conditions):
+\begin{align}
+s^2Y(s) + 5sY(s) + 6Y(s) = \frac{2}{s}
+\end{align}
+
+Note: $\mathcal{L}\{u(t)\} = \mathcal{L}\{1\} = \frac{1}{s}$ for a unit step.
+
+Factor out $Y(s)$:
+\begin{align}
+Y(s)(s^2 + 5s + 6) = \frac{2}{s}
+\end{align}
+
+Solve for $Y(s)$:
+\begin{align}
+Y(s) = \frac{2}{s(s^2+5s+6)} = \frac{2}{s(s+2)(s+3)}
+\end{align}
+
+Use partial fraction decomposition:
+\begin{align}
+\frac{2}{s(s+2)(s+3)} = \frac{A}{s} + \frac{B}{s+2} + \frac{C}{s+3}
+\end{align}
+
+Multiply both sides by $s(s+2)(s+3)$:
+\begin{align}
+2 = A(s+2)(s+3) + Bs(s+3) + Cs(s+2)
+\end{align}
+
+Find coefficients:
+\begin{itemize}
+\item Set $s = 0$: $2 = A(2)(3) = 6A \Rightarrow A = \frac{1}{3}$
+\item Set $s = -2$: $2 = B(-2)(-2+3) = -2B \Rightarrow B = -1$
+\item Set $s = -3$: $2 = C(-3)(-3+2) = 3C \Rightarrow C = \frac{2}{3}$
+\end{itemize}
+
+Therefore:
+\begin{align}
+Y(s) = \frac{1/3}{s} + \frac{-1}{s+2} + \frac{2/3}{s+3}
+\end{align}
+
+Take the inverse Laplace transform using the table:
+\begin{itemize}
+\item $\mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1$
+\item $\mathcal{L}^{-1}\left\{\frac{1}{s+a}\right\} = e^{-at}$
+\end{itemize}
+
+Result:
+\begin{align}
+y(t) = \frac{1}{3} - e^{-2t} + \frac{2}{3}e^{-3t}, \quad t \geq 0
+\end{align}
+
+\textbf{Verification:} As $t \to \infty$, the exponential terms decay to zero:
+\begin{align}
+\lim_{t \to \infty} y(t) = \frac{1}{3}
+\end{align}
+
+This matches the expected steady-state value from the final value theorem:
+\begin{align}
+y_{ss} = \lim_{s \to 0} sY(s) = \lim_{s \to 0} s \cdot \frac{2}{s(s+2)(s+3)} = \frac{2}{2 \cdot 3} = \frac{1}{3}
+\end{align}
+\end{document}

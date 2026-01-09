@@ -1,0 +1,71 @@
+% Worked Examples: Concept 2.4.3 - Design Considerations
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.4.3: Design Considerations\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.4.3: State Design}
+
+\subsection{Example 1: Pole Placement for a Second-Order System}
+
+\paragraph{Problem:} Consider a mass-spring-damper system modeled in state-space form:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4 & -2 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 0 \\ 2 \end{bmatrix}u, \quad y = \begin{bmatrix} 1 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+\end{align}
+
+Design a state feedback controller to achieve a critically damped response with natural frequency $\omega_0 = 3$ rad/s (i.e., place both eigenvalues at $\lambda = -3$).
+
+\paragraph{Solution:}
+
+For critically damped second-order dynamics with $\omega_0 = 3$, both eigenvalues should be at $\lambda = -\zeta\omega_0 = -3$ (where $\zeta = 1$).
+
+The desired characteristic polynomial is:
+\begin{align}
+p(s) = (s+3)^2 = s^2 + 6s + 9
+\end{align}
+
+The open-loop characteristic polynomial is:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s & -1 \\ 4 & s+2 \end{bmatrix} = s(s+2) + 4 = s^2 + 2s + 4
+\end{align}
+
+Therefore: $a_1 = 2$, $a_2 = 4$, and desired: $p_1 = 6$, $p_2 = 9$.
+
+First, verify reachability:
+\begin{align}
+W_r = \begin{bmatrix} B & AB \end{bmatrix} = \begin{bmatrix} 0 & 2 \\ 2 & -4 \end{bmatrix}
+\end{align}
+
+$\det(W_r) = -4 \neq 0$, so the system is reachable.
+
+With state feedback $u = -Kx$, where $K = \begin{bmatrix} k_1 & k_2 \end{bmatrix}$:
+\begin{align}
+A - BK = \begin{bmatrix} 0 & 1 \\ -4 & -2 \end{bmatrix} - \begin{bmatrix} 0 \\ 2 \end{bmatrix}\begin{bmatrix} k_1 & k_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4-2k_1 & -2-2k_2 \end{bmatrix}
+\end{align}
+
+The characteristic polynomial is:
+\begin{align}
+\det(sI - (A-BK)) &= s(s+2+2k_2) + 4+2k_1 \\
+&= s^2 + (2+2k_2)s + (4+2k_1)
+\end{align}
+
+Matching with desired $s^2 + 6s + 9$:
+\begin{align}
+2 + 2k_2 &= 6 \quad \Rightarrow \quad k_2 = 2 \\
+4 + 2k_1 &= 9 \quad \Rightarrow \quad k_1 = 2.5
+\end{align}
+
+Therefore: $K = \begin{bmatrix} 2.5 & 2 \end{bmatrix}$
+
+The control law is $u = -2.5x_1 - 2x_2$, which gives critically damped response with $\omega_0 = 3$ rad/s.
+\end{document}

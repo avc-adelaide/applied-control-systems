@@ -1,0 +1,171 @@
+% Worked Examples: Concept 1.2.4 - Examples
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.2.4: Examples\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.2.4: Examples}
+
+\subsection{Example 1: Inverted Pendulum on a Cart - Comprehensive Analysis}
+
+\paragraph{Problem:} An inverted pendulum is mounted on a cart that can move horizontally. The system parameters are:
+\begin{itemize}
+\item Cart mass: $M = 2$ kg
+\item Pendulum mass: $m = 0.5$ kg
+\item Pendulum length: $\ell = 0.5$ m
+\item Gravitational acceleration: $g = 9.81$ m/s$^2$
+\item Applied force on cart: $F$ (control input)
+\end{itemize}
+
+The nonlinear equations of motion (derived from Lagrangian mechanics) are:
+\begin{align}
+(M + m)\ddot{x} + m\ell\cos\theta\,\ddot{\theta} - m\ell\sin\theta\,\dot{\theta}^2 &= F \\
+m\ell^2\ddot{\theta} + m\ell\cos\theta\,\ddot{x} - m\ell g\sin\theta &= 0
+\end{align}
+
+where $x$ is the cart position and $\theta$ is the pendulum angle from vertical (upward).
+
+(a) Find the equilibrium points.
+
+(b) Linearize around the upright equilibrium $(\theta = 0)$.
+
+(c) Analyze the stability of the linearized system with $F = 0$.
+
+(d) Determine the characteristic equation and discuss controllability.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+At equilibrium, all derivatives are zero: $\ddot{x} = \ddot{\theta} = \dot{x} = \dot{\theta} = 0$ and $F = 0$:
+\begin{align}
+0 &= 0 \quad \text{(first equation satisfied)} \\
+-m\ell g\sin\theta &= 0 \quad \Rightarrow \quad \theta = 0 \text{ or } \pi
+\end{align}
+
+Equilibria:
+\begin{itemize}
+\item $\theta = 0$ (pendulum upright) — unstable equilibrium
+\item $\theta = \pi$ (pendulum hanging down) — stable equilibrium
+\end{itemize}
+
+We focus on the upright position $\theta = 0$ for control design.
+
+\textbf{Step 2: Linearization around $\theta = 0$}
+
+For small angles $\theta \ll 1$:
+\begin{align}
+\sin\theta &\approx \theta \\
+\cos\theta &\approx 1 \\
+\dot{\theta}^2 &\approx 0 \quad \text{(second-order small)}
+\end{align}
+
+The linearized equations become:
+\begin{align}
+(M + m)\ddot{x} + m\ell\ddot{\theta} &= F \\
+m\ell^2\ddot{\theta} + m\ell\ddot{x} - m\ell g\theta &= 0
+\end{align}
+
+\textbf{Step 3: Solve for accelerations}
+
+From the second equation:
+\begin{align}
+\ddot{\theta} = -\frac{\ddot{x}}{\ell} + \frac{g}{\ell}\theta
+\end{align}
+
+Substitute into the first equation:
+\begin{align}
+(M + m)\ddot{x} + m\ell\left(-\frac{\ddot{x}}{\ell} + \frac{g}{\ell}\theta\right) &= F \\
+(M + m)\ddot{x} - m\ddot{x} + mg\theta &= F \\
+M\ddot{x} + mg\theta &= F \\
+\ddot{x} &= \frac{F - mg\theta}{M}
+\end{align}
+
+And:
+\begin{align}
+\ddot{\theta} &= -\frac{1}{\ell}\cdot\frac{F - mg\theta}{M} + \frac{g}{\ell}\theta \\
+&= -\frac{F}{M\ell} + \frac{mg\theta}{M\ell} + \frac{g}{\ell}\theta \\
+&= -\frac{F}{M\ell} + \frac{(M+m)g\theta}{M\ell}
+\end{align}
+
+\textbf{Step 4: State-space form}
+
+Define state vector:
+\begin{align}
+x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} x \\ \dot{x} \\ \theta \\ \dot{\theta} \end{bmatrix}
+\end{align}
+
+State equations:
+\begin{align}
+\dot{x}_1 &= x_2 \\
+\dot{x}_2 &= \frac{F - mg x_3}{M} = -\frac{mg}{M}x_3 + \frac{1}{M}F \\
+\dot{x}_3 &= x_4 \\
+\dot{x}_4 &= \frac{(M+m)g}{M\ell}x_3 - \frac{1}{M\ell}F
+\end{align}
+
+In matrix form:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & -\frac{mg}{M} & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & \frac{(M+m)g}{M\ell} & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} + \begin{bmatrix} 0 \\ \frac{1}{M} \\ 0 \\ -\frac{1}{M\ell} \end{bmatrix}F
+\end{align}
+
+\textbf{Step 5: Numerical matrices}
+
+With $M = 2$ kg, $m = 0.5$ kg, $\ell = 0.5$ m, $g = 9.81$ m/s$^2$:
+\begin{align}
+A = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & -2.45 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 30.7 & 0 \end{bmatrix}, \quad B = \begin{bmatrix} 0 \\ 0.5 \\ 0 \\ -1 \end{bmatrix}
+\end{align}
+
+\textbf{Step 6: Stability analysis (uncontrolled, $F = 0$)}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s & -1 & 0 & 0 \\ 0 & s & 2.45 & 0 \\ 0 & 0 & s & -1 \\ 0 & 0 & -30.7 & s \end{bmatrix}
+\end{align}
+
+Expanding along the first column:
+\begin{align}
+= s \det\begin{bmatrix} s & 2.45 & 0 \\ 0 & s & -1 \\ 0 & -30.7 & s \end{bmatrix} - 0 + 0 - 0
+\end{align}
+
+\begin{align}
+= s \cdot s \det\begin{bmatrix} s & -1 \\ -30.7 & s \end{bmatrix} = s^2(s^2 - 30.7)
+\end{align}
+
+Eigenvalues: $\lambda_1 = 0, \lambda_2 = 0, \lambda_3 = \sqrt{30.7} \approx 5.54, \lambda_4 = -\sqrt{30.7} \approx -5.54$
+
+Since $\lambda_3 > 0$ (positive real eigenvalue), the system is \textbf{unstable}. This makes physical sense: the inverted pendulum will fall without control.
+
+The double eigenvalue at zero corresponds to the cart position being uncontrolled (it can drift at constant velocity).
+
+\textbf{Step 7: Controllability}
+
+To check if the system can be stabilized by feedback, compute the controllability matrix:
+\begin{align}
+W_c = \begin{bmatrix} B & AB & A^2B & A^3B \end{bmatrix}
+\end{align}
+
+Without computing explicitly, we can verify that $\text{rank}(W_c) = 4$ (full rank), so the system is \textbf{controllable}. This means we can design a state feedback controller to stabilize the inverted pendulum.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item The inverted pendulum is a classic example of an unstable system requiring feedback control
+\item Linearization around the upright position reveals an unstable mode (positive eigenvalue)
+\item The system has four states: cart position, cart velocity, pendulum angle, and angular velocity
+\item Without control ($F = 0$), the pendulum falls exponentially fast ($e^{5.54t}$)
+\item The system is controllable, meaning state feedback can place all poles in the left half-plane
+\item This analysis forms the basis for designing stabilizing controllers (e.g., LQR, pole placement)
+\item In practice, sensor noise, actuator limits, and model uncertainties complicate the control design
+\end{itemize}
+
+This comprehensive example integrates concepts from modeling, linearization, stability analysis, and controllability—demonstrating the complete workflow for analyzing dynamic systems before designing controllers.
+\end{document}

@@ -1,0 +1,113 @@
+% Worked Examples: Concept 3.7.2 - Simple Controllers for Complex Systems
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.7.2: Simple Controllers for Complex Systems\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.7.2: Simple Controllers}
+
+\subsection{Example 1: Comparing P, PI, and PD Controllers}
+
+\paragraph{Problem:} For the plant:
+\begin{align}
+P(s) = \frac{1}{s(s+2)}
+\end{align}
+
+Compare the closed-loop performance with three different controllers:
+\begin{itemize}
+\item[(a)] Proportional (P): $C(s) = K_p = 4$
+\item[(b)] Proportional-Integral (PI): $C(s) = K_p + \frac{K_i}{s} = 4 + \frac{2}{s}$
+\item[(c)] Proportional-Derivative (PD): $C(s) = K_p + K_d s = 4 + 2s$
+\end{itemize}
+
+For each controller, find the closed-loop transfer function and steady-state error to a unit step input.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Proportional Controller}
+
+\begin{align}
+T_P(s) = \frac{C(s)P(s)}{1 + C(s)P(s)} = \frac{4/[s(s+2)]}{1 + 4/[s(s+2)]} = \frac{4}{s^2 + 2s + 4}
+\end{align}
+
+For a Type-1 system (one integrator in the loop), the steady-state error to a step is:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{sR(s)}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{1}{1 + 4/[s(s+2)]}
+\end{align}
+
+As $s \to 0$, the denominator goes to infinity, so $e_{ss} = 0$.
+
+\textbf{Part (b): PI Controller}
+
+\begin{align}
+C(s) = 4 + \frac{2}{s} = \frac{4s + 2}{s}
+\end{align}
+
+The loop transfer function:
+\begin{align}
+C(s)P(s) = \frac{4s+2}{s} \cdot \frac{1}{s(s+2)} = \frac{4s+2}{s^2(s+2)}
+\end{align}
+
+Closed-loop transfer function:
+\begin{align}
+T_{PI}(s) = \frac{4s+2}{s^2(s+2) + 4s + 2} = \frac{4s+2}{s^3 + 2s^2 + 4s + 2}
+\end{align}
+
+For steady-state error to step:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{s}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{s^2(s+2)}{s^2(s+2) + 4s + 2} = \frac{0}{2} = 0
+\end{align}
+
+\textbf{Part (c): PD Controller}
+
+\begin{align}
+C(s) = 4 + 2s
+\end{align}
+
+The loop transfer function:
+\begin{align}
+C(s)P(s) = (4 + 2s) \cdot \frac{1}{s(s+2)} = \frac{2s+4}{s(s+2)}
+\end{align}
+
+Closed-loop transfer function:
+\begin{align}
+T_{PD}(s) = \frac{2s+4}{s(s+2) + 2s + 4} = \frac{2s+4}{s^2 + 4s + 4} = \frac{2s+4}{(s+2)^2}
+\end{align}
+
+For steady-state error:
+\begin{align}
+e_{ss} = \lim_{s \to 0} \frac{s}{1 + C(s)P(s)} = \lim_{s \to 0} \frac{s(s+2)}{s(s+2) + 2s + 4} = \frac{0}{4} = 0
+\end{align}
+
+\textbf{Summary Comparison:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Controller & Closed-Loop Poles & $e_{ss}$ (step) \\
+\hline
+P: $K_p = 4$ & $s = -1 \pm j\sqrt{3}$ & 0 \\
+PI: $K_p = 4, K_i = 2$ & $s^3 + 2s^2 + 4s + 2 = 0$ & 0 \\
+PD: $K_p = 4, K_d = 2$ & $s = -2$ (double) & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Observations:}
+\begin{itemize}
+\item All achieve zero steady-state error (plant has integrator)
+\item PD gives critically damped response (fastest settling, no overshoot)
+\item PI adds extra pole, making system third-order (may be slower)
+\item P gives oscillatory response with some overshoot
+\end{itemize}
+\end{document}

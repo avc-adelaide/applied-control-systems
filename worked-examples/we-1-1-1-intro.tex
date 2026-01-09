@@ -1,0 +1,81 @@
+% Worked Examples: Concept 1.1.1 - Introduction
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.1.1: Introduction\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.1.1: Introduction}
+
+\subsection{Example 1: Cruise Control System - Open-Loop vs Closed-Loop}
+
+\paragraph{Problem:} A car's cruise control system aims to maintain a constant speed of $v_{\text{ref}} = 100$ km/h on a highway. Compare two approaches:
+\begin{itemize}
+\item \textbf{Open-loop control:} The throttle is set to a fixed position that achieves 100 km/h on flat ground.
+\item \textbf{Closed-loop control:} The throttle adjusts continuously based on the error between the desired and actual speed.
+\end{itemize}
+
+Analyze what happens when the car encounters an uphill slope (5\% grade) that creates an additional resistance force of 500 N. The car has mass $m = 1500$ kg and aerodynamic drag coefficient $c = 30$ N·s/m.
+
+\paragraph{Solution:}
+
+\textbf{Open-Loop Control:}
+
+In open-loop control, the throttle setting $u_0$ is fixed. At the desired speed on flat ground:
+\begin{align}
+F_{\text{drive}} = F_{\text{drag}} = cv_{\text{ref}} = 30 \times \frac{100}{3.6} = 833 \text{ N}
+\end{align}
+
+When encountering the uphill slope, the total resistance becomes:
+\begin{align}
+F_{\text{resistance}} = 833 + 500 = 1333 \text{ N}
+\end{align}
+
+Since the drive force remains constant at 833 N, there is a net deceleration:
+\begin{align}
+ma = 833 - 1333 = -500 \text{ N} \quad \Rightarrow \quad a = \frac{-500}{1500} = -0.33 \text{ m/s}^2
+\end{align}
+
+The car will slow down continuously until reaching a new equilibrium where:
+\begin{align}
+F_{\text{drive}} = cv_{\text{new}} + 500 \quad \Rightarrow \quad v_{\text{new}} = \frac{833 - 500}{30} = 11.1 \text{ m/s} = 40 \text{ km/h}
+\end{align}
+
+\textbf{Result:} The speed drops from 100 km/h to 40 km/h — a significant error with no automatic correction.
+
+\textbf{Closed-Loop Control:}
+
+In closed-loop control, a controller measures the speed error $e = v_{\text{ref}} - v$ and adjusts the throttle. Using a simple proportional-integral (PI) controller:
+\begin{align}
+u(t) = K_p e(t) + K_i \int_0^t e(\tau) d\tau
+\end{align}
+
+When the car starts slowing down due to the slope:
+\begin{enumerate}
+\item The error $e = 100 - v$ becomes positive
+\item The controller increases throttle to provide more drive force
+\item The integral term accumulates, ensuring zero steady-state error
+\item The car returns to and maintains 100 km/h
+\end{enumerate}
+
+With appropriate controller gains (e.g., $K_p = 50$, $K_i = 20$), the system can reject the disturbance and maintain the reference speed within 1-2\% error.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item \textbf{Open-loop systems} are simple but cannot compensate for disturbances or model uncertainties
+\item \textbf{Closed-loop (feedback) systems} continuously measure the output and correct for errors
+\item Feedback is essential when the system is subject to unknown disturbances or parameter variations
+\item The cost of feedback is increased complexity (sensors, controllers) and potential stability issues if not designed properly
+\end{itemize}
+
+This example illustrates the fundamental motivation for feedback control systems in real-world applications.
+\end{document}

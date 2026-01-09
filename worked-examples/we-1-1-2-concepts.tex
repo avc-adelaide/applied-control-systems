@@ -1,0 +1,167 @@
+% Worked Examples: Concept 1.1.2 - Modeling Concepts
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.1.2: Modeling Concepts\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.1.2: Concepts}
+
+\subsection{Example 1: Block Diagram Analysis and Signal Flow}
+
+\paragraph{Problem:} Consider a temperature control system for an industrial furnace. The system consists of:
+\begin{itemize}
+\item Reference temperature: $T_{\text{ref}}$ (setpoint)
+\item Temperature sensor with gain $H = 0.95$ (5\% error)
+\item Controller with transfer function $C(s)$
+\item Heating element (plant) with transfer function $P(s) = \frac{50}{s+2}$
+\item Load disturbance $d$ (e.g., opening furnace door)
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[auto, node distance=2cm, >=latex']
+    % Nodes
+    \node [input] (input) {};
+    \node [sum, right of=input] (sum1) {};
+    \node [block, right of=sum1, node distance=2cm] (controller) {$C(s)$};
+    \node [sum, right of=controller, node distance=2cm] (sum2) {};
+    \node [block, right of=sum2, node distance=2cm] (plant) {$P(s)$};
+    \node [output, right of=plant, node distance=2cm] (output) {};
+    \node [block, below of=plant, node distance=1.5cm] (sensor) {$H$};
+    \node [input, above of=sum2, node distance=1.5cm] (dist) {};
+    
+    % Connections
+    \draw [->] (input) -- node {$T_{\text{ref}}$} (sum1);
+    \draw [->] (sum1) -- node {$e$} (controller);
+    \draw [->] (controller) -- node {$u$} (sum2);
+    \draw [->] (sum2) -- (plant);
+    \draw [->] (plant) -- node [name=y] {$T$} (output);
+    \draw [->] (dist) -- node {$d$} (sum2);
+    \draw [->] (y) |- (sensor);
+    \draw [->] (sensor) -| node[pos=0.95] {$-$} (sum1);
+    
+    % Sum junction labels
+    \node [above left=0.1cm of sum1] {$+$};
+    \node [above left=0.1cm of sum2] {$+$};
+\end{tikzpicture}
+\caption{Block diagram of temperature control system with sensor dynamics and disturbance.}
+\end{figure}
+
+(a) Derive the closed-loop transfer function from reference to output: $\frac{T(s)}{T_{\text{ref}}(s)}$.
+
+(b) Derive the transfer function from disturbance to output: $\frac{T(s)}{D(s)}$.
+
+(c) For $C(s) = 5$ (proportional controller) and $H = 1$ (ideal sensor), calculate the steady-state error for a step reference of 200°C.
+
+(d) Explain the role of each component and the effect of sensor error ($H \neq 1$).
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Signal relationships}
+
+From the block diagram:
+\begin{align}
+e &= T_{\text{ref}} - HT \\
+u &= C(s) \cdot e \\
+T &= P(s)(u + d)
+\end{align}
+
+Substituting:
+\begin{align}
+T = P(s)[C(s)(T_{\text{ref}} - HT) + d]
+\end{align}
+
+\textbf{Step 2: Closed-loop transfer function from reference}
+
+Rearranging:
+\begin{align}
+T &= P(s)C(s)T_{\text{ref}} - P(s)C(s)HT + P(s)d \\
+T[1 + P(s)C(s)H] &= P(s)C(s)T_{\text{ref}} + P(s)d
+\end{align}
+
+The closed-loop transfer function from reference to output is:
+\begin{align}
+\frac{T(s)}{T_{\text{ref}}(s)}\bigg|_{d=0} = \frac{P(s)C(s)}{1 + P(s)C(s)H}
+\end{align}
+
+\textbf{Step 3: Transfer function from disturbance}
+
+Similarly:
+\begin{align}
+\frac{T(s)}{D(s)}\bigg|_{T_{\text{ref}}=0} = \frac{P(s)}{1 + P(s)C(s)H}
+\end{align}
+
+\textbf{Step 4: Steady-state error analysis}
+
+With $C(s) = 5$, $P(s) = \frac{50}{s+2}$, and $H = 1$:
+\begin{align}
+\frac{T(s)}{T_{\text{ref}}(s)} = \frac{5 \cdot \frac{50}{s+2}}{1 + 5 \cdot \frac{50}{s+2} \cdot 1} = \frac{250/(s+2)}{1 + 250/(s+2)} = \frac{250}{s+2+250} = \frac{250}{s+252}
+\end{align}
+
+For a step input $T_{\text{ref}}(s) = \frac{200}{s}$:
+\begin{align}
+T(s) = \frac{250}{s+252} \cdot \frac{200}{s}
+\end{align}
+
+Using the final value theorem:
+\begin{align}
+T_{ss} = \lim_{s \to 0} s \cdot T(s) = \lim_{s \to 0} s \cdot \frac{250 \cdot 200}{s(s+252)} = \frac{50000}{252} = 198.4 \text{°C}
+\end{align}
+
+The steady-state error is:
+\begin{align}
+e_{ss} = T_{\text{ref}} - T_{ss} = 200 - 198.4 = 1.6 \text{°C}
+\end{align}
+
+Alternatively, using the error transfer function:
+\begin{align}
+\frac{E(s)}{T_{\text{ref}}(s)} = 1 - \frac{T(s)}{T_{\text{ref}}(s)} = \frac{s+2}{s+252}
+\end{align}
+
+\begin{align}
+e_{ss} = \lim_{s \to 0} s \cdot \frac{s+2}{s+252} \cdot \frac{200}{s} = \frac{2 \cdot 200}{252} = 1.6 \text{°C}
+\end{align}
+
+\textbf{Step 5: Role of components and sensor error}
+
+\textbf{Components:}
+\begin{itemize}
+\item \textbf{Controller $C(s)$:} Processes the error signal to determine control action
+\item \textbf{Plant $P(s)$:} The system being controlled (furnace dynamics)
+\item \textbf{Sensor $H$:} Measures the output for feedback
+\item \textbf{Comparator:} Computes error between reference and measured output
+\end{itemize}
+
+\textbf{Effect of sensor error ($H = 0.95$):}
+
+With $H = 0.95$, the closed-loop transfer function becomes:
+\begin{align}
+\frac{T(s)}{T_{\text{ref}}(s)} = \frac{250}{s + 2 + 250(0.95)} = \frac{250}{s + 239.5}
+\end{align}
+
+The steady-state output is:
+\begin{align}
+T_{ss} = \frac{250}{239.5} \cdot 200 = 208.8 \text{°C}
+\end{align}
+
+This is an 8.8°C \textbf{overshoot} because the sensor underreports the temperature. The controller thinks the temperature is lower than it actually is, so it continues to heat until the sensor reads 200°C, which corresponds to an actual temperature of 200/0.95 = 210.5°C.
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Block diagrams provide a systematic way to analyze feedback systems
+\item The loop gain $L(s) = P(s)C(s)H$ determines both tracking and disturbance rejection
+\item High loop gain reduces steady-state error and improves disturbance rejection
+\item Sensor errors directly affect steady-state accuracy in feedback systems
+\item Imperfect sensors introduce a fundamental limitation on achievable performance
+\end{itemize}
+\end{document}

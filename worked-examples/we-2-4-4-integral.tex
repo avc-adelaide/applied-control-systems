@@ -1,0 +1,78 @@
+% Worked Examples: Concept 2.4.4 - Integral Action
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.4.4: Integral Action\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.4.4: Integral Action}
+
+\subsection{Example 1: Adding Integral Control for Zero Steady-State Error}
+
+\paragraph{Problem:} For the system:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -1 & -1 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix}u, \quad y = \begin{bmatrix} 1 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+\end{align}
+
+Design a state feedback controller with integral action to track a reference signal $r$ with zero steady-state error. Place the closed-loop poles at $-2$, $-2 \pm j$.
+
+\paragraph{Solution:}
+
+To add integral action, we introduce an additional state $x_3 = \int (r - y) dt$. The augmented system becomes:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 \\ -1 & -1 & 0 \\ -1 & 0 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}u + \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}r
+\end{align}
+
+The control law is:
+\begin{align}
+u = -K_p x_1 - K_d x_2 - K_i x_3
+\end{align}
+
+where $K_p$ is proportional gain, $K_d$ is derivative gain, and $K_i$ is integral gain.
+
+The augmented closed-loop matrix is:
+\begin{align}
+A_{cl} = \begin{bmatrix} 0 & 1 & 0 \\ -1-K_p & -1-K_d & -K_i \\ -1 & 0 & 0 \end{bmatrix}
+\end{align}
+
+The desired characteristic polynomial with poles at $-2, -2+j, -2-j$ is:
+\begin{align}
+p(s) &= (s+2)\left[(s+2)^2 + 1\right] \\
+&= (s+2)(s^2 + 4s + 5) \\
+&= s^3 + 6s^2 + 13s + 10
+\end{align}
+
+The characteristic polynomial of $A_{cl}$ is computed by expanding along the third column:
+\begin{align}
+\det(sI - A_{cl}) &= \det\begin{bmatrix} s & -1 & 0 \\ 1+K_p & s+1+K_d & K_i \\ 1 & 0 & s \end{bmatrix} \\
+&= K_i \det\begin{bmatrix} s & -1 \\ 1 & 0 \end{bmatrix} + s\det\begin{bmatrix} s & -1 \\ 1+K_p & s+1+K_d \end{bmatrix} \\
+&= K_i(0 + 1) + s[s(s+1+K_d) - (-(1+K_p))] \\
+&= K_i + s[s^2 + (1+K_d)s + 1 + K_p] \\
+&= s^3 + (1+K_d)s^2 + (1+K_p)s + K_i
+\end{align}
+
+Matching with $s^3 + 6s^2 + 13s + 10$:
+\begin{align}
+1 + K_d &= 6 \quad \Rightarrow \quad K_d = 5 \\
+1 + K_p &= 13 \quad \Rightarrow \quad K_p = 12 \\
+K_i &= 10
+\end{align}
+
+The controller gains are: $K_p = 12$, $K_d = 5$, $K_i = 10$
+
+The control law is:
+\begin{align}
+u = -12x_1 - 5x_2 - 10\int(r-y)dt
+\end{align}
+
+This controller ensures zero steady-state tracking error for constant reference inputs while maintaining the desired pole locations.
+\end{document}

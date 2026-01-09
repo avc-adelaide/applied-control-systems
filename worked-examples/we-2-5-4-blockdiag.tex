@@ -1,0 +1,67 @@
+% Worked Examples: Concept 2.5.4 - Block Diagrams and Transfer Functions
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.5.4: Block Diagrams and Transfer Functions\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.5.4: Block Diagrams}
+
+\subsection{Example 1: Block Diagram Reduction}
+
+\paragraph{Problem:} Consider a feedback control system with the following components in series and feedback configuration:
+\begin{itemize}
+\item Controller: $C(s) = K_p + \frac{K_i}{s}$ (PI controller)
+\item Plant: $P(s) = \frac{1}{s+1}$
+\item Feedback sensor: $H(s) = 1$ (unity feedback)
+\end{itemize}
+
+Find the closed-loop transfer function from reference $R(s)$ to output $Y(s)$.
+
+\paragraph{Solution:}
+
+For a standard feedback configuration with controller $C(s)$, plant $P(s)$, and feedback $H(s) = 1$, the closed-loop transfer function is:
+\begin{align}
+T(s) = \frac{C(s)P(s)}{1 + C(s)P(s)H(s)} = \frac{C(s)P(s)}{1 + C(s)P(s)}
+\end{align}
+
+First, find the product $C(s)P(s)$:
+\begin{align}
+C(s)P(s) &= \left(K_p + \frac{K_i}{s}\right) \cdot \frac{1}{s+1} \\
+&= \frac{K_ps + K_i}{s} \cdot \frac{1}{s+1} \\
+&= \frac{K_ps + K_i}{s(s+1)}
+\end{align}
+
+Now compute the closed-loop transfer function:
+\begin{align}
+T(s) &= \frac{\frac{K_ps + K_i}{s(s+1)}}{1 + \frac{K_ps + K_i}{s(s+1)}} \\
+&= \frac{K_ps + K_i}{s(s+1) + K_ps + K_i} \\
+&= \frac{K_ps + K_i}{s^2 + s + K_ps + K_i} \\
+&= \frac{K_ps + K_i}{s^2 + (1+K_p)s + K_i}
+\end{align}
+
+\textbf{Result:} The closed-loop transfer function is:
+\begin{align}
+T(s) = \frac{K_ps + K_i}{s^2 + (1+K_p)s + K_i}
+\end{align}
+
+\textbf{Analysis:}
+\begin{itemize}
+\item The system is second-order with one zero at $s = -K_i/K_p$
+\item The closed-loop poles depend on values of $K_p$ and $K_i$
+\item For a specific example with $K_p = 2$ and $K_i = 3$:
+\begin{align}
+T(s) = \frac{2s + 3}{s^2 + 3s + 3}
+\end{align}
+The poles are at $s = \frac{-3 \pm \sqrt{9-12}}{2} = \frac{-3 \pm j\sqrt{3}}{2} \approx -1.5 \pm j0.866$
+\end{itemize}
+\end{document}

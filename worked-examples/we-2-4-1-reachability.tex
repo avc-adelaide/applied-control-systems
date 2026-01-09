@@ -1,0 +1,59 @@
+% Worked Examples: Concept 2.4.1 - Reachability
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.4.1: Reachability\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.4.1: Reachability}
+
+\subsection{Example 1: Testing Reachability of a Second-Order System}
+
+\paragraph{Problem:} Consider a simple mechanical system described by the state-space model:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix}u
+\end{align}
+where $x_1$ is position and $x_2$ is velocity. Determine if this system is reachable.
+
+\paragraph{Solution:} 
+
+To test reachability, we compute the reachability matrix $W_r$ and check if it is full rank (invertible).
+
+For a system of dimension $n=2$, the reachability matrix is:
+\begin{align}
+W_r = \begin{bmatrix} B & AB \end{bmatrix}
+\end{align}
+
+Given:
+\begin{align}
+A = \begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix}, \quad B = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+\end{align}
+
+First, compute $AB$:
+\begin{align}
+AB = \begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix}\begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ -3 \end{bmatrix}
+\end{align}
+
+Therefore, the reachability matrix is:
+\begin{align}
+W_r = \begin{bmatrix} 0 & 1 \\ 1 & -3 \end{bmatrix}
+\end{align}
+
+To check if $W_r$ is invertible, compute the determinant:
+\begin{align}
+\det(W_r) = (0)(-3) - (1)(1) = -1 \neq 0
+\end{align}
+
+Since $\det(W_r) \neq 0$, the reachability matrix is full rank and invertible.
+
+\textbf{Conclusion:} The system is reachable. This means we can steer the system from any initial state to any desired final state in finite time using an appropriate control input $u(t)$.
+\end{document}

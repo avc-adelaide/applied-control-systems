@@ -1,0 +1,302 @@
+% Worked Examples: Concept 3.8.1 - Sensitivity Functions
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.8.1: Sensitivity Functions\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.8.1: Sensitivity Functions}
+
+\subsection{Example 1: Computing the Gang of Four Transfer Functions}
+
+Understanding the Gang of Four transfer functions is fundamental to analyzing feedback system performance and robustness.
+
+\paragraph{Problem:} 
+Consider a basic feedback control system with process $P(s) = \frac{5}{s(s+2)}$ and controller $C(s) = 3(1 + \frac{1}{s})$. The feedforward gain is $F(s) = 1$.
+
+(a) Calculate the loop transfer function $L(s) = P(s)C(s)$.
+
+(b) Determine the four fundamental sensitivity functions:
+\begin{itemize}
+    \item Sensitivity function: $S = \frac{1}{1+PC}$
+    \item Complementary sensitivity function: $T = \frac{PC}{1+PC}$
+    \item Load sensitivity function: $PS = \frac{P}{1+PC}$
+    \item Noise sensitivity function: $CS = \frac{C}{1+PC}$
+\end{itemize}
+
+(c) Verify that $S + T = 1$.
+
+(d) Evaluate each function at DC ($s = 0$) and interpret the results for disturbance rejection.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Calculate the loop transfer function}
+
+The controller is a PI controller:
+\[
+C(s) = 3\left(1 + \frac{1}{s}\right) = 3\cdot\frac{s+1}{s} = \frac{3(s+1)}{s}
+\]
+
+The loop transfer function is:
+\[
+L(s) = P(s)C(s) = \frac{5}{s(s+2)} \cdot \frac{3(s+1)}{s} = \frac{15(s+1)}{s^2(s+2)}
+\]
+
+\textbf{Step 2: Calculate the sensitivity function $S$}
+
+The sensitivity function is:
+\[
+S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{15(s+1)}{s^2(s+2)}}
+\]
+
+Finding a common denominator:
+\[
+S(s) = \frac{s^2(s+2)}{s^2(s+2) + 15(s+1)} = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15}
+\]
+
+Factoring the numerator and denominator:
+\[
+S(s) = \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+\]
+
+\textbf{Step 3: Calculate the complementary sensitivity function $T$}
+
+The complementary sensitivity function is:
+\[
+T(s) = \frac{L(s)}{1 + L(s)} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
+\]
+
+Alternatively, we can use $T = 1 - S$:
+\[
+T(s) = 1 - S(s) = \frac{s^3 + 2s^2 + 15s + 15 - s^3 - 2s^2}{s^3 + 2s^2 + 15s + 15} = \frac{15s + 15}{s^3 + 2s^2 + 15s + 15} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
+\]
+
+\textbf{Step 4: Calculate the load sensitivity function $PS$}
+
+The load sensitivity function is:
+\[
+PS(s) = P(s)S(s) = \frac{5}{s(s+2)} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+\]
+
+Simplifying:
+\[
+PS(s) = \frac{5s}{s^3 + 2s^2 + 15s + 15}
+\]
+
+\textbf{Step 5: Calculate the noise sensitivity function $CS$}
+
+The noise sensitivity function is:
+\[
+CS(s) = C(s)S(s) = \frac{3(s+1)}{s} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+\]
+
+Simplifying:
+\[
+CS(s) = \frac{3s(s+1)(s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s(s^2+3s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s^3 + 9s^2 + 6s}{s^3 + 2s^2 + 15s + 15}
+\]
+
+\textbf{Step 6: Verify $S + T = 1$}
+
+\[
+S(s) + T(s) = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15} + \frac{15s + 15}{s^3 + 2s^2 + 15s + 15}
+\]
+\[
+= \frac{s^3 + 2s^2 + 15s + 15}{s^3 + 2s^2 + 15s + 15} = 1 \quad \checkmark
+\]
+
+\textbf{Step 7: Evaluate at DC and interpret}
+
+At $s = 0$ (DC or steady-state):
+
+\textbf{Sensitivity function:}
+\[
+S(0) = \frac{0}{15} = 0
+\]
+This means load disturbances are \emph{completely attenuated} at steady state. This is a key benefit of integral action.
+
+\textbf{Complementary sensitivity function:}
+\[
+T(0) = \frac{15}{15} = 1
+\]
+This confirms $S(0) + T(0) = 0 + 1 = 1$ and indicates perfect tracking of DC reference signals.
+
+\textbf{Load sensitivity function:}
+\[
+PS(0) = \frac{0}{15} = 0
+\]
+Load disturbances have zero effect on the output at steady state.
+
+\textbf{Noise sensitivity function:}
+\[
+CS(0) = \frac{0}{15} = 0
+\]
+Measurement noise at DC does not affect the control signal.
+
+\textbf{Key insights:}
+\begin{itemize}
+\item The Gang of Four provides a complete characterization of system performance
+\item The constraint $S + T = 1$ creates fundamental trade-offs: we cannot make both small simultaneously
+\item Integral action (pole at $s=0$ in controller) ensures $S(0) = 0$ for perfect steady-state disturbance rejection
+\item At low frequencies, we want $|S|$ small (good disturbance rejection) and $|T|$ close to 1 (good tracking)
+\item At high frequencies, we want $|T|$ small (noise attenuation) which means $|S|$ approaches 1
+\end{itemize}
+
+\subsection{Example 2: Analyzing the Sensitivity and Complementary Sensitivity Trade-off}
+
+The relationship $S + T = 1$ creates fundamental limitations on achievable performance.
+
+\paragraph{Problem:}
+Consider a feedback system with process $P(s) = \frac{1}{s+1}$ and proportional controller $C(s) = k$.
+
+(a) Derive expressions for $S(s)$ and $T(s)$ in terms of the gain $k$.
+
+(b) Calculate the maximum values of $|S(\ii\omega)|$ and $|T(\ii\omega)|$ over all frequencies for $k = 2$, $k = 5$, and $k = 10$.
+
+(c) Plot the magnitude Bode plots of $S$ and $T$ for $k = 5$ and identify the crossover frequency where $|S| = |T|$.
+
+(d) Explain the fundamental trade-off between disturbance rejection and noise amplification.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Derive $S(s)$ and $T(s)$}
+
+The loop transfer function is:
+\[
+L(s) = P(s)C(s) = \frac{k}{s+1}
+\]
+
+The sensitivity function is:
+\[
+S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{k}{s+1}} = \frac{s+1}{s+1+k} = \frac{s+1}{s+(1+k)}
+\]
+
+The complementary sensitivity function is:
+\[
+T(s) = \frac{L(s)}{1 + L(s)} = \frac{k/(s+1)}{1 + k/(s+1)} = \frac{k}{s+1+k} = \frac{k}{s+(1+k)}
+\]
+
+We can verify: $S(s) + T(s) = \frac{s+1}{s+(1+k)} + \frac{k}{s+(1+k)} = \frac{s+1+k}{s+(1+k)} = 1$ ✓
+
+\textbf{Step 2: Frequency response analysis}
+
+At frequency $\omega$, substitute $s = \ii\omega$:
+\[
+S(\ii\omega) = \frac{\ii\omega + 1}{\ii\omega + (1+k)}
+\]
+\[
+T(\ii\omega) = \frac{k}{\ii\omega + (1+k)}
+\]
+
+The magnitudes are:
+\[
+|S(\ii\omega)| = \frac{\sqrt{\omega^2 + 1}}{\sqrt{\omega^2 + (1+k)^2}}
+\]
+\[
+|T(\ii\omega)| = \frac{k}{\sqrt{\omega^2 + (1+k)^2}}
+\]
+
+\textbf{Step 3: Maximum values for different gains}
+
+\textbf{For $k = 2$:} $(1+k) = 3$
+
+At low frequencies ($\omega \to 0$):
+\[
+|S(\ii \cdot 0)| = \frac{1}{3} = 0.333, \quad |T(\ii \cdot 0)| = \frac{2}{3} = 0.667
+\]
+
+At high frequencies ($\omega \to \infty$):
+\[
+|S(\ii\omega)| \to \frac{\omega}{\omega} = 1, \quad |T(\ii\omega)| \to \frac{k}{\omega} \to 0
+\]
+
+Since $|S|$ is monotonically increasing from $1/3$ to $1$: $M_s = \max |S| = 1$
+
+Since $|T|$ is monotonically decreasing from $2/3$ to $0$: $M_t = \max |T| = 2/3 = 0.667$
+
+\textbf{For $k = 5$:} $(1+k) = 6$
+\[
+|S(0)| = \frac{1}{6} = 0.167, \quad M_s = 1
+\]
+\[
+|T(0)| = \frac{5}{6} = 0.833, \quad M_t = 0.833
+\]
+
+\textbf{For $k = 10$:} $(1+k) = 11$
+\[
+|S(0)| = \frac{1}{11} = 0.091, \quad M_s = 1
+\]
+\[
+|T(0)| = \frac{10}{11} = 0.909, \quad M_t = 0.909
+\]
+
+\textbf{Step 4: Crossover frequency for $k = 5$}
+
+The crossover frequency $\omega_c$ is where $|S(\ii\omega_c)| = |T(\ii\omega_c)|$.
+
+Since $S + T = 1$ and both are real at the crossover:
+\[
+|S(\ii\omega_c)| = |T(\ii\omega_c)| = \frac{1}{\sqrt{2}} \approx 0.707 \text{ (or } -3 \text{ dB)}
+\]
+
+Setting $|S(\ii\omega_c)| = 1/\sqrt{2}$:
+\[
+\frac{\sqrt{\omega_c^2 + 1}}{\sqrt{\omega_c^2 + 36}} = \frac{1}{\sqrt{2}}
+\]
+
+Squaring both sides:
+\[
+\frac{\omega_c^2 + 1}{\omega_c^2 + 36} = \frac{1}{2}
+\]
+
+Cross-multiplying:
+\[
+2(\omega_c^2 + 1) = \omega_c^2 + 36
+\]
+\[
+2\omega_c^2 + 2 = \omega_c^2 + 36
+\]
+\[
+\omega_c^2 = 34 \quad \Rightarrow \quad \omega_c = \sqrt{34} \approx 5.83 \text{ rad/s}
+\]
+
+\textbf{Step 5: Interpretation of trade-offs}
+
+\textbf{At low frequencies ($\omega \ll 1+k$):}
+\begin{itemize}
+\item $|S| \approx \frac{1}{1+k}$ is small: good disturbance rejection
+\item $|T| \approx \frac{k}{1+k}$ is close to 1: good reference tracking
+\item Higher gain $k$ improves both disturbance rejection and tracking
+\end{itemize}
+
+\textbf{At high frequencies ($\omega \gg 1+k$):}
+\begin{itemize}
+\item $|S| \to 1$: no disturbance attenuation (but high-frequency disturbances are rare)
+\item $|T| \to 0$: good noise attenuation (important since noise is typically high-frequency)
+\item The roll-off of $|T|$ prevents measurement noise from affecting the control signal
+\end{itemize}
+
+\textbf{At the crossover frequency $\omega_c$:}
+\begin{itemize}
+\item This is the transition frequency between disturbance-dominated and noise-dominated regions
+\item Bandwidth is approximately at this frequency
+\item Higher gain $k$ pushes $\omega_c$ higher, increasing bandwidth but making the system more sensitive to high-frequency effects
+\end{itemize}
+
+\textbf{Key insights:}
+\begin{itemize}
+\item The constraint $S + T = 1$ means we cannot simultaneously achieve $|S| < 1$ and $|T| < 1$ at the same frequency
+\item At each frequency, we must choose between disturbance rejection (small $|S|$) and noise attenuation (small $|T|$)
+\item Fortunately, disturbances are typically low-frequency and noise is typically high-frequency, so we can make $|S|$ small at low $\omega$ and $|T|$ small at high $\omega$
+\item The crossover frequency represents the bandwidth of the control system
+\item Increasing controller gain improves low-frequency performance but increases bandwidth, making the system more responsive to high-frequency noise
+\end{itemize}
+\end{document}

@@ -1,0 +1,144 @@
+% Worked Examples: Concept 3.7.5 - Implementation
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.7.5: Implementation\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.7.5: Implementation}
+
+\subsection{Example 1: Discrete-Time PID Implementation}
+
+\paragraph{Problem:} A continuous PID controller:
+\begin{align}
+u(t) = K_p e(t) + K_i \int_0^t e(\tau)d\tau + K_d \frac{de(t)}{dt}
+\end{align}
+
+with $K_p = 2$, $K_i = 0.5$, $K_d = 1$ needs to be implemented digitally with sampling period $T_s = 0.1$ seconds.
+
+(a) Derive the discrete-time implementation using:
+\begin{itemize}
+\item Forward Euler for the integral
+\item Backward difference for the derivative
+\end{itemize}
+
+(b) Write the resulting difference equation.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Discretization}
+
+Let $e_k = e(kT_s)$ denote the error at time step $k$.
+
+\textbf{Proportional term:} No approximation needed
+\begin{align}
+u_P[k] = K_p e_k = 2e_k
+\end{align}
+
+\textbf{Integral term:} Using forward Euler (rectangular rule)
+\begin{align}
+\int_0^{kT_s} e(\tau)d\tau \approx T_s \sum_{j=0}^{k} e_j
+\end{align}
+
+Define the accumulated sum:
+\begin{align}
+I_k = I_{k-1} + T_s e_k
+\end{align}
+
+Then:
+\begin{align}
+u_I[k] = K_i I_k = 0.5 I_k
+\end{align}
+
+\textbf{Derivative term:} Using backward difference
+\begin{align}
+\frac{de}{dt}\bigg|_{t=kT_s} \approx \frac{e_k - e_{k-1}}{T_s}
+\end{align}
+
+Therefore:
+\begin{align}
+u_D[k] = K_d \frac{e_k - e_{k-1}}{T_s} = 1 \cdot \frac{e_k - e_{k-1}}{0.1} = 10(e_k - e_{k-1})
+\end{align}
+
+\textbf{Part (b): Complete Difference Equation}
+
+The total control signal is:
+\begin{align}
+u_k = u_P[k] + u_I[k] + u_D[k]
+\end{align}
+
+Substituting:
+\begin{align}
+u_k = 2e_k + 0.5I_k + 10(e_k - e_{k-1})
+\end{align}
+
+With the integral update:
+\begin{align}
+I_k = I_{k-1} + 0.1e_k
+\end{align}
+
+Combining:
+\begin{align}
+u_k = 2e_k + 0.5(I_{k-1} + 0.1e_k) + 10e_k - 10e_{k-1}
+\end{align}
+
+Simplifying:
+\begin{align}
+u_k = 0.5I_{k-1} + (2 + 0.05 + 10)e_k - 10e_{k-1}
+\end{align}
+
+\begin{align}
+u_k = 0.5I_{k-1} + 12.05e_k - 10e_{k-1}
+\end{align}
+
+\textbf{Algorithm:}
+
+\begin{verbatim}
+Initialize: I = 0, e_prev = 0
+
+At each time step k:
+1. Read measurement y_k
+2. Compute error: e_k = r_k - y_k
+3. Compute control:
+   u_k = 0.5*I + 12.05*e_k - 10*e_prev
+4. Update integral: I = I + 0.1*e_k
+5. Update previous error: e_prev = e_k
+6. Apply control signal: u_k (with saturation if needed)
+\end{verbatim}
+
+\textbf{Alternative Velocity Form:}
+
+For better numerical properties and easier anti-windup:
+\begin{align}
+\Delta u_k = u_k - u_{k-1} = q_0 e_k + q_1 e_{k-1} + q_2 e_{k-2}
+\end{align}
+
+where:
+\begin{align}
+q_0 &= K_p + K_i T_s + \frac{K_d}{T_s} = 2 + 0.05 + 10 = 12.05 \\
+q_1 &= -K_p - 2\frac{K_d}{T_s} = -2 - 20 = -22 \\
+q_2 &= \frac{K_d}{T_s} = 10
+\end{align}
+
+This form computes the change in control signal:
+\begin{align}
+u_k = u_{k-1} + 12.05e_k - 22e_{k-1} + 10e_{k-2}
+\end{align}
+
+\textbf{Practical Considerations:}
+\begin{itemize}
+\item Add low-pass filter on derivative to reduce noise sensitivity
+\item Implement anti-windup for integral term
+\item Use appropriate data types (floating-point for better precision)
+\item Consider derivative on measurement rather than error to avoid derivative kick
+\end{itemize}
+\end{document}
