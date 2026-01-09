@@ -1,0 +1,189 @@
+% Worked Examples: Concept 3.9.1 - Modeling Uncertainty
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.9.1: Modeling Uncertainty\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.9.1: Uncertainty Modelling}
+
+\subsection{Example 1: Parametric Uncertainty in Cruise Control}
+
+Understanding parametric uncertainty is crucial for designing robust control systems. This example demonstrates how parameter variations affect controller performance.
+
+\paragraph{Problem:} 
+A cruise control system is designed with a PI controller for a car with nominal mass $m_0 = 1600$ kg. The linearised vehicle dynamics around a constant speed are given by:
+\[
+m\ddot{x} = F - c\dot{x} - mg\sin\theta
+\]
+where $x$ is position, $F$ is the drive force, $c = 10$ N·s/m is the drag coefficient, $g = 9.81$ m/s$^2$, and $\theta$ is the road slope.
+
+The PI controller is designed as $C(s) = k_p + k_i/s$ with $k_p = 50$ and $k_i = 20$ for the nominal mass. 
+
+(a) Determine the closed-loop characteristic equation for arbitrary mass $m$.
+
+(b) Calculate the maximum mass $m_{\max}$ for which the closed-loop system remains stable.
+
+(c) Explain why parametric uncertainty matters for robust control design.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: System transfer function}
+
+For velocity control at constant speed, let $v = \dot{x}$ and linearise around a slope angle $\theta$. The transfer function from force to velocity is:
+\[
+P(s) = \frac{V(s)}{F(s)} = \frac{1}{ms + c}
+\]
+
+For $m_0 = 1600$ kg and $c = 10$:
+\[
+P_0(s) = \frac{1}{1600s + 10} = \frac{1/1600}{s + 0.00625}
+\]
+
+\textbf{Step 2: Closed-loop characteristic equation}
+
+With PI controller $C(s) = k_p + k_i/s = (k_ps + k_i)/s$, the loop transfer function is:
+\[
+L(s) = P(s)C(s) = \frac{1}{ms + c} \cdot \frac{k_ps + k_i}{s} = \frac{k_ps + k_i}{s(ms + c)}
+\]
+
+The closed-loop characteristic equation is $1 + L(s) = 0$:
+\[
+s(ms + c) + k_ps + k_i = 0
+\]
+\[
+ms^2 + (c + k_p)s + k_i = 0
+\]
+
+\textbf{Step 3: Stability analysis}
+
+For stability, all coefficients must be positive (necessary condition for 2nd order system):
+\begin{itemize}
+\item $m > 0$ (always satisfied physically)
+\item $c + k_p > 0 \Rightarrow k_p > -c$ (satisfied since $k_p = 50 > 0$)
+\item $k_i > 0$ (satisfied since $k_i = 20 > 0$)
+\end{itemize}
+
+For a second-order system, if all coefficients are positive, the system is stable. Therefore, the system remains stable for all positive masses.
+
+\textbf{Step 4: Performance degradation}
+
+While the system remains stable, performance degrades with increasing mass. The natural frequency and damping ratio are:
+\[
+\omega_n = \sqrt{\frac{k_i}{m}}, \quad \zeta = \frac{c + k_p}{2\sqrt{mk_i}}
+\]
+
+For $m = 1600$ kg (nominal):
+\[
+\omega_n = \sqrt{\frac{20}{1600}} = 0.112 \text{ rad/s}, \quad \zeta = \frac{10 + 50}{2\sqrt{1600 \cdot 20}} = \frac{60}{253} = 0.237
+\]
+
+For $m = 2000$ kg (25\% increase):
+\[
+\omega_n = \sqrt{\frac{20}{2000}} = 0.100 \text{ rad/s}, \quad \zeta = \frac{60}{2\sqrt{2000 \cdot 20}} = \frac{60}{283} = 0.212
+\]
+
+The response becomes slower (lower $\omega_n$) and slightly less damped (lower $\zeta$), leading to longer settling time and potentially larger overshoot.
+
+\textbf{Key insights:}
+\begin{itemize}
+\item Parametric uncertainty doesn't necessarily cause instability but degrades performance
+\item Controllers designed for nominal conditions may perform poorly under parameter variations
+\item Robust design requires considering the full range of expected parameter values
+\end{itemize}
+
+\subsection{Example 2: Describing Unmodeled Dynamics with Multiplicative Uncertainty}
+
+Unmodeled dynamics represent system behaviors not captured by our nominal model. This example shows how to characterize them mathematically.
+
+\paragraph{Problem:}
+A nominal process model is $P(s) = 1/(s+1)$. However, the actual system has unmodeled high-frequency dynamics and can be represented as $P_{\text{actual}}(s) = 1/[(s+1)(0.1s+1)]$.
+
+(a) Express the actual system using multiplicative uncertainty: $P_{\text{actual}} = P(1 + \delta)$.
+
+(b) Find the multiplicative uncertainty $\delta(s)$ and plot $|\delta(\ii\omega)|$.
+
+(c) Determine the maximum value of $|\delta(\ii\omega)|$ and the frequency at which it occurs.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Calculate the multiplicative perturbation}
+
+By definition of multiplicative uncertainty:
+\[
+P_{\text{actual}}(s) = P(s)(1 + \delta(s))
+\]
+
+Solving for $\delta(s)$:
+\[
+\delta(s) = \frac{P_{\text{actual}}(s)}{P(s)} - 1 = \frac{P_{\text{actual}}(s) - P(s)}{P(s)}
+\]
+
+Substituting the given models:
+\[
+\delta(s) = \frac{\frac{1}{(s+1)(0.1s+1)} - \frac{1}{s+1}}{\frac{1}{s+1}} = \frac{1}{(s+1)(0.1s+1)} \cdot (s+1) - 1
+\]
+\[
+= \frac{1}{0.1s+1} - 1 = \frac{1 - (0.1s+1)}{0.1s+1} = \frac{-0.1s}{0.1s+1}
+\]
+
+\textbf{Step 2: Frequency response of the uncertainty}
+
+At frequency $\omega$, substitute $s = \ii\omega$:
+\[
+\delta(\ii\omega) = \frac{-0.1\ii\omega}{0.1\ii\omega + 1} = \frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}
+\]
+
+The magnitude is:
+\[
+|\delta(\ii\omega)| = \left|\frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}\right| = \frac{0.1\omega}{\sqrt{1 + (0.1\omega)^2}}
+\]
+
+\textbf{Step 3: Analyze the uncertainty bound}
+
+To find the maximum, take the derivative with respect to $\omega$ and set to zero. Alternatively, observe that:
+\[
+|\delta(\ii\omega)| = \frac{0.1\omega}{\sqrt{1 + 0.01\omega^2}}
+\]
+
+As $\omega \to 0$: $|\delta| \to 0$
+
+As $\omega \to \infty$: $|\delta| \to \frac{0.1\omega}{0.1\omega} = 1$
+
+The function is monotonically increasing and approaches 1 asymptotically.
+
+At $\omega = 10$ rad/s:
+\[
+|\delta(\ii \cdot 10)| = \frac{1}{\sqrt{1 + 1}} = \frac{1}{\sqrt{2}} = 0.707
+\]
+
+At $\omega = 100$ rad/s:
+\[
+|\delta(\ii \cdot 100)| = \frac{10}{\sqrt{1 + 100}} = \frac{10}{\sqrt{101}} = 0.995
+\]
+
+\textbf{Step 4: Physical interpretation}
+
+The multiplicative uncertainty $\delta(s) = -0.1s/(0.1s+1)$ represents:
+\begin{itemize}
+\item A high-pass characteristic (magnitude increases with frequency)
+\item Maximum relative error approaching 100\% at very high frequencies
+\item The unmodeled pole at $s = -10$ causes phase lag and gain reduction at high frequencies
+\end{itemize}
+
+\textbf{Key insights:}
+\begin{itemize}
+\item Multiplicative uncertainty naturally increases with frequency for unmodeled fast dynamics
+\item The uncertainty bound $|\delta(\ii\omega)| < 1$ for all $\omega$ means the actual plant is within 100\% of the nominal at high frequencies
+\item For robust stability, the complementary sensitivity $|T(\ii\omega)|$ must be small where $|\delta(\ii\omega)|$ is large
+\end{itemize}
+\end{document}

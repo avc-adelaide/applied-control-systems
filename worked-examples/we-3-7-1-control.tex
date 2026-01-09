@@ -1,0 +1,84 @@
+% Worked Examples: Concept 3.7.1 - Basic Control Functions
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.7.1: Basic Control Functions\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.7.1: Feedback Control}
+
+\subsection{Example 1: Basic Feedback Control Design}
+
+\paragraph{Problem:} A temperature control system has the plant transfer function:
+\begin{align}
+P(s) = \frac{2}{s+1}
+\end{align}
+
+Design a proportional controller $C(s) = K_p$ for a unity feedback configuration such that the closed-loop system has:
+\begin{itemize}
+\item Steady-state error less than 10\% for a unit step input
+\item Settling time (2\% criterion) less than 4 seconds
+\end{itemize}
+
+\paragraph{Solution:}
+
+For unity feedback with controller $C(s) = K_p$ and plant $P(s)$:
+
+The closed-loop transfer function is:
+\begin{align}
+T(s) = \frac{K_pP(s)}{1 + K_pP(s)} = \frac{2K_p}{s + 1 + 2K_p}
+\end{align}
+
+\textbf{Requirement 1: Steady-State Error}
+
+For a unit step input, the steady-state error is:
+\begin{align}
+e_{ss} = \frac{1}{1 + K_pP(0)} = \frac{1}{1 + 2K_p}
+\end{align}
+
+For $e_{ss} < 0.1$ (10\%):
+\begin{align}
+\frac{1}{1 + 2K_p} < 0.1 \quad \Rightarrow \quad 1 + 2K_p > 10 \quad \Rightarrow \quad K_p > 4.5
+\end{align}
+
+\textbf{Requirement 2: Settling Time}
+
+The closed-loop pole is at:
+\begin{align}
+s = -(1 + 2K_p)
+\end{align}
+
+For a first-order system, the settling time (2\% criterion) is:
+\begin{align}
+T_s = \frac{4}{|s|} = \frac{4}{1 + 2K_p}
+\end{align}
+
+For $T_s < 4$ seconds:
+\begin{align}
+\frac{4}{1 + 2K_p} < 4 \quad \Rightarrow \quad 1 + 2K_p > 1 \quad \Rightarrow \quad K_p > 0
+\end{align}
+
+This is always satisfied for positive $K_p$.
+
+\textbf{Design Choice:}
+
+The binding constraint is $K_p > 4.5$. Choose $K_p = 5$ for some margin.
+
+With $K_p = 5$:
+\begin{itemize}
+\item Closed-loop transfer function: $T(s) = \frac{10}{s+11}$
+\item Steady-state error: $e_{ss} = \frac{1}{1+10} = 0.091 = 9.1\%$ ✓
+\item Settling time: $T_s = \frac{4}{11} \approx 0.36$ seconds ✓
+\end{itemize}
+
+\textbf{Result:} The proportional controller $C(s) = 5$ meets both design requirements.
+\end{document}

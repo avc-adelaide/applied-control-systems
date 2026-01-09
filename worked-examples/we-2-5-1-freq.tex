@@ -1,0 +1,64 @@
+% Worked Examples: Concept 2.5.1 - Frequency Domain Modeling
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.5.1: Frequency Domain Modeling\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.5.1: Frequency Domain}
+
+\subsection{Example 1: Frequency Response of a First-Order System}
+
+\paragraph{Problem:} Consider a first-order system with transfer function:
+\begin{align}
+G(s) = \frac{5}{s+2}
+\end{align}
+
+Find the steady-state response to a sinusoidal input $u(t) = 3\sin(4t)$ (amplitude 3, frequency $\omega = 4$ rad/s).
+
+\paragraph{Solution:}
+
+For a sinusoidal input $u(t) = A\sin(\omega t)$, the steady-state output is:
+\begin{align}
+y_{ss}(t) = A|G(j\omega)|\sin(\omega t + \angle G(j\omega))
+\end{align}
+
+where $|G(j\omega)|$ is the magnitude and $\angle G(j\omega)$ is the phase of the transfer function at frequency $\omega$.
+
+For $\omega = 4$ rad/s:
+\begin{align}
+G(j4) = \frac{5}{j4+2} = \frac{5}{2+j4}
+\end{align}
+
+To find magnitude and phase, convert to polar form:
+\begin{align}
+G(j4) &= \frac{5}{2+j4} \cdot \frac{2-j4}{2-j4} = \frac{5(2-j4)}{4+16} = \frac{10-j20}{20} = 0.5 - j
+\end{align}
+
+Magnitude:
+\begin{align}
+|G(j4)| = \sqrt{(0.5)^2 + (-1)^2} = \sqrt{0.25 + 1} = \sqrt{1.25} \approx 1.118
+\end{align}
+
+Phase:
+\begin{align}
+\angle G(j4) = \arctan\left(\frac{-1}{0.5}\right) = \arctan(-2) \approx -63.43° \approx -1.107 \text{ rad}
+\end{align}
+
+Therefore, the steady-state output is:
+\begin{align}
+y_{ss}(t) &= 3 \times 1.118 \times \sin(4t - 1.107) \\
+&\approx 3.35\sin(4t - 63.43°)
+\end{align}
+
+\textbf{Interpretation:} The output amplitude is attenuated by a factor of 1.118 (from 3 to 3.35), and there is a phase lag of approximately 63.43° (or 1.107 radians).
+\end{document}

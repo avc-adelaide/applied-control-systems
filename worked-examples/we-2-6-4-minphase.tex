@@ -1,0 +1,93 @@
+% Worked Examples: Concept 2.6.4 - Bode's Relations and Minimum Phase Systems
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.6.4: Bode's Relations and Minimum Phase Systems\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.6.4: Minimum Phase Systems}
+
+\subsection{Example 1: Identifying Minimum Phase Systems}
+
+\paragraph{Problem:} Determine which of the following transfer functions are minimum phase systems:
+
+(a) $G_1(s) = \frac{s+2}{(s+1)(s+3)}$
+
+(b) $G_2(s) = \frac{s-2}{(s+1)(s+3)}$
+
+(c) $G_3(s) = \frac{2e^{-0.5s}}{s+1}$
+
+For each system, explain your reasoning.
+
+\paragraph{Solution:}
+
+A system is \textbf{minimum phase} if all its poles and zeros are in the left half of the complex plane (i.e., have negative real parts), and it has no time delays.
+
+\textbf{Part (a): $G_1(s) = \frac{s+2}{(s+1)(s+3)}$}
+
+Zeros: $s = -2$ (left half-plane) ✓
+
+Poles: $s = -1, -3$ (both left half-plane) ✓
+
+No time delay ✓
+
+\textbf{Result:} $G_1(s)$ is a \textbf{minimum phase system}.
+
+\textbf{Part (b): $G_2(s) = \frac{s-2}{(s+1)(s+3)}$}
+
+Zeros: $s = +2$ (right half-plane) ✗
+
+Poles: $s = -1, -3$ (both left half-plane) ✓
+
+No time delay ✓
+
+\textbf{Result:} $G_2(s)$ is \textbf{NOT minimum phase} because it has a right half-plane zero (at $s = +2$). This is called a \textit{non-minimum phase zero}.
+
+\textbf{Part (c): $G_3(s) = \frac{2e^{-0.5s}}{s+1}$}
+
+Zeros: None (the time delay $e^{-0.5s}$ is not a zero in the traditional sense)
+
+Poles: $s = -1$ (left half-plane) ✓
+
+Has time delay: $e^{-0.5s}$ ✗
+
+\textbf{Result:} $G_3(s)$ is \textbf{NOT minimum phase} because it contains a time delay. Time delays introduce infinite phase lag without affecting magnitude, making the system non-minimum phase.
+
+\textbf{Summary Table:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+System & LHP Zeros & LHP Poles & No Delay & Minimum Phase? \\
+\hline
+$G_1(s)$ & ✓ & ✓ & ✓ & Yes \\
+$G_2(s)$ & ✗ (RHP zero) & ✓ & ✓ & No \\
+$G_3(s)$ & ✓ & ✓ & ✗ (has delay) & No \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Key Properties of Minimum Phase Systems:}
+\begin{itemize}
+\item Unique relationship between magnitude and phase response
+\item Phase can be reconstructed from magnitude (and vice versa)
+\item Minimum possible phase lag for a given magnitude response
+\item Generally easier to control than non-minimum phase systems
+\end{itemize}
+
+\textbf{Practical Implications:}
+\begin{itemize}
+\item Non-minimum phase zeros (RHP zeros) impose fundamental limitations on achievable bandwidth and performance
+\item Time delays make control more challenging and limit achievable phase margin
+\item Example: inverted pendulum has non-minimum phase dynamics
+\end{itemize}
+\end{document}

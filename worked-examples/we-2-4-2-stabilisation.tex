@@ -1,0 +1,83 @@
+% Worked Examples: Concept 2.4.2 - Stabilisation by State Feedback
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.4.2: Stabilisation by State Feedback\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.4.2: Stabilisation}
+
+\subsection{Example 1: Stabilising an Unstable System via State Feedback}
+
+\paragraph{Problem:} Consider an unstable system with dynamics:
+\begin{align}
+\frac{d}{dt}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & -2 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 1 \\ 1 \end{bmatrix}u, \quad y = \begin{bmatrix} 1 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+\end{align}
+
+The system has one unstable eigenvalue at $\lambda_1 = 1$. Design a state feedback controller $u = -Kx$ to stabilise the system by placing the closed-loop eigenvalues at $\lambda_1 = -1$ and $\lambda_2 = -3$.
+
+\paragraph{Solution:} 
+
+For state feedback $u = -Kx$ where $K = \begin{bmatrix} k_1 & k_2 \end{bmatrix}$, the closed-loop system is:
+\begin{align}
+\frac{dx}{dt} = (A - BK)x
+\end{align}
+
+First, compute $BK$:
+\begin{align}
+BK = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\begin{bmatrix} k_1 & k_2 \end{bmatrix} = \begin{bmatrix} k_1 & k_2 \\ k_1 & k_2 \end{bmatrix}
+\end{align}
+
+The closed-loop matrix is:
+\begin{align}
+A - BK = \begin{bmatrix} 1 & 0 \\ 0 & -2 \end{bmatrix} - \begin{bmatrix} k_1 & k_2 \\ k_1 & k_2 \end{bmatrix} = \begin{bmatrix} 1-k_1 & -k_2 \\ -k_1 & -2-k_2 \end{bmatrix}
+\end{align}
+
+The characteristic polynomial of the closed-loop system is:
+\begin{align}
+\det(sI - (A-BK)) &= \det\begin{bmatrix} s-(1-k_1) & k_2 \\ k_1 & s+2+k_2 \end{bmatrix} \\
+&= (s-1+k_1)(s+2+k_2) - k_1k_2 \\
+&= s^2 + (1+k_1+k_2)s + (2k_2 - 2 + k_1 + k_1k_2 - k_1k_2) \\
+&= s^2 + (1+k_1+k_2)s + (k_1 + 2k_2 - 2)
+\end{align}
+
+The desired characteristic polynomial with eigenvalues $\lambda_1 = -1$ and $\lambda_2 = -3$ is:
+\begin{align}
+(s+1)(s+3) = s^2 + 4s + 3
+\end{align}
+
+Matching coefficients:
+\begin{align}
+1 + k_1 + k_2 &= 4 \\
+k_1 + 2k_2 - 2 &= 3
+\end{align}
+
+From the first equation: $k_1 + k_2 = 3$
+
+From the second equation: $k_1 + 2k_2 = 5$
+
+Subtracting: $k_2 = 2$, therefore $k_1 = 1$
+
+The state feedback gain is:
+\begin{align}
+K = \begin{bmatrix} 1 & 2 \end{bmatrix}
+\end{align}
+
+\textbf{Verification:} The closed-loop matrix is:
+\begin{align}
+A - BK = \begin{bmatrix} 0 & -2 \\ -1 & -4 \end{bmatrix}
+\end{align}
+
+The characteristic polynomial is $\det(sI - (A-BK)) = s^2 + 4s + 3 = (s+1)(s+3)$ ✓
+
+The system is now stable with eigenvalues at $-1$ and $-3$.
+\end{document}

@@ -1,0 +1,194 @@
+% Worked Examples: Concept 1.2.3 - Stability
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.2.3: Stability\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.2.3: Stability}
+
+\subsection{Example 1: Lyapunov Stability Analysis}
+
+\paragraph{Problem:} Consider the nonlinear system:
+\begin{align}
+\dot{x}_1 &= -x_1 + x_1 x_2 \\
+\dot{x}_2 &= -x_2
+\end{align}
+
+(a) Find the equilibrium points.
+
+(b) Use a Lyapunov function candidate $V(x) = \frac{1}{2}(x_1^2 + x_2^2)$ to prove stability of the origin.
+
+(c) Verify by linearization.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Equilibrium points}
+
+Set $\dot{x}_1 = \dot{x}_2 = 0$:
+\begin{align}
+-x_1 + x_1 x_2 &= 0 \quad \Rightarrow \quad x_1(x_2 - 1) = 0 \\
+-x_2 &= 0 \quad \Rightarrow \quad x_2 = 0
+\end{align}
+
+From the second equation, $x_2 = 0$. Substituting into the first: $x_1(-1) = 0$, so $x_1 = 0$.
+
+The only equilibrium is the origin: $(0, 0)$.
+
+\textbf{Step 2: Lyapunov stability analysis}
+
+Consider $V(x) = \frac{1}{2}(x_1^2 + x_2^2)$. This is:
+\begin{itemize}
+\item Positive definite: $V(x) > 0$ for all $x \neq 0$ and $V(0) = 0$ ✓
+\item Radially unbounded: $V(x) \to \infty$ as $\|x\| \to \infty$ ✓
+\end{itemize}
+
+Compute the time derivative along system trajectories:
+\begin{align}
+\dot{V} = \frac{\partial V}{\partial x_1}\dot{x}_1 + \frac{\partial V}{\partial x_2}\dot{x}_2
+\end{align}
+
+\begin{align}
+\dot{V} &= x_1(-x_1 + x_1 x_2) + x_2(-x_2) \\
+&= -x_1^2 + x_1^2 x_2 - x_2^2 \\
+&= -x_1^2(1 - x_2) - x_2^2
+\end{align}
+
+\textbf{Analysis of $\dot{V}$:}
+\begin{itemize}
+\item If $|x_2| < 1$, then $1 - x_2 > 0$, so both terms are negative: $\dot{V} < 0$
+\item If $x_2 > 1$, then $1 - x_2 < 0$, and the sign of $\dot{V}$ depends on relative magnitudes
+\end{itemize}
+
+For the region $|x_2| < 1$ (which includes a neighborhood of the origin), we have:
+\begin{align}
+\dot{V} \leq -\min(1 - x_2, 1) \cdot x_1^2 - x_2^2 < 0 \quad \text{for } x \neq 0
+\end{align}
+
+Since $V$ is positive definite and $\dot{V}$ is negative definite in a neighborhood of the origin, the origin is \textbf{asymptotically stable} by Lyapunov's theorem.
+
+For global stability, we need $\dot{V} < 0$ everywhere. Rewrite:
+\begin{align}
+\dot{V} = -x_1^2 - x_2^2 + x_1^2 x_2 = -(x_1^2 + x_2^2) + x_1^2 x_2
+\end{align}
+
+For $|x_2| < 1$: $|x_1^2 x_2| < x_1^2 < x_1^2 + x_2^2$, so $\dot{V} < 0$ ✓
+
+For $|x_2| \geq 1$: The analysis is more complex. Let's check a specific case: if $x_2 = 2$:
+\begin{align}
+\dot{V} = -x_1^2(1-2) - 4 = x_1^2 - 4
+\end{align}
+This can be positive if $|x_1| > 2$.
+
+However, for the region near the origin (which is what matters for local stability), $\dot{V} < 0$ definitively.
+
+\textbf{Conclusion:} The origin is \textbf{locally asymptotically stable}.
+
+\textbf{Step 3: Verification by linearization}
+
+The Jacobian at the origin is:
+\begin{align}
+J = \begin{bmatrix} \frac{\partial \dot{x}_1}{\partial x_1} & \frac{\partial \dot{x}_1}{\partial x_2} \\ \frac{\partial \dot{x}_2}{\partial x_1} & \frac{\partial \dot{x}_2}{\partial x_2} \end{bmatrix}\bigg|_{(0,0)} = \begin{bmatrix} -1 + x_2 & x_1 \\ 0 & -1 \end{bmatrix}\bigg|_{(0,0)} = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}
+\end{align}
+
+Eigenvalues: $\lambda_1 = \lambda_2 = -1$
+
+Both eigenvalues have negative real parts $\Rightarrow$ the linearized system is stable $\Rightarrow$ the origin is \textbf{locally asymptotically stable} ✓
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Lyapunov functions provide a powerful method to prove stability without solving the differential equations
+\item If $V > 0$ and $\dot{V} < 0$ in a neighborhood, the equilibrium is locally asymptotically stable
+\item If $V$ and $-\dot{V}$ are both positive definite and radially unbounded, the equilibrium is globally asymptotically stable
+\item Finding Lyapunov functions is more art than science—common choices include quadratic forms, energy functions, or weighted sums
+\item Linearization provides an alternative (often simpler) method for local stability analysis
+\end{itemize}
+
+\subsection{Example 2: Eigenvalue Stability Criterion}
+
+\paragraph{Problem:} Determine the stability of the equilibrium point $(0, 0)$ for the following linear systems:
+
+(a) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+(b) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} -1 & 4 \\ -1 & -1 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+(c) $\begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+\paragraph{Solution:}
+
+\textbf{Stability criterion:} For a linear system $\dot{x} = Ax$, the origin is:
+\begin{itemize}
+\item \textbf{Asymptotically stable} if all eigenvalues of $A$ have negative real parts
+\item \textbf{Unstable} if at least one eigenvalue has positive real part
+\item \textbf{Marginally stable} if some eigenvalues are purely imaginary (and the rest have negative real parts) with simple multiplicity
+\end{itemize}
+
+\textbf{Part (a):}
+\begin{align}
+A = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}
+\end{align}
+
+Since $A$ is upper triangular, eigenvalues are on the diagonal: $\lambda_1 = -2$, $\lambda_2 = -3$
+
+Both eigenvalues are negative $\Rightarrow$ \textbf{asymptotically stable}
+
+The system is a stable node.
+
+\textbf{Part (b):}
+\begin{align}
+A = \begin{bmatrix} -1 & 4 \\ -1 & -1 \end{bmatrix}
+\end{align}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s+1 & -4 \\ 1 & s+1 \end{bmatrix} = (s+1)^2 + 4 = s^2 + 2s + 5 = 0
+\end{align}
+
+\begin{align}
+s = \frac{-2 \pm \sqrt{4-20}}{2} = \frac{-2 \pm 4j}{2} = -1 \pm 2j
+\end{align}
+
+Eigenvalues: $\lambda_1 = -1 + 2j$, $\lambda_2 = -1 - 2j$
+
+Both have negative real parts ($-1$) $\Rightarrow$ \textbf{asymptotically stable}
+
+The system is a stable spiral (oscillates while converging).
+
+\textbf{Part (c):}
+\begin{align}
+A = \begin{bmatrix} 0 & 1 \\ -4 & 0 \end{bmatrix}
+\end{align}
+
+Characteristic equation:
+\begin{align}
+\det(sI - A) = \det\begin{bmatrix} s & -1 \\ 4 & s \end{bmatrix} = s^2 + 4 = 0
+\end{align}
+
+\begin{align}
+s = \pm 2j
+\end{align}
+
+Eigenvalues: $\lambda_1 = 2j$, $\lambda_2 = -2j$ (purely imaginary)
+
+Since eigenvalues are on the imaginary axis $\Rightarrow$ \textbf{marginally stable} (Lyapunov stable but not asymptotically stable)
+
+The system exhibits sustained oscillations with constant amplitude (like an undamped oscillator).
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Eigenvalues completely determine the stability of linear systems
+\item The real part of eigenvalues determines growth/decay; the imaginary part determines oscillation frequency
+\item Complex eigenvalues come in conjugate pairs for real matrices
+\item Marginally stable systems are sensitive to perturbations and nonlinearities
+\item In practice, systems should be designed with sufficient stability margin (eigenvalues well into the left half-plane)
+\end{itemize}
+\end{document}

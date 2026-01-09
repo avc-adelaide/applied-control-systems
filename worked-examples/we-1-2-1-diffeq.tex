@@ -1,0 +1,201 @@
+% Worked Examples: Concept 1.2.1 - Solving Differential Equations
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 1.2.1: Solving Differential Equations\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 1.2.1: Differential Equations}
+
+\subsection{Example 1: Solving First-Order Linear ODE with Forcing Function}
+
+\paragraph{Problem:} A hot liquid at initial temperature $T(0) = 100$°C is placed in a room at ambient temperature $T_{\infty} = 20$°C. The cooling follows Newton's law of cooling:
+\begin{align}
+\frac{dT}{dt} = -k(T - T_{\infty})
+\end{align}
+
+where $k = 0.1$ min$^{-1}$ is the cooling coefficient.
+
+(a) Solve the differential equation to find $T(t)$.
+
+(b) Determine how long it takes for the liquid to cool to 50°C.
+
+(c) What is the time constant of this system?
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Rewrite the ODE in standard form}
+
+\begin{align}
+\frac{dT}{dt} + kT = kT_{\infty}
+\end{align}
+
+This is a first-order linear ODE with constant coefficients.
+
+\textbf{Step 2: Find the homogeneous solution}
+
+For the homogeneous equation $\frac{dT_h}{dt} + kT_h = 0$:
+\begin{align}
+T_h(t) = Ce^{-kt}
+\end{align}
+
+\textbf{Step 3: Find the particular solution}
+
+For the particular solution, try a constant: $T_p = A$
+\begin{align}
+0 + kA = kT_{\infty} \quad \Rightarrow \quad A = T_{\infty} = 20
+\end{align}
+
+\textbf{Step 4: General solution}
+
+\begin{align}
+T(t) = T_h(t) + T_p = Ce^{-kt} + 20
+\end{align}
+
+Apply initial condition $T(0) = 100$:
+\begin{align}
+100 = C + 20 \quad \Rightarrow \quad C = 80
+\end{align}
+
+Therefore:
+\begin{align}
+T(t) = 80e^{-0.1t} + 20 \text{ °C}
+\end{align}
+
+\textbf{Step 5: Time to reach 50°C}
+
+Set $T(t) = 50$:
+\begin{align}
+50 = 80e^{-0.1t} + 20 \\
+30 = 80e^{-0.1t} \\
+e^{-0.1t} = \frac{30}{80} = 0.375 \\
+-0.1t = \ln(0.375) = -0.981 \\
+t = \frac{0.981}{0.1} = 9.81 \text{ minutes}
+\end{align}
+
+\textbf{Step 6: Time constant}
+
+The time constant is $\tau = 1/k = 1/0.1 = 10$ minutes.
+
+After one time constant ($t = 10$ min), the temperature deviation from ambient decreases to 37\% (or $1/e$) of its initial value:
+\begin{align}
+T(10) = 80e^{-1} + 20 = 80(0.368) + 20 = 49.4 \text{ °C}
+\end{align}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item First-order linear systems have exponential responses
+\item The time constant $\tau = 1/k$ characterizes the response speed
+\item The system reaches 63\% of its final value after one time constant
+\item Steady-state value: $T_{\infty} = 20$°C (independent of initial condition)
+\end{itemize}
+
+\subsection{Example 2: Second-Order ODE - Mass-Spring-Damper}
+
+\paragraph{Problem:} A mass-spring-damper system with mass $m = 2$ kg, spring constant $k = 8$ N/m, and damping coefficient $c = 4$ N·s/m is subject to an initial displacement $x(0) = 1$ m and initial velocity $\dot{x}(0) = 0$ m/s.
+
+The equation of motion is:
+\begin{align}
+m\ddot{x} + c\dot{x} + kx = 0
+\end{align}
+
+(a) Determine the damping ratio $\zeta$ and natural frequency $\omega_n$.
+
+(b) Classify the system as underdamped, critically damped, or overdamped.
+
+(c) Solve for $x(t)$ and sketch the response.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Standard form}
+
+Divide by $m$:
+\begin{align}
+\ddot{x} + \frac{c}{m}\dot{x} + \frac{k}{m}x = 0
+\end{align}
+
+\begin{align}
+\ddot{x} + 2\dot{x} + 4x = 0
+\end{align}
+
+Comparing with $\ddot{x} + 2\zeta\omega_n\dot{x} + \omega_n^2 x = 0$:
+\begin{align}
+\omega_n^2 = 4 \quad &\Rightarrow \quad \omega_n = 2 \text{ rad/s} \\
+2\zeta\omega_n = 2 \quad &\Rightarrow \quad \zeta = \frac{2}{2 \times 2} = 0.5
+\end{align}
+
+\textbf{Step 2: Classification}
+
+Since $0 < \zeta < 1$, the system is \textbf{underdamped}.
+
+\textbf{Step 3: Characteristic equation}
+
+\begin{align}
+s^2 + 2s + 4 = 0
+\end{align}
+
+\begin{align}
+s = \frac{-2 \pm \sqrt{4-16}}{2} = \frac{-2 \pm \sqrt{-12}}{2} = -1 \pm j\sqrt{3}
+\end{align}
+
+The roots are complex: $s_{1,2} = -1 \pm j1.732$
+
+\textbf{Step 4: Solution for underdamped case}
+
+For underdamped systems with $s = -\sigma \pm j\omega_d$ where $\sigma = \zeta\omega_n = 1$ and $\omega_d = \omega_n\sqrt{1-\zeta^2} = 2\sqrt{1-0.25} = \sqrt{3}$:
+
+\begin{align}
+x(t) = e^{-\sigma t}(A\cos\omega_d t + B\sin\omega_d t)
+\end{align}
+
+\begin{align}
+x(t) = e^{-t}(A\cos\sqrt{3}t + B\sin\sqrt{3}t)
+\end{align}
+
+Apply initial conditions:
+\begin{itemize}
+\item $x(0) = 1$: $A = 1$
+\item $\dot{x}(0) = 0$: Taking derivative:
+\begin{align}
+\dot{x}(t) = -e^{-t}(A\cos\sqrt{3}t + B\sin\sqrt{3}t) + e^{-t}(-A\sqrt{3}\sin\sqrt{3}t + B\sqrt{3}\cos\sqrt{3}t)
+\end{align}
+\begin{align}
+\dot{x}(0) = -A + B\sqrt{3} = 0 \quad \Rightarrow \quad B = \frac{1}{\sqrt{3}}
+\end{align}
+\end{itemize}
+
+Therefore:
+\begin{align}
+x(t) = e^{-t}\left(\cos\sqrt{3}t + \frac{1}{\sqrt{3}}\sin\sqrt{3}t\right) \text{ m}
+\end{align}
+
+Or equivalently:
+\begin{align}
+x(t) = \frac{2}{\sqrt{3}}e^{-t}\sin\left(\sqrt{3}t + \frac{\pi}{3}\right) \approx 1.155e^{-t}\sin(\sqrt{3}t + 60°)
+\end{align}
+
+\textbf{Response characteristics:}
+\begin{itemize}
+\item Oscillates at damped frequency $\omega_d = \sqrt{3} \approx 1.732$ rad/s
+\item Amplitude decays exponentially with time constant $\tau = 1$ s
+\item Period of oscillation: $T = 2\pi/\omega_d \approx 3.63$ s
+\item First peak occurs at approximately $t = 0.91$ s with amplitude $\approx 0.47$ m
+\end{itemize}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item Second-order systems exhibit three types of behavior based on $\zeta$
+\item Underdamped systems ($\zeta < 1$) oscillate while decaying
+\item The damped frequency $\omega_d = \omega_n\sqrt{1-\zeta^2}$ is always less than $\omega_n$
+\item Physical systems often have $0.1 < \zeta < 1$ (underdamped)
+\end{itemize}
+\end{document}

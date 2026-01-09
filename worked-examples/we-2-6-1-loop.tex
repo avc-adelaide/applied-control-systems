@@ -1,0 +1,78 @@
+% Worked Examples: Concept 2.6.1 - The Loop Transfer Function
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.6.1: The Loop Transfer Function\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.6.1: Loop Analysis}
+
+\subsection{Example 1: Closed-Loop System Analysis}
+
+\paragraph{Problem:} Consider a unity feedback system with open-loop transfer function:
+\begin{align}
+L(s) = C(s)P(s) = \frac{K}{s(s+2)}
+\end{align}
+
+Find: (a) the closed-loop transfer function, (b) the value of $K$ that gives closed-loop poles with damping ratio $\zeta = 0.707$, and (c) the corresponding natural frequency $\omega_0$.
+
+\paragraph{Solution:}
+
+\textbf{Part (a): Closed-Loop Transfer Function}
+
+For unity feedback, the closed-loop transfer function is:
+\begin{align}
+T(s) = \frac{L(s)}{1 + L(s)} = \frac{K/[s(s+2)]}{1 + K/[s(s+2)]} = \frac{K}{s^2 + 2s + K}
+\end{align}
+
+\textbf{Part (b) \& (c): Finding $K$ for $\zeta = 0.707$}
+
+The characteristic equation is:
+\begin{align}
+s^2 + 2s + K = 0
+\end{align}
+
+Compare with the standard second-order form:
+\begin{align}
+s^2 + 2\zeta\omega_0 s + \omega_0^2 = 0
+\end{align}
+
+Matching coefficients:
+\begin{align}
+2\zeta\omega_0 &= 2 \\
+\omega_0^2 &= K
+\end{align}
+
+From the first equation with $\zeta = 0.707$:
+\begin{align}
+\omega_0 = \frac{2}{2\zeta} = \frac{2}{2(0.707)} = \frac{1}{0.707} \approx 1.414 \text{ rad/s}
+\end{align}
+
+Therefore:
+\begin{align}
+K = \omega_0^2 = (1.414)^2 \approx 2
+\end{align}
+
+\textbf{Result:}
+\begin{itemize}
+\item Closed-loop transfer function: $T(s) = \frac{K}{s^2 + 2s + K}$
+\item For $\zeta = 0.707$: $K = 2$ and $\omega_0 = \sqrt{2} \approx 1.414$ rad/s
+\item The closed-loop poles are at: $s = -\zeta\omega_0 \pm j\omega_0\sqrt{1-\zeta^2} = -1 \pm j$
+\end{itemize}
+
+\textbf{Verification:} With $K = 2$, the characteristic equation is $s^2 + 2s + 2 = 0$:
+\begin{align}
+s = \frac{-2 \pm \sqrt{4-8}}{2} = \frac{-2 \pm j2}{2} = -1 \pm j
+\end{align}
+
+Damping ratio: $\zeta = \cos(\arctan(1/1)) = \cos(45°) = 0.707$ ✓
+\end{document}

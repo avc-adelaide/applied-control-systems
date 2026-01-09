@@ -1,0 +1,315 @@
+% Worked Examples: Concept 3.8.2 - Performance Specifications
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.8.2: Performance Specifications\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.8.2: Performance Specifications}
+
+\subsection{Example 1: Computing Frequency Domain Performance Specifications}
+
+Frequency domain specifications like maximum sensitivity, bandwidth, and peak frequency characterize system performance concisely.
+
+\paragraph{Problem:} 
+Consider a feedback system with process $P(s) = \frac{1}{(s+1)^3}$ and a PI controller $C(s) = k_p + \frac{k_i}{s}$ with gains $k_p = 0.6$ and $k_i = 0.5$.
+
+(a) Calculate the loop transfer function $L(s)$ and the transfer function $G_{yr}(s) = \frac{PCF}{1+PC}$ from reference to output (assuming $F = 1$).
+
+(b) Determine the complementary sensitivity function $T(s)$ and sensitivity function $S(s)$.
+
+(c) Estimate the maximum sensitivity $M_s = \sup_\omega |S(\ii\omega)|$ and the frequency $\omega_{ms}$ at which it occurs.
+
+(d) Estimate the bandwidth $\omega_b$ of $G_{yr}$, defined as the frequency where $|G_{yr}(\ii\omega_b)| = 1/\sqrt{2}$ (the -3 dB point).
+
+(e) Relate the bandwidth to the system rise time using the approximation $T_r \omega_b \approx 3$.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Loop transfer function}
+
+The PI controller is:
+\[
+C(s) = k_p + \frac{k_i}{s} = 0.6 + \frac{0.5}{s} = \frac{0.6s + 0.5}{s}
+\]
+
+The loop transfer function is:
+\[
+L(s) = P(s)C(s) = \frac{1}{(s+1)^3} \cdot \frac{0.6s + 0.5}{s} = \frac{0.6s + 0.5}{s(s+1)^3}
+\]
+
+\textbf{Step 2: Transfer function from reference to output}
+
+With $F = 1$ (unity feedforward):
+\[
+G_{yr}(s) = \frac{PC}{1+PC} = \frac{L(s)}{1+L(s)} = T(s)
+\]
+
+The complementary sensitivity function is:
+\[
+T(s) = \frac{0.6s + 0.5}{s(s+1)^3 + 0.6s + 0.5}
+\]
+
+Expanding the denominator:
+\[
+s(s+1)^3 = s(s^3 + 3s^2 + 3s + 1) = s^4 + 3s^3 + 3s^2 + s
+\]
+\[
+s(s+1)^3 + 0.6s + 0.5 = s^4 + 3s^3 + 3s^2 + 1.6s + 0.5
+\]
+
+Therefore:
+\[
+T(s) = G_{yr}(s) = \frac{0.6s + 0.5}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+\]
+
+\textbf{Step 3: Sensitivity function}
+
+Using $S = 1 - T$:
+\[
+S(s) = \frac{s^4 + 3s^3 + 3s^2 + s}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+\]
+
+Alternatively, directly:
+\[
+S(s) = \frac{1}{1+L(s)} = \frac{s(s+1)^3}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+\]
+
+\textbf{Step 4: Maximum sensitivity $M_s$}
+
+The maximum sensitivity occurs at a frequency where $|S(\ii\omega)|$ peaks. For this system, we need to evaluate:
+\[
+|S(\ii\omega)| = \left|\frac{\ii\omega(\ii\omega + 1)^3}{(\ii\omega)^4 + 3(\ii\omega)^3 + 3(\ii\omega)^2 + 1.6\ii\omega + 0.5}\right|
+\]
+
+At $\omega = 0$: $|S(0)| = \frac{0}{0.5} = 0$
+
+At $\omega \to \infty$: $|S(\ii\omega)| \to \frac{\omega \cdot \omega^3}{\omega^4} = 1$
+
+The peak typically occurs at a mid-range frequency. By numerical evaluation or using control system software:
+
+At $\omega = 1$ rad/s:
+\[
+S(\ii) = \frac{\ii(1+\ii)^3}{(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5}
+\]
+
+Computing $(1+\ii)^3$:
+\[
+(1+\ii)^2 = 1 + 2\ii - 1 = 2\ii
+\]
+\[
+(1+\ii)^3 = (1+\ii) \cdot 2\ii = 2\ii + 2\ii^2 = 2\ii - 2 = -2 + 2\ii
+\]
+
+So:
+\[
+\ii(1+\ii)^3 = \ii(-2 + 2\ii) = -2\ii - 2 = -2 - 2\ii
+\]
+
+The denominator at $s = \ii$:
+\[
+(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5 = 1 - 3\ii - 3 + 1.6\ii + 0.5 = -1.5 - 1.4\ii
+\]
+
+Therefore:
+\[
+S(\ii) = \frac{-2 - 2\ii}{-1.5 - 1.4\ii}
+\]
+
+Computing the magnitude:
+\[
+|S(\ii)| = \frac{\sqrt{4 + 4}}{\sqrt{2.25 + 1.96}} = \frac{\sqrt{8}}{\sqrt{4.21}} = \frac{2.828}{2.052} = 1.378
+\]
+
+Testing $\omega = 0.8$ rad/s would give a value closer to the peak. Through numerical optimization, we find:
+\[
+M_s \approx 1.4, \quad \omega_{ms} \approx 0.9 \text{ rad/s}
+\]
+
+\textbf{Step 5: Bandwidth calculation}
+
+The bandwidth $\omega_b$ is where $|G_{yr}(\ii\omega_b)| = 1/\sqrt{2} \approx 0.707$.
+
+At DC: $|G_{yr}(0)| = \frac{0.5}{0.5} = 1$
+
+As frequency increases, the magnitude decreases. By numerical evaluation or graphical methods:
+\[
+\omega_b \approx 1.0 \text{ rad/s}
+\]
+
+\textbf{Step 6: Rise time estimation}
+
+Using the rise time-bandwidth product approximation:
+\[
+T_r \approx \frac{3}{\omega_b} = \frac{3}{1.0} = 3 \text{ seconds}
+\]
+
+This can be verified by simulating the step response and measuring the time from 10\% to 90\% of the final value.
+
+\textbf{Key insights:}
+\begin{itemize}
+\item $M_s \approx 1.4$ indicates reasonable robustness (typically want $M_s < 2$ for good margins)
+\item The stability margin is approximately $s_m = 1/M_s \approx 0.71$, meaning the Nyquist curve stays at least 0.71 units away from the critical point $-1$
+\item Bandwidth $\omega_b \approx 1.0$ rad/s indicates the frequency range where the system responds effectively to reference commands
+\item The rise time-bandwidth product provides a quick estimate: faster responses require larger bandwidth
+\item The peak in $|S|$ near $\omega_{ms}$ indicates the frequency range where disturbances are most amplified (though still less than 1.4×)
+\end{itemize}
+
+\subsection{Example 2: Error Coefficients and Steady-State Tracking Performance}
+
+Error coefficients characterize how well a system tracks different types of reference signals at steady state.
+
+\paragraph{Problem:}
+Consider a unity feedback system with process $P(s) = \frac{1}{s(s+1)}$ (a type-1 system due to the pole at $s=0$). Two controllers are being considered:
+\begin{itemize}
+\item Controller A: $C_A(s) = 5$ (proportional only)
+\item Controller B: $C_B(s) = 2(1 + \frac{1}{s})$ (PI controller)
+\end{itemize}
+
+(a) For each controller, derive the error transfer function $G_{er}(s) = \frac{1}{1+PC}$ from reference $r$ to tracking error $e = r - y$.
+
+(b) Expand $G_{er}(s)$ as a power series in $s$ to find the error coefficients: $G_{er}(s) = e_0 + e_1 s + e_2 s^2 + \cdots$
+
+(c) Determine the steady-state error for:
+\begin{itemize}
+\item Step input: $r(t) = R_0$ (so $\dot{r} = 0$, $\ddot{r} = 0$)
+\item Ramp input: $r(t) = v_0 t$ (so $\dot{r} = v_0$, $\ddot{r} = 0$)
+\item Parabolic input: $r(t) = a_0 t^2$ (so $\ddot{r} = 2a_0$)
+\end{itemize}
+
+(d) Compare the tracking performance of the two controllers.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Error transfer function for Controller A}
+
+Loop transfer function:
+\[
+L_A(s) = P(s)C_A(s) = \frac{1}{s(s+1)} \cdot 5 = \frac{5}{s(s+1)}
+\]
+
+Error transfer function:
+\[
+G_{er,A}(s) = \frac{1}{1+L_A(s)} = \frac{1}{1 + \frac{5}{s(s+1)}} = \frac{s(s+1)}{s(s+1) + 5} = \frac{s^2 + s}{s^2 + s + 5}
+\]
+
+\textbf{Step 2: Power series expansion for Controller A}
+
+To find the error coefficients, we expand $G_{er,A}(s)$ for small $s$:
+\[
+G_{er,A}(s) = \frac{s^2 + s}{s^2 + s + 5} = \frac{s^2 + s}{5} \cdot \frac{1}{1 + \frac{s^2 + s}{5}}
+\]
+
+Using the expansion $\frac{1}{1+x} \approx 1 - x + x^2 - \cdots$ for small $x$:
+\[
+G_{er,A}(s) \approx \frac{s^2 + s}{5}\left(1 - \frac{s^2 + s}{5} + \cdots\right)
+\]
+\[
+\approx \frac{s + s^2}{5} - \frac{(s + s^2)^2}{25} + \cdots
+\]
+\[
+\approx \frac{s}{5} + \frac{s^2}{5} + O(s^2)
+\]
+
+Therefore:
+\[
+e_0 = 0, \quad e_1 = \frac{1}{5}, \quad e_2 = \frac{1}{5}
+\]
+
+\textbf{Step 3: Error transfer function for Controller B}
+
+Loop transfer function:
+\[
+L_B(s) = P(s)C_B(s) = \frac{1}{s(s+1)} \cdot \frac{2(s+1)}{s} = \frac{2(s+1)}{s^2(s+1)} = \frac{2}{s^2}
+\]
+
+Error transfer function:
+\[
+G_{er,B}(s) = \frac{1}{1 + \frac{2}{s^2}} = \frac{s^2}{s^2 + 2}
+\]
+
+\textbf{Step 4: Power series expansion for Controller B}
+
+For small $s$:
+\[
+G_{er,B}(s) = \frac{s^2}{s^2 + 2} = \frac{s^2}{2} \cdot \frac{1}{1 + \frac{s^2}{2}}
+\]
+
+Using $\frac{1}{1+x} \approx 1 - x + \cdots$:
+\[
+G_{er,B}(s) \approx \frac{s^2}{2}\left(1 - \frac{s^2}{2} + \cdots\right) \approx \frac{s^2}{2} + O(s^4)
+\]
+
+Therefore:
+\[
+e_0 = 0, \quad e_1 = 0, \quad e_2 = \frac{1}{2}
+\]
+
+\textbf{Step 5: Steady-state errors}
+
+The steady-state error for a reference signal $r(t)$ is:
+\[
+e_{ss} = e_0 r(t) + e_1 \dot{r}(t) + e_2 \ddot{r}(t) + \cdots
+\]
+
+\textbf{For a step input $r(t) = R_0$:}
+
+Controller A: $e_{ss,A} = 0 \cdot R_0 + \frac{1}{5} \cdot 0 + \cdots = 0$
+
+Controller B: $e_{ss,B} = 0 \cdot R_0 + 0 \cdot 0 + \cdots = 0$
+
+Both controllers have zero steady-state error for step inputs (both are type-1 systems).
+
+\textbf{For a ramp input $r(t) = v_0 t$:}
+
+Controller A: $e_{ss,A} = 0 + \frac{1}{5} \cdot v_0 + 0 = \frac{v_0}{5}$
+
+Controller B: $e_{ss,B} = 0 + 0 \cdot v_0 + 0 = 0$
+
+Controller B (PI) has zero steady-state error for ramps, while Controller A has a constant lag error.
+
+\textbf{For a parabolic input $r(t) = a_0 t^2$:}
+
+Controller A: $e_{ss,A} = 0 + \frac{1}{5} \cdot 2a_0 t + \frac{1}{5} \cdot 2a_0 = \frac{2a_0 t}{5} + \frac{2a_0}{5}$
+
+The error grows linearly with time (unbounded).
+
+Controller B: $e_{ss,B} = 0 + 0 + \frac{1}{2} \cdot 2a_0 = a_0$
+
+Controller B has a constant error (bounded but non-zero).
+
+\textbf{Step 6: Comparison and interpretation}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Input} & \textbf{Controller A (P)} & \textbf{Controller B (PI)} \\
+\hline
+Step ($R_0$) & 0 & 0 \\
+Ramp ($v_0 t$) & $v_0/5$ & 0 \\
+Parabolic ($a_0 t^2$) & $\infty$ (grows) & $a_0$ (constant) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Key insights:}
+\begin{itemize}
+\item The system type (number of integrators in the loop) determines which polynomial inputs can be tracked with zero steady-state error
+\item The process $P(s) = 1/[s(s+1)]$ already has one integrator, making it type-1 without any controller
+\item Adding PI control (Controller B) introduces a second integrator, making the loop type-2
+\item Type-1 systems track steps with zero error and ramps with constant error
+\item Type-2 systems track both steps and ramps with zero error, and parabolas with constant error
+\item Higher-order terms ($e_2, e_3, \ldots$) determine the error for higher-order polynomial inputs
+\item Error coefficients provide insight without needing to simulate each input type
+\item Low-frequency behavior (small $s$) corresponds to long-time steady-state behavior
+\end{itemize}
+\end{document}

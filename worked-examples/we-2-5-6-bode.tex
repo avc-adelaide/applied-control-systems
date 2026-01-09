@@ -1,0 +1,104 @@
+% Worked Examples: Concept 2.5.6 - The Bode Plot
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 2.5.6: The Bode Plot\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 2.5.6: Bode Plots}
+
+\subsection{Example 1: Sketching Bode Plots by Hand}
+
+\paragraph{Problem:} Sketch the Bode magnitude and phase plots for the transfer function:
+\begin{align}
+G(s) = \frac{100}{s(s+10)}
+\end{align}
+
+\paragraph{Solution:}
+
+First, rewrite in standard Bode form by factoring out constants and normalizing poles/zeros:
+\begin{align}
+G(s) = \frac{100}{s \cdot 10(s/10 + 1)} = \frac{10}{s(1 + s/10)}
+\end{align}
+
+At $s = j\omega$:
+\begin{align}
+G(j\omega) = \frac{10}{j\omega(1 + j\omega/10)}
+\end{align}
+
+\textbf{Magnitude Plot:}
+
+Express in dB:
+\begin{align}
+|G(j\omega)|_{dB} = 20\log_{10}|G(j\omega)| = 20\log_{10}\left|\frac{10}{j\omega(1 + j\omega/10)}\right|
+\end{align}
+
+Using logarithm properties:
+\begin{align}
+|G(j\omega)|_{dB} &= 20\log_{10}(10) - 20\log_{10}|\omega| - 20\log_{10}|1 + j\omega/10| \\
+&= 20 - 20\log_{10}(\omega) - 20\log_{10}\sqrt{1 + (\omega/10)^2}
+\end{align}
+
+Asymptotic approximation:
+\begin{itemize}
+\item \textbf{Integrator $1/s$:} Contributes $-20$ dB/decade slope starting from DC
+\item \textbf{Pole at $\omega = 10$ rad/s:} Adds $-20$ dB/decade for $\omega > 10$
+\item \textbf{DC gain term (10):} Contributes $+20$ dB offset
+\end{itemize}
+
+Key frequencies:
+\begin{itemize}
+\item At $\omega = 1$ rad/s: $|G(j1)|_{dB} = 20 - 0 - 0 = 20$ dB
+\item At $\omega = 10$ rad/s (corner frequency): $|G(j10)|_{dB} \approx 20 - 20 - 3 = -3$ dB
+\item At $\omega = 100$ rad/s: $|G(j100)|_{dB} = 20 - 40 - 20 = -40$ dB
+\end{itemize}
+
+Slope breakdown:
+\begin{itemize}
+\item $\omega < 10$: slope is $-20$ dB/decade (from integrator)
+\item $\omega > 10$: slope is $-40$ dB/decade (integrator + pole)
+\end{itemize}
+
+\textbf{Phase Plot:}
+
+Phase contribution from each component:
+\begin{itemize}
+\item Integrator $1/s$: contributes $-90°$ at all frequencies
+\item Pole at $s = -10$: contributes $-\arctan(\omega/10)$
+  \begin{itemize}
+  \item $\omega \ll 10$: $\approx 0°$
+  \item $\omega = 10$: $\approx -45°$
+  \item $\omega \gg 10$: $\approx -90°$
+  \end{itemize}
+\end{itemize}
+
+Total phase:
+\begin{align}
+\angle G(j\omega) = -90° - \arctan(\omega/10)
+\end{align}
+
+Key phase values:
+\begin{itemize}
+\item At $\omega = 1$: $\angle G \approx -90° - 6° = -96°$
+\item At $\omega = 10$: $\angle G = -90° - 45° = -135°$
+\item At $\omega = 100$: $\angle G \approx -90° - 84° = -174°$
+\item As $\omega \to \infty$: $\angle G \to -180°$
+\end{itemize}
+
+\textbf{Summary:}
+\begin{itemize}
+\item Magnitude starts at 20 dB at $\omega = 1$ rad/s with $-20$ dB/decade slope
+\item At corner frequency $\omega = 10$ rad/s, slope changes to $-40$ dB/decade
+\item Phase starts at $-90°$ and asymptotically approaches $-180°$
+\item Phase is $-135°$ at the corner frequency
+\end{itemize}
+\end{document}

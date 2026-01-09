@@ -1,0 +1,202 @@
+% Worked Examples: Concept 3.9.3 - System Design Considerations
+\documentclass[11pt,a4paper]{article}
+\usepackage{worked-examples-template}
+
+\title{\textbf{Worked Examples}\\[0.5em]
+\large Concept 3.9.3: System Design Considerations\\[0.3em]
+\normalsize \coursesubtitle{} -- \coursetitle}
+\author{Assoc.\ Prof.\ William Robertson \and Dr Sean McGowan}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Concept 3.9.3: System Design}
+
+\subsection{Example 1: Stabilisability Check Using the Popov-Belevitch-Hautus Test}
+
+The PBH test provides an algebraic method to determine if a system can be stabilised. This is fundamental for determining feasibility of control design.
+
+\paragraph{Problem:}
+Consider a system with state-space representation:
+\[
+A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & -1 & 1 \\ 0 & 0 & 3 \end{bmatrix}, \quad
+B = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+\]
+
+(a) Determine if the system is stabilisable using the Popov-Belevitch-Hautus (PBH) test.
+
+(b) Identify which eigenvalues can be moved by state feedback.
+
+(c) Explain why this system can or cannot be stabilised.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Find eigenvalues of $A$}
+
+The eigenvalues are found from $\det(A - \lambda I) = 0$. Since $A$ is upper triangular, the eigenvalues are the diagonal elements:
+\[
+\lambda_1 = 2, \quad \lambda_2 = -1, \quad \lambda_3 = 3
+\]
+
+Eigenvalues in the right half-plane (unstable): $\lambda_1 = 2$ and $\lambda_3 = 3$.
+
+\textbf{Step 2: Apply PBH test for stabilisability}
+
+The PBH test states that a system is stabilisable if and only if:
+\[
+\operatorname{rank}([A - \lambda I \quad B]) = n
+\]
+for all eigenvalues $\lambda$ with $\operatorname{Re}(\lambda) \geq 0$ (right half-plane).
+
+We need to check this for $\lambda_1 = 2$ and $\lambda_3 = 3$.
+
+\textbf{For $\lambda_1 = 2$:}
+\[
+A - 2I = \begin{bmatrix} 0 & 1 & 0 \\ 0 & -3 & 1 \\ 0 & 0 & 1 \end{bmatrix}
+\]
+\[
+[A - 2I \quad B] = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & -3 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix}
+\]
+
+Row reduce to find rank:
+\[
+\begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & -3 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix} \sim \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix} \sim \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+\]
+
+Rank = 3 ✓ (satisfies PBH test for $\lambda = 2$)
+
+\textbf{For $\lambda_3 = 3$:}
+\[
+A - 3I = \begin{bmatrix} -1 & 1 & 0 \\ 0 & -4 & 1 \\ 0 & 0 & 0 \end{bmatrix}
+\]
+\[
+[A - 3I \quad B] = \begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & -4 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+\]
+
+Row reduce:
+\[
+\begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & -4 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+\]
+
+Rank = 2 ✗ (fails PBH test for $\lambda = 3$)
+
+\textbf{Step 3: Conclusion}
+
+The system is \textbf{NOT stabilisable} because the PBH test fails for the unstable eigenvalue $\lambda_3 = 3$.
+
+Physically, this means:
+\begin{itemize}
+\item The eigenvalue $\lambda = 2$ is reachable and can be moved by state feedback
+\item The eigenvalue $\lambda = 3$ is \emph{unreachable} from the input and cannot be affected by any control
+\item Since $\lambda = 3$ is unstable and cannot be controlled, the system cannot be stabilised
+\end{itemize}
+
+\textbf{Key insights:}
+\begin{itemize}
+\item Stabilisability requires that all unstable modes be reachable from the input
+\item A system can have unreachable modes, but only if they are stable
+\item The PBH test provides a simple algebraic check without computing eigenvectors
+\end{itemize}
+
+\subsection{Example 2: Bode's Integral Formula and the Waterbed Effect}
+
+Bode's Integral Formula reveals fundamental limitations: reducing sensitivity at one frequency inevitably increases it elsewhere.
+
+\paragraph{Problem:}
+Consider a feedback system with an unstable process $P(s) = 1/(s-1)$ and proportional controller $C(s) = k$. 
+
+(a) For $k = 5$, calculate the sensitivity function $S(s)$ and loop transfer function $L(s)$.
+
+(b) Evaluate $\log|S(\ii\omega)|$ at $\omega = 0.5$, $\omega = 2$, and $\omega = 10$ rad/s.
+
+(c) Apply Bode's Integral Formula to find $\int_0^\infty \log|S(\ii\omega)|\,\mathrm{d}\omega$.
+
+(d) Explain the waterbed effect for this system.
+
+\paragraph{Solution:}
+
+\textbf{Step 1: Loop transfer function and sensitivity}
+
+Loop transfer function:
+\[
+L(s) = P(s)C(s) = \frac{k}{s-1} = \frac{5}{s-1}
+\]
+
+Sensitivity function:
+\[
+S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + 5/(s-1)} = \frac{s-1}{s-1+5} = \frac{s-1}{s+4}
+\]
+
+\textbf{Step 2: Evaluate $\log|S(\ii\omega)|$ at specific frequencies}
+
+At $\omega = 0.5$ rad/s:
+\[
+S(\ii \cdot 0.5) = \frac{\ii \cdot 0.5 - 1}{\ii \cdot 0.5 + 4} = \frac{-1 + \ii \cdot 0.5}{4 + \ii \cdot 0.5}
+\]
+\[
+|S(\ii \cdot 0.5)| = \frac{\sqrt{1 + 0.25}}{\sqrt{16 + 0.25}} = \frac{\sqrt{1.25}}{\sqrt{16.25}} = \frac{1.118}{4.031} = 0.277
+\]
+\[
+\log|S(\ii \cdot 0.5)| = \log(0.277) = -1.284
+\]
+
+At $\omega = 2$ rad/s:
+\[
+|S(\ii \cdot 2)| = \frac{\sqrt{1 + 4}}{\sqrt{16 + 4}} = \frac{\sqrt{5}}{\sqrt{20}} = \frac{2.236}{4.472} = 0.500
+\]
+\[
+\log|S(\ii \cdot 2)| = \log(0.5) = -0.693
+\]
+
+At $\omega = 10$ rad/s:
+\[
+|S(\ii \cdot 10)| = \frac{\sqrt{1 + 100}}{\sqrt{16 + 100}} = \frac{\sqrt{101}}{\sqrt{116}} = \frac{10.05}{10.77} = 0.933
+\]
+\[
+\log|S(\ii \cdot 10)| = \log(0.933) = -0.069
+\]
+
+\textbf{Step 3: Apply Bode's Integral Formula}
+
+Bode's Integral Formula states:
+\[
+\int_0^\infty \log|S(\ii\omega)|\,\mathrm{d}\omega = \pi \sum p_k
+\]
+where $p_k$ are the right half-plane poles of $L(s)$.
+
+For our system, $L(s) = 5/(s-1)$ has one right half-plane pole at $p_1 = 1$.
+
+Therefore:
+\[
+\int_0^\infty \log|S(\ii\omega)|\,\mathrm{d}\omega = \pi \cdot 1 = \pi \approx 3.14
+\]
+
+\textbf{Step 4: Interpretation - The waterbed effect}
+
+\begin{itemize}
+\item The integral is \emph{constant} and positive for unstable systems
+\item At low frequencies ($\omega = 0.5$), $\log|S| < 0$ means $|S| < 1$ (good disturbance rejection)
+\item At high frequencies ($\omega = 10$), $\log|S| > 0$ means $|S| > 1$ (amplification)
+\item The negative area (good performance) at low frequencies must be balanced by positive area (poor performance) at higher frequencies
+\item This is the "waterbed effect": pushing down sensitivity at one frequency causes it to pop up elsewhere
+\end{itemize}
+
+If we tried to increase $k$ to improve low-frequency disturbance rejection, we would:
+\begin{itemize}
+\item Reduce $|S|$ at low frequencies (more negative contribution to integral)
+\item Force $|S|$ to increase more at mid-range frequencies (to maintain constant integral)
+\item Create a larger sensitivity peak, reducing robustness
+\end{itemize}
+
+\textbf{Key insights:}
+\begin{itemize}
+\item Unstable systems have inherent performance limitations
+\item The total "cost" of disturbance rejection is fixed by the unstable pole location
+\item Control design is always a compromise between performance at different frequencies
+\item Stable systems ($\sum p_k = 0$) have zero integral, allowing better performance flexibility
+\end{itemize}
+\end{document}
