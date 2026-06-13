@@ -40,7 +40,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Strongly stabilisability}
+\begin{frame}{Strong stabilisability}
 	\begin{itemize}
 		\item A system is strongly stabilisable if it can be stabilised by a stable controller
 		\item A linear system is strongly stabilisable if and only if it has an even number of real poles between every pair of real zeros in the right half-plane ($\operatorname{Re} s \geq 0$)
@@ -64,7 +64,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{RHP zeros- Example}
+\begin{frame}{RHP zeros - Example}
 	\begin{itemize}
 		\item Consider the vehicle steering system
 		\[P(s) = \frac{av_0s+v_0^2}{bs}\]
@@ -86,12 +86,12 @@
 \end{frame}
 
 
-\begin{frame}{Time delays- Pad\'{e} approximation}
+\begin{frame}{Time delays - Pad\'{e} approximation}
 \begin{itemize}
 	\item The Pad\'{e} approximation of a time delay provides a unity gain, rational transfer function whose phase approximates the time delay
 	\item The first and second order Pad\'{e} approximations are
 	\[G_1(s)=\frac{1-s\tau/2}{1+s\tau/2}, \quad G_2(s)=\frac{1-\tau s/2 + \tau^2 s^2/12}{1+\tau s/2 + \tau^2 s^2/12}\]
-	\item The first order approximation has a right half-plane at $s=2/\tau$ and the second order approximation has a complex conjugate pair of right half-plane zeros at $s=(3\pm \ii\sqrt{3})/\tau$
+	\item The first order approximation has a right half-plane zero at $s=2/\tau$ and the second order approximation has a complex conjugate pair of right half-plane zeros at $s=(3\pm \ii\sqrt{3})/\tau$
 \end{itemize}
 \end{frame}
 

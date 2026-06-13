@@ -46,7 +46,7 @@
 \begin{itemize}
 \item We may easily investigate the effects of variations in parameters but other uncertainties must also be considered
 \item For example, the cruise control system fails to account for the dynamics of the engine combustion processes, nonlinear air resistance, or delays between applying the throttle and the force at the wheels
-\item These negelected mechanisms are known as \alert{unmodeled dynamics}
+\item These neglected mechanisms are known as \alert{unmodeled dynamics}
 \item One approach is to make our model more complex but this can be challenging and often introduces more parameter uncertainty
 \item We may instead probe our system to see if it is sensitive to generic forms of unmodeled dynamics
 \end{itemize}
@@ -56,9 +56,9 @@
 \begin{frame}{Describing unmodeled dynamics}
 	\begin{itemize}
 		\item The nominal model may be augmented by a bounded input/output transfer function that captures the generic features of the unmodeled dynamics (additive $\Delta$, multiplicative $\delta$, or feedback uncertainty $\Delta_{fb}$)
-		\item These types of  are related by
+		\item These types of uncertainty are related by
 		\[\delta=\frac{\Delta}{P}, \quad \Delta_{fb} = \frac{\Delta}{P(P+\Delta)}=\frac{\delta}{P(1+\delta)}\]
-		\item If the closed loop system is stable for \textit{all}  bounded input/output transfer functions, the system is said to be robustly stable
+		\item If the closed loop system is stable for \textit{all} bounded input/output transfer functions, the system is said to be robustly stable
 		
 	\end{itemize}
 \begin{figure}

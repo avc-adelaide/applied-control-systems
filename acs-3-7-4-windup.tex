@@ -22,7 +22,7 @@
 \begin{frame}{Actuator saturation}
 \begin{itemize}
 \item We have mostly analysed control systems from the perspective of linear systems but the effects of nonlinear systems must be considered
-\item A nonlinear phenomenon of importance is saturation -- limitations in actuators such as speed limits of motors, region of movement of a robotic arm, or a valves limitations of not being more than fully opened or fully closed
+\item A nonlinear phenomenon of importance is saturation -- limitations in actuators such as speed limits of motors, region of movement of a robotic arm, or a valve's limitations of not being more than fully opened or fully closed
 \item All actuators have physical limitations
 \end{itemize}
 \end{frame}
@@ -31,7 +31,7 @@
 \begin{itemize}
 \item When saturation is achieved, the feedback loop is broken and the system effectively runs in open loop with the actuator remaining at the limiting value as long as it is still saturated
 \item In these cases, the integral term and the controller input may become very large and it may take a long time for the integrator and controller to come out of saturation
-\item This results in very large transient behaviour and is knonwn as \alert{integrator windup}
+\item This results in very large transient behaviour and is known as \alert{integrator windup}
 \item This can occur in any controller with integral action
 \end{itemize}
 \end{frame}
