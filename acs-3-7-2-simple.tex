@@ -32,7 +32,7 @@
 	\item Any stable system can be modelled by a static system if its inputs are sufficiently slow, which approximates the transfer function by a constant 
 	\[K=P(0)\]
 	\item Using integral control, the controller is $K\tfrac{k_i}{s}$ with closed loop characteristic polynomial $s+Kk_i$
-	\item Specifying the performance of the controlled system by the desired time constant $T_{cl}$ of the closed loopn system, we have
+	\item Specifying the performance of the controlled system by the desired time constant $T_{cl}$ of the closed loop system, we have
 	\[k_i = \frac{1}{T_c P(0)}\]
 	\item A reasonable criterion for the process transfer function to be well approximated by a constant is that the average residence time $T_{ar}=\tfrac{-P'(0)}{P(0)}$ satisfies $T_{ar}<T_{cl}$
 \end{itemize}
@@ -59,7 +59,7 @@
 \item Consider a first-order system with transfer function 
 \[P(s) = \frac{b}{s+a}\]
 \item Comparing the desired and closed loop characteristic polynomials with a PI controller
-\[s^2+a_1s+a_2 = s^2 (a_bk_p)s+bk_i\]
+\[s^2+a_1s+a_2 = s^2+(a+bk_p)s+bk_i\]
 \item We may therefore assign arbitrary values of the closed loop poles via PI control
 \[k_p=\frac{a_1-a}{b}, \quad k_i = \frac{a_2}{b}\]
 \end{itemize}
