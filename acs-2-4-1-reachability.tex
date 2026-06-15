@@ -34,7 +34,7 @@ where $x$ is n-dimensional
 
 \begin{frame}{Reachability}
 \begin{itemize}
-	\item A linear system is \alert{reachable} if,for any initial state $x_0$ and final state $x_f$, there exists a $T>0$ and control $u(t)$ such that $x(0)=x_0$ and $x(T)=x_f$
+	\item A linear system is \alert{reachable} if, for any initial state $x_0$ and final state $x_f$, there exists a $T>0$ and control $u(t)$ such that $x(0)=x_0$ and $x(T)=x_f$
 	\item In other words, the reachable set $\mathcal{R}(x_0,\leq T)$ is our whole state space
 	\item This is essentially saying, we can get anywhere in our state space in finite time, no matter where we start!
 \end{itemize}
@@ -64,7 +64,7 @@ where $x$ is n-dimensional
 	\begin{itemize}
 		\item Define the reachability matrix
 		\[W_r = \begin{bmatrix}
-			B & AB & A^2 B & \cdots & A^{n-1}
+			B & AB & A^2 B & \cdots & A^{n-1}B
 		\end{bmatrix}\]
 		\item A linear system is reachable if and only if the reachability matrix $W_r$ is invertible (or equivalently, full rank)
 	\end{itemize}
@@ -75,7 +75,7 @@ where $x$ is n-dimensional
 	Consider the simplified balance system (which is a model for many examples which the centre of mass is above a pivot point i.e. segway, inverted pendulum)
 	\begin{align}
 		(M+m)\ddot{p}-ml\cos \theta \ddot{\theta} &= -ml\sin\theta \dot{\theta}^2+F,\\
-		(J_ml^2)\ddot{\theta} -ml\cos \theta \ddot{p} &= mgl\sin \theta.
+		(J+ml^2)\ddot{\theta} -ml\cos \theta \ddot{p} &= mgl\sin \theta.
 	\end{align}
 	Linearising around $(p,0,0,0)$ gives us the state space matrices
 	\[ A=\begin{bmatrix}
@@ -84,7 +84,7 @@ where $x$ is n-dimensional
 		0 & m^2l^2g/\mu & 0 & 0 \\ 0& M_tmgl/\mu & 0 & 0
 	\end{bmatrix}, \quad
 	B = \begin{bmatrix}
-		0 \\ 0 \\ Jt/\mu \\ lm/\mu
+		0 \\ 0 \\ J_t/\mu \\ lm/\mu
 	\end{bmatrix}\]
 	where $\mu=M_tJ_t-m^2l^2$, $M_t=M+m$, and $J_t=J+ml^2$
 \end{frame}
@@ -99,7 +99,7 @@ The reachability matrix is
 		0 & J_t/\mu & 0 & gl^3m^3/\mu^2 \\ 
 		0 & lm/\mu & 0 & gl^2m^2M_t/\mu^2 \\
 		J_t/\mu & 0 & gl^3m^3/\mu^2 & 0 \\
-		lm/\mu & 0 & g^2l^2m^2M_t/\mu^2 & 0 
+		lm/\mu & 0 & gl^2m^2M_t/\mu^2 & 0
 	\end{bmatrix}
 \end{align}
 The determinant of this matrix is $\operatorname{det}(W_r)=-\frac{g^2l^4m^4}{\mu^6}(MJ+mJ+Mml^2)^2\neq 0$ and therefore, the reachability matrix is invertible and so the balance system is reachable!
@@ -140,7 +140,7 @@ The determinant of this matrix is $\operatorname{det}(W_r)=-\frac{g^2l^4m^4}{\mu
 	\end{bmatrix}\]
 	where $*$ are possible nonzero terms
 	\item The transformation matrix $T$ can be found by 
-	\[T=\tilde{W_r} W_r^{-1}\]
+	\[T=\tilde{W}_r W_r^{-1}\]
 \end{itemize}
 \end{frame}
 
