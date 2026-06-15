@@ -85,7 +85,7 @@
 
 \begin{frame}{Reachable canonical form }
 	\begin{itemize}
-		\item For control law \[u=-\tilde{K}z+k_f r=-\tilde{k}_1z_1-\tilde{k}_1z_1- \cdots - \tilde{k}_nz_n+k_fr,\] the closed loop system is 
+		\item For control law \[u=-\tilde{K}z+k_f r=-\tilde{k}_1z_1-\tilde{k}_2z_2- \cdots - \tilde{k}_nz_n+k_fr,\] the closed loop system is 
 		\[  \frac{\mathrm{d} z}{\mathrm{d} t}=\begin{bmatrix}
 			-a_1-\tilde{k}_1 & -a_2-\tilde{k}_2 & -a_3-\tilde{k}_3 & \ldots & -a_n-\tilde{k}_n \\
 			1 & 0 & & & \\
@@ -112,7 +112,7 @@
 
 \begin{frame}{Reachable canonical form}
 \begin{itemize}
-	\item Therefore, we find that relating the desired characteristic polynomial to the closed loop characterisic polynomial we have
+	\item Therefore, we find that relating the desired characteristic polynomial to the closed loop characteristic polynomial we have
 	\[\tilde{K} = \begin{bmatrix}
 		p_1-a_1 & p_2-a_2 & \cdots & p_n-a_n
 	\end{bmatrix}\]
@@ -131,7 +131,7 @@ This process allows us to assign the eigenvalues of the closed loop system to th
 	\[\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n\]
 	\item Calculate gains in reachable canonical form  
 	by determining  \[W_r = \begin{bmatrix}
-		B & AB & A^2 B & \cdots & A^{n-1}
+		B & AB & A^2 B & \cdots & A^{n-1}B
 	\end{bmatrix},\quad \tiny{\tilde{W}_r = \begin{bmatrix}
 		1 & -a_1 & a_1^2-a_2 & & \\
 		0 & 1 & -a_1 & & * \\
@@ -189,7 +189,7 @@ Choosing parameters $a=3.2$, $b=0.6$, $c=50$, $d=0.56$, $k=125$,  $r=1.6$, takin
 	\end{bmatrix} \]
 where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$
 	
-This system is reachable (by showing that the reachability matrix is full rank) and therefore we can assign the eignenvalues using state feedback
+This system is reachable (by showing that the reachability matrix is full rank) and therefore we can assign the eigenvalues using state feedback
 
 \end{frame}
 
