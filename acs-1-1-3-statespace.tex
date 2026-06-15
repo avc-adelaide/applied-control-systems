@@ -49,10 +49,10 @@ In the previous concept, we wrote:
 \begin{align}
 \dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- c(\dot q)/m - kq/m\end{bmatrix}
 \end{align}
-Let's now linearise with $c(\dot q) \eqdef c q$:
+Let's now linearise with $c(\dot q) := c \dot q$:
 \begin{align}
-\dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- cq/m - kq/m\end{bmatrix}
-              = \begin{bmatrix}0 & 1\\- c/m & - k/m\end{bmatrix}\begin{bmatrix} q\\\dot q\end{bmatrix} = Ax
+\dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- kq/m - c\dot q/m\end{bmatrix}
+              = \begin{bmatrix}0 & 1\\- k/m & - c/m\end{bmatrix}\begin{bmatrix} q\\\dot q\end{bmatrix} = Ax
 \end{align}
 \end{frame}
 
@@ -127,9 +127,9 @@ F \\
 \frametitle{Banjo music\dots}
 Defining some shorthands:
 \begin{align}
-M_t &= M+m & J_t&=J+ml^2 & c_\theta&=\cos\theta & s_\theta &= \cos\theta
+M_t &= M+m & J_t&=J+ml^2 & c_\theta&=\cos\theta & s_\theta &= \sin\theta
 \end{align}
-Equation \eqref{segway} becomes:
+Equation \eqref{eq:segway} becomes:
 \begin{align}
 \Deriv{}{t}
 \begin{pmatrix}
