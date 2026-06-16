@@ -49,7 +49,7 @@ In the previous concept, we wrote:
 \begin{align}
 \dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- c(\dot q)/m - kq/m\end{bmatrix}
 \end{align}
-Let's now linearise with $c(\dot q) := c \dot q$:
+Let's now linearise with $c(\dot q) \eqdef c \dot q$:
 \begin{align}
 \dot x &= \begin{bmatrix}\dot q\\\ddot q\end{bmatrix} = \begin{bmatrix}\dot q\\- kq/m - c\dot q/m\end{bmatrix}
               = \begin{bmatrix}0 & 1\\- k/m & - c/m\end{bmatrix}\begin{bmatrix} q\\\dot q\end{bmatrix} = Ax
@@ -129,7 +129,7 @@ Defining some shorthands:
 \begin{align}
 M_t &= M+m & J_t&=J+ml^2 & c_\theta&=\cos\theta & s_\theta &= \sin\theta
 \end{align}
-Equation \eqref{eq:segway} becomes:
+Equation \eqref{segway} becomes:
 \begin{align}
 \Deriv{}{t}
 \begin{pmatrix}
@@ -255,7 +255,7 @@ You can learn control entirely from the discrete perspective; we want to conside
 \begin{frame}
 \frametitle{Discrete PI Controller}
 \begin{align}
-u(t) &= K_p e(t) + K_i \underbrace{\int_o^t e(\tau) \dee \tau}_{u_i(t)} & \Deriv{u_i(t)}{t} &= e(t) \\
+u(t) &= K_p e(t) + K_i \underbrace{\int_0^t e(\tau) \dee \tau}_{u_i(t)} & \Deriv{u_i(t)}{t} &= e(t) \\
 u[k] &= K_p e[k] + K_i u_i[k]
 \end{align}
 What is $u_i[k]$ ?
