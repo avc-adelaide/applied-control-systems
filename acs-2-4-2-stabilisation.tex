@@ -54,6 +54,7 @@
 		\[p(s) = s^n + p_1 s^{n-1} + \cdots p_{n-1} s + p_n\] 
 		we can design our gains $K$ and $k_f$ to meet performance specifications 
 		\item Typically we want a stable equilibrium point, but maybe we care about rise time, settling time, overshoot as well 
+		\item See \textbf{Example 7.4 Vehicle Steering} for a worked example
 	\end{itemize}
 \end{frame}
 
@@ -85,7 +86,14 @@
 
 \begin{frame}{Reachable canonical form }
 	\begin{itemize}
-		\item For control law \[u=-\tilde{K}z+k_f r=-\tilde{k}_1z_1-\tilde{k}_2z_2- \cdots - \tilde{k}_nz_n+k_fr,\] the closed loop system is 
+		\item 
+		For control law 
+		\[ 
+		  u = -\tilde{K} z + k_f r
+		    = -\tilde{k}_1 z_1 - \tilde{k}_2 z_2 - \cdots - \tilde{k}_n z_n + k_f r,
+		\]
+		the closed loop system is 
+		\small
 		\[  \frac{\mathrm{d} z}{\mathrm{d} t}=\begin{bmatrix}
 			-a_1-\tilde{k}_1 & -a_2-\tilde{k}_2 & -a_3-\tilde{k}_3 & \ldots & -a_n-\tilde{k}_n \\
 			1 & 0 & & & \\
@@ -99,6 +107,7 @@
 			\vdots \\
 			0
 		\end{bmatrix} r  \]
+		\normalsize
 		\[y = \begin{bmatrix}
 			b_1 & b_2 & \cdots & b_n
 		\end{bmatrix}z\]
@@ -156,7 +165,10 @@ This process allows us to assign the eigenvalues of the closed loop system to th
 This method is implemented in Matlab in the functions \textbf{acker} and \textbf{place}
 \end{frame}
 
-\begin{frame}{Example}
+
+
+
+\begin{frame}{Example — recall §4.7}
 The predator-prey model is given by 
 \[\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL\]
 where the population of an ecosystem can be regulated by controlling the food supply
@@ -187,9 +199,8 @@ Choosing parameters $a=3.2$, $b=0.6$, $c=50$, $d=0.56$, $k=125$,  $r=1.6$, takin
 	\end{bmatrix}  \begin{bmatrix}
 		z_1 \\ z_2
 	\end{bmatrix} \]
-where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$
-	
-This system is reachable (by showing that the reachability matrix is full rank) and therefore we can assign the eigenvalues using state feedback
+where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$.	
+This system is reachable (by showing that the reachability matrix is full rank) and therefore we can assign the eignenvalues using state feedback
 
 \end{frame}
 
