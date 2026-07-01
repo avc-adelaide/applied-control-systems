@@ -5,20 +5,114 @@
 
 \begin{frame}
 \frametitle{Introduction}
-In this workshop, we will explore state feedback control design techniques and their implementation in Matlab and Simulink.
+In this workshop, we will explore state feedback control design techniques by using an example from the concepts notes.
 \end{frame}
 
-\SUBCONCEPT{Matlab}
+\SUBCONCEPT{Example of a simulated ecosystem}
 
 \begin{frame}[fragile]
-\frametitle{Getting started with Matlab}
+\frametitle{Predator-prey model}
+In previous workshops you have seen how to simulate and plot a dynamical system. Let us start by recreating Figure 4.20 from the notes: simulated results for an uncontrolled predator-prey system.
+
+This system is governed by the two differential equations
+\[\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL.\]  
+The variables are  
+\begin{itemize}
+	\item  $H$: Hare population 
+	\item $L$: Lynx population 
+		\item $u$: Controlled food source for hares
+		
+\end{itemize}
+The parameters are
+\begin{itemize}
+	\item $a$: Rate that hare population diminishes as a function of lynx population
+	\item $b$: Growth rate of lynxes
+	\item $c$: Prey consumption rate for low hare population
+	\item $d$: Mortality rate of lynxes
+	\item $k$: Maximum population of hares (in the absence of lynxes)
+	\item $r$: Growth rate of hares
+\end{itemize}
+\end{frame}
 
 
+\begin{frame}[fragile]
+	\frametitle{Matlab}
+First let's consider the uncontrolled system. We will use the parameters used in the text book: \\
+\vspace{-0.5cm}
+\[a=3.2, \quad b=0.6, \quad c=50,\]
+\vspace{-0.8cm}
+\[d=0.56, \quad k=125, \quad r=1.6.\]
+
+\includematlab{workshop4.m}{part1}
 
 \end{frame}
 
 
+\begin{frame}[fragile]
+	\frametitle{Simulating and plotting}
+	
+	Now we can simulate the uncontrolled system.
+	
+	\includematlab{workshop4.m}{part2}
+	
+	Play around with some parameters! What happens if you increase or decrease the mortality rate of lynxes ($d$), maximum population of hares ($k$), or initial populations ($H(0)$ or $L(0)$)?
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Linearising}
+Taking the number of lynxes $L$ as the output, and linearising around the equilibrium point (as we have done in the previous workshop) we get
+\[\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
+	z_1 \\ z_2
+\end{bmatrix} = \begin{bmatrix}
+	0.13 & -0.93 \\ 0.57 & 0
+\end{bmatrix} \begin{bmatrix}
+	z_1 \\ z_2
+\end{bmatrix}  + \begin{bmatrix}
+	17.2 \\ 0
+\end{bmatrix} v\]
+\[w=\begin{bmatrix}
+	0& 1
+\end{bmatrix}  \begin{bmatrix}
+	z_1 \\ z_2
+\end{bmatrix} \]
+where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$
+
+Putting this into Matlab, we can set up our linearised state space representation.
+\includematlab{workshop4.m}{part3}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reachability and observability}
+	Now that we have our linearised system, let us analyse its reachability and observability.
+	\includematlab{workshop4.m}{part7}
+	Is the system reachable?
+	\includematlab{workshop4.m}{part6}
+	Is the system observable?\\[15pt]
+	What does this mean in relation to our system?
+\end{frame}
+
+\SUBCONCEPT{Controlling the system}
+\begin{frame}
+	\frametitle{Feeding back the state}
+Now we can choose desired pole locations, and feed back our state to control the system.
+\includematlab{workshop4.m}{part4}
+Play around with different placements of the desired poles, what do you notice? Consider making them complex conjugate poles (such as $\lambda = -0.1\pm 0.5\jj$), what happens?
+\end{frame}
 
 
+\begin{frame}
+	\frametitle{Simulating the closed loop system}
+	Now let us see the effect on the closed loop system.
+	\includematlab{workshop4.m}{part5}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Simulating the closed loop system}
+	The populations are stabilised around their equilibria! \\[15pt]
+Try playing around with different parameters to see the effect on the behaviour of the closed loop system. \\[15pt]
+If you have time, use the code from Workshop 2 to plot the phase portrait and vector field of both the uncontrolled and controlled predator-prey system, what do you notice?
+\end{frame}
 
 \end{document}

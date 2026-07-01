@@ -11,13 +11,115 @@ In this workshop, we will work with transfer functions and their applications in
 \SUBCONCEPT{Matlab}
 
 \begin{frame}[fragile]
-\frametitle{Getting started with Matlab}
+\frametitle{Transfer functions}
+Let us first consider the linear mass-spring-damper system with an external force ($u$)
+\[m\ddot{x}+b\dot{x}+kx=u\]
+The state space representation of this system is 
+\[\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
+	x_1 \\ x_2
+\end{bmatrix} = \begin{bmatrix}
+	0 & 1 \\ -k/m & -b/m
+\end{bmatrix} \begin{bmatrix}
+	x_1 \\ x_2
+\end{bmatrix}  + \begin{bmatrix}
+	0 \\ 1/m
+\end{bmatrix} v\]
+\[y=\begin{bmatrix}
+	1 & 0
+\end{bmatrix}  \begin{bmatrix}
+	x_1 \\ x_2
+\end{bmatrix} + [0] u\]
 
-
-
+The main way to find the transfer function of a system is to take the Laplace transform of the system of ODEs. In our case, since we have a linear system we can calculate the transfer function as 
+\[G(s) = C(sI-A)^{-1}B+D\]
 \end{frame}
 
 
+\begin{frame}
+	\frametitle{Transfer functions in Matlab}
+In Matlab, we can calculate this by first defining $s$ as a `transfer function' $s$ and calculating
+\includematlab{workshop5.m}{part1}
+We could have also used
+\includematlab{workshop5.m}{part2}
+Verify that these give the same result!
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Step responses}
+	Now that we have our transfer function, we can calculate its poles using $\texttt{pole()}$ or $\texttt{damp()}$ and analyse its response to a step input using $\texttt{step()}$
+	
+	\includematlab{workshop5.m}{part3}
+	Compare this with the command $\texttt{impulse()}$.\\
+	
+	Right-click on the graph to calculate characteristics of the step response such as rise time, settling time, and overshoot. These may also be calculated without plotting the graph by the command
+	$\texttt{stepinfo()}$.
+	\includematlab{workshop5.m}{part3.1}
+	
+	Play around with the spring stiffness ($k$) and the damping coefficient ($d$) to build up some intuition. What do you notice happens to the step response as you increase or decrease these variables?
+\end{frame}
+
+
+\SUBCONCEPT{The frequency domain}
+\begin{frame}[fragile]
+	\frametitle{Bode plots}
+	When we have a transfer function for a given system, it becomes very simple to investigate its response to a range of frequencies by graphing the Bode plot.\\
+	A `Bode plot' is actually the combination of two plots:
+	\begin{itemize}
+		\item a Bode magnitude plot, that shows us the magnitude of the response to different frequencies
+		\item and a Bode phase plot, that shows us the phase shift of the response to different frequencies
+	\end{itemize} 
+	Bode plots may be created in Matlab using 
+	\includematlab{workshop5.m}{part4}
+	Spend some time noticing the features of these plots
+	\begin{itemize}
+		\item What does the drop off in magnitude and phase represent?
+		\item What does the peak in magnitude represent?
+		\item How does the `drop off' and `peak' change with more spring stiffness? More damping?
+	\end{itemize}
+	
+\end{frame}
+
+
+\SUBCONCEPT{Simulink}
+
+\begin{frame}[fragile]
+	\frametitle{Block diagrams}
+	Let us move on to another representation --  block diagrams.\\[10pt]
+	First open up Simulink by typing $\texttt{simulink}$ in the Matlab Command Window, then click `Blank Model' to create a new Simulink file.\\[10pt]	
+	We are going to represent our mass-spring-damper system as a block diagram. 
+	
+	\includegraphics[width=\linewidth]{workshop5_simulink}
+	
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Block diagrams}
+	Blocks may created by double-clicking in space and typing the blocks you want, we will need Gain blocks, a Sum block, an Integrator block, a Step block, and a Scope block. The Gain blocks handle our matrix multiplication, the Integrator integrates (!), the Sum block adds up our signals, and the Step and Scope serve as our input and output of the system.\\[10pt]
+	
+	Some notes
+	\begin{itemize}
+		\item To ensure the Gain blocks perform matrix multiplication, double-click and set `Multiplication' to `Matrix (K*u)'
+		\item As long as your $A$, $B$, and $C$ matrices are in your Matlab Workspace, Simulink can retrieve them and you can place $A$ in the appropriate Gain block without having to write it out again
+		\item Blocks may be `flipped' by right-clicking  > Format > Flip Block
+		\item The Sum block can be modified by double-clicking and adjusting the `List of signs'
+		\item Double-click on the Step block and make sure the `Step time' is set to 0
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Step responses in Simulink}
+		Now that you have set up your block diagram, check that this matches the standard state space representation i.e. does the output agree with the output of the state space representation on page 5 of these notes? \\[10pt]
+		
+	Now let us simulate the system. Change the Stop Time to 25 seconds, hit Run, then double-click on the Scope to view the results. \\[10pt]
+	
+	Does this match the results of using the $\texttt{step()}$ function in Matlab?
+	
+	
+\end{frame}
 
 
 

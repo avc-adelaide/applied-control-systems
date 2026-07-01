@@ -8,15 +8,71 @@
 In this workshop, we will examine robust control design principles and fundamental limitations of control systems.
 \end{frame}
 
-\SUBCONCEPT{Matlab}
+\SUBCONCEPT{Robustness to uncertainty}
 
 \begin{frame}[fragile]
-\frametitle{Getting started with Matlab}
-
-
-
+\frametitle{Modelling additive uncertainty}
+Define the following system in both Matlab and Simulink
+\[P = \frac{1}{(s+1)^3}\]
+with a PID controller $C$ with gains $K_p=1.8$, $T_i=1.6$, $T_d=0.8$, $N=100$\\[10pt]
+We will investigate the limits of unmodelled uncertainty in designing robust controllers. Define the following additive uncertainty transfer function in both Matlab and Simulink
+\[ \Delta = \frac{k}{(s^2+0.7s+1)^2} \]
+The block diagram should look like
+\begin{figure} 
+\centering
+\includegraphics[width=8cm]{workshop9_simulink_1}
+\end{figure}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Assessing stability}
+	From the notes, we require the additive uncertainty to be bounded by the following transfer function
+	\[|\Delta| <\left|\frac{1+PC}{C}\right| \]
+	for all frequencies $\omega \geq 0$ to maintain stability of the closed loop system.\\[10pt]
+	Investigate parameter values of $k=[0.1,0.2,0.3,0.4,0.5,0.6]$, what do you notice about the closed loop system?\\[10pt]
+	Make sure to plot the Bode plots of $\Delta$ and $\frac{1+PC}{C}$ as well as simulating the step response (with appropriately long stop time) of the closed loop system. \\[10pt]
+	\alert{Is this bound too conservative? \\
+	What condition gives a tighter bound? \\
+	(Hint: think about what frequencies are important here)}
+		
+	\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Multiplicative uncertainty}
+	Now, investigate the effect of multiplicative uncertainty using 
+	\[\delta =  \frac{k}{(s^2+0.7s+1)^2}\]
+	along with the condition 
+	\[|\delta|<\left|\frac{1+PC}{PC}\right| \]
+	and the block diagram
+	\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{workshop9_simulink_2}
+	\vspace{-0.5cm}
+	\end{figure}
+	As in the additive uncertainty example, try $k=[0.1,0.2,0.3,0.4,0.5,0.6]$
+\end{frame}
+
+
+
+
+\SUBCONCEPT{Robustness to nonlinearities}
+
+\begin{frame}[fragile]
+	\frametitle{Nonlinear effects}
+	Unlike modelling uncertainties, we are not shown analytic results for how nonlinear effects affect controller performance in this course. We can, however, simulate these effects to provide some intuition.\\[10pt]
+	Remove the uncertainty transfer functions in Simulink, and place a Saturation and Colulomb \& Viscous Friction block just after the PID controller. This simulates a situation where we either have saturation or friction affecting of our plant input. \\[10pt]
+	Start with saturation limits of $\pm1$, friction offset of $0.5$, and friction gain of $0.5$.\\[10pt]
+	Play around with different values and different setpoints, what do you notice?
+	
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=9cm]{workshop9_simulink_3}
+	\end{figure}
+	
+\end{frame}
 
 
 

@@ -11,14 +11,87 @@ In this workshop, we will explore frequency domain design methods for control sy
 \SUBCONCEPT{Matlab}
 
 \begin{frame}[fragile]
-\frametitle{Getting started with Matlab}
+	\frametitle{A sixth-order system}
+	
+	Define the following transfer function
+	\[
+	P = \frac{3000(s+4)}{(s+1)(s+6)(s+10)(s+100)(s^2+2s+2)} \,.
+	\]
+	Define a PID controller $C$ with gains $K_p=1$, $T_i=2.9$, $T_d=0.9$, $N=100$. \\[10pt]
+	Plot the closed loop step response and note the characteristics of the system.\\[10pt]
+	\alert{Does the controller appear to be achieving acceptable performance?}
+	
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Sensitivity functions in Matlab}
+Calculate the Gang of Four transfer functions in Matlab
+\begin{itemize}
+	\item The sensitivity function is 
+\[S=\frac{1}{1+PC}\]
+\item The load (or input) sensitivity function is 
+\[PS=\frac{P}{1+PC}\]
+\item The complementary sensitivity function is 
+\[T=\frac{PC}{1+PC}\]
+\item The noise (or output) sensitivity function is
+\[CS = \frac{C}{1+PC}\]
+\end{itemize}
+\end{frame}
 
+\begin{frame}
+\frametitle{Sensitivity functions in Matlab}
+Then use the following code to graph the Bode magnitude plots of each transfer function
+\includematlab{workshop8.m}{part1} 
+The bandwidth $\omega_b$ is the frequency at which the magnitude of a transfer function drops $-3$dB (or $1/\sqrt{2}\approx 0.707$) below the zero frequency gain. The bandwidth frequency of the complementary sensitivity function $T$ may be calculated in Matlab using
+\includematlab{workshop8.m}{part2} 
+or viewed on the Bode plot for $T$
+\end{frame}
 
+\SUBCONCEPT{Simulink}
+\begin{frame}
+	\frametitle{Transfer functions in Simulink}
+	Let us now define the same system in Simulink. The PID Controller block in Simulink uses a different definition to $\texttt{pidstd}$: in `Proportional' put $K_p$, in `Integral' put $1/T_i$, in `Derivative' put $T_d$, and in `Filter coefficient' put $N/Td$. You may check by comparing your step responses.\\
+	
+	You may use the following code to retrieve the numerator and denominator coefficients for the Transfer Function block that represents the plant
+	\includematlab{workshop8.m}{part3} 
+	In Simulink, type $\texttt{[Pnum\{:\}]}$ and $\texttt{[Pden\{:\}]}$ to place the coefficients into the plant Transfer Function block\\
+	\centering
+	\includegraphics[width=10cm]{workshop8sim1}
 \end{frame}
 
 
+\begin{frame}
+	\frametitle{Frequency response in Simulink}
+	Replace the step input with a Sine Wave block to excite the system with a sinusoid of unity amplitude at the bandwidth frequency $\omega_b$. Ensure you simulate for long enough for transient effects to die down. \\[10pt]
+	What is the amplitude of the output signal? \\[10pt]
+	If we achieved setpoint following for the step response, why are the input and output signals different in this case? \\[10pt]
+	\centering
+	\includegraphics[width=10cm]{workshop8sim2}
+\end{frame}
 
 
+\begin{frame}
+	\frametitle{Simulating measurement noise}
+	Now let us add measurement noise into the system. The frequency $\omega_m$ at which the measurement noise is attenuated by $10$dB can be found using the complementary sensitivity function Bode plot.\\[10pt]
+	 Introduce sinusoidal measurement noise of unity amplitude at this frequency and set the step input amplitude to $0$. \\[10pt]
+	 What is the amplitude of the output signal? Does this match expectations?\\
+	 \begin{figure}
+	 	\centering
+	 \includegraphics[width=8cm]{workshop8sim3}
+	 \end{figure}
+	 What happens when you change the measurement noise to a step? Why?
+\end{frame}
+
+\begin{frame}
+	\frametitle{Simulating disturbance}
+	Finally let us add disturbances. The frequency $\omega_d$ at which the measurement noise is attenuated by $10$dB can be found using the sensitivity function $S$ Bode plot.\\[10pt]
+	Add sinusoidal disturbance of unity amplitude at this frequency and change the measurement noise to $0$. Again, make sure to run the simulation for long enough for transient effects to die down. \\[10pt]
+	What is the amplitude of the output signal? Does this match expectations?\\
+	\begin{figure}
+		\centering
+		\includegraphics[width=6cm]{workshop8sim4}
+	\end{figure}
+	What happens when you change the disturbance to a step? Why?
+\end{frame}
 
 \end{document}
