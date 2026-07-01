@@ -17,9 +17,16 @@
 
 
 
-\SUBCONCEPT{System augmentation}
+\SUBCONCEPT{System augmentation to add integral action}
 
 \begin{frame}{Integral action}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figure7.5}
+	\\
+	\textbf{Figure 7.5:} A feedback control system with state feedback.
+\end{figure}
+
 \begin{itemize}
 \item When a perfect model is available, state feedback allows systems in closed-loop to track command signals
 \item In cases where our model is only approximately accurate, our controller may have non-zero steady-state error
@@ -28,23 +35,41 @@
 \end{frame}
 
 \begin{frame}{Integral action}
-The idea is to add an additional state to our system that computes the integral of the error signal which is then fedback into the input. We do this by augmenting the system with a new state $z$ which is the integral of the error between the output $y$ and the desired output $r$
-\[\frac{\mathrm{d}}{\mathrm{d} t} \begin{bmatrix}
+Defn $z$, the integral of the error between the output $y$ and the desired output $r$:
+\begin{equation}
+z = \int y-r \,\mathrm{d}t \,.
+\end{equation}
+Add integral feedback to the controller, now dependent on the state $x$, desired output $r$, and new $z$ term:
+\[
+  u = -K x - k_i z + k_f r \,.
+\]
+Include this in the model by augmenting the system with the new state, $z$:
+\[
+  \frac{\mathrm{d}}{\mathrm{d} t} 
+\begin{bmatrix}
 	x \\ z
 \end{bmatrix} = 
 \begin{bmatrix}
 	Ax+Bu\\ y-r
 \end{bmatrix} = \begin{bmatrix}
 Ax+Bu\\ Cx-r
-\end{bmatrix}.\]
+\end{bmatrix}.
+\]
 To stabilise this system we require $\dot{z}=0$ and therefore $y=r$  (the output matches the desired output).\\
-The state space controller for this system is therefore dependent on the state $x$, augmented state $z$ and desired output $r$,
-\[u=-Kx-k_iz+k_fr.\]
 \end{frame}
+
+\SUBCONCEPT{Example (cruise control)}
 
 \begin{frame}{Example}
 The linearised dynamics around an equilibrium point $v_e$, $u_e$, of a cruise control system are 
-\[\frac{\mathrm{d}x}{\mathrm{d} t} = -ax-b_g\theta +bw, \quad y=v=x+v_e.\]
+\begin{equation}
+  \tfrac{\mathrm{d}}{\mathrm{d}t} x = -ax-b_g\theta +bw, 
+  \quad y=v=x+v_e.
+\end{equation}
+The error term would be:
+\begin{equation}
+   \tfrac{\mathrm{d}}{\mathrm{d}t} z = y-v_r = x+v_e-v_r, 
+\end{equation}
 The system may be augmented with an integrator to become
 \[\frac{\mathrm{d}}{\mathrm{d}t} \begin{bmatrix}
 	x \\ z
@@ -59,14 +84,19 @@ b \\ 0
 \end{bmatrix} \theta +  \begin{bmatrix}
 0 \\ v_e-v_r
 \end{bmatrix}\]
-in state space.\\
-The constants $a$, $b$, $b_g$ depend on properties of the system, $x=v-v_e$ is the speed around the equilibrium, $w=u-u_e$ is the throttle around the equilibrium, and $\theta$ is the angle of the road.
+
+The constants $a$, $b$, $b_g$ depend on properties of the system, 
+$x=v-v_e$ is the speed around the equilibrium, 
+$w=u-u_e$ is the throttle around the equilibrium, and 
+$\theta$ is the angle of the road.
 \end{frame}
 
 \begin{frame}{Example continued}
 The controller will be of the form 
-\[\frac{\mathrm{d}z}{\mathrm{d}t} = y-v_r, \quad w=-k_px-k_iz+k_fv_r\]
-where $v_r$ is the desired reference speed.\\
+\[
+w=-k_px-k_iz+k_fv_r=-Kx+k_fv_r,  \qquad K = \Matr{k_p & k_i}
+\]
+where $v_r$ is the desired reference speed.
 If we wish to design the closed-loop system to have the desired characteristic polynomial
 \[p(s)=s^2+a_1s+a_2\]
 then we must compare with the characteristic polynomial of 
