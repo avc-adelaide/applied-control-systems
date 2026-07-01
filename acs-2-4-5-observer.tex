@@ -34,10 +34,10 @@ the system is observable if for every $T>0$, it is possible to determine the sta
 	\begin{itemize}
 		\item In a similar way to the reachability condition, for linear systems the \alert{observability} matrix tells us when it is possible to infer the state from observations of the output
 		\item The observability matrix is defined as 
-		\[W_o = \begin{bmatrix}
+		\[\Wob = \begin{bmatrix}
 			C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1}
 		\end{bmatrix}\]
-		\item A linear system is \alert{observable} if and only if the observability matrix $W_o$ is full row rank (it has $n$ independent rows)
+		\item A linear system is \alert{observable} if and only if the observability matrix $\Wob$ is full row rank (it has $n$ independent rows)
 	\end{itemize}
 \end{frame}
 
@@ -56,7 +56,7 @@ the system is observable if for every $T>0$, it is possible to determine the sta
 			1 & 0  & \cdots & 0
 		\end{bmatrix}z + d_0u\]}
 		\item The observability matrix in observability canonical form is 
-		\small{\[\tilde{W}_o = \begin{bmatrix}
+		\small{\[\tilde{W}_{\mathrm o} = \begin{bmatrix}
 			1 & & & & \\
 			a_1 & 1& & & \\
 			a_2 & a_1 & 1 & & \\
@@ -68,9 +68,14 @@ the system is observable if for every $T>0$, it is possible to determine the sta
 
 \SUBCONCEPT{State estimation}
 
+\begin{frame}
+\frametitle{The observer}
+Observers are linear dynamical systems that take the inputs $u$ and outputs $y$ of a system and produces an estimate $\hat{x}$ of the system state $x$
+\includegraphics[width=\linewidth]{figure8.5}
+\end{frame}
+
 \begin{frame}{The observer}
 \begin{itemize}
-\item Observers are linear dynamical systems that take the inputs $u$ and outputs $y$ of a system and produces an estimate $\hat{x}$ of the systems state $x$
 \item The differential equations for an observer are
 \[\frac{\mathrm{d}\hat{x}}{\mathrm{d}t} = A\hat{x}+Bu+L(y-C\hat{x})\]
 \item The estimation error $\tilde{x}=x-\hat{x}$ therefore has dynamics
@@ -84,7 +89,7 @@ so the error between our estimate and the true state goes to zero if $(A-LC)$ ha
 \begin{itemize}
 	\item The problem of assigning eigenvalues for our observer is similar to the problem of assigning eigenvalues for a state feedback controller 
 	\item Both problems are \alert{dual} with the following equivalences
-	\[A \leftrightarrow A^T, \quad B \leftrightarrow C^T, \quad K \leftrightarrow L^T, \quad W_{\mathrm{r}} \leftrightarrow W_{\mathrm{o}}^T \]
+	\[A \leftrightarrow A\Tr, \quad B \leftrightarrow C\Tr, \quad K \leftrightarrow L\Tr, \quad W_{\mathrm{r}} \leftrightarrow W_{\mathrm{o}}\Tr \]
 	\item This means we can use the same algorithms to design  linear observers and linear controllers
 \end{itemize}
 \end{frame}
@@ -96,7 +101,7 @@ so the error between our estimate and the true state goes to zero if $(A-LC)$ ha
 		\item If the system is observable then 
 		\[\frac{\mathrm{d}\hat{x}}{\mathrm{d}t} = A\hat{x}+Bu+L(y-C\hat{x})\]
 		is an observer for the system with $L$ chosen as 
-		\[L= W_o^{-1} \tilde{W}_o\begin{bmatrix}
+		\[L= \Wob^{-1} \tilde{W}_{\mathrm o}\begin{bmatrix}
 			p_1-a_1\\ p_2-a_2 \\ \vdots \\ p_n-a_n
 		\end{bmatrix}\]
 		
