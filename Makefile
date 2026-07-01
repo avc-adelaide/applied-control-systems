@@ -5,6 +5,13 @@ BUILD = _build
 UPLOAD = _upload
 EXTRA = _extra
 
+SHAREPOINT_REAL = /Users/will/Library/CloudStorage/OneDrive-SharedLibraries-AdelaideUniversity/Applied Control Systems - Applied Control Systems
+ifeq ($(shell test -d "$(SHAREPOINT_REAL)" && echo yes),yes)
+SHAREPOINT = $(SHAREPOINT_REAL)
+else
+SHAREPOINT = ./Sharepoint
+endif
+
 texsty   = $(wildcard *.cls) $(wildcard *.sty) $(wildcard *.bib) applied-control-systems.tex $(wildcard *.lua)
 
 notesrc  = applied-control-systems.tex
@@ -30,7 +37,9 @@ uploadnotepdf = $(addprefix $(UPLOAD)/,$(notepdf))
 uploadtopcpdf = $(addprefix $(UPLOAD)/,$(topcpdf))
 uploadworkpdf = $(addprefix $(UPLOAD)/,$(workpdf))
 uploadpracpdf = $(addprefix $(UPLOAD)/,$(pracpdf))
+
 uploadextra   = $(addprefix $(EXTRA)/,$(extrafiles))
+
 
 .PHONY: help edit topics pracs workshops notes examples all upload uploadnotes clean figures
 
@@ -50,7 +59,7 @@ help:
 
 test:
 	echo $(extrafiles)
-	
+
 edit:
 	edit Makefile || bbedit Makefile
 
@@ -62,10 +71,10 @@ examples: $(buildexamplepdf)
 all: topics pracs workshops notes examples
 extra: $(uploadextra)
 
-uploadtopics: $(uploadtopcpdf)
-uploadpracs: $(uploadpracpdf)
+uploadtopics:    $(uploadtopcpdf)
+uploadpracs:     $(uploadpracpdf)
 uploadworkshops: $(uploadworkpdf)
-uploadnotes: $(uploadnotepdf)
+uploadnotes:     $(uploadnotepdf)
 uploadall: uploadtopics uploadpracs uploadworkshops uploadnotes
 
 clean:
@@ -75,9 +84,10 @@ clean:
 	echo "The contents of this folder are auto-generated and can be safely deleted." > $(BUILD)/README.md
 
 $(UPLOAD)/%.pdf: $(BUILD)/%.pdf
+	mkdir -p "$(SHAREPOINT)/PDF"
 	mkdir -p $(UPLOAD)
 	@echo '\n\nUPLOAD\n\n'
-	lua canvas-acs-upload-file.lua $<  &&  cp -f $< $@
+	lua canvas-acs-upload-file.lua $<  &&  cp -f $< $@  &&  cp -f $< "$(SHAREPOINT)/PDF/$*.pdf"
 
 $(EXTRA)/%: extra/%
 	mkdir -p $(EXTRA)
