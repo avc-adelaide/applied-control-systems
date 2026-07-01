@@ -1,7 +1,9 @@
 #!/usr/local/bin/lua
 
-local canvas  = require("canvas-lms"):new("canvas-config.lua")
+local lms  = require("canvas-lms")
 local dump = require "pl.pretty".dump
+
+local canvas = lms:new("canvas-config.lua")
 
 canvas:get_pages()
 
