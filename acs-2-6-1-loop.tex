@@ -15,7 +15,25 @@
 \end{itemize}
 \end{SUMMARY}
 
+\SUBCONCEPT{Topic introduction}
 
+\begin{frame}
+\frametitle{Frequency domain analysis}
+
+\emph{In this chapter we study how the stability and robustness of closed loop systems
+can be determined by investigating how sinusoidal signals of different frequencies
+propagate around the feedback loop. 
+
+\bigskip
+This technique allows us to reason about the
+closed loop behavior of a system through the frequency domain properties of the
+open loop transfer function. 
+
+\bigskip
+The Nyquist stability theorem is a key result that
+provides a way to analyze stability and introduce measures of degrees of stability.}
+
+\end{frame}
 
 \SUBCONCEPT{Loop analysis}
 
@@ -23,7 +41,7 @@
 \begin{itemize}
 \item How may we assess the behaviour of a closed loop system by studying the open loop system properties?
 \item Using transfer functions we can follow how a sinusoidal signal at a given frequency behaves in the feedback loop
-\item We can then assess stability of the closed loop by noticing if this signal grows or decays - if it grows, we have an unstable system
+\item We can then assess stability of the closed loop by noticing if this signal grows or decays --- if it grows, we have an unstable system
 \end{itemize}
 \end{frame}
 
@@ -90,6 +108,24 @@ will cause $L(\jj\omega_0)$ to be equal to $-1$
 \\
 \textbf{Figure 10.3:} The loop transfer function and step response for electric motor control system.
 \end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Loop shaping}
+
+\begin{itemize}
+\item
+The properties of the loop transfer function $L= P C$ allows us to study the stability of the feedback system
+\item
+Therefore easy to see how the controller should be chosen to obtain a desired loop transfer function
+\item
+E.g., if we change the gain of the controller, the loop
+transfer function will be scaled accordingly and the critical point can be avoided (or not!)
+\item
+Different ways to modify $L$ beyond gain is called \alert{Loop Shaping} and discussed in a later topic
+\end{itemize}
 
 \end{frame}
 
