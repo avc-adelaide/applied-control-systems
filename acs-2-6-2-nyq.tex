@@ -16,6 +16,39 @@
 \end{SUMMARY}
 
 
+\SUBCONCEPT{Review of stability}
+
+\begin{frame}{Definitions}
+\begin{description}
+  \item[Plant] $P$
+  \item[Controller] $C$
+  \item[Loop transfer function] $CP$
+
+  \item[Open loop stability]\
+
+  When the poles of $CP$ are in the LHS of the $s$-plane.
+
+  \item[Closed loop stability]\
+
+  When the poles of $\frac{CP}{1+CP}$ are in the LHS of the $s$-plane.
+
+\end{description}
+\end{frame}
+
+
+\begin{frame}{Examples of stability with gain}
+Consider the simple loop transfer function:
+\begin{align*}
+CP &= \frac{k(s-2)}{(s+4)^2} & \frac{CP}{1+CP} &= T = \frac{k(s-2)}{(s+4)^2+k(s-2)}
+\end{align*}
+Always open loop stable.
+\begin{align*}
+\text{For } k= 1:\qquad T &= \frac{(s-2)}{s^2+9s+14} \qquad \text{stable poles}\\
+\text{For } k=10:\qquad T &= \frac{10(s-2)}{s^2+18s-4} \qquad \text{\emph{unstable} poles}
+\end{align*}
+Here, we could analytically determine $k=8$ is the threshold between stability and instability, but not (easily) for more complex systems.
+\end{frame}
+
 
 \SUBCONCEPT{Nyquist plot}
 
@@ -28,6 +61,11 @@
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Nyquist contour to the Nyquist plot (cf.\ Fig.\,10.4)}
+
+\end{frame}
 
 \begin{frame}{Nyquist plot}
 \begin{figure}
@@ -43,23 +81,27 @@
 
 \begin{frame}{Condition for stability - Nyquist criterion}
 \begin{itemize}
-\item Let $L(s)$ be the loop transfer function for a negative feedback system and assume that $L$ has no poles in the closed right half-plane except possibly at the origin
+\item Let $L(s)$ be the loop transfer function for a negative feedback system and assume (initially) that $L$ has no poles in the closed right half-plane except possibly at the origin
 \item Then the closed loop system 
 \[
 G_{cl}=\frac{L(s)}{1+L(s)}
 \]
-is stable if and only if the image of $L$ along the closed contour $\Gamma$ has no net encirclements of the critical point $s=-1$
+is stable iff the image of $L$ along the closed contour $\Gamma$ has no net encirclements of the critical point $-1$ in the complex plane
 \item The number of encirclements is called the winding number
 \item This criterion tells us how the stability of a system is influenced by changing the controller parameters
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Nyquist plot --- simple stability example}
+	\centering
+	\includegraphics[width=0.6\linewidth]{figure10.5}
+\end{frame}
 
 \begin{frame}{Example}
 \begin{itemize}
 	\item Consider the transfer function 
 	\[L(s) = \frac{k}{s(s+1)^2}\] 
-	representing a third-order system with a pole at the origin with nominal gain value $k=1$
+	with nominal gain value $k=1$
 	\item The system has a single pole at $s=0$ and a double pole at $s=-1$
 	\item The Bode plot thus has the slope $-1$ for low frequencies, and at the double pole the slope changes to $-3$
 	\item The phase curve starts at $-90^\circ$ for low frequencies, is \ang{-180} at $\omega=1$ and is \ang{-270} at high frequencies
@@ -79,6 +121,119 @@ is stable if and only if the image of $L$ along the closed contour $\Gamma$ has 
 	\textbf{Figure 10.6:} Sketching Nyquist and Bode plots.
 \end{figure}
 \end{frame}
+
+
+\SUBCONCEPT{Generalised Nyquist criterion}
+
+\begin{frame}{Contour in PZMAP = different contour in freq resp}
+  \includegraphics[width=\linewidth]{encirc1}
+\end{frame}
+\begin{frame}{Contour in PZMAP = different contour in freq resp}
+  \includegraphics[width=\linewidth]{encirc3}
+\end{frame}
+\begin{frame}{Contour around pole}
+  \includegraphics[width=\linewidth]{encirc2}
+\end{frame}
+\begin{frame}{Contour around zero}
+  \includegraphics[width=\linewidth]{encirc4}
+\end{frame}
+
+\begin{frame}{The Cauchy criterion}
+When taking a closed contour in the complex plane, and mapping it through a complex function $L(s)$:
+\[
+  n_N = n_Z - n_P
+\]
+where:
+\begin{itemize}
+\item $n_N =$ number of times the mapping of $L(s)$ encircles the origin
+\item $n_Z =$ number of zeros of $L(s)$ enclosed by contour
+\item $n_P =$ number of poles of $L(s)$ enclosed by contour
+\end{itemize}
+Note that positive $n_N$ = same direction as the original contour
+\end{frame}
+
+\begin{frame}{Poles/zeros to encirclement and vice versa}
+  \begin{itemize}
+    \item  These examples show if we know the poles and zeros in a contour we can determine the number of encirclements
+    \item  The opposite also holds!
+    \item  By looking at encirclements we can predict the poles and zeros found in the region
+    \item  Here's the trick:
+    \begin{itemize}
+    \item  Our contour is defined as the entire RHS of the $s$-plane
+    \item  Our mapping is $s=\jj\ww$ for $\omega\in(-\infty,+\infty)$
+    \item  And one more important thing\dots
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contour along imaginary axis}
+  \includegraphics[width=\linewidth]{encirc5}
+\end{frame}
+\begin{frame}{As it grows larger\dots}
+  \includegraphics<1>[width=\linewidth]{encirc6}
+  \includegraphics<2>[width=\linewidth]{encirc7}
+  \includegraphics<3>[width=\linewidth]{encirc8}
+\end{frame}
+
+\begin{frame}{That final important thing}{The critical point $(-1,0)$}
+  \begin{itemize}
+    \item  $L$ encirclement of origin: $L$ has RHS poles and zeros
+    \begin{itemize}
+      \item  Don't really care --- we usually know when $L$ is unstable!
+    \end{itemize}
+    \bigskip
+    \item  $L$ encirclement of $(-1,0)$ $\equiv$ $(1+L)$ encirclement of origin
+    \bigskip
+    \item  If $1+L$ has RHS zeros, $\frac{L}{1+L}$ will have RHS poles
+    \begin{itemize}
+    \item  This is what we want to know!
+    \item  Use encirclement to find RHS zeros of $1+L$
+    \item  Poles of $1+L$ are same as the poles of $L$ (\emph{think about it})
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How many unstable CL poles?}
+Cauchy Criterion reformulated as the Nyquist Stability Criterion:
+\FORMULA{n_Z = n_P + n_N}
+\begin{equation}
+\theFORMULA
+\end{equation}
+For loop transfer function $L$:
+\begin{itemize}
+\item $n_Z=$ number of RHS CL poles (of $\frac{L}{1+L}$) \hfill \makebox[0.4\linewidth][r]{\small\em --- or \textbf{z}eros of $1+L$}\smallskip
+
+\item $n_P=$ number of RHS OL poles (of $L$) \hfill \makebox[0.4\linewidth][r]{\small\em --- know this from the TF}\smallskip
+
+\item $n_N=$ number of CW encirc.\ of $(-1,0)$ \hfill \makebox[0.4\linewidth][r]{\small\em --- get this from Nyquist}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Non-negative number of poles and zeros}
+$n_Z\ge 0$ and $n_P\ge 0$ imply the following scenarios:
+\begin{multicols}{2}
+$n_P=0$:
+\begin{align*}
+n_N=0 &\implies n_Z=0 \\
+n_N>0 &\implies n_Z>0
+\end{align*}
+Avoid encirclement for stability.
+\bigskip
+
+$n_P>0$:
+\begin{align*}
+n_N=-n_P &\implies n_Z=0 \\
+n_N\ge 0 &\implies n_Z>0 \\
+0>n_N>-n_P &\implies n_Z>0
+\end{align*}
+Need $n_P$ CCW encirclements for stability.
+\end{multicols}
+
+Finally, note that \emph{any} CW encirclements always means CL instability.
+\end{frame}
+
+
 
 \SUMMARYFRAME
 \FINALE
