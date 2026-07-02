@@ -19,6 +19,11 @@
 
 \SUBCONCEPT{Descriptions of stability}
 
+\begin{frame}{The critical point --- stable vs unstable}
+\includegraphics[width=0.5\linewidth]{gh1-nyq.pdf}%
+\includegraphics[width=0.5\linewidth]{gh1-pzmap.pdf}
+\end{frame}
+
 \begin{frame}{How stable is a system?}
 \begin{itemize}
 \item The Nyquist criterion tells us when a system will be unstable in closed loop -- dependent on encirclement of the critical point
@@ -29,17 +34,50 @@
 \end{frame}
 
 
-
-\begin{frame}{Different margins}
-There are three types of margin to assess stability
+\begin{frame}{The three stability margins}
 \begin{itemize}
 	\item The \alert{stability margin} $s_m$ describes the shortest distance of the Nyquist curve to the critical point
-	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $g_m$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<g_m<5$)
-	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\varphi_m$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \varphi_m < 60^\circ$)
 \end{itemize}
-The gain and phase margins may also be determined from the Bode plots
+
+\centering
+\includegraphics[scale=0.6]{nyq-plain3}
 	
 \end{frame}
+
+\begin{frame}{The three stability margins}
+\begin{itemize}
+	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $g_m$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<g_m<5$)
+\end{itemize}
+
+\centering
+\includegraphics[scale=0.6]{nyq-plain1}
+
+\end{frame}
+
+\begin{frame}{The three stability margins}
+\begin{itemize}
+	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\varphi_m$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \varphi_m < 60^\circ$)
+\end{itemize}
+
+\centering
+\includegraphics[scale=0.6]{nyq-plain2}
+
+\end{frame}
+
+\begin{frame}{The fourth margin from time delay}
+  \centering
+  \includegraphics[width=0.5\linewidth]{timedelaynyq}
+  
+  \[
+  G_{\text{delay}} = \Exp{-s\tau} \,, \qquad \varphi_{\text{delay}} = -\ww\tau
+  \]
+  
+  This gives us the \alert{delay margin} $\tau_m$:
+  \[
+    \varphi_m = \ww_{\text{gc}} \tau_m
+  \]
+\end{frame}
+
 
 \SUBCONCEPT{Calculating stability margins}
 
@@ -72,6 +110,42 @@ The gain and phase margins may also be determined from the Bode plots
 	\\
 	\textbf{Figure 10.12:} Stability margins for a third-order loop transfer function.
 \end{figure}
+\end{frame}
+
+\begin{frame}{Three pole system: Nyquist}
+\begin{columns}
+\column{0.4\linewidth}
+\begin{align*}
+GH &= \frac{100}{(s+2)(s+4)(s+5)} \\
+\mathrm{GM} &= -\frac{1}{-0.265} = 3.77 \\
+3.77 &\equiv \SI{11.5}{dB} \\
+\mathrm{PM} &= \arctan(0.854/0.517) \\
+            &= \ang{58.8}
+\end{align*}
+
+\column{0.6\linewidth}
+\includegraphics[width=0.9\linewidth]{gmpm_nyq_ex}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Three pole system: Bode (shows $\ww_{\text{pc}}$ and $\ww_{\text{gc}}$)}
+\begin{columns}
+\column{0.4\linewidth}
+\[
+GH = \frac{100}{(s+2)(s+4)(s+5)}
+\]
+
+\begin{align*}
+\mathrm{GM} &= \SI{0}{dB} - (\SI{-11.5}{dB}) \\
+            &= \SI{11.5}{dB} \\
+\mathrm{PM} &= \ang{-121.2} - (\ang{-180}) \\
+            &= \ang{58.8}
+\end{align*}
+(+ve values for stability)
+
+\column{0.6\linewidth}
+\includegraphics[width=0.9\linewidth]{gmpm_bode_ex}
+\end{columns}
 \end{frame}
 
 \SUMMARYFRAME

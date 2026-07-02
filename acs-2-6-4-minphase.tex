@@ -84,6 +84,40 @@ In the below plots, the phase curve of the corresponding minimum phase system wi
 \end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{So what?}
+
+\begin{itemize}
+\item We don't need to (or can't) independently control gain and phase
+\item Non-minimum phase systems reduce phase, which is now explicitly a \emph{bad thing}
+\item Linking gain with phase explains some of the later work we will do on loop shaping --- aiming for a slope of $-1$ at the gain crossover frequency, which gives a comfortable \ang{90} phase margin.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Vehicle steering}
+\begin{itemize}
+\item Initially introduced in \AMref*{Example 3.11 and Example 6.13}
+\item TF for steering angle to lateral position:
+\[
+    P(s) = \frac{av_0 s + v_0^2}{bs^2}
+\]
+where $v_0$ is the vehicle velocity ($a,b>0$)
+\item Plant has a zero at $s=-v_0/a$
+\begin{itemize}
+\item For $v_0 >0$:
+\item For $v_0 <0$:
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Vehicle steering}
+\centering
+\includegraphics[width=\linewidth]{figure10.16}
+\end{frame}
+
 \SUMMARYFRAME
 \FINALE
 
