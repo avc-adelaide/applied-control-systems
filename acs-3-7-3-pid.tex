@@ -29,24 +29,38 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Ziegler-Nichols' tuning}
+\begin{frame}
+\frametitle{Ziegler-Nichols's tuning}
+\small
+\begin{columns}
+\column{0.5\textwidth}
 \begin{itemize}
-\item Ziegler and Nichols designed the first tuning laws in the 1940s
-\item The idea is to perform an experiment on the process dynamics, extract information about the system in the time and frequency domains, and infer good choices for the PID gains
+\item First presented in 1942
+\item Developed empirically based on a large number of cases
+\item Designed around process models --- often too much overshoot for mechanical engineering applications
+\item Still often used as a starting point for tuning, followed by manual tuning 
 \end{itemize}
+\column{0.5\textwidth}
+\begin{itemize}
+\item ITD time-based approach 
+\item `Ultimate point' freq-based approach
+\item Estimates period of CL system with term $T_p$ --- can use for assessment of fit 
+\item Aim to achieve effective disturbance rejection and acceptable set point following
+\end{itemize}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Ziegler-Nichols' tuning - Time-domain method}
+\begin{frame}{Ziegler-Nichols' tuning — Time-domain method}
 \begin{itemize}
 	\item In the time domain method, the step response of a system is measured by inputting a unit step and measuring the output (or scaling the output if the step was not of magnitude $1$)
 	\item The output may be characterised by two parameters $a$ and $\tau$ and the resulting model is known as the Integrator with Time Delay (ITD) model
-	\[P(s) = \frac{a}{\tau s}e^{-\tau s}\]
+	\[P(s) = \frac{a}{\tau s} \Exp{-\tau s}\]
 	\item The parameter $\tau$ approximates the time delay in the system and $\tfrac{a}{\tau}$ is the steepest slope of the step response
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Ziegler-Nichols' tuning - Time-domain method}
+\begin{frame}{Ziegler-Nichols' tuning — Time-domain method}
 \begin{figure}
 	\centering
 	\includegraphics[width=8cm,clip,trim=0 25 0 0]{itd-at}
@@ -54,7 +68,7 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}{Ziegler-Nichols' tuning - Frequency domain method}
+\begin{frame}{Ziegler-Nichols' tuning — Frequency domain method}
 \begin{itemize}
 	\item For the frequency domain version of Ziegler-Nichols' tuning laws a controller is connected to the system with integral and derivative gains set to $0$
 	\item The proportional gain is increased until the system starts to oscillate
@@ -62,6 +76,27 @@
 	\item From the Nyquist stability criterion, the loop transfer function $L(s)=k_cP(s)$ passes through the critical point at the frequency $\omega_c=\tfrac{2\pi}{T_c}$
 	\item Therefore, we know the point on the Nyquist curve of the system $P(s)$ where the phase lag is $180^\circ$
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Critical gain, Nyquist plot}
+
+\begin{columns}
+\column{0.5\textwidth}
+\includegraphics[width=\linewidth]{ultimate-gain}
+
+\column{0.5\textwidth}
+\small
+\begin{itemize}
+\item Static gain at $\ww=0$
+\item Cross-over point at $(a,0)$ --- n.b.~$a<0$
+\item \dots\ at corresponding frequency $\omega_c$
+\item \ang{-180} OL phase (aka phase cross-over point)
+\item Critical gain $k_c = \frac{-1}{a}$
+\item Critical oscillation period $T_c = \frac{2\pi}{\omega_c}$\\
+\end{itemize}
+\end{columns}
 \end{frame}
 
 
@@ -79,22 +114,20 @@
 \end{figure}
 \end{frame}
 
+
+
 \begin{frame}{FOTD tuning}
 	\begin{itemize}
 		\item We can improve the tuning of PID controllers by considering a characterisation of the system using a more descriptive model
 		\item The first-order time-delay (FOTD) model
-		\[P(s) = \frac{K}{1+sT}e^{-\tau s}\]
+		\[P(s) = \frac{K}{1+sT}\Exp{-\tau s}\]
 		can be used to approximate the step response of systems that achieve a steady state after a step input
-		\item The relative time delay $\tau_n = \tfrac{\tau}{\tau+T}$
-		has values between $0$ and $1$ and characterises the dynamics of the system
+		\item The relative time delay $\tau_n = \tfrac{\tau}{\tau+T}$ (n.b.\ $0\le \tau_n \le 1$) often used to characterise the dynamics of the system in a normalised way
 		\item If $\tau_n$ is close to $0$ the dynamics are lag dominated, if $\tau_n$ is close to $1$ the dynamics are delay dominated, and the dynamics are said to be balanced for intermediate values of $\tau_n$
 	\end{itemize}
 \end{frame}
 
-
-
-
-\begin{frame}{FOTD tuning - model}
+\begin{frame}{FOTD tuning — model}
 \begin{figure}
 	\centering
 	\includegraphics[width=8cm,clip,trim=0 25 0 0]{fotd-LT}
@@ -102,45 +135,128 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}{FOTD tuning laws}
+\begin{frame}
+\frametitle{Chien-Hrones-Resnick step response method}
 \begin{itemize}
-	\item There are many tuning laws for FOTD models
-	\item These typically give lower controller gains than the original Ziegler-Nichols' gains
+\item Modified ZN, and new approach for FOTD
+\item Gives better damped CL response
+\item Two performance variations to choose from:
+\begin{itemize}
+\item Quickest response with `0\%' overshoot
+\item Quickest response with `20\%' overshoot
 \end{itemize}
+\item Two gain variations to choose from:
+\begin{itemize}
+\item Better for set point following
+\item Better for disturbance rejection
+\end{itemize}
+\end{itemize}
+\end{frame}
 
-\begin{columns}
-\begin{column}{0.4\textwidth}
-	\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline
-		$K_p$ & $\TTi$ & $\TTd$\\
-		\hline
-		$\frac{0.6}{a}$ & $T$ & $\frac{\tau}{2}$\\
-		\hline	
-	\end{tabular}
-	\caption{FOTD Chien-Hrones-Reswick tuning law (0\% overshoot)}
-\end{table}
-\end{column}
+\begin{frame}
+\frametitle{CHR tuning laws}
 
-\begin{column}{0.6\textwidth}
-			
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline
-		$K_p$ & $\TTi$ & $\TTd$\\
-		\hline
-		\tiny{$\frac{1.35}{a}\left(1 + \frac{0.18 \tau_n}{1-\tau_n} \right)$} & \tiny{$ \tau\left( \frac{2.5-2\tau_n}{1-0.39\tau_n} \right) $} & \tiny{$\tau \left( \frac{0.37-0.37\tau_n}{1-0.81\tau_n} \right)$}\\
-		\hline	
-	\end{tabular}
-	\caption{Cohen-Coon tuning law where $\tau_n=\frac{\tau}{\tau+T}$}
-\end{table}
-\end{column}
-\end{columns}
-
+  \scriptsize
+  \colwd=1.0cm
+  
+  \centerline{%
+  \begin{tabular}{LPPP}
+  \toprule
+  \multicolumn{4}{l}{Disturbance rejection (ITD)}\\
+  \multicolumn{4}{l}{0\% overshoot}\\
+  \midrule
+  & K_p & T_i & T_d \\
+  \midrule
+  P   & 0.30/a   &      &       \\
+  PI  & 0.60/a   & 4.0L &       \\
+  PID & 0.95/a  & 2.4L & 0.42L \\
+  \bottomrule
+  \end{tabular}\qquad
+  \begin{tabular}{LPPP}
+  \toprule
+  \multicolumn{4}{l}{Disturbance rejection (ITD)}\\
+  \multicolumn{4}{l}{20\% overshoot}\\
+  \midrule  
+  & K_p & T_i & T_d \\
+  \midrule
+  P   & 0.7/a   &      &       \\
+  PI  & 0.7/a   & 2.3L &       \\
+  PID & 1.2/a   & 2.0L   & 0.42L \\
+  \bottomrule
+  \end{tabular}}
+  
+  \bigskip
+  
+  \centerline{%
+  \begin{tabular}{LPPP}
+  \toprule
+  \multicolumn{4}{l}{Set-point following (FOTD)}\\
+  \multicolumn{4}{l}{0\% overshoot}\\
+  \midrule  
+  & K_p & T_i & T_d \\
+  \midrule
+  P   & 0.30/a   &      &       \\
+  PI  & 0.35/a   & 1.2T &       \\
+  PID & 0.60/a   & T    & 0.5L  \\
+  \bottomrule
+  \end{tabular}\qquad
+  \begin{tabular}{LPPP}
+  \toprule
+  \multicolumn{4}{l}{Set-point following (FOTD)}\\
+  \multicolumn{4}{l}{20\% overshoot}\\
+  \midrule  
+  & K_p & T_i & T_d \\
+  \midrule
+  P   & 0.70/a   &       &       \\
+  PI  & 0.60/a   & T     &       \\
+  PID & 0.95/a   & 1.4T  & 0.47L \\
+  \bottomrule
+  \end{tabular}}
 
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Cohen-Coon method}{Alternate approach using FOTD}
+\begin{itemize}
+\item Uses normalised time delay and geometric definition of $a$:
+\[
+   \tau_n = \frac{\tau}{\tau+T}\,,
+   \qquad
+   a = \frac{P(0) L}{T}
+\]
+\item From a PID pole placement perspective, assigns three poles (two complex, one real) equidistant from origin to achieve a 25\% decay ratio
+\item Similar to ZN, often produces too large an overshoot for Mech systems
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{CC tuning method}
+  \small
+  \colwd=2.8cm
+  \extrarowheight=4pt
+  \begin{tabular}{LPPP@{}}
+  \toprule
+  & K_p & T_i & T_d \\
+  \midrule
+  \STRUT{12pt}{3pt}%
+  P   & \frac{1}{a}\Bigl(1+\frac{0.35\tau}{1-\tau}\Bigr) && \\
+  \STRUT{12pt}{3pt}%
+  PI  & \frac{0.9}{a}\Bigl(1+\frac{0.92\tau}{1-\tau}\Bigr) &
+        L\cdot\frac{3.3-3\tau}{1+1.2\tau} & \\
+  \STRUT{12pt}{3pt}%
+  PD  & \frac{1.24}{a}\Bigl(1+\frac{0.13\tau}{1-\tau}\Bigr) &&
+        L\cdot\frac{0.27-0.36\tau}{1-0.87\tau} \\
+  \STRUT{12pt}{3pt}%
+  PID & \frac{1.35}{a}\Bigl(1+\frac{0.18\tau}{1-\tau}\Bigr) &
+        L\cdot\frac{2.5-2\tau}{1-0.39\tau} &
+        L\cdot\frac{0.37-0.37\tau}{1-0.81\tau} \\
+  \bottomrule
+  \end{tabular}
+
+\end{frame}
+
+
 
 
 \SUBCONCEPT{Automatic tuning}
@@ -158,7 +274,7 @@
 \begin{frame}{Automating PID tuning with relay feedback}
 \begin{itemize}
 	\item This may be implemented into a system to achieve automatic tuning of the PID gains 
-	\item The relay amplitude may be adjusted to keep oscillations sufficiently small
+	\item The relay amplitude may be adjusted to keep oscillations small
 	\item Only a quick experiment for identifying the system is needed to find PID gains automatically and while the system is running
 \end{itemize}
 \begin{figure}
@@ -169,6 +285,30 @@
 \end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{Relay feedback equations}
+
+For relay amplitude $d$ and process output amplitude $a$, the critical gain is
+\[
+   k_c = \frac{4d}{\pi a} \,,
+\]
+and with measured oscillation period $T_c$ the critical frequency is
+\[
+  \ww_c = \frac{2\pi}{T_c}
+\]
+These can be used as inputs into control tuning laws.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Closing remarks}
+\begin{itemize}
+\item More complex relay elements (biased, hysteresis) allow id of more of the frequency response
+\item Autotuning is now common in many process plants and industrial controllers
+\item Allows online performance monitoring, as relay oscillations can be small
+\end{itemize}
+\end{frame}
 
 \SUMMARYFRAME
 \FINALE

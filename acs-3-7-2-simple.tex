@@ -32,9 +32,9 @@
 	\item Any stable system can be modelled by a static system if its inputs are sufficiently slow, which approximates the transfer function by a constant 
 	\[K=P(0)\]
 	\item Using integral control, the controller is $K\tfrac{\kki}{s}$ with closed loop characteristic polynomial $s+K\kki$
-	\item Specifying the performance of the controlled system by the desired time constant $T_{cl}$ of the closed loop system, we have
-	\[\kki = \frac{1}{T_{cl} P(0)}\]
-	\item A reasonable criterion for the process transfer function to be well approximated by a constant is that the average residence time $T_{ar}=\tfrac{-P'(0)}{P(0)}$ satisfies $T_{ar}<T_{cl}$
+	\item Specifying the performance of the controlled system by the desired time constant $T_{\text{cl}}$ of the closed loop system, we have
+	\[\kki = \frac{1}{T_{\text{cl}} P(0)}\]
+	\item A reasonable criterion for the process transfer function to be well approximated by a constant is that the average residence time $T_{\text{ar}}=\tfrac{-P'(0)}{P(0)}$ satisfies $T_{\text{ar}}<T_{\text{cl}}$
 \end{itemize}
 \end{frame}
 
@@ -42,10 +42,10 @@
 \begin{itemize}
 	\item We may instead approximate the dynamics by a first-order system to achieve higher performance
 	\item The process dynamics are then approximated as 
-	\[P(s) \approx \frac{P(0)}{1+sT_{ar}}\]
+	\[P(s) \approx \frac{P(0)}{1+sT_{\text{ar}}}\]
 	\item To achieve a step response with small overshoot and reasonable response time we may choose an integral controller with gain
-	\[\kki = \frac{1}{2P(0)T_{ar}}\]
-	\item This controller has $\omega_0 = \tfrac{1}{T_{ar}\sqrt{2}}$, with rise time of $3.1 T_{ar}$, settling time of $7.9T_{ar}$, and overshoot of 4\%
+	\[\kki = \frac{1}{2P(0)T_{\text{ar}}}\]
+	\item This controller has $\omega_0 = \tfrac{1}{T_{\text{ar}}\sqrt{2}}$, with rise time of $3.1 T_{\text{ar}}$, settling time of $7.9T_{\text{ar}}$, and overshoot of 4\%
 \end{itemize}
 \end{frame}
 
@@ -55,7 +55,7 @@
 \begin{frame}{Specifying system dynamics}
 \begin{itemize}
 \item Another approach is to use the gains of the controller to set the location of the closed loop poles
-\item PI controllers have two gains which may set the closed loop poles for simple models
+\item PI has two gains to set the CL poles for simple models
 \item Consider a first-order system with transfer function 
 \[P(s) = \frac{b}{s+a}\]
 \item Comparing the desired and closed loop characteristic polynomials with a PI controller
@@ -68,7 +68,7 @@
 \begin{frame}{Higher order systems}
 \begin{itemize}
 	\item A PI controller can be used with second-order dynamics but there are restrictions to the possible locations of the closed loop poles
-	\item A PID controller can be used to control the system to have arbitrary locations
+	\item A PID controller can be used to control the system to have arbitrary pole locations
 	\item For higher order systems, we may instead attempt to place only the dominant poles of the system
 \end{itemize}
 \end{frame}
