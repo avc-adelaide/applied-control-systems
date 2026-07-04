@@ -1,6 +1,7 @@
 
 .DS_Store
 
+*.bcf
 *.asv
 *.aux
 *-blx.bib
@@ -31,3 +32,4 @@ ignore/
 cache/
 upload/
 get/
+

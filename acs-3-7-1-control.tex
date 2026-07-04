@@ -1,8 +1,8 @@
 \documentclass[10pt]{beamer-control}
 \usepackage{beamer-control-singlefile}
-\INCLUDEONLY{Basic Control Functions}
+\INCLUDEONLY{Basic control functions}
 \begin{document}
-\CONCEPT{Basic Control Functions}
+\CONCEPT{Basic control functions}
 
 \begin{SUMMARY}
 \begin{itemize}
@@ -12,51 +12,32 @@
 \vfill References:
 \begin{itemize}
 \item \astrom{§11.1}
+\item \minicite{odwyer2009-book}
 \end{itemize}
 \end{SUMMARY}
 
 
-	
-\SUBCONCEPT{PID controller structure}
-
-\begin{frame}{Control without a model}
-The PID controller is composed of three terms:
-\begin{itemize}
-\item \alert{\textbf{P}}roportional term -- depends on the present error,
-\item \alert{\textbf{I}}ntegral term  -- depends on the past error, and 
-\item \alert{\textbf{D}}erivative term -- depends on the future error.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Control without a model}
-\begin{itemize}
-\item Rather than using a full state feedback controller based on a prediction of the future state of a system using a mathematical model, the PID controller uses linear extrapolation of the measured output for control
-\item PID controllers are ubiquitous in industrial applications due to their wide applicability, ease of implementation, and avoidance of using a model
-\end{itemize}
-\end{frame}
-
+\SUBCONCEPT{Module \& topic introduction}
 
 \begin{frame}
-\begin{figure}
-	\centering
-	\includegraphics{figure1.15}
-	\\
-	\textbf{Figure 1.15}: Action of a PID controller.
-\end{figure}
-\end{frame}
-
-\begin{frame}{Control action}
+\frametitle{Control system design}
+In module I, we:
 \begin{itemize}
-	\item The control action of a PID controller is dependent on proportional feedback, integral action, and derivative action
-	\[u=k_{p} e+k_{i} \int_0^t e(\tau) \, \mathrm{d} \tau+k_{d} \frac{\mathrm{d} e}{\mathrm{d} t}\]
-	where $k_p$ is the proportional gain, $k_i$ is the integral gain, and $k_d$ is the derivative gain
-	\item The integral time constant $T_i=\tfrac{k_p}{k_i}$ and derivative time constant $T_d = \tfrac{k_d}{k_p}$ provide an alternate parameterisation for the control action
-	\[u = k_{p}\left(e+\frac{1}{T_{i}} \int_0^t e(\tau) \, \mathrm{d} \tau+T_{d} \frac{\mathrm{d} e}{\mathrm{d} t}\right)\]
+\item introduced dynamical systems and the concept of feedback
+\item described differential equations using state space methods
+\item represented systems in terms of inputs \& outputs, and standardised forms
 \end{itemize}
-
+In module II, we:
+\begin{itemize}
+\item formalised the ideas of control (reachability, etc.) 
+\item introduced the frequency response (poles, zeros, Bode plot)
+\item discussed the concept of stability (loop transfer function, Nyquist plot)
+\end{itemize}
+We can now (finally) properly discuss control system design, starting with \alert{PID Control}
 \end{frame}
 
+	
+\SUBCONCEPT{PID controller structure}
 
 \begin{frame}
 \begin{figure}
@@ -67,21 +48,86 @@ The PID controller is composed of three terms:
 \end{figure}
 \end{frame}
 
+\begin{frame}{Control without a model}
+The PID controller is composed of three terms:
+\begin{itemize}
+\item {\Huge\kramer{P}}roportional term -- depends on the present error,
+\item {\Huge\kramer{I}}ntegral term  -- depends on the past error, and 
+\item {\Huge\kramer{D}}erivative term -- depends on the future error.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics{figure1.15}
+	\\
+	\textbf{Figure 1.15}: Action of a PID controller.
+\end{figure}
+\end{frame}
+
+\begin{frame}{Control without a model}
+\begin{itemize}
+\item In contrast to a state feedback controller\dots
+\item \dots the PID controller uses linear extrapolation of the measured output for control.
+\item PID controllers are ubiquitous in industrial applications due to:
+\begin{itemize}
+\item their wide applicability
+\item their understandability and ease of implementation
+\item their avoidance of using a model [*]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why PID?}{O'Dwyer (2009) \emph{Handbook of PI and PID Controller Tuning Rules}}
+PID is a standardised control methodology, with well-defined and `understandable' interfaces.
+\begin{itemize}
+\item Most industrial controllers are PID:
+\begin{itemize}
+\item For controlling low- to medium-order processes
+\item When time delays are small
+\item Only 5\%--10\% of plants cannot be controlled with PID
+\item Large industrial plants may contain thousands of PID loops
+\end{itemize}
+\item But:
+\begin{itemize}
+\item 80\% of PID loops in industry are badly tuned
+\item 25\% have `factory default' settings --- i.e., no tuning!
+\item This course hopefully a small step to help this problem
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Control action}
+\begin{itemize}
+	\item The control action of a PID controller is given by
+	\[u=\kkp e+\kki \int_0^t e(\tau) \, \mathrm{d} \tau+\kkd \frac{\mathrm{d} e}{\mathrm{d} t}\]
+	where $\kkp$ is the proportional gain, $\kki$ is the integral gain, and $\kkd$ is the derivative gain
+	\item The integral time constant $\TTi=\tfrac{\kkp}{\kki}$ and derivative time constant $\TTd = \tfrac{\kkd}{\kkp}$ provide an alternate parameterisation for the control action
+	\[u = k_{p}\left(e+\frac{1}{T_{i}} \int_0^t e(\tau) \, \mathrm{d} \tau+T_{d} \frac{\mathrm{d} e}{\mathrm{d} t}\right)\]
+\end{itemize}
+
+\end{frame}
+
+
+
 \SUBCONCEPT{P, I and D}
 
 \begin{frame}{Effects of the three terms}{Proportional feedback}
 \begin{itemize}
-\item With only proportional feedback, non-zero steady-state error is common
-\item Increasing the proportional gain $k_p$ will reduce the error but make the system more oscillatory
+\item With only P feedback, non-zero steady-state error is common
+\item Increasing the proportional gain $\kkp$ will reduce the error but make the system more oscillatory
 \item Too high of a gain may make the system unstable 
-\item Proportional band also used, $PB=\tfrac{100}{k_p}$
+\item Proportional band also used, $\mathrm{PB}=\tfrac{100}{\kkp}$
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Effects of the three terms}{Integral feedback}
 \begin{itemize}
-	\item We saw in the Topic 4 - State Feedback that integral action guarantees that if a steady state exists, we will reach it with integral control
-	\item An increase in the integral gain $k_i$ makes the system robust to disturbances
+	\item We saw in the Topic 4 `State Feedback' that integral action guarantees that if a steady state exists, we will reach it with integral control
+	\item An increase in the integral gain $\kki$ makes the system robust to disturbances
 	\item Too high of a gain results in oscillatory behaviour, poor robustness, and possible instability
 \end{itemize}
 \end{frame}
@@ -90,7 +136,7 @@ The PID controller is composed of three terms:
 \begin{frame}{Effects of the three terms}{Derivative feedback}
 	\begin{itemize}
 		\item Derivative control provides predictive or anticipatory action
-		\item An increase in the derivative gain $k_d$ adds damping into the system
+		\item An increase in the derivative gain $\kkd$ adds damping into the system
 		\item Reduces overshoot
 	\end{itemize}
 \end{frame}
@@ -105,7 +151,39 @@ The PID controller is composed of three terms:
 \end{frame}
 
 
+\SUBCONCEPT{Additional details}
+
+\begin{frame}
+\frametitle{PID gains vs time constants}
+
+\begin{itemize}
+\item As illustrated, this is the parallel form of PID
+\item Also very common to use the \alert{standard form} with time constants $\TTi$ and $\TTd$
+\item (If you ever see the `series form', that's different again)
+\item Two-degree of freedom PID controllers are also possible
+\item Cf.\ Matlab's \texttt{pid} / \texttt{pidstd} / \texttt{pid2} / \texttt{pidstd2}, and Simulink PID blocks
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Generally cannot use a straight derivative}
+\[
+ u(t) = \kkp e(t) + \kki\int_0^t e(\tau)\dee \tau + \kkd\frac{\dee e(t)}{\dee t}
+\]
+\[
+ \frac{U(s)}{E(s)} = \kkp + \frac{k_i}{s} + \kkd s = \frac{\kkd s^2 + \kkp s + \kki}{s}
+\]
+Notice anything? Therefore:
+\[
+   \frac{U_{\text{d}}(s)}{E(s)} = \frac{\kkd s}{1 + \TTf s}
+\]
+\end{frame}
+
 \SUMMARYFRAME
 \FINALE
 
 \end{document}
+
+
+

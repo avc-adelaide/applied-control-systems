@@ -95,7 +95,7 @@
 
 \usepackage{amsmath,array,booktabs,docmute,environ,multicol,siunitx,bookmark,pdfpages,etoolbox}
 
-\usepackage{fontspec,unicode-math}
+\usepackage{fontspec,unicode-math,Kramer}
 
 \usepackage{listings,matlab-prettifier}
 
@@ -120,7 +120,6 @@
   \citeauthor{#1} (\citeyear{#1}) \citetitle{#1}
 }
 \usepackage[
-     backend = bibtex,
        style = authoryear,
   refsection = section,
   giveninits = true,
