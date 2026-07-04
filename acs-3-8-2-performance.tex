@@ -72,7 +72,7 @@
 \begin{frame}{Example}
 \begin{itemize}
 	\item Consider a process with transfer function $P(s)=\frac{1}{(s+1)^3}$
-	and a PI controller with error feedback having gains $k_p=0.6$ and $k_i=0.5$
+	and a PI controller with error feedback having gains $\kkp=0.6$ and $\kki=0.5$
 	\item We compare the performance of a controller with only error feedback, and  with feedforward control implemented
 \end{itemize}
 \begin{figure}
@@ -134,7 +134,7 @@
 		\item The transfer function from load disturbance $v$ to process output $y$ is 
 		\[G_{yv} = \frac{P}{1+PC}=PS=\frac{T}{C}\]
 		\item As load disturbances typically have low frequencies, small $s$ results in $T\approx1$ and so $G_{yv}\approx \frac{1}{C}$
-		\item Therefore, for a controller with integral action at small $s$, $G_{yv}\approx \frac{s}{k_i}$ and so disturbances are attenuated effectively
+		\item Therefore, for a controller with integral action at small $s$, $G_{yv}\approx \frac{s}{\kki}$ and so disturbances are attenuated effectively
 		
 	\end{itemize}
 \end{frame}

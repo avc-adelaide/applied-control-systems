@@ -33,11 +33,11 @@
 \item A pole is stable if it is in the left half-plane and unstable if it is in the right half-plane
 \item A \textit{fast} pole is one that has a magnitude larger than the intended closed loop bandwidth
 \item Consider a PI controller for a first-order system
-\[P(s) = \frac{b}{s+a}, \quad C(s)=k_p+\frac{k_i}{s}\]
-\item The closed loop characteristic polynomial is 
-\[s(s+a)+b(k_ps+k_i)=s^2+(a+bk_p)s+k_ib\]
+\[P(s) = \frac{b}{s+a}, \quad C(s)=\kkp+\frac{\kki}{s}\]
+\item The closed loop characteristic polynomial is
+\[s(s+a)+b(\kkp s+\kki)=s^2+(a+b\kkp)s+\kki b\]
 \item If we want poles at $-p_1$ and $-p_2$ we get
-\[k_p=\frac{p_1+p_2-a}{b}, \quad k_i=\frac{p_1p_2}{b}\]
+\[\kkp=\frac{p_1+p_2-a}{b}, \quad \kki=\frac{p_1p_2}{b}\]
 \end{itemize}
 \end{frame}
 
@@ -46,7 +46,7 @@
 	\begin{itemize}
 		\item The sensitivity functions are 
 		\[S(s) = \frac{s(s+a)}{(s+p_1)(s+p_2)}, \quad T(s) = \frac{(p_1+p_2-a)s+p_1p_2}{(s+p_1)(s+p_2)}\]
-		\item Assume that pole $a$ is faster than the closed loop poles, the proportional gain $k_p$ is then negative and the controller has a zero in the right half-plane
+		\item Assume that pole $a$ is faster than the closed loop poles, the proportional gain $\kkp$ is then negative and the controller has a zero in the right half-plane
 		\item There is a large sensitivity peak due to the fast stable pole $\rightarrow$ poor robustness
 	\end{itemize}
 \begin{figure}

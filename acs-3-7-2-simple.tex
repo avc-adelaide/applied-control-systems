@@ -31,9 +31,9 @@
 \begin{itemize}
 	\item Any stable system can be modelled by a static system if its inputs are sufficiently slow, which approximates the transfer function by a constant 
 	\[K=P(0)\]
-	\item Using integral control, the controller is $K\tfrac{k_i}{s}$ with closed loop characteristic polynomial $s+Kk_i$
+	\item Using integral control, the controller is $K\tfrac{\kki}{s}$ with closed loop characteristic polynomial $s+K\kki$
 	\item Specifying the performance of the controlled system by the desired time constant $T_{cl}$ of the closed loop system, we have
-	\[k_i = \frac{1}{T_{cl} P(0)}\]
+	\[\kki = \frac{1}{T_{cl} P(0)}\]
 	\item A reasonable criterion for the process transfer function to be well approximated by a constant is that the average residence time $T_{ar}=\tfrac{-P'(0)}{P(0)}$ satisfies $T_{ar}<T_{cl}$
 \end{itemize}
 \end{frame}
@@ -44,7 +44,7 @@
 	\item The process dynamics are then approximated as 
 	\[P(s) \approx \frac{P(0)}{1+sT_{ar}}\]
 	\item To achieve a step response with small overshoot and reasonable response time we may choose an integral controller with gain
-	\[k_i = \frac{1}{2P(0)T_{ar}}\]
+	\[\kki = \frac{1}{2P(0)T_{ar}}\]
 	\item This controller has $\omega_0 = \tfrac{1}{T_{ar}\sqrt{2}}$, with rise time of $3.1 T_{ar}$, settling time of $7.9T_{ar}$, and overshoot of 4\%
 \end{itemize}
 \end{frame}
@@ -59,9 +59,9 @@
 \item Consider a first-order system with transfer function 
 \[P(s) = \frac{b}{s+a}\]
 \item Comparing the desired and closed loop characteristic polynomials with a PI controller
-\[s^2+a_1s+a_2 = s^2+(a+bk_p)s+bk_i\]
+\[s^2+a_1s+a_2 = s^2+(a+b\kkp)s+b\kki\]
 \item We may therefore assign arbitrary values of the closed loop poles via PI control
-\[k_p=\frac{a_1-a}{b}, \quad k_i = \frac{a_2}{b}\]
+\[\kkp=\frac{a_1-a}{b}, \quad \kki = \frac{a_2}{b}\]
 \end{itemize}
 \end{frame}
 

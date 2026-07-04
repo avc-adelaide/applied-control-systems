@@ -88,7 +88,7 @@ F_d = F_r + F_a + F_g = \underbrace{mg C_r \operatorname{sgn}(v)}_{\text{frictio
 \item This style of system is well controlled by a `PI' controller:
 \end{itemize}
 \begin{align}
-u &= k_p(v_r-v)+k_iz & \Deriv{z}{t} = v_r-v
+u &= \kkp(v_r-v)+\kki z & \Deriv{z}{t} = v_r-v
 \end{align}
 Where $e=v_r-v$ and therefore $z=\int_0^t e(\tau) \dee \tau$
 \end{frame}
@@ -99,7 +99,7 @@ To study our `controlled' system, augment the state equation:
 \begin{align}
 x &= \Matr{v\\z} \\
 \Deriv{x}{t} &= \Matr{\dot v\\\dot z} = \Matr{\tfrac1m(uf-F_d)\\v_r-v} = F(x) \\
-u &= k_p(v_r-v)+k_iz
+u &= \kkp(v_r-v)+\kki z
 \end{align}
 We now consider $\Deriv{x}{t}=F(x)$ as before.
 \end{frame}

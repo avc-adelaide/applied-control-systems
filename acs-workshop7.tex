@@ -25,7 +25,7 @@ The following indexing syntax can also be used to view and change variable value
 	\frametitle{PID in Matlab}
 	Using a transfer function we saw in last weeks workshop, let us try to control the closed loop system with a PID controller.
 	\includematlab{workshop7.m}{part4} 
-	Try to change the $K_p$, $T_i$, and $T_d$ variables from these initial values to achieve a better closed loop step response. \\[10pt]
+	Try to change the $K_p$, $\TTi$, and $\TTd$ variables from these initial values to achieve a better closed loop step response. \\[10pt]
 	\alert{What does `better' mean in this context?}
 	
 \end{frame}
@@ -34,7 +34,7 @@ The following indexing syntax can also be used to view and change variable value
 	\frametitle{PID in Simulink}
 	We can of course also design PID controllers in Simulink. In addition to blocks we have seen before, we will also need a Derivative block and a Transfer Function block. Try to recreate your Matlab step response in Simulink. \\
 	Remember that 
-	\[K_i = \frac{K_p}{T_i}, \quad K_d = K_pT_d\]
+	\[K_i = \frac{K_p}{\TTi}, \quad K_d = K_p\TTd\]
 	when transferring PID gains from $\texttt{pidstd()}$ to Simulink or vice versa!\\[10pt]
 	Your Simulink should look something like this (make sure you are incorporating negative feedback by appropriately changing the left-most Sum block!)
 	\includegraphics[width=0.9\linewidth]{workshop7_simulink}
@@ -48,7 +48,7 @@ The following indexing syntax can also be used to view and change variable value
 	A generic first-order system is given by the transfer function 
 	\[P(s) = \frac{b}{s+a}\]
 	Comparing the desired and closed loop characteristic polynomials with a PI controller
-	\[s^2+a_1s+a_2 = s^2 (a_bk_p)s+bk_i\]
+	\[s^2+a_1s+a_2 = s^2 (a_b\kkp)s+b\kki\]
 	We may therefore assign arbitrary values of the closed loop poles via PI control ($K_d=0$)
 	\[K_p=\frac{a_1-a}{b}, \quad K_i = \frac{a_2}{b}\]
 \end{frame}

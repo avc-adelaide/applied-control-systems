@@ -17,7 +17,7 @@ In this workshop, we will explore frequency domain design methods for control sy
 	\[
 	P = \frac{3000(s+4)}{(s+1)(s+6)(s+10)(s+100)(s^2+2s+2)} \,.
 	\]
-	Define a PID controller $C$ with gains $K_p=1$, $T_i=2.9$, $T_d=0.9$, $N=100$. \\[10pt]
+	Define a PID controller $C$ with gains $K_p=1$, $\TTi=2.9$, $\TTd=0.9$, $N=100$. \\[10pt]
 	Plot the closed loop step response and note the characteristics of the system.\\[10pt]
 	\alert{Does the controller appear to be achieving acceptable performance?}
 	
@@ -50,7 +50,7 @@ or viewed on the Bode plot for $T$
 \SUBCONCEPT{Simulink}
 \begin{frame}
 	\frametitle{Transfer functions in Simulink}
-	Let us now define the same system in Simulink. The PID Controller block in Simulink uses a different definition to $\texttt{pidstd}$: in `Proportional' put $K_p$, in `Integral' put $1/T_i$, in `Derivative' put $T_d$, and in `Filter coefficient' put $N/Td$. You may check by comparing your step responses.\\
+	Let us now define the same system in Simulink. The PID Controller block in Simulink uses a different definition to $\texttt{pidstd}$: in `Proportional' put $K_p$, in `Integral' put $1/\TTi$, in `Derivative' put $\TTd$, and in `Filter coefficient' put $N/Td$. You may check by comparing your step responses.\\
 	
 	You may use the following code to retrieve the numerator and denominator coefficients for the Transfer Function block that represents the plant
 	\includematlab{workshop8.m}{part3} 

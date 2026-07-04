@@ -78,9 +78,9 @@ which represents the transfer function from input at A to output at B multiplied
 \item The process dynamics are 
 \[P(s) = \frac{k_I}{Js^2+cs}\]
 \item The controller is of the form
-\[C(s) = k_p\]
-\item Therefore the loop transfer function (with added delay $\tau$) is 
-\[L(s) = P(s) C(s) e^{-\tau s} = \frac{k_Ik_p}{Js^2+cs}e^{-\tau s}\]
+\[C(s) = \kkp\]
+\item Therefore the loop transfer function (with added delay $\tau$) is
+\[L(s) = P(s) C(s) e^{-\tau s} = \frac{k_I\kkp}{Js^2+cs}e^{-\tau s}\]
 \end{itemize}
 \end{frame}
 

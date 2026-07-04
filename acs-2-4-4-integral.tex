@@ -41,7 +41,7 @@ z = \int y-r \,\mathrm{d}t \,.
 \end{equation}
 Add integral feedback to the controller, now dependent on the state $x$, desired output $r$, and new $z$ term:
 \[
-  u = -K x - k_i z + k_f r \,.
+  u = -K x - \kki z + k_f r \,.
 \]
 Include this in the model by augmenting the system with the new state, $z$:
 \[
@@ -94,15 +94,15 @@ $\theta$ is the angle of the road.
 \begin{frame}{Example continued}
 The controller will be of the form 
 \[
-w=-k_px-k_iz+k_fv_r=-Kx+k_fv_r,  \qquad K = \Matr{k_p & k_i}
+w=-\kkp x-\kki z+k_fv_r=-Kx+k_fv_r,  \qquad K = \Matr{\kkp & \kki}
 \]
 where $v_r$ is the desired reference speed.
 If we wish to design the closed-loop system to have the desired characteristic polynomial
 \[p(s)=s^2+a_1s+a_2\]
 then we must compare with the characteristic polynomial of 
-\[\operatorname{det}(sI-A+BK) = s^2+(bk_p+a)s+bk_i.\]
+\[\operatorname{det}(sI-A+BK) = s^2+(b\kkp+a)s+b\kki.\]
 Therefore, 
-\[k_p=\frac{a_1-a}{b}, \quad k_i=\frac{a_2}{b}, \quad k_f=\frac{a_1}{a}.\]
+\[\kkp=\frac{a_1-a}{b}, \quad \kki=\frac{a_2}{b}, \quad k_f=\frac{a_1}{a}.\]
 \end{frame}
 
 \begin{frame}{Example continued}
@@ -126,7 +126,7 @@ The figure below shows an example of the cruise control system with reference sp
 	0 & CB & \cdots & CA^{n-1}B
 \end{bmatrix}\]
 \item The condition of reachability for the augmented system is equivalent to the condition that $b_n\neq 0$ (the original system does not contain a pure derivative term in the input/output response)
-\item In the previous example we see that if $b=0$, there are no values of $k_i$ that make the constant term of our characteristic polynomial equal to the constant term of the desired characteristic polynomial $a_2$
+\item In the previous example we see that if $b=0$, there are no values of $\kki$ that make the constant term of our characteristic polynomial equal to the constant term of the desired characteristic polynomial $a_2$
 \end{itemize}
 \end{frame}
 

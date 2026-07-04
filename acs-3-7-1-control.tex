@@ -106,7 +106,7 @@ PID is a standardised control methodology, with well-defined and `understandable
 	\[u=\kkp e+\kki \int_0^t e(\tau) \, \mathrm{d} \tau+\kkd \frac{\mathrm{d} e}{\mathrm{d} t}\]
 	where $\kkp$ is the proportional gain, $\kki$ is the integral gain, and $\kkd$ is the derivative gain
 	\item The integral time constant $\TTi=\tfrac{\kkp}{\kki}$ and derivative time constant $\TTd = \tfrac{\kkd}{\kkp}$ provide an alternate parameterisation for the control action
-	\[u = k_{p}\left(e+\frac{1}{T_{i}} \int_0^t e(\tau) \, \mathrm{d} \tau+T_{d} \frac{\mathrm{d} e}{\mathrm{d} t}\right)\]
+	\[u = \kkp\left(e+\frac{1}{\TTi} \int_0^t e(\tau) \, \mathrm{d} \tau+\TTd \frac{\mathrm{d} e}{\mathrm{d} t}\right)\]
 \end{itemize}
 
 \end{frame}
