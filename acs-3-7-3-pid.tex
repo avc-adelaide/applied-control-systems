@@ -168,8 +168,8 @@
   & K_p & T_i & T_d \\
   \midrule
   P   & 0.30/a   &      &       \\
-  PI  & 0.60/a   & 4.0L &       \\
-  PID & 0.95/a  & 2.4L & 0.42L \\
+  PI  & 0.60/a   & 4.0\tau &       \\
+  PID & 0.95/a  & 2.4\tau & 0.42\tau \\
   \bottomrule
   \end{tabular}\qquad
   \begin{tabular}{LPPP}
@@ -180,8 +180,8 @@
   & K_p & T_i & T_d \\
   \midrule
   P   & 0.7/a   &      &       \\
-  PI  & 0.7/a   & 2.3L &       \\
-  PID & 1.2/a   & 2.0L   & 0.42L \\
+  PI  & 0.7/a   & 2.3\tau &       \\
+  PID & 1.2/a   & 2.0\tau   & 0.42\tau \\
   \bottomrule
   \end{tabular}}
   
@@ -197,7 +197,7 @@
   \midrule
   P   & 0.30/a   &      &       \\
   PI  & 0.35/a   & 1.2T &       \\
-  PID & 0.60/a   & T    & 0.5L  \\
+  PID & 0.60/a   & T    & 0.5\tau  \\
   \bottomrule
   \end{tabular}\qquad
   \begin{tabular}{LPPP}
@@ -209,7 +209,7 @@
   \midrule
   P   & 0.70/a   &       &       \\
   PI  & 0.60/a   & T     &       \\
-  PID & 0.95/a   & 1.4T  & 0.47L \\
+  PID & 0.95/a   & 1.4T  & 0.47\tau \\
   \bottomrule
   \end{tabular}}
 
@@ -223,7 +223,7 @@
 \[
    \tau_n = \frac{\tau}{\tau+T}\,,
    \qquad
-   a = \frac{P(0) L}{T}
+   a = \frac{P(0) \tau}{T}
 \]
 \item From a PID pole placement perspective, assigns three poles (two complex, one real) equidistant from origin to achieve a 25\% decay ratio
 \item Similar to ZN, often produces too large an overshoot for Mech systems
@@ -240,17 +240,17 @@
   & K_p & T_i & T_d \\
   \midrule
   \STRUT{12pt}{3pt}%
-  P   & \frac{1}{a}\Bigl(1+\frac{0.35\tau}{1-\tau}\Bigr) && \\
+  P   & \frac{1}{a}\Bigl(1+\frac{0.35\tau_n}{1-\tau_n}\Bigr) && \\
   \STRUT{12pt}{3pt}%
-  PI  & \frac{0.9}{a}\Bigl(1+\frac{0.92\tau}{1-\tau}\Bigr) &
-        L\cdot\frac{3.3-3\tau}{1+1.2\tau} & \\
+  PI  & \frac{0.9}{a}\Bigl(1+\frac{0.92\tau_n}{1-\tau_n}\Bigr) &
+        \tau\cdot\frac{3.3-3\tau_n}{1+1.2\tau_n} & \\
   \STRUT{12pt}{3pt}%
-  PD  & \frac{1.24}{a}\Bigl(1+\frac{0.13\tau}{1-\tau}\Bigr) &&
-        L\cdot\frac{0.27-0.36\tau}{1-0.87\tau} \\
+  PD  & \frac{1.24}{a}\Bigl(1+\frac{0.13\tau_n}{1-\tau_n}\Bigr) &&
+        \tau\cdot\frac{0.27-0.36\tau_n}{1-0.87\tau_n} \\
   \STRUT{12pt}{3pt}%
-  PID & \frac{1.35}{a}\Bigl(1+\frac{0.18\tau}{1-\tau}\Bigr) &
-        L\cdot\frac{2.5-2\tau}{1-0.39\tau} &
-        L\cdot\frac{0.37-0.37\tau}{1-0.81\tau} \\
+  PID & \frac{1.35}{a}\Bigl(1+\frac{0.18\tau_n}{1-\tau_n}\Bigr) &
+        \tau\cdot\frac{2.5-2\tau_n}{1-0.39\tau_n} &
+        \tau\cdot\frac{0.37-0.37\tau_n}{1-0.81\tau_n} \\
   \bottomrule
   \end{tabular}
 

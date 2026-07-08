@@ -12,6 +12,7 @@
 \vfill References:
 \begin{itemize}
 \item \astrom{§11.5}
+\item \minicite{sundstrom2026}
 \end{itemize}
 \end{SUMMARY}
 
@@ -89,8 +90,8 @@
 		\item Considering the two degree-of-freedom PID controller, we can implement the proportional term by replacing $P=\kkp(\beta r-y)$ with its sampled version
 		\[P(t_k) = \kkp (\beta r(t_k)-y(t_k))\]
 		\item The integral term is found by approximating the integral with a sum
-		\[I(t_{k+1}) = I(t_k)+\kki h e(t_k) + \tfrac{h}{T_{aw}} (\operatorname{sat}(u_a)-u_a)\]
-		where $T_{aw}=h/k_{aw}$ represents the anti-windup term
+		\[I(t_{k+1}) = I(t_k)+\kki h e(t_k) + \tfrac{h}{T_{\text{aw}}} (\operatorname{sat}(u_a)-u_a)\]
+		where $T_{\text{aw}}=h/k_{\text{aw}}$ represents the anti-windup term
 	\end{itemize}
 \end{frame}
 
@@ -101,7 +102,55 @@
 		\item Approximating the derivative with a backward difference gives
 		\[D(t_k) = \frac{\TTf}{\TTf+h} D(t_{k-1})-\frac{\kkd}{\TTf+h}(y(t_k)-y(t_{k-1}))  \]
 		\item This allows implementation onto PLCs or microcontrollers
+		\item Working close to the `silicon', it is common to formulate control problems using \alert{discrete domain} $z$-transform instead of continuous domain $s$-transform
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{`A Practical Guide to PID Controller Implementation'}
+\begin{itemize}
+\item \textcite{sundstrom2026}:
+\end{itemize}
+\begin{quote}
+\parskip=4pt\relax
+\scriptsize
+How difficult can it be to implement a PID controller? The answer is twofold. 
+\begin{itemize}
+\item
+Implementing the PID control law is simple and computationally inexpensive. However,
+\item
+this basic form will not work in practical applications. 
+\end{itemize}
+
+The primary reason for this
+is the various physical limitations of the actuator.
+
+Measurement noise, different implementations depending on the various structures (P, PI, PD or PID), bumpless
+transfer, and varying sampling time also result in problems rendering the basic form
+inoperable.
+
+PID implementation is therefore more difficult than meets the eye. 
+This paper introduces a reference implementation of the PID controller which considers
+these practical issues.
+
+It includes pseudo-code, discussion of the implementation
+choices and simulation of carefully selected, important test cases.
+\end{quote}
+\end{frame}
+
+\begin{frame}
+\frametitle{`A Practical Guide to PID Controller Implementation'}
+\centering
+\includegraphics[width=0.8\linewidth]{sundstrom}
+\end{frame}
+
+\begin{frame}
+\frametitle{With thanks to M. Bauer}
+
+\centering
+\includegraphics[width=0.8\linewidth]{iceberg}
+
+
 \end{frame}
 
 \SUMMARYFRAME
