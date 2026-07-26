@@ -41,7 +41,7 @@ where $K_p$ is proportional gain, $K_d$ is derivative gain, and $K_i$ is integra
 
 The augmented closed-loop matrix is:
 \begin{align}
-A_{cl} = \begin{bmatrix} 0 & 1 & 0 \\ -1-K_p & -1-K_d & -K_i \\ -1 & 0 & 0 \end{bmatrix}
+A\closedloop = \begin{bmatrix} 0 & 1 & 0 \\ -1-K_p & -1-K_d & -K_i \\ -1 & 0 & 0 \end{bmatrix}
 \end{align}
 
 The desired characteristic polynomial with poles at $-2, -2+j, -2-j$ is:
@@ -51,9 +51,9 @@ p(s) &= (s+2)\left[(s+2)^2 + 1\right] \\
 &= s^3 + 6s^2 + 13s + 10
 \end{align}
 
-The characteristic polynomial of $A_{cl}$ is computed by expanding along the third column:
+The characteristic polynomial of $A\closedloop$ is computed by expanding along the third column:
 \begin{align}
-\det(sI - A_{cl}) &= \det\begin{bmatrix} s & -1 & 0 \\ 1+K_p & s+1+K_d & K_i \\ 1 & 0 & s \end{bmatrix} \\
+\det(sI - A\closedloop) &= \det\begin{bmatrix} s & -1 & 0 \\ 1+K_p & s+1+K_d & K_i \\ 1 & 0 & s \end{bmatrix} \\
 &= K_i \det\begin{bmatrix} s & -1 \\ 1 & 0 \end{bmatrix} + s\det\begin{bmatrix} s & -1 \\ 1+K_p & s+1+K_d \end{bmatrix} \\
 &= K_i(0 + 1) + s[s(s+1+K_d) - (-(1+K_p))] \\
 &= K_i + s[s^2 + (1+K_d)s + 1 + K_p] \\

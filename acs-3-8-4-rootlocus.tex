@@ -36,19 +36,19 @@
 		P(s) &= \frac{b(s)}{a(s)} = \frac{b_0s^m+b_1s^{m-1}+\cdots + b_m}{s^n+a_1s^{n-1}+\cdots + a_n} \\
 		&= b_0\frac{(s-z_1)(s-z_2)\cdots (s-z_m)}{(s-p_1)(s-p_2)\cdots(s-p_n)}
 	\end{align*}
-	\item Assume the pole excess $n_{pe}=n-m$ is nonnegative
+	\item Assume the pole excess $\npoleexcess=n-m$ is nonnegative
 	\item The controller for the system is assumed to be a proportional controller (for simplicity) with transfer function $C(s)=k$
 		\item The closed loop characteristic polynomial is 
-\[a_{cl}(s)=a(s)+kb(s)\]
-and the closed loop poles are the roots of $a_{cl}(s)$
-\item The root locus is a graph of the roots of $a_{cl}(s)$ as $k$ varies from $0$ to $\infty$
+\[a\closedloop(s)=a(s)+kb(s)\]
+and the closed loop poles are the roots of $a\closedloop(s)$
+\item The root locus is a graph of the roots of $a\closedloop(s)$ as $k$ varies from $0$ to $\infty$
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Small $k$}
 	\begin{itemize}
-		\item Since $a_{cl}(s)$ is of degree $n$, the plot will have $n$ branches
+		\item Since $a\closedloop(s)$ is of degree $n$, the plot will have $n$ branches
 		\item When $k=0$, the closed loop poles are equal to the open loop poles
 		\item When there are open loop poles at $s=p_l$ with multiplicity $m$, the characteristic equation is 
 		\[(s-p_l)^m\tilde{a}(s) + kb(s)\approx (s-p_l)^m\tilde{a}(p_l)+kb(p_l)=0\]
@@ -62,10 +62,10 @@ and the closed loop poles are the roots of $a_{cl}(s)$
 \begin{frame}{Large $k$}
 	\begin{itemize}
 		\item For large gain values we may approximate the characteristic polynomial as
-		\[a_{cl}(s) = b(s)\left(\frac{a(s)}{b(s)}+k \right) \approx b(s)\left(\frac{s^{n_{pe}}}{b_0}+k \right)\]
-		\item Therefore, for large $k$, the closed loop poles are approximately the roots of $b(s)$ and $\sqrt[n_{pe}]{-b_0k}$
-		\item The asymptotes are $n_{pe}$ lines emanating from the centre of mass of poles and zeros
-		\item When $b_0k>0$, the lines have angles $(\pi+2l\pi)/n_{pe}$ for $l=1,\cdots,n_{pe}$ with respect to the real line
+		\[a\closedloop(s) = b(s)\left(\frac{a(s)}{b(s)}+k \right) \approx b(s)\left(\frac{s^{\npoleexcess}}{b_0}+k \right)\]
+		\item Therefore, for large $k$, the closed loop poles are approximately the roots of $b(s)$ and $\sqrt[\npoleexcess]{-b_0k}$
+		\item The asymptotes are $\npoleexcess$ lines emanating from the centre of mass of poles and zeros
+		\item When $b_0k>0$, the lines have angles $(\pi+2l\pi)/\npoleexcess$ for $l=1,\cdots,\npoleexcess$ with respect to the real line
 	\end{itemize}
 \end{frame}
 
