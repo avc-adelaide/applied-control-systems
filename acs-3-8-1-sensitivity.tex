@@ -64,9 +64,9 @@
 	\begin{table}
 		\begin{tabular}{ccccc| c}
 			\hline $y$ & $u$ & $e$ & $\mu$ & $\eta$ & \\
-			\hline $\frac{P C F}{1+P C}$ & $\frac{C F}{1+P C}$ & $\frac{F}{1+P C}$ & $\frac{C F}{1+P C}$ & $\frac{P C F}{1+P C}$ & $r$\\
-			$\frac{P}{1+P C}$ & $\frac{-P C}{1+P C}$ & $\frac{-P}{1+P C}$ & $\frac{1}{1+P C}$ & $\frac{P}{1+P C}$ & $v$\\
-			$\frac{1}{1+P C}$ & $\frac{-C}{1+P C}$ & $\frac{-1}{1+P C}$ & $\frac{-C}{1+P C}$ & $\frac{-P C}{1+P C}$ & $w$ \\
+			\hline $\frac{P C F}{1+P C}$ & $\frac{C F}{1+P C}$ & $\frac{F}{1+P C}$ & $\frac{C F}{1+P C}$ & $\frac{P C F}{1+P C}$ & $r$\\[1ex]
+			$\frac{P}{1+P C}$ & $\frac{-P C}{1+P C}$ & $\frac{-P}{1+P C}$ & $\frac{1}{1+P C}$ & $\frac{P}{1+P C}$ & $v$\\[1ex]
+			$\frac{1}{1+P C}$ & $\frac{-C}{1+P C}$ & $\frac{-1}{1+P C}$ & $\frac{-C}{1+P C}$ & $\frac{-P C}{1+P C}$ & $w$ \\[1ex]
 			\hline
 		\end{tabular}\\
 		\vspace{.5cm}
@@ -82,7 +82,8 @@
 \[ G_{yr} = \frac{PCF}{1+PC}, \quad -G_{uv} = \frac{PC}{1+PC}, \quad G_{yv} = \frac{P}{1+PC},\]
 \[G_{ur} = \frac{CF}{1+PC}, \quad -G_{uw} = \frac{C}{1+PC}, \quad G_{yw} = \frac{1}{1+PC}.\]
 
-\item The response of the system to load disturbances and measurement noise is of importance for robustness in practice and these transfer functions are known as the sensitivity functions (or the \alert{Gang of Four})
+\item The response of the system to load disturbances and measurement noise is important for robustness in practice
+\item These transfer functions are known as the sensitivity functions \\ (or the \alert{Gang of Four})
 \end{itemize}
 \end{frame}
 
@@ -102,18 +103,22 @@
 \begin{frame}{Design of controllers}
 \begin{itemize}
 	\item The Gang of Four captures the response of the system to disturbances, which assists in the design of the controller $C$
-	\item The remaining two transfer functions of the Gang of Six capture the relationship between the reference signal and the measured output, which can be designed by $F$
+	\item The remaining two transfer functions of the Gang of Six ($G_{yr}$, $G_{ur}$) capture the relationship between the reference signal and the measured output, which can be designed by $F$
 	\item If all of the Gang of Four transfer functions are stable, the feedback system is said to be \alert{internally stable}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Sensitivity and its complement}
+\begin{align}
+  \epsilon & = (1-TF)r - PSv - Tw \,, \\
+  			   & = Sr - PSv - Tw \qquad\text{for $F(s)=1$}
+\end{align}
 \begin{itemize}
-	\item The sensitivity function $S$ determines the attenuation of load disturbances
-	\item The complementary sensitivity function $T$ determines robustness to measurement noise
-	\item The sensitivity functions have the property that $S+T=1$ (this is why $T$ is called complementary sensitivity)
-	\item Therefore, there are unavoidable trade-offs between performance and disturbance/noise attenuation (we can't make both $|S|$ and $|T|$ zero at the same time)
-	\item Typically disturbances are low frequency and measurement noise is high frequency 
+	\item Sensitivity $S(s)$ determines the attenuation of load disturbances
+	\item Complementary sensitivity $T(s)$ determines robustness to measurement noise
+	\item The sensitivity functions have the property that $S+T=1$\\ (\emph{this is why $T$ is called complementary sensitivity})
+	\item There are unavoidable trade-offs between performance and disturbance/noise attenuation (we can't make both $|S|$ and $|T|$ zero at the same time)
+	\item Typically, disturbances are low frequency and measurement noise is high frequency 
 \end{itemize}
 \end{frame}
 
