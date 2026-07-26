@@ -41,12 +41,12 @@
 
 \centering
 \includegraphics[scale=0.6]{nyq-plain3}
-	
+
 \end{frame}
 
 \begin{frame}{The three stability margins}
 \begin{itemize}
-	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $g_m$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<g_m<5$)
+	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $\gainmargin$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<\gainmargin<5$)
 \end{itemize}
 
 \centering
@@ -56,7 +56,7 @@
 
 \begin{frame}{The three stability margins}
 \begin{itemize}
-	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\varphi_m$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \varphi_m < 60^\circ$)
+	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\phasemargin$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \phasemargin < 60^\circ$)
 \end{itemize}
 
 \centering
@@ -67,14 +67,14 @@
 \begin{frame}{The fourth margin from time delay}
   \centering
   \includegraphics[width=0.5\linewidth]{timedelaynyq}
-  
+
   \[
   G_{\text{delay}} = \Exp{-s\tau} \,, \qquad \varphi_{\text{delay}} = -\ww\tau
   \]
-  
-  This gives us the \alert{delay margin} $\tau_m$:
+
+  This gives us the \alert{delay margin} $\delaymargin$:
   \[
-    \varphi_m = \ww_{\text{gc}} \tau_m
+    \phasemargin = \ww\gaincrossover \delaymargin
   \]
 \end{frame}
 
@@ -83,9 +83,9 @@
 
 \begin{frame}{Margins from Nyquist}
 \begin{itemize}
-	\item The \alert{stability margin} $s_m$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
-	\item The \alert{gain margin} $g_m$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
-	\item The \alert{phase margin} $\varphi_m$ is the angle between the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
+	\item The \alert{stability margin} $\stabilitymargin$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
+	\item The \alert{gain margin} $\gainmargin$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
+	\item The \alert{phase margin} $\phasemargin$ is the angle between the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
 \end{itemize}
 \end{frame}
 
@@ -102,7 +102,7 @@
 \begin{frame}{Example}
 \begin{itemize}
 	\item Consider the loop transfer function $L=\tfrac{3}{(s+1)^3}$
-	\item From the Nyquist plot we get $s_m=0.464$, $g_m = 2.67$, $\varphi_m=41.7^\circ$
+	\item From the Nyquist plot we get $\stabilitymargin=0.464$, $\gainmargin = 2.67$, $\phasemargin=41.7^\circ$
 \end{itemize}
 \begin{figure}
 	\centering

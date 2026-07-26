@@ -28,12 +28,12 @@ C(s) = k\frac{s + a}{s + b}, \quad a < b
 to achieve:
 \begin{itemize}
 \item Gain crossover frequency $\omega_{gc} = 5$ rad/s
-\item Phase margin $\varphi_m \geq 50°$
+\item Phase margin $\phasemargin \geq 50°$
 \end{itemize}
 
 (a) Calculate the phase and gain of $P(\ii\omega)$ at $\omega = 5$ rad/s without compensation.
 
-(b) Determine the required phase lead $\phi$ to achieve $\varphi_m = 50°$.
+(b) Determine the required phase lead $\phi$ to achieve $\phasemargin = 50°$.
 
 (c) Choose $a$ and $b$ to provide the required phase lead, using the maximum phase lead formula for a lead compensator:
 \[
@@ -65,10 +65,10 @@ Phase:
 
 With proportional control $C = k$, the phase margin would be:
 \[
-\varphi_m = 180° - 158.2° = 21.8°
+\phasemargin = 180° - 158.2° = 21.8°
 \]
 
-This is too small (typically want $\varphi_m > 45°$ for good performance).
+This is too small (typically want $\phasemargin > 45°$ for good performance).
 
 \textbf{Step 2: Required phase lead}
 
@@ -180,7 +180,7 @@ Total phase at crossover:
 
 Phase margin:
 \[
-\varphi_m = 180° - 123.2° = 56.8°
+\phasemargin = 180° - 123.2° = 56.8°
 \]
 
 This exceeds our target of 50°. ✓
@@ -200,7 +200,7 @@ This exceeds our target of 50°. ✓
 Lag compensation increases low-frequency gain to improve steady-state accuracy while preserving phase margin.
 
 \paragraph{Problem:}
-A process has transfer function $P(s) = \frac{1}{s+1}$. A proportional controller $C = k = 3$ gives acceptable transient response (phase margin $\varphi_m = 53°$) but poor steady-state error for ramp tracking.
+A process has transfer function $P(s) = \frac{1}{s+1}$. A proportional controller $C = k = 3$ gives acceptable transient response (phase margin $\phasemargin = 53°$) but poor steady-state error for ramp tracking.
 
 Design a lag compensator:
 \[
@@ -241,7 +241,7 @@ Phase at crossover:
 
 Phase margin:
 \[
-\varphi_m = 180° - 70.6° = 109.4°
+\phasemargin = 180° - 70.6° = 109.4°
 \]
 
 Wait, this seems too large. Let me recalculate. Actually, for $P(s) = 1/(s+1)$, the phase is simply $-\tan^{-1}(\omega)$. At $\omega = 2.83$:
@@ -249,10 +249,10 @@ Wait, this seems too large. Let me recalculate. Actually, for $P(s) = 1/(s+1)$, 
 \angle P(\ii \cdot 2.83) = -\tan^{-1}(2.83) = -70.5°
 \]
 \[
-\varphi_m = 180° - 70.5° = 109.5°
+\phasemargin = 180° - 70.5° = 109.5°
 \]
 
-Actually, the problem states $\varphi_m \approx 53°$, which suggests a different process or I misread. Let me use the given value and proceed with the lag design concept.
+Actually, the problem states $\phasemargin \approx 53°$, which suggests a different process or I misread. Let me use the given value and proceed with the lag design concept.
 
 \textbf{Step 2: Lag compensator design}
 
