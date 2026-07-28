@@ -1,6 +1,7 @@
 .ONESHELL:
 SHELL = bash
 
+LATEX = lualatex
 BUILD = _build
 UPLOAD = _upload
 EXTRA = _extra
@@ -100,9 +101,9 @@ $(BUILD)/%.pdf: %.tex
 	cp -f $(texsty) $(BUILD)/
 	cp -f $(topcsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
-	cd $(BUILD); xelatex $*
+	cd $(BUILD); $(LATEX) $*
 	cd $(BUILD); bibtex  $* || echo "BibTeX may have failed."
-	cd $(BUILD); xelatex $*
+	cd $(BUILD); $(LATEX) $*
 	echo "\n\nDone!\n\n"
 
 $(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.sty
@@ -111,8 +112,8 @@ $(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.s
 	cp -f worked-examples-template.sty $(BUILD)/
 	cp -f beamer-control-maths.sty $(BUILD)/
 	@echo "\n\nCOMPILE WORKED EXAMPLE\n\n"
-	cd $(BUILD)/worked-examples; xelatex $(notdir $<)
-	cd $(BUILD)/worked-examples; xelatex $(notdir $<)
+	cd $(BUILD)/worked-examples; $(LATEX) $(notdir $<)
+	cd $(BUILD)/worked-examples; $(LATEX) $(notdir $<)
 	echo "\n\nDone!\n\n"
 
 $(BUILD)/applied-control-systems.pdf: applied-control-systems.tex $(topcsrc)
@@ -121,7 +122,7 @@ $(BUILD)/applied-control-systems.pdf: applied-control-systems.tex $(topcsrc)
 	cp -f $(texsty) $(BUILD)/
 	cp -f $(topcsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
-	cd $(BUILD); xelatex applied-control-systems
+	cd $(BUILD); $(LATEX) applied-control-systems
 	cd $(BUILD); bibtex  applied-control-systems || echo "BibTeX may have failed."
-	cd $(BUILD); xelatex -interaction=batchmode applied-control-systems
+	cd $(BUILD); $(LATEX) -interaction=batchmode applied-control-systems
 	echo "\n\nDone!\n\n"
