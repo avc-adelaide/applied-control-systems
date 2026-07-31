@@ -450,8 +450,7 @@
 
 \AtEndDocument{\FINALESLIDE}
 
-
-
+\newcommand\PORTFOLIO[1]{\fbox{\alert{\textbf{Portfolio:} #1}}}
 
 
 % fix TOC spacing
