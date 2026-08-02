@@ -34,10 +34,10 @@ buildworkpdf  = $(addprefix $(BUILD)/,$(workpdf))
 buildpracpdf  = $(addprefix $(BUILD)/,$(pracpdf))
 buildexamplepdf = $(addprefix $(BUILD)/,$(examplepdf))
 
-uploadnotepdf = $(addprefix $(UPLOAD)/,$(notepdf))
-uploadtopcpdf = $(addprefix $(UPLOAD)/,$(topcpdf))
-uploadworkpdf = $(addprefix $(UPLOAD)/,$(workpdf))
-uploadpracpdf = $(addprefix $(UPLOAD)/,$(pracpdf))
+pdfuploadnote = $(addprefix $(UPLOAD)/,$(notepdf))
+pdfuploadtopc = $(addprefix $(UPLOAD)/,$(topcpdf))
+pdfuploadwork = $(addprefix $(UPLOAD)/,$(workpdf))
+pdfuploadprac = $(addprefix $(UPLOAD)/,$(pracpdf))
 
 uploadextra   = $(addprefix $(EXTRA)/,$(extrafiles))
 
@@ -64,18 +64,18 @@ test:
 edit:
 	edit Makefile || bbedit Makefile
 
-topics: $(buildtopcpdf)
-pracs: $(buildpracpdf)
+topics:    $(buildtopcpdf)
+pracs:     $(buildpracpdf)
 workshops: $(buildworkpdf)
-notes: $(buildnotepdf)
-examples: $(buildexamplepdf)
+notes:     $(buildnotepdf)
+examples:  $(buildexamplepdf)
+extra:     $(uploadextra)
 all: topics pracs workshops notes examples
-extra: $(uploadextra)
 
-uploadtopics:    $(uploadtopcpdf)
-uploadpracs:     $(uploadpracpdf)
-uploadworkshops: $(uploadworkpdf)
-uploadnotes:     $(uploadnotepdf)
+uploadtopics:    $(pdfuploadtopc)
+uploadpracs:     $(pdfuploadprac)
+uploadworkshops: $(pdfuploadwork)
+uploadnotes:     $(pdfuploadnote)
 uploadall: uploadtopics uploadpracs uploadworkshops uploadnotes
 
 clean:
