@@ -3,10 +3,10 @@
 
 \if\MYRIO F\relax
   \def\LOC{City East CARM Lab}
-  \def\SLX{QubeModel_CARM_v1}
+  \edef\SLX{\detokenize{QubeModel_CARM_v1}}
 \else
   \def\LOC{Mawson Lakes --- MyRIO controller}
-  \def\SLX{QubeModel_MyRIO_v1}
+  \edef\SLX{\detokenize{QubeModel_MyRIO_v1}}
 \fi
 
 \documentclass[8pt]{beamer-control}
@@ -14,7 +14,7 @@
 \begin{document}
 
 \TOPIC[1]{System Response}
-\CONCEPT[1]{Week 1: Introduction to software and hardware (\LOC)}
+\CONCEPT[1]{Week 1: Introduction to software and hardware\\(\LOC)}
 
 \begin{frame}
 \frametitle{Introduction}
@@ -28,6 +28,7 @@ This practical will consist of the following parts:
 \item Setting up
 \item Operating the hardware
 \item Filtering the output
+\item Running Simulink from Matlab
 \end{itemize}
 \end{frame}
 
@@ -36,61 +37,66 @@ This practical will consist of the following parts:
 Saving your weekly progress will be essential in this course for both your portfolio and to draw upon in later weeks. There will be some reminders as you go, e.g.:
 \PORTFOLIO{Take a screenshot!}
 
-Your portfolio will be submitted every second practical and with every assignment. You are encouraged to also use the portfolio for your general weekly notes and workshop activities.
+Your portfolio will be submitted every second practical and with every assignment. This is an individual submission, although you may share code, screenshots, and photographs within the group.
+
+You are strongly encouraged to also use the portfolio for your general weekly notes and workshop activities so it becomes a comprehensive reference document of your work completed in the course.
 \end{frame}
 
 
 \SUBCONCEPT{Setting up}
 
 \if\MYRIO F\relax
-\begin{frame}{Hardware}
-Get into a small group, and acquire 
-\vspace{-0.2cm}
-\begin{multicols}{2}
-\begin{itemize}
-	\item a QUBE unit,
-	\item a green circuit board (PCB),
-	\item a power cable, and
-	\item a red inertia disk.
-\end{itemize}  
-\end{multicols}
-\vspace{-0.2cm}
-These components only assemble one way. In particular, ensure the ribbon cable is inserted correctly into the PCB (align the notch on the ribbon cable connector with the corresponding gap in the plastic PCB connector).
-\vspace{-0.2cm}
-\begin{figure}
-	\centering
-	\includegraphics[width=5cm]{prac1_hardware.png}
-\end{figure}
-\PORTFOLIO{Take a photograph of your setup.}
-\end{frame}
+  \begin{frame}{Hardware}
+  Get into a small group, and acquire 
+  \vspace{-0.2cm}
+  \begin{multicols}{2}
+  \begin{itemize}
+  	\item a QUBE unit,
+  	\item a green circuit board (PCB),
+  	\item a power cable, and
+  	\item a red inertia disk.
+  \end{itemize}  
+  \end{multicols}
+  \vspace{-0.2cm}
+  These components only assemble one way. In particular, ensure the ribbon cable is inserted correctly into the PCB (align the notch on the ribbon cable connector with the corresponding gap in the plastic PCB connector).
+  \vspace{-0.2cm}
+  \begin{figure}
+  	\centering
+  	\includegraphics[width=5cm]{prac1_hardware.png}
+  \end{figure}
+  \PORTFOLIO{Take a photograph of your setup.}
+  \end{frame}
 \else
-\begin{frame}{Hardware}
-Get into a small group, and acquire 
-\vspace{-0.2cm}
-\begin{itemize}
-	\item a QUBE unit,
-	\item a MyRIO real-time controller,
-	\item a ribbon cable to connect the two,
-	\item two power cables (one for the QUBE, one for the MyRIO),
-	\item and a red inertia disk.
-\end{itemize}  
-\vspace{-0.2cm}
-These components only assemble one way. The ribbon cable is difficult to work with, please don't force it and ask for help if need be. 
-\vspace{-0.2cm}
-\begin{figure}
-	\centering
-	\includegraphics[width=6cm]{prac1_hardware_myrio.jpg}
-\end{figure}
-\end{frame}
+  \begin{frame}{Hardware}
+  Get into a small group, and acquire 
+  \vspace{-0.2cm}
+  \begin{multicols}{2}
+  \begin{itemize}
+  	\item a QUBE unit,
+  	\item a MyRIO real-time controller,
+  	\item a ribbon cable to connect the two,
+  	\item two power cables (one for the QUBE, one for the MyRIO),
+  	\item and a red inertia disk.
+  \end{itemize}  
+  \end{multicols}
+  \vspace{-0.2cm}
+  These components only assemble one way. The ribbon cable is difficult to work with, please don't force it and ask for help if need be. 
+  \vspace{-0.2cm}
+  \begin{figure}
+  	\centering
+  	\includegraphics[width=6cm]{prac1_hardware_myrio.jpg}
+  \end{figure}
+  \PORTFOLIO{Take a photograph of your setup.}
+  \end{frame}
 \fi
 
 \begin{frame}{Software}
 Once the physical plant is assembled, 
 \begin{enumerate}
-\item Download the Simulink model \texttt{QubeModel\_CARM.slx} from Canvas
+\item Download the Simulink model \texttt{\SLX.slx} from Canvas
 \item Create a folder named “\textsf{Prac\_1}” in your student U: drive
 \item Save the Simulink model in this folder and open it with Matlab/Simulink
-\item Create a Matlab script named “\textsf{Prac\_1}” to accompany your Simulink file
+\item Create a Matlab script named “\textsf{Prac\_1.m}” to accompany your Simulink file
 \end{enumerate}
 
 Note that no spaces, punctuation (like hyphens), or special characters are permitted in Matlab file names.
@@ -102,11 +108,11 @@ Note that no spaces, punctuation (like hyphens), or special characters are permi
 \SUBCONCEPT{Operating the hardware}
 
 \begin{frame}{Inputs and outputs}
-The `QUBE - Inertia Disk' block in the \texttt{QubeModel\_CARM.slx} Simulink model template contains the code needed to interface with the QUBE. For the purposes of these practicals we have simplified the inputs and outputs.
+The `QUBE - Inertia Disk' block in the \texttt{\SLX.slx} Simulink model template contains the code needed to interface with the QUBE. For the purposes of these practicals we have simplified the inputs and outputs.
 
 \begin{itemize}
-	\item \textbf{Input} - voltage that eventuates as a torque on the attached disk, in volts
-	\item \textbf{Output} - angle from the initial position, in radians
+	\item \textbf{Input} -- voltage that eventuates as a torque on the attached disk, in volts
+	\item \textbf{Output} -- angle from the initial position, in radians
 \end{itemize}
 
 \begin{figure}
@@ -185,7 +191,7 @@ The output angle is measured using an encoder which divides the range of motion 
 
 \begin{frame}{Manual control}
 \begin{enumerate}
-	\item Change the simulation time back to inf
+	\item Change the simulation time back to \texttt{inf}
     \item Disconnect the step input to the QUBE by clicking on the line and pressing delete
     \item Run the model and manually control the disk to create a waveform
     \end{enumerate}
@@ -251,7 +257,7 @@ The discrete steps from the encoder can be effectively smoothed out by the low p
 \end{frame}
 
 \begin{frame}{Low-pass filter}
- A good guess might be 50 rad/s to start, but experiment with different cutoff frequencies to get an idea of what range we need. The key is to get a smooth signal without introducing too much time lag. The following figure shows that the filter does smooth the curve, but also introduces a time lag (i.e. shifts to the right).
+ A good guess might be \qty{50}{rad/s} to start, but experiment with different cutoff frequencies to get an idea of what range we need. The key is to get a smooth signal without introducing too much time lag. The following figure shows that the filter does smooth the curve, but also introduces a time lag (i.e., shifts to the right).
 \begin{figure}
 	\centering
 	\includegraphics[width=7cm]{prac1_filtered.png}
@@ -261,7 +267,7 @@ The discrete steps from the encoder can be effectively smoothed out by the low p
 \end{frame}
 
 \begin{frame}{Sinusoidal input}
- It might be more intuitive to look at a sine input instead of a step input --- you have freedom to customise the model. Here we have a sine wave with an amplitude of \SI{0.5}{V} and a frequency of \(2\pi\) rad/s (\SI{1}{Hz}, or \(1\) period per second). What is happening in the figure below?
+It might be more intuitive to look at a sine input instead of a step input --- you have freedom to customise the model. Here we have a sine wave with an amplitude of \SI{0.5}{V} and a frequency of \(2\pi\) rad/s (\SI{1}{Hz}, or \(1\) period per second). What is happening in the figure below?
 \begin{figure}
 	\centering
 	\includegraphics[width=10cm]{prac1_Sine wave.png}
@@ -270,12 +276,12 @@ The discrete steps from the encoder can be effectively smoothed out by the low p
 \PORTFOLIO{Take a screenshot of your block diagram scope.}
 \end{frame}
 
-\SUBCONCEPT{Programmatic interfacing}
+\SUBCONCEPT{Running Simulink from Matlab (programmatic interfacing)}
 
 \begin{frame}{Programmatic control of the model}
 It is important to understand how we can interact with the Simulink model programmatically with MATLAB code.
 \begin{enumerate}
-    \item Open ``Prac\_1.m" and copy the following code
+    \item Open \textsf{Prac\_1.m} and copy the following code
     \item Observe what happens in the block diagram when you run this code snippet
 \end{enumerate}
 \includematlab{Prac_1.m}{partA}
@@ -313,9 +319,9 @@ After having altered the inputs to the QUBE, we can now see how the outputs chan
 
 
 \begin{frame}{Next week}
-	This week you learned how to set up and operate the QUBE, filter the output signal, and interface MATLAB code with a Simulink block diagram.
+This week you learned how to set up and operate the QUBE, filter the output signal, and interface MATLAB code with a Simulink block diagram.
 	
-	For control purposes, it is often very beneficial to first derive a model or characterise the output response of a system. Next week we will step through these processes for the QUBE inertia disk system.
+For control purposes, it is often very beneficial to first derive a model or characterise the output response of a system. Next week we will step through these processes for the QUBE inertia disk system.
 \end{frame}
 
 \end{document}
