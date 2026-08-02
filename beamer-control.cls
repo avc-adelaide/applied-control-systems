@@ -11,7 +11,7 @@
 %% PATHS %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{graphicx}
+\usepackage{graphicx,fontawesome5}
 
 \def\PATHSETUP#1{
   \def\input@path{#1}
@@ -450,8 +450,12 @@
 
 \AtEndDocument{\FINALESLIDE}
 
-\newcommand\PORTFOLIO[1]{\fbox{\alert{\textbf{Portfolio:} #1}}}
-
+% \faFile from fontawesome5 package
+\newcommand\PORTFOLIO[1]{%
+  \fcolorbox{AUHighlight}{white}{%
+    \alert{\faFile*[regular]~\textbf{Portfolio:} \emph{#1}~\faFile*[regular]}%
+  }%
+}
 
 % fix TOC spacing
 \makeatletter

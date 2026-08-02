@@ -1,10 +1,20 @@
 
-\documentclass[9pt]{beamer-control}
+\providecommand\MYRIO{F}
+
+\if\MYRIO F\relax
+  \def\LOC{City East CARM Lab}
+  \def\SLX{QubeModel_CARM_v1}
+\else
+  \def\LOC{Mawson Lakes --- MyRIO controller}
+  \def\SLX{QubeModel_MyRIO_v1}
+\fi
+
+\documentclass[8pt]{beamer-control}
 \usepackage{beamer-control-prac}
 \begin{document}
 
 \TOPIC[1]{System Response}
-\CONCEPT[1]{Week 1: Introduction to software and hardware (\alert{City East CARM Lab})}
+\CONCEPT[1]{Week 1: Introduction to software and hardware (\LOC)}
 
 \begin{frame}
 \frametitle{Introduction}
@@ -21,40 +31,69 @@ This practical will consist of the following parts:
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Portfolio}
+Saving your weekly progress will be essential in this course for both your portfolio and to draw upon in later weeks. There will be some reminders as you go, e.g.:
+\PORTFOLIO{Take a screenshot!}
+
+Your portfolio will be submitted every second practical and with every assignment. You are encouraged to also use the portfolio for your general weekly notes and workshop activities.
+\end{frame}
+
+
 \SUBCONCEPT{Setting up}
 
+\if\MYRIO F\relax
 \begin{frame}{Hardware}
 Get into a small group, and acquire 
 \vspace{-0.2cm}
+\begin{multicols}{2}
 \begin{itemize}
 	\item a QUBE unit,
-	\item a green printed circuit board (PCB),
-	\item a power cable,
-	\item and a red inertia disk.
+	\item a green circuit board (PCB),
+	\item a power cable, and
+	\item a red inertia disk.
 \end{itemize}  
+\end{multicols}
 \vspace{-0.2cm}
 These components only assemble one way. In particular, ensure the ribbon cable is inserted correctly into the PCB (align the notch on the ribbon cable connector with the corresponding gap in the plastic PCB connector).
 \vspace{-0.2cm}
 \begin{figure}
 	\centering
-	\includegraphics[width=6cm]{prac1_hardware.png}
+	\includegraphics[width=5cm]{prac1_hardware.png}
 \end{figure}
-
-
+\PORTFOLIO{Take a photograph of your setup.}
 \end{frame}
-
+\else
+\begin{frame}{Hardware}
+Get into a small group, and acquire 
+\vspace{-0.2cm}
+\begin{itemize}
+	\item a QUBE unit,
+	\item a MyRIO real-time controller,
+	\item a ribbon cable to connect the two,
+	\item two power cables (one for the QUBE, one for the MyRIO),
+	\item and a red inertia disk.
+\end{itemize}  
+\vspace{-0.2cm}
+These components only assemble one way. The ribbon cable is difficult to work with, please don't force it and ask for help if need be. 
+\vspace{-0.2cm}
+\begin{figure}
+	\centering
+	\includegraphics[width=6cm]{prac1_hardware_myrio.jpg}
+\end{figure}
+\end{frame}
+\fi
 
 \begin{frame}{Software}
 Once the physical plant is assembled, 
 \begin{enumerate}
-\item Download the Simulink model \texttt{QubeModel.slx} from Canvas
-\item Open this file in Matlab 2026b/Simulink and save it in a separate folder named “\textsf{Prac\_1}”
+\item Download the Simulink model \texttt{QubeModel\_CARM.slx} from Canvas
+\item Create a folder named “\textsf{Prac\_1}” in your student U: drive
+\item Save the Simulink model in this folder and open it with Matlab/Simulink
 \item Create a Matlab script named “\textsf{Prac\_1}” to accompany your Simulink file
 \end{enumerate}
 
-Saving your weekly progress will be essential in this course in order to draw upon in later weeks. Note that no spaces, punctuation (like hyphens), or special characters are permitted in Matlab file names.
-
-\PORTFOLIO{Insert a screenshot of your Matlab setup.}
+Note that no spaces, punctuation (like hyphens), or special characters are permitted in Matlab file names.
 
 \end{frame}
 
@@ -63,7 +102,7 @@ Saving your weekly progress will be essential in this course in order to draw up
 \SUBCONCEPT{Operating the hardware}
 
 \begin{frame}{Inputs and outputs}
-The block in the Simulink model contains the code needed to interface with the QUBE. For the purposes of these practicals we have simplified the inputs and outputs. 
+The `QUBE - Inertia Disk' block in the \texttt{QubeModel\_CARM.slx} Simulink model template contains the code needed to interface with the QUBE. For the purposes of these practicals we have simplified the inputs and outputs.
 
 \begin{itemize}
 	\item \textbf{Input} - voltage that eventuates as a torque on the attached disk, in volts
@@ -75,7 +114,7 @@ The block in the Simulink model contains the code needed to interface with the Q
 	\includegraphics[width=8cm]{prac1_qube_simulink.png}
 	\caption{Simulink QUBE model.}
 \end{figure}
-
+You will be modifying both the input and output in this practical.
 
 \end{frame}
 
@@ -87,18 +126,33 @@ The block in the Simulink model contains the code needed to interface with the Q
 	\begin{enumerate}
 		\item For an initial input, insert a step function block (Step) with default parameters\footnote{Hint: double click in a blank part of the model and type \texttt{step}}, this will generate a step signal, i.e. a 0 volts for 1 second, and 1 volt after 1 second
 		\item Also attach a Scope block to the output of the plant to read the angular displacement
+        \item Change the Stop Time from inf to 10 seconds, found in the `Hardware tab', in `Run on Hardware'. If kept as inf, the disk will spin forever (try this)
 		\item You may then build the model (CTRL-B) and connect to the target and then run (note that building the model may take up to 60 seconds)
 	\end{enumerate}
 
 \end{frame}
 
 \begin{frame}{Operating the QUBE}
-	The following figure labels the important functions on the toolbar under the Hardware tab and shows the simple Simulink model.
-\begin{figure}
+	Run the model and watch the disk! The following figure labels the important functions on the toolbar under the Hardware tab and shows the simple Simulink model.
+    \begin{figure}
 	\centering
 	\includegraphics[width=8cm]{prac1_simulink.png}
 	\caption{Simulink toolbar.}
-\end{figure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Viewing the data}
+\begin{enumerate}
+	\item Double click on the Scope in the block diagram to view the plot
+    \item The plot data will likely have gone out of the scope window limits. Play around with the zoom buttons to learn their functions. You can also click and drag with the mouse in the scope window
+    \item Always label your plots! You can turn on the X-axis label and define a Y-axis label in the scope settings. The plot legend labels are updated by double-clicking the line/trace entering the scope and writing a name
+    \end{enumerate}
+    \begin{figure}
+	\centering
+	\includegraphics[width=3.5cm]{prac1_Step Scope.PNG}
+	\caption{Simulink scope.}
+    \end{figure}
+    \PORTFOLIO{Take a screenshot of your scope.}
 \end{frame}
 
 
@@ -110,16 +164,38 @@ The output angle is measured using an encoder which divides the range of motion 
 \item Therefore, the encoder output (in ticks) may be converted to radians by multiplying by $\tfrac{2\pi}{2048}$ (this is done within the Simulink QUBE subsystem).
 \item \emph{In general it is critical to understand the format of the output from the device for control purposes i.e. units, scale, resolution, sensitivity etc.}
 \end{itemize}
+
+  \begin{figure}
+	\centering
+	\includegraphics[width=5cm]{prac1_UnitConversion.png}
+	\caption{Double-click on the `QUBE - Inertia Disk' block to find this configuration.}
+\end{figure}
+
 \end{frame}
 
 \begin{frame}{Discretisation}
-	The following figure demonstrates the discretisation of the encoder.
+	The following figure demonstrates the discretisation of the encoder, where the time between vertical steps is the sampling rate.
 	\begin{figure}
 		\centering
 		\includegraphics[width=8cm]{prac1_discretised_signal.png}
 		\caption{Discretised signal from encoder.}
 	\end{figure}
 	
+\end{frame}
+
+\begin{frame}{Manual control}
+\begin{enumerate}
+	\item Change the simulation time back to inf
+    \item Disconnect the step input to the QUBE by clicking on the line and pressing delete
+    \item Run the model and manually control the disk to create a waveform
+    \end{enumerate}
+    \begin{figure}
+	\centering
+	\includegraphics[width=6cm]{prac1_Manual Block Diagram.PNG}\hfill
+    \includegraphics[width=3.5cm]{prac1_Manual Scope.PNG}
+	\caption{Simulink block diagram and scope.}
+    \end{figure}
+    \PORTFOLIO{Take a screenshot of your scope.}
 \end{frame}
 
 
@@ -149,6 +225,7 @@ The discrete steps from the encoder can be effectively smoothed out by the low p
 \begin{enumerate}
 	\item Add the low-pass filter \textsf{Transfer Fcn} block to the output signal
 	\item Connect a scope before and after the filter to visualise the effects of filtering
+    \item Set the simulation time to 2 seconds
 	\item Run the QUBE and compare the pre-filtered and filtered signals to get an intuitive feel for an appropriate cut-off frequency
 \end{enumerate}
  
@@ -160,16 +237,83 @@ The discrete steps from the encoder can be effectively smoothed out by the low p
 \end{frame}
 
 \begin{frame}{Low-pass filter}
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item You will need to adjust the plot window in order to see the effect of the filter. Do not forget to label the additional line/trace into the scope!
+\end{enumerate}
+ \begin{figure}
+ 	\centering
+ 	\includegraphics[width=5cm]{prac1_Step Limited Time.png}\hfill
+    \includegraphics[width=5cm]{prac1_Step Limited Time Zoom.PNG}
+ 
+ 	\caption{Using the `click and drag' feature to zoom in the Simulink scope.}
+ \end{figure}
+\end{frame}
+
+\begin{frame}{Low-pass filter}
  A good guess might be 50 rad/s to start, but experiment with different cutoff frequencies to get an idea of what range we need. The key is to get a smooth signal without introducing too much time lag. The following figure shows that the filter does smooth the curve, but also introduces a time lag (i.e. shifts to the right).
 \begin{figure}
 	\centering
 	\includegraphics[width=7cm]{prac1_filtered.png}
 	\caption{Output signal in Simulink before and after filter.}
 \end{figure}
+\PORTFOLIO{Take a screenshot of your scope.}
 \end{frame}
 
+\begin{frame}{Sinusoidal input}
+ It might be more intuitive to look at a sine input instead of a step input --- you have freedom to customise the model. Here we have a sine wave with an amplitude of \SI{0.5}{V} and a frequency of \(2\pi\) rad/s (\SI{1}{Hz}, or \(1\) period per second). What is happening in the figure below?
+\begin{figure}
+	\centering
+	\includegraphics[width=10cm]{prac1_Sine wave.png}
+	\caption{Simulink block diagram and scope.}
+\end{figure}
+\PORTFOLIO{Take a screenshot of your block diagram scope.}
+\end{frame}
+
+\SUBCONCEPT{Programmatic interfacing}
+
+\begin{frame}{Programmatic control of the model}
+It is important to understand how we can interact with the Simulink model programmatically with MATLAB code.
+\begin{enumerate}
+    \item Open ``Prac\_1.m" and copy the following code
+    \item Observe what happens in the block diagram when you run this code snippet
+\end{enumerate}
+\includematlab{Prac_1.m}{partA}
+\end{frame}
+
+\begin{frame}{Data export and processing}
+After having altered the inputs to the QUBE, we can now see how the outputs change --- potentially comparing the data across multiple simulations (e.g. different low-pass cut-off frequencies).
+\begin{enumerate}
+    \item Open the scope settings, navigate to the `logging' drop-down section, then: tick log data to workspace; set a variable name; and change the save format to structure with time.
+\end{enumerate}
+\begin{figure}
+	\centering
+	\includegraphics[width=5.5cm]{prac1_scopesettings.png}
+	\caption{Simulink scope settings for data logging.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Data export and processing}
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item Run the Simulink model and see if the output appears in the MATLAB workspace
+    \item Copy the following code to generate an equivalent plot in MATLAB to the Simulink scope
+\end{enumerate}
+\includematlab{Prac_1.m}{partB}
+\end{frame}
+
+\begin{frame}{Data export and processing}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item To plot multiple channels from the scope you will need to update the code, as below
+\end{enumerate}
+\includematlab{Prac_1.m}{partC}
+\PORTFOLIO{Take a screenshot of your MATLAB plot.}
+\end{frame}
+
+
 \begin{frame}{Next week}
-	This week you learned how to set up and operate the QUBE, and filter the output signal.
+	This week you learned how to set up and operate the QUBE, filter the output signal, and interface MATLAB code with a Simulink block diagram.
 	
 	For control purposes, it is often very beneficial to first derive a model or characterise the output response of a system. Next week we will step through these processes for the QUBE inertia disk system.
 \end{frame}
