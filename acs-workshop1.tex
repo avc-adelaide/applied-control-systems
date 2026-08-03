@@ -104,7 +104,7 @@ In this workshop, we will introduce the Matlab and Simulink environments and use
  (If you are using quite an old version of Matlab, you'll need to put the function at the end of the file)
 \item What are the states of this system?
 \item Is acceleration a state? Why or why not?
-\item Spend a couple minutes experimenting with different values of $m$, $c$, $k$, and initial conditions (e.g. try doubling the mass, or halfing the spring stiffness)
+\item Spend a couple minutes experimenting with different values of $m$, $c$, $k$, and initial conditions (e.g. try doubling the mass, or halving the spring stiffness)
 \item Can any of these values be negative? What happens?
 \item Plot a phase diagram of this system ($\dot x$ vs $x$)
 \end{itemize}
@@ -155,7 +155,8 @@ Create and save the model with a filename like \texttt{topic1model.slx}
 \begin{frame}
 \frametitle{Create some blocks}
 \begin{itemize}
-\item Double click in the empty space and type `Sine' to insert a sinusoid source
+\item Click on \Mbutton{Library Browser} and explore some of the available blocks
+\item Double click in the empty space of your model and type `Sine Wave' to insert a sinusoid `asourcee'tw
 \item Double click and type 'Scope' to insert a graphing output (or `sink')
 \item Click the arrows to join the source to the scope. Then click \Mbutton{Run} and double click the Scope:
 \end{itemize}
@@ -169,7 +170,7 @@ Create and save the model with a filename like \texttt{topic1model.slx}
 \frametitle{Setting up variables}
 \begin{itemize}
 \item
-Double click the Sine block and change the amplitude to \CODE{AA} and the frequency to \CODE{ww}
+Double click the Sine Wave block and change the amplitude to \CODE{AA} and the frequency to \CODE{ww}
 \item
 Because these variables aren't (yet) defined in Matlab you'll see some red warning `glow'
 \item
@@ -200,9 +201,9 @@ Below your \CODE{sim()} command, add:
 \includematlab{workshop1.m}{slx2}
 \begin{itemize}
 \item
-Add a new variable \CODE{tmax = 20;} and figure out how to parameterise this in the Simulink model
+Add a new variable \CODE{tmax = 20;} and figure out how to use it to set the `Stop Time' of the Simulink model
 \item
-You can now set up a model in Simulink and produce results
+You can now set up a model in Simulink and produce results in a nicely general way
 \end{itemize}
 
 \end{frame}
@@ -249,7 +250,7 @@ You'll need the following blocks:
 \begin{itemize}
 \item Internally Simulink is using the Matlab \CODE{ode45} solver (by default) --- but it's much easier to set up complex models with block diagrams like this
 \item Go to tab \Mbutton{Modeling} and click button \Mbutton{Model Settings} to improve fidelity
-\item E.g., \Mbutton{Solver details} > \Mbutton{Relative tolerance} = \texttt{1e6}\\
+\item E.g., \Mbutton{Solver details} > \Mbutton{Relative tolerance} = \texttt{1e-6}\\
       (yes, this can be parameterised too)
 \item Note the default step response starts at $t=1$ seconds --- nonstandard
 \end{itemize}

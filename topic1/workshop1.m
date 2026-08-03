@@ -32,32 +32,30 @@ ylabel("Signal")
 
 %<*msd>
 %% Mass-spring-damper
-%
 % Let's solve an ODE numerically. Take the mass-spring-damper model:
 % $$ m\ddot x = - k x - c \dot x $$
 
-k = 10; % stiffness, N/m
-c = 1; % damping, kg/s
-m = 2; % mass, kg
-
 function dq = mass_spring_damper(q,param)
   k = param(1); c = param(2); m = param(3);
-  x   = q(1);
-  dx  = q(2);
+  x = q(1); dx = q(2);
   ddx = - k/m*x - c/m*dx;
   dq  = [dx; ddx];
 end
 
 tmax = 10; % s
 x0  = 0.1; % initial position, m
-dx0 = 0; % initial velocity, m/s
-[t,x] = ode45(@(tt,xx) mass_spring_damper(xx,[k,c,m]),[0 tmax],[x0; dx0]);
+dx0 = 0.0; % initial velocity, m/s
+k = 10;    % stiffness, N/m
+c = 1;     % damping, kg/s
+m = 2;     % mass, kg
+[time,state_output] = ode45(@(tt,qq) mass_spring_damper(qq,[k,c,m]),...
+    [0,tmax], [x0; dx0]);
 
 figure(3); clf; hold on
-plot(t,x)
+displ = state_output(:,1); vel = state_output(:,2);
+plot(time,displ,time,vel)
 box on; grid on
-xlabel("Time, s")
-ylabel("Signal")
+xlabel("Time, s"); ylabel("Signal")
 legend("Displacement","Velocity")
 %</msd>
 
