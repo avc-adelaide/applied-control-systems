@@ -106,6 +106,8 @@ $(BUILD)/%.pdf: %.tex
 	cd $(BUILD); $(LATEX) $*
 	echo "\n\nDone!\n\n"
 
+acs-prac1-myrio.tex: acs-prac1.tex
+
 $(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.sty
 	mkdir -p $(BUILD)/worked-examples
 	cp -f $< $(BUILD)/worked-examples/
