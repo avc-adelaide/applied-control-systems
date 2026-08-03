@@ -10,6 +10,8 @@ texsty   = $(wildcard *.cls) $(wildcard *.sty) $(wildcard *.bib) applied-control
 notesrc  = applied-control-systems.tex
 topcsrc  = $(wildcard acs-0-*.tex) $(wildcard acs-1-*.tex) $(wildcard acs-2-*.tex) $(wildcard acs-3-*.tex)
 pracsrc  = $(wildcard acs-prac*.tex)
+pracsrc_myrio := $(filter %-myrio.tex,$(pracsrc))
+$(foreach m,$(pracsrc_myrio),$(eval $(BUILD)/$(m:.tex=.pdf): $(patsubst %-myrio.tex,%.tex,$(m))))
 worksrc  = $(wildcard acs-workshop*.tex)
 examplesrc = $(wildcard worked-examples/we-*.tex)
 extrafiles = $(notdir $(wildcard extra/*.*))
@@ -86,7 +88,7 @@ $(EXTRA)/%: extra/%
 
 $(BUILD)/%.pdf: %.tex
 	mkdir -p $(BUILD)
-	cp -f $< $(BUILD)/
+	cp -f $^ $(BUILD)/
 	cp -f $(texsty) $(BUILD)/
 	cp -f $(topcsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
