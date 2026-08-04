@@ -19,10 +19,10 @@ set_param('QubeModel/Low-pass filter (rad)', ...
 %</partA>
 %<*partB>
 
-% Extract the Simulink scope output data structure (scopeData) with one channel
+% Extract the Simulink scope output data structure (ScopeData) with one channel
 
-t = scopeData.time;
-y = scopeData.signals.values;
+t = ScopeData.time;
+y = ScopeData.signals.values;
 
 figure(1); clf;
 plot(t, y);
@@ -31,11 +31,11 @@ xlabel('Time, s')
 ylabel('Amplitude')
 %</partB>
 %<*partC>
-% Extract the Simulink scope output data structure (scopeData) with two channels
+% Extract the Simulink scope output data structure (ScopeData) with two channels
 
-t = scopeData.time;
-y1 = scopeData.signals(1).values;
-y2 = scopeData.signals(2).values;
+t = ScopeData.time;
+y1 = ScopeData.signals(1).values;
+y2 = ScopeData.signals(2).values;
 
 figure(2); clf; hold on;
 plot(t, y1);

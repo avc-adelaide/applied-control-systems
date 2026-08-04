@@ -151,12 +151,13 @@ You will be modifying both the input and output in this practical.
 \begin{enumerate}
 	\item Double click on the Scope in the block diagram to view the plot
     \item The plot data will likely have gone out of the scope window limits. Play around with the zoom buttons to learn their functions. You can also click and drag with the mouse in the scope window
-    \item Always label your plots! You can turn on the X-axis label and define a Y-axis label in the scope settings. The plot legend labels are updated by double-clicking the line/trace entering the scope and writing a name
+    \item Always label your plots! You can turn on the X-axis label and define a Y-axis label in the scope settings. The plot legend labels are updated by double-clicking the signal (line/trace) entering the scope in the block diagram and writing a name
     \end{enumerate}
     \begin{figure}
 	\centering
-	\includegraphics[width=3.5cm]{prac1_Step Scope.PNG}
-	\caption{Simulink scope.}
+	\includegraphics[width=3.5cm]{prac1_Step Scope.PNG}\hspace{1cm}
+    \includegraphics[width=3.5cm]{prac1_signallabel.PNG}
+	\caption{Simulink scope and naming a signal.}
     \end{figure}
     \PORTFOLIO{Take a screenshot of your scope.}
 \end{frame}
@@ -282,6 +283,7 @@ It might be more intuitive to look at a sine input instead of a step input --- y
 It is important to understand how we can interact with the Simulink model programmatically with MATLAB code.
 \begin{enumerate}
     \item Open \textsf{Prac\_1.m} and copy the following code
+    \item Fix the code if an error appears when trying to run --- think about naming and what the code is trying to achieve
     \item Observe what happens in the block diagram when you run this code snippet
 \end{enumerate}
 \includematlab{Prac_1.m}{partA}
