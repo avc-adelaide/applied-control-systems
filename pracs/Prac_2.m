@@ -31,7 +31,7 @@ step(model_inertia_disk)
 xlim([0, 1.5])
 
 %% Part 2
-hold on 
+hold on
 
 m= 22.6;
 % ITD parameters
@@ -53,7 +53,7 @@ xlim([0, 2.5])
 close all
 modelname = 'QubeModel';
 
-% Update the sine wave block in Simulink programmatically 
+% Update the sine wave block in Simulink programmatically
 amp =           % V (peak limited to 2V)
 freq =          % Hz
 
@@ -64,7 +64,7 @@ set_param(modelname, 'DefaultParameterBehavior','Tunable');
 results = cell(length(amp),length(freq));
 %</part1>
 %<*part2>
-figure;
+figure(77); clf;
 for aa = 1:length(amp)
     for ff = 1:length(freq)
 
@@ -95,9 +95,9 @@ results{aa,ff}=ScopeData;
 
 % Plot the results as they come
 subplot(length(amp),length(freq),sub2ind(size(results),aa,ff))
+cla; hold on; grid on
 
 plot(ScopeData.time, ScopeData.signals(1).values);
-hold on; grid on
 plot(ScopeData.time, ScopeData.signals(2).values);
 
 title(sprintf('Amplitude %.2fV, Frequency %0.2fHz',amp(aa),freq(ff)))
