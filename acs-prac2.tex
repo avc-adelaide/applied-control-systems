@@ -14,7 +14,8 @@ In this practical, you will learn how to derive a first-principles model of the 
 This practical will consist of the following parts:
 \begin{itemize}
 \item First-principles modelling
-\item Characterising the output response
+\item Characterising the output response and comparing real and simulated models 
+\item Looping multiple simulations
 \end{itemize}
 \end{frame}
 
@@ -22,6 +23,14 @@ This practical will consist of the following parts:
 \SUBCONCEPT{First-principles modelling}
 
 \begin{frame}{Deriving the model}
+
+Ensure you have done the initial housekeeping:
+\begin{itemize}
+\item Create a new folder for “\textsf{Prac\_2}” in your student U: drive;
+\item Copy the Simulink template (or your configured Simulink model) from Practical 1.
+\item Add an empty MATLAB script to the folder.
+\end{itemize}
+
 We begin by deriving a first principles model of the inertia disk. A schematic diagram of the motor armature circuit is shown below.
 
 \begin{figure}
@@ -87,6 +96,10 @@ Using these values
 	\item Run the code to simulate the systems reponse to a step input 
 \end{enumerate}
 
+How would you find (and plot) the slope of this line?
+
+\PORTFOLIO{Take a screenshot of the figure output from 0-1.5 seconds.}
+
 \end{frame}
 
 \begin{frame}{Simulating the model}
@@ -103,6 +116,10 @@ Similarly, we can use Simulink to simulate the state space model.
 \end{enumerate}
 
 What do you notice?
+
+Remember to always label your plot axes and signals (lines in the Simulink block diagram).
+
+\PORTFOLIO{Take a screenshot of the scope output.}
 
 \end{frame}
 
@@ -149,6 +166,67 @@ An alternative method to deriving a first principles model is to identify the sy
 	\includematlab{prac1.m}{part2}
 \end{frame}
 
+\begin{frame}{Simulink scope measurements}
+	\begin{figure}
+		\centering
+		\includegraphics[width=10cm]{prac2_scope_slope.PNG}
+		\caption{A quick method for finding ITD model parameters. Ensure the system has reached a `steady-state' response.}
+	\end{figure}
+    \PORTFOLIO{Show how you determined your ITD model parameters.}
+\end{frame}
+
+\begin{frame}{Model comparison}
+    \begin{itemize}
+        \item Compare all results on the same plot. Ensure the scope is appropriately set up to log data. If unsure, refer to Practial 1 (or your Portfolio).
+        \item You may need to adjust the time-domain signals to ensure all step responses begin at the same time. Alternatively, you can adjust the step starting time within Simulink.
+        \item What is the difference between the MATLAB and Simulink state-space models?
+    \end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=5cm]{prac2_combined_plot_zoom.PNG}\hfill
+        \includegraphics[width=5cm]{prac2_combined_plot.PNG}
+		\caption{Comparison of the state-space model, ITD model, and real system.}
+	\end{figure}
+\end{frame}
+\begin{frame}{Model comparison}
+\PORTFOLIO{Take a screenshot of the figure(s).}
+
+    \PORTFOLIO{Comment on what model `worked best'.}
+\end{frame}
+\SUBCONCEPT{Looping multiple simulations}
+
+\begin{frame}{Iterating through Simulink parameters}
+    \begin{enumerate}
+        \item Copy the following code and create two arrays (\texttt{amp} and \texttt{freq}) with 2 different parameters each.
+    \end{enumerate}
+    \includematlab{Prac_2.m}{part1}
+\end{frame}
+\begin{frame}{Looping multiple simulations}
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item Copy the following code which loops through all combinations of  \texttt{amp} and \texttt{freq}. In each loop the Simulink model is updated and started, then the code waits for the simulation to finish.
+    \end{enumerate}
+    \includematlab{Prac_2.m}{part2}
+\end{frame}
+
+\begin{frame}{Looping multiple simulations}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item In Simulink, replace the Step block with the Sine Wave block.
+        \item Copy the following code and find an appropriate location to place it!
+    \end{enumerate}
+    \includematlab{Prac_2.m}{part3}
+\end{frame}
+
+\begin{frame}{.}
+	\begin{figure}
+		\centering
+		\includegraphics[width=8cm]{prac2_iteration.png}
+		\caption{Observing and simulating the system across a range of sinusoidal inputs, varying voltage (amplitude) and frequency.}
+	\end{figure}
+    \PORTFOLIO{Take a screenshot of your simulated model.}
+    \PORTFOLIO{\small Comment on the state-space model accuracy with varying parameters.}
+\end{frame}
 
 \begin{frame}{Next week}
 	This week you derived a state-space model of the inertia disk and characterised its output as an ITD model.

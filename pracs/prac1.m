@@ -20,12 +20,15 @@ model_inertia_disk = ss(A,B,C,D);
 
 % Define state, input, and output names
 State_names = str2mat('theta','omega');
-set(model_inertia_disk,'StateName',Statenames);
+set(model_inertia_disk,'StateName',State_names);
 set(model_inertia_disk,'InputName',{'V\_{command}'},...
 'OutputName',{'theta'}); 
 
 % Simulate system response to a step input
 step(model_inertia_disk)
+
+% To customise the output, return the variables then manually plot
+% [x,y] = step(model_inertia_disk)
 %</part1>
 
 
