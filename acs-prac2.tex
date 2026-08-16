@@ -1,7 +1,7 @@
 \documentclass[9pt]{beamer-control}
 \usepackage{beamer-control-prac}
 \begin{document}
-	
+
 	\TOPIC[1]{System Response}
 	\CONCEPT[2]{Week 2: Characterising and modelling systems}
 
@@ -14,7 +14,7 @@ In this practical, you will learn how to derive a first-principles model of the 
 This practical will consist of the following parts:
 \begin{itemize}
 \item First-principles modelling
-\item Characterising the output response and comparing real and simulated models 
+\item Characterising the output response and comparing real and simulated models
 \item Looping multiple simulations
 \end{itemize}
 \end{frame}
@@ -41,7 +41,7 @@ We begin by deriving a first principles model of the inertia disk. A schematic d
 \end{frame}
 
 \begin{frame}{Deriving the model}
-The DC motor shaft with moment of inertia $J_m$ is connected to the load hub which is a metal disc used to mount the inertia disc and has a moment of inertia of $J_h$. The back-emf (electromotive) voltage $e_b(t)$ depends on the speed of the motor shaft, $\omega_m$, and the back-emf constant of the motor $k_m$ and opposes the current flow. The back-emf voltage is given by 
+The DC motor shaft with moment of inertia $J_m$ is connected to the load hub which is a metal disc used to mount the inertia disc and has a moment of inertia of $J_h$. The back-emf (electromotive) voltage $e_b(t)$ depends on the speed of the motor shaft, $\omega_m$, and the back-emf constant of the motor $k_m$ and opposes the current flow. The back-emf voltage is given by
 \[e_b(t) = k_m \omega _m (t) \]
 Using Kirchoff's Voltage Law, we can write
 \[v_m(t) - R_m i_m(t)-L_m \frac{\mathrm{d} i_m(t)}{\mathrm{d} t} - k_m \omega_m (t) = 0\]
@@ -61,8 +61,8 @@ The moment of inertia about the disk can be determined by
 
 
 \begin{frame}{Deriving the model}
-These linear differential equations can be assembled in a state space representation as 
-\[\dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad \]	
+These linear differential equations can be assembled in a state space representation as
+\[\dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad \]
 where the state and output vectors are
 \[\mathbf{x} = \begin{bmatrix}
 \theta_m \\ \omega_m
@@ -76,14 +76,14 @@ Setting the input as $\mathbf{u}=v_m$, the matrices are
 \end{bmatrix},
 \mathbf{B} = \begin{bmatrix}
 	0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_d)}
-\end{bmatrix}, 
+\end{bmatrix},
 \mathbf{C} = \begin{bmatrix}
 	1 & 0
 \end{bmatrix},
 \mathbf{D} = \begin{bmatrix}
 	0
 \end{bmatrix}
-\]  
+\]
 \end{frame}
 
 \begin{frame}{Simulating the model}
@@ -91,9 +91,9 @@ The required parameter values for the QUBE inertia disk are $R_m=8.4\Omega$, $k_
 
 Using these values
 \begin{enumerate}
-	\item Define the matrices $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ in Matlab 
+	\item Define the matrices $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ in Matlab
 	\item Use the code on the following slide to set up the state space model in Matlab
-	\item Run the code to simulate the systems reponse to a step input 
+	\item Run the code to simulate the systems reponse to a step input
 \end{enumerate}
 
 How would you find (and plot) the slope of this line?
@@ -136,7 +136,7 @@ Remember to always label your plot axes and signals (lines in the Simulink block
 \SUBCONCEPT{Characterising the output response}
 
 \begin{frame}{Parameter calculation}
-An alternative method to deriving a first principles model is to identify the system by fitting a curve to the output response. 
+An alternative method to deriving a first principles model is to identify the system by fitting a curve to the output response.
 
 \begin{itemize}
 	\item The open loop (no feedback) response of the inertia disk may be modelled as an Integrator with Time Delay (ITD) model which requires two parameters, $a$ and $\tau$
@@ -177,7 +177,7 @@ An alternative method to deriving a first principles model is to identify the sy
 
 \begin{frame}{Model comparison}
     \begin{itemize}
-        \item Compare all results on the same plot. Ensure the scope is appropriately set up to log data. If unsure, refer to Practial 1 (or your Portfolio).
+        \item Compare all results on the same plot. Ensure the scope is appropriately set up to log data. If unsure, refer to Practical 1 (or your Portfolio).
         \item You may need to adjust the time-domain signals to ensure all step responses begin at the same time. Alternatively, you can adjust the step starting time within Simulink.
         \item What is the difference between the MATLAB and Simulink state-space models?
     \end{itemize}
@@ -229,9 +229,11 @@ An alternative method to deriving a first principles model is to identify the sy
 \end{frame}
 
 \begin{frame}{Next week}
-	This week you derived a state-space model of the inertia disk and characterised its output as an ITD model.
-		
-	When we start looking at controlling a system to reach a desired output we will see that deriving models or characterising output responses give us methods of determining good initial control gains for our controllers. Next week we will be introduced to the concept of feedback to control the inertia disk to reach a desired angle. 
+This week you derived a state-space model of the inertia disk and characterised its output as an ITD model.
+
+When we start looking at controlling a system to reach a desired output we will see that deriving models or characterising output responses give us methods of determining good initial control gains for our controllers.
+
+Next week we will be introduced to the concept of feedback to control the inertia disk to reach a desired angle.
 \end{frame}
 
 

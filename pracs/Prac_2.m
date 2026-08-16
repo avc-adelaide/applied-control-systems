@@ -25,7 +25,7 @@ model_inertia_disk = ss(A,B,C,D);
 State_names = str2mat('theta','omega');
 set(model_inertia_disk,'StateName',State_names);
 set(model_inertia_disk,'InputName',{'V\_{command}'},...
-'OutputName',{'theta'});
+                       'OutputName',{'theta'});
 % Simulate system response to a step input
 step(model_inertia_disk)
 xlim([0, 1.5])
@@ -54,6 +54,7 @@ close all
 modelname = 'QubeModel';
 
 % Update the sine wave block in Simulink programmatically
+%(input values yourself)
 amp =           % V (peak limited to 2V)
 freq =          % Hz
 
@@ -61,23 +62,23 @@ freq =          % Hz
 set_param(modelname, 'DefaultParameterBehavior','Tunable');
 
 % Pre-initialise array size
-results = cell(length(amp),length(freq));
+results = cell(numel(amp),numel(freq));
 %</part1>
 %<*part2>
 figure(77); clf;
-for aa = 1:length(amp)
-    for ff = 1:length(freq)
+for aa = 1:numel(amp)
+    for ff = 1:numel(freq)
 
-    % Update the sine wave block parameters
-    set_param(strcat(modelname,'/Sine Wave'), ...
-                 'Amplitude', sprintf('%g', amp(aa)), ...
-                 'Bias', '0',...
-                 'Frequency', sprintf('2*pi*%g', freq(ff)), ...
-                 'Phase', '0' ...
-              );
+        % Update the sine wave block parameters
+        set_param(strcat(modelname,'/Sine Wave'), ...
+                     'Amplitude', sprintf('%g', amp(aa)), ...
+                     'Bias', '0',...
+                     'Frequency', sprintf('2*pi*%g', freq(ff)), ...
+                     'Phase', '0' ...
+                  );
 
-    % Start the Simulink simulation
-    set_param(modelname, 'SimulationCommand','start');
+        % Start the Simulink simulation
+        set_param(modelname, 'SimulationCommand','start');
 
         % Continously poll the simulation status to check if finished
         while ~strcmp(get_param(modelname, 'SimulationStatus'),'stopped')
@@ -94,7 +95,7 @@ end
 results{aa,ff}=ScopeData;
 
 % Plot the results as they come
-subplot(length(amp),length(freq),sub2ind(size(results),aa,ff))
+subplot(numel(amp),numel(freq),sub2ind(size(results),aa,ff))
 cla; hold on; grid on
 
 plot(ScopeData.time, ScopeData.signals(1).values);
@@ -104,5 +105,4 @@ title(sprintf('Amplitude %.2fV, Frequency %0.2fHz',amp(aa),freq(ff)))
 xlabel('Time, s')
 ylabel('Angular position, rad')
 legend('Real System', "State-Space Model", 'Location','Best')
-
 %</part3>
