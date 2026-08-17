@@ -154,11 +154,25 @@ An alternative method to deriving a first principles model is to identify the sy
 	\end{figure}
 \end{frame}
 
+\begin{frame}{Diagnostic --- model check}
+
+The Simulink real-time hardware connection (Quarc) can only log 10,000 samples.
+To make sure all data is collected correctly:
+\begin{itemize}
+    \item Ensure the sample time is \qty{0.01}{s} (\textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} $\to$ \textsf{Sample time})
+    \item Set the \textsf{Stop Time} of the model to \qty{9}{s}
+\end{itemize}
+When characterising the system to find $\tau$ and $a$ based on the ITD model, we need to ensure the step response starts at $t=\qty{0}{s}$:
+\begin{itemize}
+    \item Double click the Step Input block and change the Step Time to \texttt{0}
+\end{itemize}
+
+\end{frame}
 
 \begin{frame}{Characterising the response}
 	Approximate the ITD parameters $a$ and $\tau$ of the open-loop inertia disk.
 	\begin{enumerate}
-		\item Run the Simulink model for 10 seconds to receive the output response to a step input
+		\item Run the Simulink model (\textsf{Monitor \& Tune} button) to receive the output response to a step input
 		\item Open the Scope and click Tools > Measurements > Cursor Measurements to assist in identifying individual points
 		\item The vertical lines which appear may be dragged left and right to select points and specific data is given in the Cursor Measurements box on the right of the scope window
 		\item Use the following Matlab code to simulate the ITD model
@@ -193,7 +207,8 @@ An alternative method to deriving a first principles model is to identify the sy
 
     \PORTFOLIO{Comment on what model `worked best'.}
 \end{frame}
-\SUBCONCEPT{Looping multiple simulations}
+
+\SUBCONCEPT{Looping multiple simulations (extension material)}
 
 \begin{frame}{Iterating through Simulink parameters}
     \begin{enumerate}
