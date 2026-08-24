@@ -88,7 +88,7 @@ $(UPLOAD)/%.pdf: $(BUILD)/%.pdf
 	mkdir -p "$(SHAREPOINT)/PDF"
 	mkdir -p $(UPLOAD)
 	@echo '\n\nUPLOAD\n\n'
-	lua canvas-acs-upload-file.lua $<  &&  cp -f $< $@  &&  cp -f $< "$(SHAREPOINT)/PDF/$*.pdf"
+	lua canvas-acs-upload-file.lua $<  &&  cp -f $< $@  &&  cp -f $< "$(SHAREPOINT)/PDF/$*.pdf" && echo ' ' && echo 'PDF copied to:' && echo '    $(SHAREPOINT)/PDF/$*.pdf'
 
 $(EXTRA)/%: extra/%
 	mkdir -p $(EXTRA)
