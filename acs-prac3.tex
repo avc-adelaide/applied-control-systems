@@ -37,7 +37,7 @@ This practical will consist of the following parts:
 \begin{frame}{Using proportional feedback}
 First let us implement a proportional feedback with gain $K_p$ to control the disk
 \begin{enumerate}
-	\item In Simulink, add a Gain block along with a Sum block and Slider Gain block as in the figure in the following slide. Double click on the Sum block to ensure you are using \textit{negative} feedback.
+	\item In Simulink, add Gain blocks along with a Sum block, Slider Gain block, and Manual Switch as in the figure in the following slide. Double click on the Sum block to ensure you are using \textit{negative} feedback.
 	\item You should change the step value to something other than one, double click on the Step block and change the Final value to $\tfrac{\pi}{2}$ (in Matlab/Simulink, you may use ‘pi’ for the value of pi)
 \end{enumerate}
 Note the proportional gain uses difference between output and the step signal to generate the “error” signal which drives the motor. The plant will then force the motor angle towards the value of the step input. The Slider Gain block is useful for adjustments during operation but is optional.
@@ -51,14 +51,14 @@ Note the proportional gain uses difference between output and the step signal to
 \begin{frame}{Using proportional feedback}
 	\begin{figure}
 		\centering
-		\includegraphics[width=9cm]{prac3_kp.png}
+		\includegraphics[width=11cm]{prac3_Part1A.png}
 		\caption{Applying proportional control to the system.}
 	\end{figure}
 	You’ll need to select an appropriate $K_p.$ Try some large and some smaller values until you get a feel for what each of these does. You are effectively incorporating a virtual spring where $K_p$ is your stiffness. Changing the stiffness in many mechanical devices changes the way systems behave and often dictate important resonances. Hence, adding a virtual spring can be used to accomplish the same result.
 \end{frame}
 
 \begin{frame}{Understanding proportional feedback}
-	You can use a second signal scope to show the motor control signal and see the `proportional error'. Further, you can change the scope units to degrees!
+	You can use a second signal scope to show the motor control signal and see the `proportional error'. Further, you can change the scope units to degrees! Do you want your system to respond quickly or have no overshoot? How close is your system to the setpoint (step response final value, $\pi/2$, $90^\circ$)?
     \begin{figure}
 		\centering
 		\includegraphics[width=5.1cm]{prac3_Kp_step.PNG}
@@ -74,7 +74,7 @@ After finding a good $K_p$ we are ready to additionally implement derivative con
 
 \begin{enumerate}
 	\item Add a Gain block along with a Derivative block to feed back the derivative of the error signal
-	\item As we are working with discretised values of angle from the angular encoder, we must first filter our signal using a low-pass filter as we saw in Week 1, choose an appropriate cutoff frequency $f_c$ = $\omega_c/2\pi$
+	\item As we are working with discretised values of angle from the angular encoder, we must first filter our signal using a low-pass filter as we saw in Week 1, choose an appropriate cutoff frequency $f_c$ = $\omega_c/2\pi$ ($\omega_c=100\;$rad/s is a decent reference to begin tuning from)
 	\item Find an appropriate value for $K_d$ through experimentation
 \end{enumerate}
 
@@ -84,13 +84,13 @@ After finding a good $K_p$ we are ready to additionally implement derivative con
 \begin{frame}{Using derivative feedback}
 		\begin{figure}
 		\centering
-		\includegraphics[width=11cm]{prac3_pd.png}
+		\includegraphics[width=11cm]{prac3_Part1B.png}
 		\caption{Applying derivative control to the system.}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Understanding derivative feedback}
-	Add the `derivative error' to your scope.
+	Add the `derivative error' to your scope. Think about the trade-offs when tuning your P-controller. With a PD-controller, can you both improve the system response time and remove the overshoot?
     \begin{figure}
 		\centering
 		\includegraphics[width=5.1cm]{prac3_KpKd_step.PNG}
@@ -113,10 +113,10 @@ After finding a good $K_p$ we are ready to additionally implement derivative con
 \end{frame}
 
 \begin{frame}{Using integral feedback}
-After appropriate selction of $K_d$, integral control with gain $K_i$ can be introduced by feeding back the integral of the state error. 
+After appropriate selection of $K_d$, integral control with gain $K_i$ can be introduced by feeding back the integral of the state error. 
 
 \begin{enumerate}
-	\item The error signal can be integrated by using a Transfer Fcn block with an integrator, $G(s)=\tfrac{1}{s}$, as well as a Gain block
+	\item The error signal can be integrated by using an Integrator block (or Transfer Fcn block with an integrator, $G(s)=\tfrac{1}{s}$), as well as a Gain block
 	\item Find an appropriate value for $K_i$ through experimentation
 \end{enumerate}
 
@@ -127,20 +127,20 @@ After appropriate selction of $K_d$, integral control with gain $K_i$ can be int
 \begin{frame}{Using integral feedback}
 			\begin{figure}
 		\centering
-		\includegraphics[width=11cm]{prac3_pid.png}
+		\includegraphics[width=11cm]{prac3_Part1C.png}
 		\caption{Applying integral control to the system.}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Understanding integral feedback}
-	Add the `integral error' to your scope.
+	Add the `integral error' to your scope. With your PID-controller, can you improve the steady-state error? Does this have a positive effect on the system response time and overshoot?
     \begin{figure}
 		\centering
 		\includegraphics[width=5.1cm]{prac3_KpKiKd_step.PNG}
         \includegraphics[width=4cm]{prac3_KpKiKd_step_V_lowpass.PNG}
 		\caption{The system with a PID-controller.}
 	\end{figure}
-     \PORTFOLIO{Discuss settling time, overshoot, and steady-state error.}
+    \PORTFOLIO{Discuss settling time, overshoot, and steady-state error.}
     \PORTFOLIO{Take a screenshot of your `best' tuned response.}
     \PORTFOLIO{Are all the P-I-D signals effectively contributing in your system?}
 \end{frame}
@@ -148,7 +148,7 @@ After appropriate selction of $K_d$, integral control with gain $K_i$ can be int
 \begin{frame}{Alternate block diagram}
     \begin{figure}
 		\centering
-		\includegraphics[width=10cm]{prac3_PID_BD.PNG}
+		\includegraphics[width=10cm]{prac3_pid.PNG}
 		\caption{Should a PID controller be in the order P-I-D?}
 	\end{figure}
 \end{frame}
@@ -173,6 +173,30 @@ You may wish to continue plotting the motor input voltage to better assess your 
 \begin{frame}{Creating a series of plots}
 
     Fun code was provided in the extension portion of the previous practical. You can slightly update this code block to vary $K_p$, $K_i$, and $K_d$ programmatically in MATLAB (instead of changing the sine wave amplitude and frequency). This allows rapid iteration of the PID gains --- remember to vary only one $K$ at a time!
+    
+    Pseudo-code for generating the plot is provided below.
+   {\small
+    \begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \ttfamily
+         \item define an array of $K$\\
+         \item create a figure environment\\
+         \item FOR each $K$ in array\\
+         \item  \hspace*{3em} update $K$ in Simulink (via MATLAB workspace)\\
+         \item  \hspace*{3em} start the Simulink code (programmatic monitor and tune) \\
+        \item  \hspace*{3em} wait for Simulink code to stop (disk/motor stops) \\
+        \item  \hspace*{3em} plot the response (e.g. ScopeData.signals.values)
+         \item  END FOR
+         \item configure figure labels, limits, legend,\threedots etc.
+        \end{enumerate}
+    }
+    
+\end{frame}
+
+\begin{frame}{Creating a series of plots}
+
+    \textbf{IMPORTANT:} If your QUBE/Simulink is not automatically running from MATLAB, then an important default setting has gone awry! Do not fear, re-download the QUBE template from the Practical 1 page on MyLearning and copy/paste over your Practical 3 block diagram into a reset workspace.
+    
     \begin{figure}
 		\centering
 		\includegraphics[width=6cm]{prac_3_varKp.png}
