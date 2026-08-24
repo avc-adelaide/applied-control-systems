@@ -29,7 +29,7 @@ This practical will consist of the following parts:
 \end{itemize}
 \begin{figure}
 		\centering
-		\includegraphics[width=3cm]{pracs/prac3_disk_angle.jpg}
+		\includegraphics[width=3cm]{prac3_disk_angle.jpg}
 		\caption{Tip: visually monitor your control system.}
 	\end{figure}
 \end{frame}
@@ -41,9 +41,9 @@ First let us implement a proportional feedback with gain $K_p$ to control the di
 	\item You should change the step value to something other than one, double click on the Step block and change the Final value to $\tfrac{\pi}{2}$ (in Matlab/Simulink, you may use ‘pi’ for the value of pi)
 \end{enumerate}
 Note the proportional gain uses difference between output and the step signal to generate the “error” signal which drives the motor. The plant will then force the motor angle towards the value of the step input. The Slider Gain block is useful for adjustments during operation but is optional.
-	
+
 \textbf{Proportional control uses the \textit{present} error of the state, and acts like a spring.}
-	
+
 \end{frame}
 
 
@@ -113,7 +113,7 @@ After finding a good $K_p$ we are ready to additionally implement derivative con
 \end{frame}
 
 \begin{frame}{Using integral feedback}
-After appropriate selection of $K_d$, integral control with gain $K_i$ can be introduced by feeding back the integral of the state error. 
+After appropriate selection of $K_d$, integral control with gain $K_i$ can be introduced by feeding back the integral of the state error.
 
 \begin{enumerate}
 	\item The error signal can be integrated by using an Integrator block (or Transfer Fcn block with an integrator, $G(s)=\tfrac{1}{s}$), as well as a Gain block
@@ -156,7 +156,7 @@ After appropriate selection of $K_d$, integral control with gain $K_i$ can be in
 \SUBCONCEPT{Manual tuning}
 
 \begin{frame}{Hand tuning the gains}
-Now that we have fully implemented PID control it is best practice to optimise the response of the plant by manually tuning the gains. 
+Now that we have fully implemented PID control it is best practice to optimise the response of the plant by manually tuning the gains.
 
 \begin{enumerate}
 	\item Adapt the PID gains to optimise performance of the controller (you may start with large variations say doubling or halving values, and then focus in with smaller variations)
@@ -173,7 +173,7 @@ You may wish to continue plotting the motor input voltage to better assess your 
 \begin{frame}{Creating a series of plots}
 
     Fun code was provided in the extension portion of the previous practical. You can slightly update this code block to vary $K_p$, $K_i$, and $K_d$ programmatically in MATLAB (instead of changing the sine wave amplitude and frequency). This allows rapid iteration of the PID gains --- remember to vary only one $K$ at a time!
-    
+
     Pseudo-code for generating the plot is provided below.
    {\small
     \begin{enumerate}
@@ -190,26 +190,26 @@ You may wish to continue plotting the motor input voltage to better assess your 
          \item configure figure labels, limits, legend,\dots\ etc.
         \end{enumerate}
     }
-    
+
 \end{frame}
 
 \begin{frame}{Creating a series of plots}
 
     \textbf{IMPORTANT:} If your QUBE/Simulink is not automatically running from MATLAB, then an important default setting has gone awry! Do not fear, re-download the QUBE template from the Practical 1 page on MyLearning and copy/paste over your Practical 3 block diagram into a reset workspace.
-    
+
     \begin{figure}
 		\centering
 		\includegraphics[width=6cm]{prac_3_varKp.png}
 		\caption{Visualising the effect of $K_p$ in a PID controller.}
 	\end{figure}
-    
+
 \end{frame}
 
 
 \begin{frame}{Next week}
 This week you learned how to apply P, I, and D feedback terms in a controller, and how to manually tune these gains.
 
-Often it is very hard to tune the three gains without a good starting point. We will see in the following weeks how a model of the plant or characterisation of the output response of the plant can present initial control gains that offer acceptable control as a precursor to manual tuning. 
+Often it is very hard to tune the three gains without a good starting point. We will see in the following weeks how a model of the plant or characterisation of the output response of the plant can present initial control gains that offer acceptable control as a precursor to manual tuning.
 \end{frame}
 
 
