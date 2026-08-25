@@ -65,7 +65,7 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 		\[a\closedloop(s) = b(s)\left(\frac{a(s)}{b(s)}+k \right) \approx b(s)\left(\frac{s^{\npoleexcess}}{b_0}+k \right)\]
 		\item Therefore, for large $k$, the closed loop poles are approximately the roots of $b(s)$ and $\sqrt[\npoleexcess]{-b_0k}$
 		\item The asymptotes are $\npoleexcess$ lines emanating from the centre of mass of poles and zeros
-		\item When $b_0k>0$, the lines have angles $(\pi+2l\pi)/\npoleexcess$ for $l=1,\cdots,\npoleexcess$ with respect to the real line
+		\item When $b_0k>0$, the lines have angles $(\pi+2l\pi)/\npoleexcess$ for $l=1,\dots,\npoleexcess$ with respect to the real line
 	\end{itemize}
 \end{frame}
 
@@ -74,6 +74,7 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 	\item The root locus plot with loop gain as the varied parameter has $n$ branches that start at the open loop poles and end either at the open loop zeros, or at infinity
 	\item Open loop poles with multiplicity $m$ will create $m$ branches emanating from the open loop pole
 	\item The branches that end at infinity have star-patterned asymptotes
+	\item Open loop systems with right half-plane zeros or with $\npoleexcess \ge 2$ will always be unstable for large gains
 	
 \end{itemize}
 \end{frame}
@@ -86,9 +87,13 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 \[P_a(s)=k\frac{s+1}{s^2}, \quad P_b(s) = k\frac{s+1}{s(s+2)(s^2+2s+4)},\]
 \[P_c(s) = k\frac{s+1}{s(s^2+1)}, \quad P_d(s) = k\frac{s^2+2s+2}{s(s^2+1)}\]
 \end{itemize}
+The root loci trace the roots of the characteristic equation $1 + kP(s) = 0$ as the gain $k$ increases from $k=0$ to $k=\infty$; branches originate at the poles of $P$ (\textsf{x}) and terminate at its zeros (\textsf{o}) or at infinity.
+\end{frame}
+
+\begin{frame}{Some root loci}
 \begin{figure}
 	\centering
-	\includegraphics[width=10cm]{figure12.18}\\
+	\includegraphics[width=\linewidth]{figure12.18}\\
 	\vspace{-0.2cm}
 	\textbf{Figure 12.18:} Examples of root loci.
 \end{figure}
