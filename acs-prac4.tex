@@ -22,20 +22,19 @@ This practical will consist of the following parts:
 \SUBCONCEPT{Controlling angular displacement}
 
 \begin{frame}{Tuning a displacement controller}
-In previous weeks we have characterised the angular output of the QUBE inertia disk as an Integrator with Time Delay (ITD) model. From this output characterisation we can use offline tuning laws to set $K_p$, $K_i$, and $K_d$ which can be found at the end of this document.
+In Practical 2 we have characterised the angular output of the QUBE inertia disk as an Integrator with Time Delay (ITD) model. From this output characterisation we can use offline tuning laws to set $K_p$, $K_i$, and $K_d$ which can be found at the end of this document.
 
 \begin{enumerate}
 \item Find the ITD parameters $a$ and $\tau$ of the inertia disk model 
-\item Using the Ziegler-Nichols tuning law, calculate the corresponding PID gains
+\item Using the Ziegler-Nichols (ZN) tuning law, calculate the corresponding PID gains
 \item Run the plant and controller with these gains and assess the performance to a step input of $\tfrac{\pi}{2}$
-\item Repeat with the ITD Chien-Hrones-Reswick tuning law and compare
+\item Repeat with the Skogestad IMC (SIMC) PI tuning law and compare to ZN
 \end{enumerate}
+\PORTFOLIO{What do you notice about the $K_d$ term in ZN?}
 
-Which offers the better performance?
-
+\PORTFOLIO{Which tuning law offers the better performance?}
 
 \end{frame}
-
 
 \begin{frame}{Tuning a displacement controller}
 	\begin{figure}
@@ -45,7 +44,22 @@ Which offers the better performance?
 	\end{figure}
 \end{frame}
 
+\begin{frame}{Tuning a displacement controller}
+	Instead of using the Simulink Scope cursor to compare your various step responses, you can use the \texttt{stepinfo} MATLAB function, as seen in the workshops.
+    \includematlab{Prac_4.m}{part1}
+    Looking ahead to Practical part 2, you may find the following code snippet useful.
+    \includematlab{Prac_4.m}{part2}
+\end{frame}
 
+\begin{frame}{Tuning a displacement controller}
+	\begin{figure}
+		\centering
+		\includegraphics[width=7.5cm]{prac4_PID tuning laws displacement feedback}
+		\caption{Comparison of a manually tuned trial-and-error PID controller with gains chosen via a PID tuning law (ZN) and a PI tuning law (SIMC).}
+	\end{figure}
+
+     \PORTFOLIO{Plot the various step responses and comment using \texttt{stepinfo}.}
+\end{frame}
 
 \SUBCONCEPT{Controlling angular velocity}
 
@@ -53,11 +67,11 @@ Which offers the better performance?
 Suppose we instead wish to control the angular velocity of the inertia disk to introduce `speed control'. 
 
 \begin{enumerate}
-	\item First we need to measure the velocity of the inertia disk, which can be facilitated through adding in a low-pass filter and a Derivative block, additionally connect this to a Scope, choose a low cutoff frequency of $f_c=10$ rad/s for the low-pass filter
+	\item First we need to measure the velocity of the inertia disk, which can be facilitated through adding in a low-pass filter and a Derivative block, additionally connect this to a Scope, choose a low cutoff frequency of $\omega_c=10$ rad/s for the low-pass filter
 	\item You will see after running the Simulink file that in this case the ITD model is not a great fit, we instead need to use the First Order Time Delay (FOTD) model which is on the following slide
-	\item Calculate the FOTD parameters $a$, $T$, and $\tau$, and using the FOTD Chien-Hrones-Reswick tuning law calculate the corresponding PID gains (note we do not need a low-pass filter for the derivative gain as our signal is already filtered)
+	\item Calculate the FOTD parameters $a$, $T$, and $\tau$ from a $1V$ step response, and using the FOTD Chien-Hrones-Reswick (CHR) tuning law calculate the corresponding PID gains (note we do not need a low-pass filter for the derivative gain as our signal is already filtered)
 	\item Run the plant and controller with these gains and assess the performance to a step input of $20$ (this is setting a desired angular velocity of $20$ rad/s)
-	\item Repeat with the Cohen-Coon tuning law and compare
+	\item Repeat with the Cohen-Coon (CC) tuning law and compare
 \end{enumerate}
 
 \end{frame}
@@ -73,11 +87,47 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 \begin{frame}{Tuning a speed controller}
 	\begin{figure}
 		\centering
-		\includegraphics[width=11cm]{prac4_speed_control}
-		\caption{Simulink model for speed control.}
+		\includegraphics[width=11.5cm]{prac4_PID_FOTD}
+		\caption{Simulink model for speed control with a switch for open and closed loop responses, along with a switch retaining functionality for prior angle control.}
 	\end{figure}
 \end{frame}
 
+\begin{frame}{Tuning a speed controller}
+
+    The manually tuned and ZN PID gains are robust in this simple system, but our ITD SIMC model is not.
+	\begin{figure}
+		\centering
+		\includegraphics[width=7.5cm]{prac4_ITD for FOTD}
+		\caption{Using the angle-control PID gains found in Part 1 directly in the angular velocity-controlled system.}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Tuning a speed controller}
+You can find `$T+\tau$'\, graphically via the Simulink scope as shown below, along with finding $a$ and $\tau$ by fitting a straight line through the point of maximum slope, similar to method used in Practical 2. This can be inaccurate, and lead to a controller with varied performance. Alternatively, on the next slide a MATLAB code snippet is provided to complete this interpolation.
+\begin{figure}
+	\centering
+	\includegraphics[width=8cm]{prac4_T_scope2}
+	\caption{Finding the parameter $T+\tau$\, via the Simulink scope.}
+\end{figure}
+\vspace{-0.5cm}
+\PORTFOLIO{Show how you calculated $a$, $\tau$, $T$.}
+\end{frame}
+
+\begin{frame}{Tuning a speed controller}
+The MATLAB function \texttt{stepinfo} provides the rise time, then we can interpolate on the scope data to find $0.632K$. If you plot the gradient, you may be surprised! Do you have confidence in the value of $m$?
+    \includematlab{Prac_4.m}{part3}
+\end{frame}
+
+\begin{frame}{Tuning a speed controller}
+You may be able to `hear' a poorly tuned control system. It will be audibly obvious, with the motor reacting strongly to small changes when repeatedly correcting error.
+	\begin{figure}
+		\centering
+		\includegraphics[width=7.5cm]{prac4_PID tuning laws velocity feedback}
+		\caption{Comparison of a manually tuned trial-and-error PID controller with gains chosen via two FOTD PID tuning laws (CHR and CC).}
+	\end{figure}
+     \PORTFOLIO{Plot the various step responses and comment using \texttt{stepinfo}.}
+\end{frame}
 
 \begin{frame}{Tuning a speed controller}
 \begin{itemize}
@@ -91,6 +141,27 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 	\includegraphics[width=6.5cm]{prac4_tacho}
 	\caption{Tachometer for measuring angular velocity.}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Tuning a speed controller}
+\begin{figure}
+	\centering
+	\includegraphics[width=4cm]{prac4_tachoA} \hspace{1cm}
+    \includegraphics[width=4cm]{prac4_tachoB}
+	\caption{It may take some practice to angle the tachometer and get it reading correctly. Rotating it $90$ degrees (or blocking the overhead light) may also find you some success.}
+    \PORTFOLIO{How does the RPM on the tachometer compare to that in Simulink?}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Tuning a speed controller}
+\begin{figure}
+	\centering
+	\includegraphics[width=8.5cm]{prac4_PID_FOTD_disturbance} 
+	\caption{An example of \textbf{not} using a light touch.}
+    \PORTFOLIO{How does the inertia disk respond to a minor disturbance?}
+    \PORTFOLIO{Can you improve the angular velocity step response?}
+    \PORTFOLIO{How does the system respond to a sinusoidal setpoint?}
+\end{figure}
 
 \end{frame}
 
@@ -98,9 +169,10 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 \SUBCONCEPT{Tuning laws}
 
 \begin{frame}{Tuning laws}
+
 	\centering
-	The time constants relate to the gains by $K_i= \frac{K_p}{\TTi}$ and $K_d = K_p \TTd$\\
-	\vfill
+	The time constants relate to the gains by $K_i= \frac{K_p}{\TTi}$ and $K_d = K_p \TTd$. The value $\tau_c$ is a tuning parameter. Increasing \(\tau_c\) produces a slower response with longer rise and settling times, but typically reduces overshoot and oscillation.\\
+	\vspace{1cm}
 	
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -123,10 +195,10 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 					\hline
 					$K_p$ & $\TTi$ & $\TTd$\\
 					\hline
-					$\frac{0.95}{a}$ & $2.4 \tau$ & $0.42 \tau$\\
-					\hline	
+					$\frac{1}{a(\tau_c+\tau)}$ & $4(\tau_c+\tau)$ & $0$\\
+					\hline
 				\end{tabular}
-				\caption{ITD Chien-Hrones-Reswick tuning law (0\% overshoot)}
+				\caption{Skogestad IMC tuning law}
 			\end{table}
 		\end{column}
 		\begin{column}{0.6\textwidth} 
@@ -135,13 +207,13 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 			\begin{table}
 				\centering
 				\begin{tabular}{|c|c|c|}
-					\hline
+                    \hline
 					$K_p$ & $\TTi$ & $\TTd$\\
 					\hline
 					$\frac{0.6}{a}$ & $T$ & $\frac{\tau}{2}$\\
 					\hline	
 				\end{tabular}
-				\caption{FOTD Chien-Hrones-Reswick tuning law (0\% overshoot)}
+				\caption{Chien-Hrones-Reswick tuning law}
 			\end{table}
 			
 			\begin{table}
@@ -157,7 +229,9 @@ Suppose we instead wish to control the angular velocity of the inertia disk to i
 			\end{table}
 		\end{column}
 	\end{columns}
-	
+	\raggedright
+    Numerous other tuning laws are discussed in the course notes and text book.
+
 	
 \end{frame}
 
