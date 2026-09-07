@@ -15,8 +15,58 @@ This practical will consist of the following parts:
 \item Controlling angular displacement
 \item Controlling angular velocity
 \end{itemize}
+
+An overview for using the Simulink block diagram setup is provided on the following pages.
 \end{frame}
 
+\begin{frame}{Practical overview}
+This practical can be completed with an `all-in-one' block diagram, adapted from Practical 3. Download this file for higher resolution diagrams.
+    \begin{enumerate}
+        \item Open loop \textbf{angle} response of the QUBE intertia disk. You can use the ITD parameters from Practical 2. \\ \underline{\textbf{IMPORTANT:}} If you used step response with a $1$ second  delay, you will need the adjustments $\tau=\tau-1$ and $a = a - m$.
+    \end{enumerate}
+	\begin{figure}
+	\centering
+	\includegraphics[width=11.5cm]{prac4_OverviewA}
+	\caption{Open loop response for ITD model parameters.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Practical overview}
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item Closed loop \textbf{angle} response of the QUBE intertia disk with various gains found from ITD tuning laws. \\
+        \underline{\textbf{IMPORTANT:}} Calculate and adjust $K_p$, $K_i$, and $K_d$ using MATLAB.
+    \end{enumerate}
+	\begin{figure}
+	\centering
+	\includegraphics[width=11.5cm]{Prac4_OverviewB}
+	\caption{Closed loop response from ITD model tuning laws.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Practical overview}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item Open loop \textbf{velocity} response of the QUBE intertia disk.
+    \end{enumerate}
+	\begin{figure}
+	\centering
+	\includegraphics[width=11.5cm]{prac4_OverviewC}
+	\caption{Open loop response for FOTD model parameters.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Practical overview}
+    \begin{enumerate}
+        \setcounter{enumi}{3}
+        \item Closed loop \textbf{velocity} response of the QUBE intertia disk with various gains found from FOTD tuning laws.
+    \end{enumerate}
+	\begin{figure}
+	\centering
+	\includegraphics[width=11.5cm]{prac4_OverviewD}
+	\caption{Closed loop response from FOTD model tuning laws.}
+\end{figure}
+\end{frame}
 
 
 \SUBCONCEPT{Controlling angular displacement}
@@ -52,12 +102,14 @@ In Practical 2 we have characterised the angular output of the QUBE inertia disk
 \end{frame}
 
 \begin{frame}{Tuning a displacement controller}
+A simple way to make this plot is to assign the Simulink scope output structure (default name: ScopeData) a unique MATLAB variable for each set of gains. An advanced method uses the loop from Practical 3, Part 2.
+    \vspace{-0.5cm}
 	\begin{figure}
 		\centering
-		\includegraphics[width=7.5cm]{prac4_PID tuning laws displacement feedback}
+		\includegraphics[width=7cm]{prac4_PID tuning laws displacement feedback}
 		\caption{Comparison of a manually tuned trial-and-error PID controller with gains chosen via a PID tuning law (ZN) and a PI tuning law (SIMC).}
 	\end{figure}
-
+    \vspace{-0.5cm}
      \PORTFOLIO{Plot the various step responses and comment using \texttt{stepinfo}.}
 \end{frame}
 
