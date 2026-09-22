@@ -47,7 +47,7 @@ Using the small angle approximation, applying the Laplace transform, and rearran
 
 
 \begin{frame}{Compound pendulum}
-The parameter values for the QUBE compound pendulum are $R_m=8.4\Omega$, $k_m=0.042$ V/(rad/s), $D_r=2\times 10^{-5}$ N.m.s/rad, $J_m = 4\times 10^{-6}$ kg.m$^2$, $J_h = 0.65 \times 10^{-6}$ kg.m$^2$, $m_b=0.03$ kg, $m_p=0.095$ kg, $r_b = 0.0127$ m, and $r_p = 0.035$ m.
+The parameter values for the QUBE compound pendulum are $R_m=8.4\Omega$, $k_m=0.042$ V/(rad/s), $D_r=2\times 10^{-5}$ N.m.s/rad, $J_m = 4\times 10^{-6}$ kg.m$^2$, $J_h = 0.65 \times 10^{-6}$ kg.m$^2$, $m_b=0.03$ kg, $r_b = 0.0127$ m, and $r_p = 0.035$ m.
 The moment of inertia of a pendulum is given by the parallel axis theorem as $J_p = m_b r_p^2+ \tfrac{1}{2}m_b r_b^2$.
 
 The second-order transfer function may be transformed into a two-dimensional linear state-space model given by the matrices
@@ -58,7 +58,9 @@ The second-order transfer function may be transformed into a two-dimensional lin
 \end{bmatrix},
 \mathbf{B} = \begin{bmatrix}
 	0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_p)}
-\end{bmatrix}, 
+\end{bmatrix},
+\]  \\
+\[
 \mathbf{C} = \begin{bmatrix}
 	1 & 0
 \end{bmatrix},
@@ -72,8 +74,67 @@ where
 \end{bmatrix}
 \quad , \quad \mathbf{y} = \theta_m \quad  \text{and} \quad u=v_m.\]
 \end{frame}
+\begin{frame}{Compound pendulum}
+In this procedure you will create your own Simulink model to compare an experimental and theoretical plant response.
+\begin{enumerate}
+	\item Download the MATLAB template containing an implementation of the compound pendulum state-space model
+    \item Download the `blank' Simulink QUBE template
+    \item Configure a State-Space block to simulate our linearised second-order system dynamics
+    \item Create an impulse response for the system using a Step block with a $0.1$s Step Time, $2$V Initial Value, and $0$V Final Value
+    \item Run the Simulink model and compare the angular response (in degrees) of the state-space model and plant on a single scope 
+    \item Export the scope data to MATLAB
+    \item Compare the natural frequency and damping ratio of both signals using a time-domain analysis method (using \texttt{damp()} and \texttt{damp\_plant()})
+\end{enumerate}
 
+\end{frame}
 
+\begin{frame}{Time domain analysis}
+
+The average logarithmic decrement is calculated across \(N\) peaks in the
+time-series window (with \(x_1\) and \(x_2\) being the first ratio,
+\(x_2\) and \(x_3\) the second, and so on):
+%
+\begin{equation}
+    \delta
+    =
+    \frac{1}{N-1}
+    \sum_{i=1}^{N-1}
+    \ln\left(\frac{x_i}{x_{i+1}}\right).
+\end{equation}
+
+The ratio of successive amplitudes gives the damping ratio of an
+underdamped system:
+%
+\begin{equation}
+    \zeta
+    =
+    \frac{\delta}
+    {\sqrt{4\pi^2+\delta^2}}.
+\end{equation}
+
+This damping ratio is used to convert the observed damped natural frequency (underdamped system)
+into the undamped natural frequency:
+%
+\begin{equation}
+    \omega_n
+    =
+    \frac{\omega_d}{\sqrt{1-\zeta^2}}.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{Compound pendulum: experimental vs theoretical}
+The following figure is an example of a free vibration response, also known as a transient response.
+\vspace{-0.6cm}
+\begin{figure}	
+    \centering
+	\includegraphics[width=7cm]{prac5_part1}
+	\caption{Comparing the pendulum state-space model and plant response to an impulse.}
+\end{figure}
+\vspace{-0.6cm}
+\PORTFOLIO{Plot both impulse responses, including the plant amplitude peaks.}
+\PORTFOLIO{Tabulate $\omega_n$, $\omega_d$, and $\zeta$ for both impulse responses.}
+\end{frame}
 
 \SUBCONCEPT{Controlling the plant}
 
@@ -96,76 +157,118 @@ For a general second-order system, the pair of complex poles are given by
 
 
 \begin{frame}{Pole placement}
-
+Using this controller we are changing the dynamic response of the system (the damping ratio is proportional to the damping).
 \begin{enumerate}
 	\item Calculate the position of the desired poles given that we require a damping ratio of $\zeta_n=\tfrac{1}{2\sqrt{2}}$ with a natural frequency of $\omega_n=10$ rad/s
-	\item Calculate the $A$ and $B$ matrices in Matlab and use the command K=place(A,B,p) to determine the required gains 
+	\item Calculate the $A$ and $B$ matrices in MATLAB and use the command \texttt{K=place(A,B,p)} to determine the required gains 
 	\item Implement this controller in Simulink by multiplying the appropriate states with the corresponding gain values (you will have to estimate the angular velocity $\dot{\theta}$ using a low-pass filter and a derivative block)
-	\item Run the system with no input and apply an impulse to the system by tapping the bottom of the pendulum (or model an impulse in Simulink using a Step block)
-	\item Calculate the theoretical damped natural frequency $\omega_d=\omega_n\sqrt{1-\zeta^2}$, does the impulse response match what you would expect? Why or why not?
-	\item Try again with $\omega_n=2$ rad/s and compare
+	\item Repeat the impulse response from part one, comparing the closed-loop plant response with the state-space model (requiring $A_{CL} = A - BK$). \textbf{IMPORTANT:} The state-space model does not require feedback from the plant.
+	\item Calculate the theoretical damped natural frequency $\omega_d=\omega_n\sqrt{1-\zeta^2}$
 \end{enumerate}
 
-Why is pole placement not a robust control strategy?
+\PORTFOLIO{Does the Simulink response match what you expect? Why or why not?}
+\PORTFOLIO{Plot the state-space model step and impulse responses in MATLAB.}
 
 \end{frame}
 
 
-\begin{frame}{Pole placement}
+\begin{frame}{Pole placement block diagram example}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{prac5_poleplacement}
-	\caption{Simulink setup for pole placement.}
+	\caption{A Simulink setup for pole placement. \textbf{NOTE: }Your Simulink block diagram will look different (contain additional blocks and signals)!}
 \end{figure}
 
 \end{frame}
 
-
-\begin{frame}{Command tracking}
-\begin{itemize}
-	\item With only proportional and derivative gain we cannot in general achieve perfect command tracking and must include feedback of the integral of the error
-	\item Now adding a step input of $\tfrac{\pi}{4}$ to your Simulink model, evaluate the step response of your pole placement controller
-	\item You should find that despite being able to successfully change the location of the poles of our system, our step response has non-zero steady state error and therefore falls short at accurately tracking our input
-	\item We therefore need to include integral feedback which we will do by using PID control
-\end{itemize}
-
+\begin{frame}{Compound pendulum with controller: experimental vs theoretical}
+This figure is similar to that in Part one, now with a pole placement controller.
+\vspace{-0.6cm}
+\begin{figure}	
+    \centering
+	\includegraphics[width=7cm]{prac5_part2}
+	\caption{Comparing the pendulum closed-loop state-space model and plant response to an impulse.}
+\end{figure}
+\vspace{-0.6cm}
+\PORTFOLIO{Plot both impulse responses, including the plant amplitude peaks.}
+\PORTFOLIO{Tabulate $\omega_n$, $\omega_d$, and $\zeta$ for both impulse responses.}
 \end{frame}
 
-\begin{frame}{PID Control}
-Similar to last week, we may characterise the open loop output response of the pendulum system as an FOTD model.
+% MOVE TO PRAC 6 AND CALL SETPOINT FOLLOWING
 
-\begin{enumerate}
-	\item Characterise the step response of the open-loop compound pendulum as a FOTD model by finding the parameters $a$, $T$, and $\tau$
-	\item Using these FOTD parameters, select a PID tuning law and determine the corresponding PID gains
-	\item Run the system in close loop with a step input of $\tfrac{\pi}{4}$
+% \begin{frame}{Command tracking}
+% \begin{itemize}
+% 	\item With only proportional and derivative gain we cannot in general achieve perfect command tracking and must include feedback of the integral of the error
+% 	\item Now adding a step input of $\tfrac{\pi}{4}$ to your Simulink model, evaluate the step response of your pole placement controller
+% 	\item You should find that despite being able to successfully change the location of the poles of our system, our step response has non-zero steady state error and therefore falls short at accurately tracking our input
+% 	\item We therefore need to include integral feedback which we will do by using PID control
+% \end{itemize}
+
+% \end{frame}
+
+
+% THIS DOES NOT WORK
+
+% \begin{frame}{PID Control}
+% Similar to last week, we may characterise the open loop output response of the pendulum system as an FOTD model.
+
+% \begin{enumerate}
+% 	\item Characterise the step response of the open-loop compound pendulum as a FOTD model by finding the parameters $a$, $T$, and $\tau$
+% 	\item Using these FOTD parameters, select a PID tuning law and determine the corresponding PID gains
+% 	\item Run the system in close loop with a step input of $\tfrac{\pi}{4}$
 	
-\end{enumerate}
+% \end{enumerate}
 
-After implementing the tuned PID gains, manually tune your controller to improve your step response.
+% After implementing the tuned PID gains, manually tune your controller to improve your step response.
 
-\end{frame}
-
-
+% \end{frame}
 
 \SUBCONCEPT{Frequency response}
 
 \begin{frame}{Response to a sinusoid input}
-With a controller implemented and optimised, we often would like to understand how well our controller can follow a given input. One way to assess this that gives us more information than just looking at the system's response to a step input is to input a periodic signal and analyse the phase and magnitude of the output.
+With a controller implemented we would like to understand how well our controller can follow a given input. One way to assess this, that gives us more information than just looking at the system's response to a step input, is to input a periodic signal and analyse the phase and magnitude of the output.
 
 \begin{enumerate}
-	\item Replace the Step block in Simulink with a Signal Generator block, change to a sinusoid signal, and set the frequency to 1 Hz and the amplitude to $\tfrac{\pi}{4}$
-	\item Run the Simulink and assess how well the controller follows this signal by plotting both the input and output signals on one Scope
+	\item Replace the Step block (configured as an impulse response) in Simulink with a Sine Wave block, set the frequency somewhere between $1$ and $10$ rad/s with an amplitude of $1$.
+	\item Run the Simulink model and assess how well the controller follows this signal. This requires plotting both the input (setpoint) and output (current angle) signals on one Scope. You do not need to plot the state-space response.
+    \item Repeat for a few frequencies to observe the setpoint tracking accuracy (amplitude and phase)
+    \item Compare the response to the uncontrolled (open-loop) system
 \end{enumerate}
+
+\PORTFOLIO{Why is pole placement not a robust control strategy?}
+\PORTFOLIO{Does the pole placement controller improve setpoint following?}
 
 \end{frame}
 
+\begin{frame}{Response to a sinusoid input: pole placement}
 
+\begin{figure}	
+    \centering
+	\includegraphics[width=5cm]{prac5_5rads}\hfill
+    \includegraphics[width=5cm]{prac5_10rads}
+	\caption{Comparison of setpoint tracking of a pole placement controller to a $5$ rad/s and $10$ rad/s frequency sine wave.}
+\end{figure}
+
+\PORTFOLIO{Plot and explain why $5$ rad/s has an improved frequency response.}
+\end{frame}
+
+\begin{frame}{Response to a sinusoid input: open loop}
+
+\begin{figure}	
+    \centering
+	\includegraphics[width=5cm]{prac5_5rads_no_controller}\hfill
+    \includegraphics[width=5cm]{prac5_10rads_no_controller}
+	\caption{Comparison of open-loop setpoint tracking to a $5$ rad/s and $10$ rad/s frequency sine wave.}
+\end{figure}
+
+\PORTFOLIO{Plot and compare to the closed-loop response.}
+\end{frame}
 
 \begin{frame}{Next week}
-	This week we moved onto the compound pendulum system, derived its model, and controlled it with several different strategies. We also analysed the performance of the controller at following a sinusoidal input.
+	This week we moved onto the compound pendulum system, derived its model, and used a pole placement controller. We also analysed the performance of the controller at following a sinusoidal input.
 	
-	Next week we will experimentally analyse the frequency response of the compound pendulum plant to a range of frequencies to better assess and understand the performance of a system.
+	Next week we will improve the setpoint tracking of the compound pendulum plant, then experimentally analyse the frequency response to a range of frequencies to better assess and understand the performance of a system.
 \end{frame}
 
 
