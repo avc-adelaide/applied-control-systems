@@ -54,8 +54,11 @@ acs-[MODULE]-[TOPIC]-[CONCEPT]-[name].tex
 
 Other top-level content:
 - `acs-0-0-0-welcome.tex` — welcome/intro slides
-- `acs-prac[1-6].tex` — laboratory practicals
-- `acs-prac-project.tex` — course project
+- `acs-prac[1-6].tex` — laboratory practicals (`acs-prac1-myrio.tex` is a myRIO-hardware variant of prac 1)
+- `acs-prac-project.tex` — course project (ping pong rig). `acs-prac-project-sean.tex` is an
+  independently written version and `acs-prac-project-new.tex` a merge of the two, pending review
+- Note: the Makefile builds (and `make uploadpracs` uploads) **every** `acs-prac*.tex`, so any
+  extra/draft prac file placed at the top level is built and uploaded too
 - `acs-workshop[1-9].tex` — workshop activities (some are stubs/placeholders)
 - `acs-nup.tex` — n-up handout helper
 
@@ -64,7 +67,8 @@ Other top-level content:
   `we-M-T-C-descr.tex` <-> `acs-M-T-C-descr.tex` (e.g. `we-1-1-1-intro.tex` ↔ `acs-1-1-1-intro.tex`)
 - All use `worked-examples-template.sty`, which auto-loads `beamer-control-maths.sty` for
   consistent notation and configures figure paths back to the main repo directories.
-- Each file compiles independently (two XeLaTeX passes for the TOC).
+- Each file compiles independently (two LaTeX passes for the TOC — LuaLaTeX via `make examples`,
+  XeLaTeX in the GitHub Pages script; see Compilation details).
 - Published to GitHub Pages via `.github/workflows/compile-examples.yml` and
   `.github/scripts/compile-examples.sh` (triggered on pushes to `main` touching
   `worked-examples/**`, the templates, `index.md`, or `_config.yml`).
@@ -94,10 +98,19 @@ Run `make help` for a summary. Key targets:
 - `make extra` — upload everything in `extra/` to Canvas as-is
 
 ### Compilation details
-- Engine: **XeLaTeX** (for font support — Latin Modern + OpenType math), with **BibTeX** for
-  references. Slide/notes targets run xelatex → bibtex → xelatex. Worked examples run xelatex
-  twice (no bibliography step).
+- Engine: **LuaLaTeX** (`LATEX = lualatex` at the top of the `Makefile`). The sources use
+  `fontspec`/`unicode-math`, so they need a Unicode engine; plain `pdflatex` will not work.
+  Slide/prac/workshop/notes targets run lualatex → bibtex → lualatex. Worked examples run
+  lualatex twice (no bibliography step).
+- Exception: the GitHub Pages workflow (`compile-examples.yml` → `.github/scripts/compile-examples.sh`)
+  compiles worked examples with **XeLaTeX**, not via the Makefile. Worked examples should
+  therefore compile under both engines.
+- Each target copies the source plus all `*.cls`, `*.sty`, `*.bib` and topic files into `_build/`
+  and compiles there; build logs are at `_build/<name>.log` (check for `Overfull \vbox` — it means
+  slide content runs off the frame).
 - Required TeX Live packages are listed in `.github/tl_packages`.
+- In a fresh Debian/Ubuntu container without TeX Live, this is enough to build slides/pracs:
+  `apt-get install texlive-luatex texlive-xetex texlive-latex-extra texlive-science texlive-fonts-extra fonts-lmodern`.
 
 ## Development Workflow
 
@@ -144,8 +157,8 @@ Run `make help` for a summary. Key targets:
 
 - Make minimal, surgical changes — this is curriculum content reviewed by a human instructor.
 - After editing `.tex` files, try to compile the relevant `make` target to catch LaTeX errors
-  before handing back. If XeLaTeX/TeX Live isn't available in the environment, say so explicitly
-  rather than claiming the build passes.
+  before handing back (e.g. `make _build/acs-prac2.pdf` for a single file). If LuaLaTeX/TeX Live
+  isn't available in the environment, say so explicitly rather than claiming the build passes.
 - Don't touch `_build/`, `_upload/`, `_extra/` — they're generated and gitignored.
 - Be careful with Canvas-related Lua scripts (`canvas/*.lua`, `canvas-config.lua`,
   `canvas-acs-upload-file.lua`) — these can push live changes to the course LMS
