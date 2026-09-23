@@ -55,8 +55,7 @@ acs-[MODULE]-[TOPIC]-[CONCEPT]-[name].tex
 Other top-level content:
 - `acs-0-0-0-welcome.tex` — welcome/intro slides
 - `acs-prac[1-6].tex` — laboratory practicals (`acs-prac1-myrio.tex` is a myRIO-hardware variant of prac 1)
-- `acs-prac-project.tex` — course project (ping pong rig). `acs-prac-project-sean.tex` is an
-  independently written version and `acs-prac-project-new.tex` a merge of the two, pending review
+- `acs-prac-project.tex` — course project (ping pong rig)
 - Note: the Makefile builds (and `make uploadpracs` uploads) **every** `acs-prac*.tex`, so any
   extra/draft prac file placed at the top level is built and uploaded too
 - `acs-workshop[1-9].tex` — workshop activities (some are stubs/placeholders)
