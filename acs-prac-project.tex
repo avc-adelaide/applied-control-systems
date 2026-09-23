@@ -1,7 +1,7 @@
 \documentclass[9pt]{beamer-control}
 \usepackage{beamer-control-prac}
 \begin{document}
-\CONCEPT[7]{Weeks 7--9: Complex system --- Ping Pong rig}
+\CONCEPT[7]{Practical Project: Ping Pong control system}
 
 \begin{frame}
 \frametitle{Introduction}
@@ -9,34 +9,109 @@ In this practical project, you will apply control theory concepts to design and 
 
 \vfill
 
-This practical will consist of the following parts:
+This practical project will consist of the following parts:
 \begin{itemize}
 \item System identification and modelling
 \item Controller design and tuning
-\item Implementation and testing
 \item Performance evaluation and analysis
+\end{itemize}
+You will be assessed via a formal group report.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Timing}
+
+\begin{itemize}
+\item Each part should take approximately \emph{no more than} one week to complete.
+\item Plan to write up the report as you go, as it will also take time to put together.
+\item Manage your time and progress carefully. A final (fourth) prac session will be held in the final week of semester to allow for finishing up, but no sessions are planned for SWOTVAC.
 \end{itemize}
 \end{frame}
 
-\SUBCONCEPT{System Identification}
+\SUBCONCEPT{Problem statement}
+
+\begin{frame}{Problem statement}
+In this project, you are provided with a hardware rig that needs to be controlled.
+\begin{itemize}
+\item Using your best engineering judgement, you are required to implement a position controller for the height of the ping pong ball
+\item As part of the documentation, a complete description of the hardware and interfaces is required
+\item In order to achieve setpoint following, calibration of the position sensor is required
+\item No fixed performance criteria is specified; in your documentation you must justify how you tuned the controller and attempted to optimise the performance of the closed loop system
+\item While a relatively simple PID controller in its `pure' form will manage to control this plant, we encourage creativity in terms of signal processing, fudge factors, gain scheduling, in order to improve performance
+\end{itemize}
+\end{frame}
+
+\SUBCONCEPT{Part A: System identification}
+
+\begin{frame}{Interfacing}
+\begin{itemize}
+\item Identifying inputs and outputs
+\item Calibration of sensor input signals
+\item Bounding output signals
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Modelling the ping pong rig}
 \begin{itemize}
 \item Identify system dynamics
-\item Determine transfer function
+\item Determine transfer function and/or state space model
 \end{itemize}
 \end{frame}
 
 
-\SUBCONCEPT{Controller Design}
+\SUBCONCEPT{Part B: Controller design and tuning}
 
 \begin{frame}{Implementing control strategies}
 \begin{itemize}
-\item Design appropriate controller
-\item Test performance and stability
+\item Design appropriate controller(s) --- more req'd than trial-and-error
+\item Measure initial performance characteristics
 \end{itemize}
 \end{frame}
 
+
+\SUBCONCEPT{Part C: Performance evaluation and analysis}
+
+\begin{frame}{Performance evaluation}
+\begin{itemize}
+\item Use systematic methods to improve the tuning
+\item Quantify performance improvements against at least two metrics (e.g., overshoot, \dots)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Analysis and testing}
+\begin{itemize}
+\item Test against a sweep of step inputs (different amplitudes, different signs)
+\item Use at least one approach to test disturbance rejection characteristics
+\end{itemize}
+\end{frame}
+
+
+\SUBCONCEPT{Report and assessment}
+
+\begin{frame}{Rubric}
+The project is assessed via a formal report. The rubric includes the following criteria (equally weighted):
+
+\small
+\begin{enumerate}
+    \item \textbf{Writing Style and Report Formatting}:
+    Grammar, spelling, tenses, formality, completeness, flow. Etc. Appropriate introduction and conclusion. Must include executive summary. High quality figures and graphs, typography, typesetting, document structure, tables of contents, figure captions. Etc.
+    
+    \item \textbf{Systems overview}:
+    Explanation (and possibly derivation) of dynamics, actuator, interfacing with sensor(s), input signals, output signals, ranges of electrical signals. Photo(s) / schematic(s) / flow diagram(s) needed.
+
+    \item \textbf{Open loop characterisations}:
+    Sensor calibration, signal normalisation, step responses, nonlinearities, frequency responses. Characterisation of plant model (transfer function, ITD/FOTD parameters, etc., as appropriate).
+
+    \item \textbf{Control systems}:
+    Use of at least one tuning recipe, characterising performance (settling time, overshoot, etc.). Manual tuning improvements to improve default response. Discussion of desired performance and obstacles for improving performance.
+
+    \item \textbf{Performance and robustness}:
+    Exploration of system behaviour under varying conditions, including but not limited to robustness to parameter variation (e.g., mass variation), measurement noise, disturbances. Changes in performance vs variations. Limits of stability.
+\end{enumerate}
+\end{frame}
 
 \SUMMARYFRAME
 
