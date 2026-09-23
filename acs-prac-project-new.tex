@@ -129,18 +129,18 @@ Before modelling the plant you need a clear picture of its signals:
 \end{itemize}
 \begin{figure}
 	\centering
-	\includegraphics[width=10cm]{project_conversion}
+	\includegraphics[width=8cm]{project_conversion}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Conditioning the measurement}
-Once calibrated, you will notice that the sensor is heavily discretised, making analysis difficult. The discretisation would also give large spikes in the derivative term, limiting the effectiveness of a controller.
+Once calibrated, you will notice that the sensor is heavily discretised, making analysis difficult; it would also give large spikes in the derivative term, limiting the effectiveness of a controller.
 
-Therefore, as in previous practicals, filter the output to smooth the signal without introducing too much time lag. Filter the displacement using the same low-pass filter method as Practicals 1 and 3 to identify an appropriate cut-off frequency. An example of a filtered signal is shown below: the signal is smoother, does not have too much lag, and may be suitable for control purposes.
+As in previous practicals, filter the displacement to smooth the signal without introducing too much time lag, using the low-pass filter method from Practicals 1 and 3 to identify an appropriate cut-off frequency. In the example below the signal is smoother, does not have too much lag, and may be suitable for control purposes.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=6cm]{project_filter}
+	\includegraphics[width=4.8cm]{project_filter}
 \end{figure}
 \end{frame}
 
@@ -167,7 +167,7 @@ Now that the system has been calibrated and the output conditioned, characterise
 	\end{itemize}
 \begin{figure}
 	\centering
-	\includegraphics[width=11cm]{project_pid}
+	\includegraphics[width=\textwidth]{project_pid}
 \end{figure}
 \end{frame}
 
