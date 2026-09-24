@@ -156,7 +156,7 @@ An alternative method to deriving a first principles model is to identify the sy
 
 \begin{frame}{Diagnostic --- model check}
 
-The Simulink real-time hardware connection (Quarc) runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default (the \textsf{Duration} setting in the \textsf{External Mode Control Panel}).
+The Simulink real-time hardware connection (Quarc) runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default.
 To make sure all data is collected correctly:
 \begin{itemize}
     \item Ensure the sample time is \qty{0.01}{s} (\textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} $\to$ \textsf{Sample time})
