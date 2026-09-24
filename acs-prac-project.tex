@@ -90,6 +90,9 @@ In your group, follow these steps:
 		\item \textsf{HIL Write Analog}: send analogue signal (voltage)
 	\end{itemize}
 	Find these three blocks in the \textsf{Library Browser} and drag them into your model. Double-click the \textsf{HIL Read/Write} blocks and ensure channel 0 is selected. Double-click \textsf{HIL Initialize} and choose the \textsf{PCIE 6321} board under the \textsf{Board Type} section.
+
+	% TODO: confirm the exact option names in HIL Initialize > Analog Outputs at the rig
+	The fan holds the last voltage it was sent when the model stops. So that it switches off at the end of each run, also set the final output voltage (applied when the model terminates) to \qty{0}{V} in the \textsf{Analog Outputs} settings of \textsf{HIL Initialize}.
 \end{frame}
 
 \begin{frame}{Setting up software}
@@ -110,9 +113,6 @@ In your group, follow these steps:
 	The \textsf{To Workspace} block may lose data points while the model is running. To prevent this, go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} and set the fixed-step size to \qty{0.01}{s}. Quarc runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default, so with this step size set the \textsf{Stop Time} to \qty{9.99}{s}.
 
 	Try running the system to get the ping pong ball to lift into the tube by adding a step input to the system. You may have to play around with the input voltage to get the ball to lift.
-
-	% TODO: confirm the exact option names in HIL Initialize > Analog Outputs at the rig
-	The fan holds the last voltage it was sent when the model stops. To switch it off at the end of each run, open the \textsf{HIL Initialize} block and, in its \textsf{Analog Outputs} settings, set the final output voltage (applied when the model terminates) to \qty{0}{V}.
 \end{frame}
 
 \SUBCONCEPT{Part A: System identification and modelling}
