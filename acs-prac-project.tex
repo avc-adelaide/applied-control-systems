@@ -107,7 +107,7 @@ In your group, follow these steps:
 \begin{frame}{Running the system}
 	To run on hardware go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Code Generation} $\to$ \textsf{Browse} and choose \texttt{quarc\_win64.tlc}; the \textsf{Hardware} tab should now appear.
 
-	The \textsf{To Workspace} block may lose data points while the model is running. To prevent this, go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} and set the fixed-step size to \qty{0.01}{s}. Quarc only logs 1000 samples per run, so with this step size set the \textsf{Stop Time} to \qty{9.99}{s}.
+	The \textsf{To Workspace} block may lose data points while the model is running. To prevent this, go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} and set the fixed-step size to \qty{0.01}{s}. Quarc runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default (the \textsf{Duration} setting in the \textsf{External Mode Control Panel}), so with this step size set the \textsf{Stop Time} to \qty{9.99}{s}.
 
 	Try running the system to get the ping pong ball to lift into the tube by adding a step input to the system. You may have to play around with the input voltage to get the ball to lift.
 
