@@ -32,6 +32,8 @@ The project consists of three parts, preceded by setting up the rig:
 \item Part C: Performance evaluation and analysis
 \end{itemize}
 Work in groups of around 2--3 (depending on class size and number of rigs). You will be assessed via a formal group report.
+
+\emph{Once you have formed a group, self-enrol into a Project Group in MyLearning. }
 \end{frame}
 
 \begin{frame}
@@ -53,7 +55,7 @@ Work in groups of around 2--3 (depending on class size and number of rigs). You 
 \begin{column}{0.7\textwidth}
 \vspace{1cm}
 \begin{itemize}
-\item The ping pong rig has one input and one output
+\item \alert{Write down your ping pong rig hardware ID so you can get the same one next time.}
 \item The input is a voltage supplied to a fan mounted on the base of the system to create an airflow to push the ping pong ball up the vertical cylinder
 \item The output is a voltage reading from an ultrasonic proximity sensor placed at the bottom of the tube facing upwards, which will need to be converted into units of distance for control purposes
 \item The ultrasonic sensor is less accurate and noisier than the encoder used in previous practicals, making the rig more of a challenge to control well
@@ -70,49 +72,93 @@ Work in groups of around 2--3 (depending on class size and number of rigs). You 
 \end{columns}
 \end{frame}
 
-
+{\setbeamercolor{background canvas}{bg=yellow!15}
 \begin{frame}{Setting up hardware (CARM)}
 In your group, follow these steps:
 \begin{enumerate}
 	\item Do not connect the rig to the power supply
-	\item Connect the ping pong rig output labelled \textsf{Distance} to channel \textsf{AI 0} on the data acquisition board
-	\item Connect the ping pong rig input labelled \textsf{Fan Input} to channel \textsf{AO 0} on the data acquisition board
+	\item Connect the ping pong rig output labelled \textsf{Ball Distance} to channel \textsf{AI 0} on the data acquisition board
+	\item Connect the ping pong rig input labelled \textsf{Fan Power Input} to channel \textsf{AO 0} on the data acquisition board
 	\item Ensure the gain knob is rotated all the way to the right (minimum gain)
 	\item Connect the rig to the power supply
 \end{enumerate}
 \end{frame}
 
 \begin{frame}{Setting up software (CARM)}
-	Open Simulink and create a blank model. In this project you are going to create your own model for the ping pong rig. Three blocks initialise the hardware and send/receive signals to/from the physical rig:
+	Open the provided Simulink model:
+	
+	\centerline{\includegraphics[width=\linewidth]{ping_pong_CARM.png}}
+	
+	Three blocks initialise the hardware and send/receive signals to/from the physical rig:
 	\begin{itemize}
 		\item \textsf{HIL Initialize}: hardware initialisation
 		\item \textsf{HIL Read Analog}: receive analogue signal (voltage)
 		\item \textsf{HIL Write Analog}: send analogue signal (voltage)
 	\end{itemize}
-	Find these three blocks in the \textsf{Library Browser} and drag them into your model. Double-click the \textsf{HIL Read/Write} blocks and ensure channel 0 is selected. Double-click \textsf{HIL Initialize} and choose the \textsf{PCIE 6321} board under the \textsf{Board Type} section.
 
-	% TODO: confirm the exact option names in HIL Initialize > Analog Outputs at the rig
-	The fan holds the last voltage it was sent when the model stops. So that it switches off at the end of each run, also set the final output voltage (applied when the model terminates) to \qty{0}{V} in the \textsf{Analog Outputs} settings of \textsf{HIL Initialize}.
+  These blocks are set up to interface with the NI PCIe 6321 I/O board in the PC, selecting analogue input 0 and analogue output 0, and ensure the output is reset to \qty{0}{V} after a run is terminated.
+\end{frame}
+}
+
+{\setbeamercolor{background canvas}{bg=green!15}
+\begin{frame}{Setting up hardware (MyRIO)}
+In your group, follow these steps:
+\begin{enumerate}
+	\item Do not connect the rig to the power supply
+	\item Connect the ping pong rig output labelled \textsf{Distance} to screw terminals \texttt{AI 0+} and \texttt{AI 0-} on the MyRIO
+	\item Connect the ping pong rig input labelled \textsf{Fan Input} to screw terminals \texttt{AO AGND} and \texttt{AO 0} on the MyRIO
+	\item Ensure the gain knob is rotated all the way to the right (minimum gain)
+	\item Connect the rig to the power supply (\qty{24}{V})
+\end{enumerate}
 \end{frame}
 
-\begin{frame}{Setting up software}
-	Select the three blocks, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below.
+\begin{frame}{Setting up software (MyRIO)}
+	Open the provided Simulink model:
+	
+	\centerline{\includegraphics[width=\linewidth]{ping_pong_MyRIO.png}}
+	
+	Three blocks initialise the hardware and send/receive signals to/from the physical rig:
+	\begin{itemize}
+		\item \textsf{HIL Initialize}: hardware initialisation
+		\item \textsf{HIL Read Analog}: receive analogue signal (voltage)
+		\item \textsf{HIL Write Analog}: send analogue signal (voltage)
+	\end{itemize}
 
-	The \textsf{To Workspace} block exports the sensor data to MATLAB. Set up the \textsf{Step} block with a step time of \texttt{0} and a final value between \qty{1}{V} and \qty{10}{V}, then run the model. You may need to increase the input voltage to increase the upward force provided by the fan.
+  These blocks are set up to interface with the MyRIO controller, selecting analogue input 0 and analogue output 0, and ensure the output is reset to \qty{0}{V} after a run is terminated.
+\end{frame}
+}
 
-\begin{figure}
+
+\begin{frame}{Simulink model notes}
+
+  \begin{itemize}
+  \item The fixed step size (sample time) for the model is set to \qty{0.01}{s}. This shouldn't need to be adjusted (but worth checking).
+  
+  \item
+  The Simulink model includes a saturation block to ensure no control signal is ever requested that exceeds the capacity of the voltage output of the system.
+  
+  \item
+  The step input is set to \qty{1}{V} at \qty{0}{s} in series with a Slider Gain. The Slider Gain allows you to manually adjust the voltage to get a feel for how the fan behaves and interacts with the ping pong ball. 
+
+  \item
+	To simplify your model going forwards, select the highlighted area, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below:
+
 	\centering
-	\includegraphics[width=10cm]{project_subsystem}
-\end{figure}
+	\includegraphics[clip,trim=100 0 200 0,height=3cm]{project_subsystem}
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Running the system}
-	To run on hardware go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Code Generation} $\to$ \textsf{Browse} and choose \texttt{quarc\_win64.tlc}; the \textsf{Hardware} tab should now appear.
+\begin{frame}{Running the system and logging data}
+	
+	\begin{itemize}
+	\item When investigating and tuning the system, you likely want to keep the \textsf{Stop Time} set to \texttt{Inf}. Remember you can use manual switches, slider gains, and scopes to monitor and tune the system in real time.
+	
+	\item Quarc runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default, so when logging data to calculate indentification parameters or to create plots for reporting, with a step size of \qty{0.01}{s} set the \textsf{Stop Time} to (at most) \qty{9.99}{s}
+	
+	\item We recommend creating copies of your block diagram rather than continuously iterating the same model. This will make it easy to flip back and forth between open/closed loop, continuous/short runs, different tuning approaches, etc.
+	\end{itemize}
 
-	The \textsf{To Workspace} block may lose data points while the model is running. To prevent this, go to \textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} and set the fixed-step size to \qty{0.01}{s}. Quarc runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default, so with this step size set the \textsf{Stop Time} to \qty{9.99}{s}.
-
-	Try running the system to get the ping pong ball to lift into the tube by adding a step input to the system. You may have to play around with the input voltage to get the ball to lift.
 \end{frame}
 
 \SUBCONCEPT{Part A: System identification and modelling}
