@@ -16,7 +16,8 @@
 *.vrb
 
 # only top-level PDFs
-/*.pdf 
+/*.pdf
+Sharepoint/
 
 _*
 !_config.yml
