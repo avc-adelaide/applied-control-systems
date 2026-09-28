@@ -74,19 +74,19 @@ Work in groups of around 2--3 (depending on class size and number of rigs). You 
 
 {\setbeamercolor{background canvas}{bg=yellow!15}
 \begin{frame}{Setting up hardware (CARM)}
-In your group, follow these steps: (see photo on next page)
+\begin{columns}
+\column{0.6\linewidth}
 \begin{enumerate}
 	\item Do not connect the rig to the power supply
 	\item Connect the ping pong rig output labelled \textsf{Ball Distance} to channel \textsf{AI 0} on the data acquisition board
 	\item Connect the ping pong rig input labelled \textsf{Fan Power Input} to channel \textsf{AO 0} on the data acquisition board
-	\item Ensure the gain knob is rotated all the way to the right (minimum gain)
+	\item Ensure the gain knob is rotated to the centre (feel for it)
 	\item Connect the rig to the power supply
 \end{enumerate}
-\end{frame}
 
-\begin{frame}
-\frametitle{Hardware photo (CARM)}
+\column{0.4\linewidth}
 \includegraphics[height=0.7\textheight]{ping_pong_CARM_IO.jpg}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Setting up software (CARM)}
@@ -107,21 +107,18 @@ In your group, follow these steps: (see photo on next page)
 
 {\setbeamercolor{background canvas}{bg=green!15}
 \begin{frame}{Setting up hardware (MyRIO)}
-In your group, follow these steps: (see photo on next page)
 \begin{enumerate}
 	\item Do not connect the rig to the power supply
 	\item Connect the ping pong rig output labelled \textsf{Distance} to screw terminals \texttt{AI 0+} and \texttt{AI 0-} on the MyRIO
 	\item Connect the ping pong rig input labelled \textsf{Fan Input} to screw terminals \texttt{AO AGND} and \texttt{AO 0} on the MyRIO
-	\item Ensure the gain knob is rotated all the way to the right (minimum gain)
+	\item Ensure the gain knob is rotated to the centre (feel for it)
 	\item Connect the rig to the power supply (\qty{24}{V})
 \end{enumerate}
+
+\centering
+\includegraphics[width=0.5\textwidth]{ping_pong_MyRIO_IO.jpg}
 \end{frame}
 
-\begin{frame}
-\frametitle{Hardware photo (MyRIO)}
-\includegraphics[width=0.7\textwidth]{ping_pong_MyRIO_IO.jpg}
-\alert{this photo is incorrect, need to take a new one}
-\end{frame}
 
 \begin{frame}{Setting up software (MyRIO)}
 	Open the provided Simulink model:
@@ -143,20 +140,15 @@ In your group, follow these steps: (see photo on next page)
 \begin{frame}{Simulink model notes}
 
   \begin{itemize}
-  \item The fixed step size (sample time) for the model is set to \qty{0.01}{s}. This shouldn't need to be adjusted (but worth checking).
+  \item The fixed step size (sample time) for the model is set to \qty{0.01}{s} with a solver type of \textsf{Auto}. These settings shouldn't need to be adjusted (but are worth checking).
   
   \item
-  The Simulink model includes a saturation block to ensure no control signal is ever requested that exceeds the capacity of the voltage output of the system.
+  The Simulink model includes a saturation block to ensure no control signal can exceed the capacity of the voltage output of the system.
   
   \item
   The step input is set to \qty{1}{V} at \qty{0}{s} in series with a Slider Gain. The Slider Gain allows you to manually adjust the voltage to get a feel for how the fan behaves and interacts with the ping pong ball. 
+  \end{itemize}
 
-  \item
-	To simplify your model going forwards, select the highlighted area, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below:
-
-	\centering
-	\includegraphics[clip,trim=100 0 200 0,height=3cm]{project_subsystem}
-	\end{itemize}
 \end{frame}
 
 
@@ -165,7 +157,7 @@ In your group, follow these steps: (see photo on next page)
 	\begin{itemize}
 	\item When investigating and tuning the system, you likely want to keep the \textsf{Stop Time} set to \texttt{Inf}. Remember you can use manual switches, slider gains, and scopes to monitor and tune the system in real time.
 	
-	\item Quarc runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default, so when logging data to calculate indentification parameters or to create plots for reporting, with a step size of \qty{0.01}{s} set the \textsf{Stop Time} to (at most) \qty{9.99}{s}
+	\item Quarc runs the model in Simulink External Mode, whose data buffer holds 10,000 samples per run by default, so when logging data to calculate identification parameters or to create plots for reporting, with a step size of \qty{0.01}{s} set the \textsf{Stop Time} to (at most) \qty{99.99}{s}
 	
 	\item We recommend creating copies of your block diagram rather than continuously iterating the same model. This will make it easy to flip back and forth between open/closed loop, continuous/short runs, different tuning approaches, etc.
 	\end{itemize}
@@ -178,9 +170,23 @@ In your group, follow these steps: (see photo on next page)
 Before modelling the plant you need a clear picture of its signals:
 \begin{itemize}
 \item Identify the inputs and outputs, and the range of each electrical signal
-\item Calibrate the sensor signal (the plant output; next slide) so the controller works in units of distance
-\item Bound the control signal sent to the fan (the plant input): the controller must never command a voltage outside the fan's allowable input range (e.g.\ use a \textsf{Saturation} block before \textsf{HIL Write Analog})
+\item Regularise the input signal (the fan voltage) so that a signal input range of 0\%--100\% results in a `sensible' fan voltage input range.
+\item Calibrate the sensor signal (the plant output) so the controller works in units of distance
+\item Filter the sensor signal so the feedback signal is smooth
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regularisation: fan voltage ranges}
+\begin{itemize}
+\item Use the \textsf{Slider Gain} to get a feel for the behaviour of the system, and identify the key voltage inputs of interest. In particular, find the minimum voltage ($v_{\text{min}}$) required before ball lift-off, and maximum useable voltage ($v_{\text{max}}$)
+\item Add a scaling factor and bias to the step input so that a normalised input signal of 0\%--100\% results in a `sensible' fan voltage.
+\item Once completed, a step input of \texttt{0.01} should barely lift the ball, and a step input of \texttt{1.0} (the default) should be a nominal maximum `expected' input.
+\end{itemize}
+
+\centering
+\includegraphics[width=0.7\linewidth]{ping_pong_input_norm.png}
+
 \end{frame}
 
 \begin{frame}{Calibration: voltage to distance conversion}
@@ -190,10 +196,9 @@ Before modelling the plant you need a clear picture of its signals:
 \item Use at least two data points to fit a linear relationship between sensor voltage and distance; more points will show whether the sensor is linear over the full height of the tube
 \item Implement this conversion with \textsf{Gain} and \textsf{Constant} blocks, as shown below
 \end{itemize}
-\begin{figure}
+
 	\centering
-	\includegraphics[width=8cm]{project_conversion}
-\end{figure}
+	\includegraphics[width=8cm]{ping_pong_output_calib.png}
 \end{frame}
 
 \begin{frame}{Conditioning the measurement}
@@ -205,6 +210,15 @@ As in previous practicals, filter the measured height to smooth the signal witho
 	\centering
 	\includegraphics[width=4.8cm]{project_filter}
 \end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Model subsystem}
+
+To simplify your model going forwards, select the plant, regularisation, calibration, and filtering stages, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below:
+
+\centering
+\includegraphics[height=3cm]{project_subsystem}
 \end{frame}
 
 \begin{frame}{Modelling the ping pong rig}
