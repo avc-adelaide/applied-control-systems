@@ -192,6 +192,7 @@ Before modelling the plant you need a clear picture of its signals:
 \begin{frame}{Calibration: voltage to distance conversion}
 	After getting the ping pong ball to lift, you may notice that the output is not in units of distance. You will need to calibrate the sensor (i.e.\ convert volts to a unit of distance).
 \begin{itemize}
+\item You can use a physical object (we provide a tape measure) to hold the ball steady at a series of positions in the tube
 \item Record the \emph{sensor output} voltage (not the fan input voltage!) with the ball at known heights, using the \qty{10}{cm} markings on the side of the tube
 \item Use at least two data points to fit a linear relationship between sensor voltage and distance; more points will show whether the sensor is linear over the full height of the tube
 \item Implement this conversion with \textsf{Gain} and \textsf{Constant} blocks, as shown below
@@ -226,7 +227,7 @@ Now that the system has been calibrated and the output conditioned, characterise
 	\begin{itemize}
 		\item Run a step response on the rig and plot the data in MATLAB using the \textsf{To Workspace} block
 		\item As in Practical 2, fit a straight line to the response to find the Integrator with Time Delay (ITD) parameters $a$ and $\tau$
-		\item Determine a transfer function and/or state space model for the plant; consider whether another model form (e.g.\ First Order with Time Delay, FOTD) fits your data better, and justify your choice
+		\item As in Practical 4, determine a transfer function and/or state space model for the plant; consider whether another model form (e.g.\ First Order with Time Delay, FOTD) fits your data better, and justify your choice
 		\item Look for nonlinearities: does the response change with the size of the step, or with the height of the ball?
 		\item Optionally, characterise the frequency response, as in Practical 5
 	\end{itemize}
@@ -248,10 +249,11 @@ Save the data from every run (e.g.\ as a \texttt{.mat} file with a descriptive n
 \SUBCONCEPT{Part B: Controller design and tuning}
 
 \begin{frame}{Initial design}
-	With the system set up, calibrated, filtered and characterised, you may start designing a controller. Controller design must be more than trial and error:
+	With the system set up, calibrated, filtered and characterised, you will start designing a controller. Controller design must be more than trial and error:
 	\begin{itemize}
-		\item Using your model parameters (e.g.\ $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g.\ the ITD tuning laws from Practical 4)
-		\item Implement a closed-loop PID controller in Simulink
+		\item Using your model parameters (i.e., $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g., the ITD tuning laws from Practical 4)
+		\item You may wish to research and test alternative laws in the literature, including state space methods
+		\item Using your chosen control approach(es), implement a closed-loop controller in Simulink
 	\end{itemize}
 \begin{figure}
 	\centering
@@ -261,22 +263,22 @@ Save the data from every run (e.g.\ as a \texttt{.mat} file with a descriptive n
 
 
 \begin{frame}{Initial performance}
-With these initial gains:
+For each of the control approaches explored:
 \begin{itemize}
 	\item Does the controller stabilise the system?
 	\item Does it achieve setpoint following?
 	\item How does the controller perform in general? Measure initial performance characteristics (settling time, overshoot, etc.)
 \end{itemize}
-Your initial controller is unlikely to perform very well. Even if it does, further tuning will improve its performance (Part C).
 \end{frame}
+
 
 \begin{frame}{Part B: What to record for your report}
 Part B provides the first half of the evidence for rubric criterion 4 (\emph{Control systems}). Before moving on, make sure you have:
 \begin{itemize}
-\item The tuning recipe you used, the model parameters it needs, and the calculation of your PID gains
+\item The tuning recipe(s) you used, the model parameters it needs, and the calculation of your gains
 \item A diagram of your closed-loop Simulink model, including the filter and saturation (for the appendix)
-\item The closed-loop step response with your initial gains, and the measured performance (e.g.\ settling time, overshoot, steady-state error)
-\item A statement of the performance you are aiming for, and what you think limits it on this rig (e.g.\ sensor noise and discretisation, time delay, fan saturation)
+\item The closed-loop step response with your initial gains, and the measured performance (e.g., settling time, overshoot, steady-state error)
+\item A statement of the performance you are aiming for, and what you think limits it on this rig (e.g., sensor noise and discretisation, time delay, fan saturation)
 \end{itemize}
 \end{frame}
 
@@ -284,10 +286,11 @@ Part B provides the first half of the evidence for rubric criterion 4 (\emph{Con
 \SUBCONCEPT{Part C: Performance evaluation and analysis}
 
 \begin{frame}{Improving performance}
+By this point of the project you should have a well-characterised plant with a functioning, if not optimal, closed loop control system.
 \begin{itemize}
 \item Use systematic methods to improve the tuning --- record what you changed, why, and the effect of each change
 \item Quantify performance improvements against at least two metrics (e.g.\ overshoot, settling time, \dots)
-\item Beyond `pure' PID, consider signal processing, fudge factors, gain scheduling, etc., as encouraged in the problem statement
+\item Beyond `standard' PID or state-space approaches, consider additional signal processing, nonlinearities or fudge factors, gain scheduling, etc., as encouraged in the problem statement
 \end{itemize}
 \end{frame}
 
@@ -295,10 +298,12 @@ Part B provides the first half of the evidence for rubric criterion 4 (\emph{Con
 \begin{frame}{Analysis and testing}
 Once you have successfully controlled the ping pong rig, investigate how well your system operates under different conditions. As a minimum:
 \begin{itemize}
-\item Test against a sweep of step inputs (different amplitudes, different signs)
-\item Use at least one approach to test disturbance rejection characteristics
+\item Test against a variety of step inputs (different amplitudes, different signs)
+\item Use at least one approach to test the robustness characteristics of the closed loop system
 \end{itemize}
-Beyond this, try varying some of the system parameters (e.g.\ a ball of different mass), investigate measurement noise, and look for the limits of stability. This investigation will indicate the robustness of your controller.
+To achieve this, consider investigating: the performance of disturbance rejection (e.g., a ball disturbance, or a flow blockage); the impact of measurement noise;   the limits of stability (or at least usable ranges of feedback gain).
+
+Another opportunity for investigation is to analyse the impact of the input regularisation step in Part A and whether it substantially affected the results of the control design process.
 
 This part of the project is purposefully open-ended: what do \emph{you} think are important experiments to test the performance of the ping pong rig controller?
 \end{frame}
