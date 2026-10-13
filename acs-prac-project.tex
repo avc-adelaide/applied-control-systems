@@ -166,30 +166,33 @@ Work in groups of around 2--3 (depending on class size and number of rigs). You 
 
 \SUBCONCEPT{Part A: System identification and modelling}
 
+
 \begin{frame}{Interfacing}
 Before modelling the plant you need a clear picture of its signals:
 \begin{itemize}
-\item Identify the inputs and outputs, and the range of each electrical signal
-\item Regularise the input signal (the fan voltage) so that a signal input range of 0\%--100\% results in a `sensible' fan voltage input range.
-\item Calibrate the sensor signal (the plant output) so the controller works in units of distance
-\item Filter the sensor signal so the feedback signal is smooth
+\item[1)] Identify the inputs and outputs, and the range of each electrical signal
+\item[2)] Regularise the input signal (the fan voltage) so that a signal input range of 0\%--100\% results in a `sensible' fan voltage input range.
+\item[3)] Calibrate the sensor signal (the plant output) so the controller works in units of distance
+\item[4)] Filter the sensor signal so the feedback signal is smooth
 \end{itemize}
+You have likely already started step 1), no further instructions needed on that step.
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Regularisation: fan voltage ranges}
+\frametitle{2) Regularisation: fan voltage ranges}
 \begin{itemize}
 \item Use the \textsf{Slider Gain} to get a feel for the behaviour of the system, and identify the key voltage inputs of interest. In particular, find the minimum voltage ($v_{\text{min}}$) required before ball lift-off, and maximum useable voltage ($v_{\text{max}}$)
-\item Add a scaling factor and bias to the step input so that a normalised input signal of 0\%--100\% results in a `sensible' fan voltage.
+\item Note that the maximum useable voltage may be less than the maximum electrical voltage; pick a lower value if you see no qualitative difference with a higher value, or if the higher value results in an unacceptable level of sensor noise/distortion.
+\item Add a scaling factor and bias to the step input so that a normalised input signal of 0\%--100\% results in a `sensible' fan voltage across the full range.
 \item Once completed, a step input of \texttt{0.01} should barely lift the ball, and a step input of \texttt{1.0} (the default) should be a nominal maximum `expected' input.
 \end{itemize}
 
 \centering
 \includegraphics[width=0.7\linewidth]{ping_pong_input_norm.png}
-
 \end{frame}
 
-\begin{frame}{Calibration: voltage to distance conversion}
+\begin{frame}{3) Calibration: voltage to distance conversion}
 	After getting the ping pong ball to lift, you may notice that the output is not in units of distance. You will need to calibrate the sensor (i.e.\ convert volts to a unit of distance).
 \begin{itemize}
 \item You can use a physical object (we provide a tape measure) to hold the ball steady at a series of positions in the tube
@@ -202,7 +205,7 @@ Before modelling the plant you need a clear picture of its signals:
 	\includegraphics[width=8cm]{ping_pong_output_calib.png}
 \end{frame}
 
-\begin{frame}{Conditioning the measurement}
+\begin{frame}{4) Conditioning the measurement}
 Once calibrated, you will notice that the sensor is heavily discretised, making analysis difficult; the discretisation would also cause large spikes in the derivative term, limiting the effectiveness of a controller.
 
 As in previous practicals, filter the measured height to smooth the signal without introducing too much time lag, using the low-pass filter method from Practicals 1 and 3 to identify an appropriate cut-off frequency. In the example below the signal is smoother, does not have too much lag, and may be suitable for control purposes.
