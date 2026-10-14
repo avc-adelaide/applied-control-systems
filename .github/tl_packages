@@ -20,6 +20,11 @@ pdflscape
 pgf
 siunitx
 unicode-math
+fontawesome5
+kramer
+circuitikz
+enumitem
 
 tex-gyre
 tex-gyre-math
+lm-math
