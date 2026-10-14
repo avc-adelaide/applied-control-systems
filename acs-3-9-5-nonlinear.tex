@@ -37,7 +37,7 @@
 \begin{frame}{Actuation limits - Example}
 	\begin{itemize}
 		\item Consider a servo system, where the actuator is a current-driven voice coil modelled by
-		\[m\frac{\mathrm{d}^2x}{\mathrm{d}t^2}=F=k_I I\]
+		\begin{equation}m\frac{\mathrm{d}^2x}{\mathrm{d}t^2}=F=k_I I\end{equation}
 		where $m$ is the mass of the system, $x$ is the position of the mass, $F$ is the force, $I$ is the current, and $k_I$ is the motor constant
 		\item The maximum acceleration $a_{\text{max}} =F_{\text{max}}/m=k_I I_{\text{max}}/m $ is given by the maximum current
 		\item There is also a maximum velocity for a voice coil drive, $v_{\text{max}}=V_{\text{max}}/k_I$ given by the maximum voltage
@@ -52,7 +52,7 @@
 		\item Without velocity saturation, we can simply apply the maximum acceleration until the midpoint and then apply maximum deceleration
 		\item For a scenario with velocity saturation, we are additionally limited by the maximum velocity which increases the minimum time
 		\item The minimum time for a transition over a distance $l$ with zero velocity at start and end is
-		\[t= \begin{cases}2 \sqrt{\ell / a_{\max }} & \text { if } \ell \leq v_{\max }^2 / a_{\max } \\ \ell / v_{\max }+v_{\max } / a_{\max } & \text { if } \ell>v_{\max }^2 / a_{\max }\end{cases}\]
+		\begin{equation}t= \begin{cases}2 \sqrt{\ell / a_{\max }} & \text { if } \ell \leq v_{\max }^2 / a_{\max } \\ \ell / v_{\max }+v_{\max } / a_{\max } & \text { if } \ell>v_{\max }^2 / a_{\max }\end{cases}\end{equation}
 	\end{itemize}
 
 \end{frame} 
@@ -80,7 +80,7 @@
 \begin{frame}{Friction - Example}
 	\begin{itemize}
 		\item Consider the cart-pendulum balance system with state feedback but including a friction force given by
-		\[F=-\mu_f M_t g \operatorname{sgn}(v)\]
+		\begin{equation}F=-\mu_f M_t g \operatorname{sgn}(v)\end{equation}
 		\item Experiments often show that friction on the cart creates oscillation
 	\end{itemize}
 	

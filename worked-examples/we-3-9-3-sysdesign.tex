@@ -22,10 +22,10 @@ The PBH test provides an algebraic method to determine if a system can be stabil
 
 \paragraph{Problem:}
 Consider a system with state-space representation:
-\[
+\begin{equation}
 A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & -1 & 1 \\ 0 & 0 & 3 \end{bmatrix}, \quad
 B = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
-\]
+\end{equation}
 
 (a) Determine if the system is stabilisable using the Popov-Belevitch-Hautus (PBH) test.
 
@@ -38,49 +38,49 @@ B = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
 \textbf{Step 1: Find eigenvalues of $A$}
 
 The eigenvalues are found from $\det(A - \lambda I) = 0$. Since $A$ is upper triangular, the eigenvalues are the diagonal elements:
-\[
+\begin{equation}
 \lambda_1 = 2, \quad \lambda_2 = -1, \quad \lambda_3 = 3
-\]
+\end{equation}
 
 Eigenvalues in the right half-plane (unstable): $\lambda_1 = 2$ and $\lambda_3 = 3$.
 
 \textbf{Step 2: Apply PBH test for stabilisability}
 
 The PBH test states that a system is stabilisable if and only if:
-\[
+\begin{equation}
 \operatorname{rank}([A - \lambda I \quad B]) = n
-\]
+\end{equation}
 for all eigenvalues $\lambda$ with $\operatorname{Re}(\lambda) \geq 0$ (right half-plane).
 
 We need to check this for $\lambda_1 = 2$ and $\lambda_3 = 3$.
 
 \textbf{For $\lambda_1 = 2$:}
-\[
+\begin{equation}
 A - 2I = \begin{bmatrix} 0 & 1 & 0 \\ 0 & -3 & 1 \\ 0 & 0 & 1 \end{bmatrix}
-\]
-\[
+\end{equation}
+\begin{equation}
 [A - 2I \quad B] = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & -3 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix}
-\]
+\end{equation}
 
 Row reduce to find rank:
-\[
+\begin{equation}
 \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & -3 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix} \sim \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{bmatrix} \sim \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
-\]
+\end{equation}
 
 Rank = 3 ✓ (satisfies PBH test for $\lambda = 2$)
 
 \textbf{For $\lambda_3 = 3$:}
-\[
+\begin{equation}
 A - 3I = \begin{bmatrix} -1 & 1 & 0 \\ 0 & -4 & 1 \\ 0 & 0 & 0 \end{bmatrix}
-\]
-\[
+\end{equation}
+\begin{equation}
 [A - 3I \quad B] = \begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & -4 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{bmatrix}
-\]
+\end{equation}
 
 Row reduce:
-\[
+\begin{equation}
 \begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & -4 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{bmatrix}
-\]
+\end{equation}
 
 Rank = 2 ✗ (fails PBH test for $\lambda = 3$)
 
@@ -122,58 +122,58 @@ Consider a feedback system with an unstable process $P(s) = 1/(s-1)$ and proport
 \textbf{Step 1: Loop transfer function and sensitivity}
 
 Loop transfer function:
-\[
+\begin{equation}
 L(s) = P(s)C(s) = \frac{k}{s-1} = \frac{5}{s-1}
-\]
+\end{equation}
 
 Sensitivity function:
-\[
+\begin{equation}
 S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + 5/(s-1)} = \frac{s-1}{s-1+5} = \frac{s-1}{s+4}
-\]
+\end{equation}
 
 \textbf{Step 2: Evaluate $\log|S(\ii\omega)|$ at specific frequencies}
 
 At $\omega = 0.5$ rad/s:
-\[
+\begin{equation}
 S(\ii \cdot 0.5) = \frac{\ii \cdot 0.5 - 1}{\ii \cdot 0.5 + 4} = \frac{-1 + \ii \cdot 0.5}{4 + \ii \cdot 0.5}
-\]
-\[
+\end{equation}
+\begin{equation}
 |S(\ii \cdot 0.5)| = \frac{\sqrt{1 + 0.25}}{\sqrt{16 + 0.25}} = \frac{\sqrt{1.25}}{\sqrt{16.25}} = \frac{1.118}{4.031} = 0.277
-\]
-\[
+\end{equation}
+\begin{equation}
 \log|S(\ii \cdot 0.5)| = \log(0.277) = -1.284
-\]
+\end{equation}
 
 At $\omega = 2$ rad/s:
-\[
+\begin{equation}
 |S(\ii \cdot 2)| = \frac{\sqrt{1 + 4}}{\sqrt{16 + 4}} = \frac{\sqrt{5}}{\sqrt{20}} = \frac{2.236}{4.472} = 0.500
-\]
-\[
+\end{equation}
+\begin{equation}
 \log|S(\ii \cdot 2)| = \log(0.5) = -0.693
-\]
+\end{equation}
 
 At $\omega = 10$ rad/s:
-\[
+\begin{equation}
 |S(\ii \cdot 10)| = \frac{\sqrt{1 + 100}}{\sqrt{16 + 100}} = \frac{\sqrt{101}}{\sqrt{116}} = \frac{10.05}{10.77} = 0.933
-\]
-\[
+\end{equation}
+\begin{equation}
 \log|S(\ii \cdot 10)| = \log(0.933) = -0.069
-\]
+\end{equation}
 
 \textbf{Step 3: Apply Bode's Integral Formula}
 
 Bode's Integral Formula states:
-\[
+\begin{equation}
 \int_0^\infty \log|S(\ii\omega)|\,\mathrm{d}\omega = \pi \sum p_k
-\]
+\end{equation}
 where $p_k$ are the right half-plane poles of $L(s)$.
 
 For our system, $L(s) = 5/(s-1)$ has one right half-plane pole at $p_1 = 1$.
 
 Therefore:
-\[
+\begin{equation}
 \int_0^\infty \log|S(\ii\omega)|\,\mathrm{d}\omega = \pi \cdot 1 = \pi \approx 3.14
-\]
+\end{equation}
 
 \textbf{Step 4: Interpretation - The waterbed effect}
 

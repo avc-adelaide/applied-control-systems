@@ -34,7 +34,7 @@ The following indexing syntax can also be used to view and change variable value
 	\frametitle{PID in Simulink}
 	We can of course also design PID controllers in Simulink. In addition to blocks we have seen before, we will also need a Derivative block and a Transfer Function block. Try to recreate your Matlab step response in Simulink. \\
 	Remember that 
-	\[K_i = \frac{K_p}{\TTi}, \quad K_d = K_p\TTd\]
+	\begin{equation}K_i = \frac{K_p}{\TTi}, \quad K_d = K_p\TTd\end{equation}
 	when transferring PID gains from $\texttt{pidstd()}$ to Simulink or vice versa!\\[10pt]
 	Your Simulink should look something like this (make sure you are incorporating negative feedback by appropriately changing the left-most Sum block!)
 	\includegraphics[width=0.9\linewidth]{workshop7_simulink}
@@ -46,18 +46,18 @@ The following indexing syntax can also be used to view and change variable value
 	\frametitle{Placing poles with PID}
 	Let us follow an example from the notes for how we can place poles using PID.\\
 	A generic first-order system is given by the transfer function 
-	\[P(s) = \frac{b}{s+a}\]
+	\begin{equation}P(s) = \frac{b}{s+a}\end{equation}
 	Comparing the desired and closed loop characteristic polynomials with a PI controller
-	\[s^2+a_1s+a_2 = s^2 (a_b\kkp)s+b\kki\]
+	\begin{equation}s^2+a_1s+a_2 = s^2 (a_b\kkp)s+b\kki\end{equation}
 	We may therefore assign arbitrary values of the closed loop poles via PI control ($K_d=0$)
-	\[K_p=\frac{a_1-a}{b}, \quad K_i = \frac{a_2}{b}\]
+	\begin{equation}K_p=\frac{a_1-a}{b}, \quad K_i = \frac{a_2}{b}\end{equation}
 \end{frame}
 
 
 \begin{frame}[fragile]
 	\frametitle{Placing poles with PID}
 	Consider the system
-	\[P(s) = \frac{3}{s-2}\]
+	\begin{equation}P(s) = \frac{3}{s-2}\end{equation}
 	which is unstable in open loop.\\[10pt]
 	
 	Using the previous slide, derive a PI controller to place the closed loop poles at $\lambda = -1, -5$. \\[10pt]

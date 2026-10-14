@@ -13,10 +13,10 @@ In this workshop, we will examine robust control design principles and fundament
 \begin{frame}[fragile]
 \frametitle{Modelling additive uncertainty}
 Define the following system in both Matlab and Simulink
-\[P = \frac{1}{(s+1)^3}\]
+\begin{equation}P = \frac{1}{(s+1)^3}\end{equation}
 with a PID controller $C$ with gains $K_p=1.8$, $\TTi=1.6$, $\TTd=0.8$, $N=100$\\[10pt]
 We will investigate the limits of unmodelled uncertainty in designing robust controllers. Define the following additive uncertainty transfer function in both Matlab and Simulink
-\[ \Delta = \frac{k}{(s^2+0.7s+1)^2} \]
+\begin{equation} \Delta = \frac{k}{(s^2+0.7s+1)^2} \end{equation}
 The block diagram should look like
 \begin{figure} 
 \centering
@@ -27,7 +27,7 @@ The block diagram should look like
 \begin{frame}[fragile]
 	\frametitle{Assessing stability}
 	From the notes, we require the additive uncertainty to be bounded by the following transfer function
-	\[|\Delta| <\left|\frac{1+PC}{C}\right| \]
+	\begin{equation}|\Delta| <\left|\frac{1+PC}{C}\right| \end{equation}
 	for all frequencies $\omega \geq 0$ to maintain stability of the closed loop system.\\[10pt]
 	Investigate parameter values of $k=[0.1,0.2,0.3,0.4,0.5,0.6]$, what do you notice about the closed loop system?\\[10pt]
 	Make sure to plot the Bode plots of $\Delta$ and $\frac{1+PC}{C}$ as well as simulating the step response (with appropriately long stop time) of the closed loop system. \\[10pt]
@@ -42,9 +42,9 @@ The block diagram should look like
 \begin{frame}[fragile]
 	\frametitle{Multiplicative uncertainty}
 	Now, investigate the effect of multiplicative uncertainty using 
-	\[\delta =  \frac{k}{(s^2+0.7s+1)^2}\]
+	\begin{equation}\delta =  \frac{k}{(s^2+0.7s+1)^2}\end{equation}
 	along with the condition 
-	\[|\delta|<\left|\frac{1+PC}{PC}\right| \]
+	\begin{equation}|\delta|<\left|\frac{1+PC}{PC}\right| \end{equation}
 	and the block diagram
 	\begin{figure}
 	\centering

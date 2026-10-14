@@ -13,9 +13,9 @@ In this workshop, we will work with transfer functions and their applications in
 \begin{frame}[fragile]
 \frametitle{Transfer functions}
 Let us first consider the linear mass-spring-damper system with an external force ($u$)
-\[m\ddot{x}+b\dot{x}+kx=u\]
+\begin{equation}m\ddot{x}+b\dot{x}+kx=u\end{equation}
 The state space representation of this system is 
-\[\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
+\begin{equation}\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
 	x_1 \\ x_2
 \end{bmatrix} = \begin{bmatrix}
 	0 & 1 \\ -k/m & -b/m
@@ -23,15 +23,15 @@ The state space representation of this system is
 	x_1 \\ x_2
 \end{bmatrix}  + \begin{bmatrix}
 	0 \\ 1/m
-\end{bmatrix} v\]
-\[y=\begin{bmatrix}
+\end{bmatrix} v\end{equation}
+\begin{equation}y=\begin{bmatrix}
 	1 & 0
 \end{bmatrix}  \begin{bmatrix}
 	x_1 \\ x_2
-\end{bmatrix} + [0] u\]
+\end{bmatrix} + [0] u\end{equation}
 
 The main way to find the transfer function of a system is to take the Laplace transform of the system of ODEs. In our case, since we have a linear system we can calculate the transfer function as 
-\[G(s) = C(sI-A)^{-1}B+D\]
+\begin{equation}G(s) = C(sI-A)^{-1}B+D\end{equation}
 \end{frame}
 
 
