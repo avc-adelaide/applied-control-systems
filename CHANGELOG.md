@@ -1,5 +1,9 @@
 # Changelog for Applied Control Systems
 
+## 2026-10-14
+
+* Added `acs-revision.tex`: week 10 revision deck summarising and linking all nine topics (`make revision`).
+
 ## 2025-05-99
 
 * ...

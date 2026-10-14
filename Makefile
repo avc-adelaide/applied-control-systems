@@ -20,6 +20,7 @@ notesrc  = applied-control-systems.tex
 topcsrc  = $(wildcard acs-0-*.tex) $(wildcard acs-1-*.tex) $(wildcard acs-2-*.tex) $(wildcard acs-3-*.tex)
 pracsrc  = $(wildcard acs-prac*.tex)
 worksrc  = $(wildcard acs-workshop*.tex)
+revsrc   = acs-revision.tex
 examplesrc = $(wildcard worked-examples/we-*.tex)
 extrafiles = $(notdir $(wildcard extra/*.*))
 
@@ -27,23 +28,26 @@ notepdf = $(notesrc:.tex=.pdf)
 topcpdf = $(topcsrc:.tex=.pdf)
 workpdf = $(worksrc:.tex=.pdf)
 pracpdf = $(pracsrc:.tex=.pdf)
+revpdf  = $(revsrc:.tex=.pdf)
 examplepdf = $(examplesrc:.tex=.pdf)
 
 buildnotepdf  = $(addprefix $(BUILD)/,$(notepdf))
 buildtopcpdf  = $(addprefix $(BUILD)/,$(topcpdf))
 buildworkpdf  = $(addprefix $(BUILD)/,$(workpdf))
 buildpracpdf  = $(addprefix $(BUILD)/,$(pracpdf))
+buildrevpdf   = $(addprefix $(BUILD)/,$(revpdf))
 buildexamplepdf = $(addprefix $(BUILD)/,$(examplepdf))
 
 pdfuploadnote = $(addprefix $(UPLOAD)/,$(notepdf))
 pdfuploadtopc = $(addprefix $(UPLOAD)/,$(topcpdf))
 pdfuploadwork = $(addprefix $(UPLOAD)/,$(workpdf))
 pdfuploadprac = $(addprefix $(UPLOAD)/,$(pracpdf))
+pdfuploadrev  = $(addprefix $(UPLOAD)/,$(revpdf))
 
 uploadextra   = $(addprefix $(EXTRA)/,$(extrafiles))
 
 
-.PHONY: help edit topics pracs workshops notes examples all upload uploadnotes clean figures
+.PHONY: help edit topics pracs workshops notes examples revision all upload uploadnotes clean figures
 
 help:
 	@echo 'APPL CONTROL SLIDES MAKEFILE:'
@@ -53,6 +57,7 @@ help:
 	@echo '   workshops - PDFs for each workshops'
 	@echo '       notes - Combined lecture notes'
 	@echo '    examples - PDFs for worked examples'
+	@echo '    revision - Week 10 revision slides'
 	@echo '         all - All of the above'
 	@echo '   upload[*] - Make [*] as above (e.g. "uploadpracs" reqs "pracs") and upload the results'
 	@echo '       extra - Upload all files in extra/ to Canvas'
@@ -70,13 +75,15 @@ pracs:     $(buildpracpdf)
 workshops: $(buildworkpdf)
 notes:     $(buildnotepdf)
 examples:  $(buildexamplepdf)
+revision:  $(buildrevpdf)
 extra:     $(uploadextra)
-all: topics pracs workshops notes examples
+all: topics pracs workshops notes examples revision
 
 uploadtopics:    $(pdfuploadtopc)
 uploadpracs:     $(pdfuploadprac)
 uploadworkshops: $(pdfuploadwork)
 uploadnotes:     $(pdfuploadnote)
+uploadrevision:  $(pdfuploadrev)
 uploadall: uploadtopics uploadpracs uploadworkshops uploadnotes
 
 clean:

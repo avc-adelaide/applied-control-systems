@@ -60,6 +60,7 @@ Other top-level content:
   extra/draft prac file placed at the top level is built and uploaded too
 - `acs-workshop[1-9].tex` — workshop activities (some are stubs/placeholders)
 - `acs-nup.tex` — n-up handout helper
+- `acs-revision.tex` — week 10 revision deck (standalone; does not use `\INCLUDEONLY`), built by `make revision`
 
 ### Worked examples (`worked-examples/`)
 - Article-class PDFs, one file per **concept**, mirroring the slide naming convention exactly:
