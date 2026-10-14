@@ -21,7 +21,8 @@ pgf
 siunitx
 unicode-math
 fontawesome5
-kramer
+cfr-initials
+initials
 circuitikz
 enumitem
 
