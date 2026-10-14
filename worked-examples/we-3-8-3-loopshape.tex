@@ -22,9 +22,9 @@ Lead compensation adds phase lead to improve phase margin and system responsiven
 
 \paragraph{Problem:}
 A process has transfer function $P(s) = \frac{10}{s(s+2)}$. A proportional controller $C(s) = k$ gives poor phase margin. Design a lead compensator of the form:
-\[
+\begin{equation}
 C(s) = k\frac{s + a}{s + b}, \quad a < b
-\]
+\end{equation}
 to achieve:
 \begin{itemize}
 \item Gain crossover frequency $\omega_{gc} = 5$ rad/s
@@ -36,9 +36,9 @@ to achieve:
 (b) Determine the required phase lead $\phi$ to achieve $\phasemargin = 50°$.
 
 (c) Choose $a$ and $b$ to provide the required phase lead, using the maximum phase lead formula for a lead compensator:
-\[
+\begin{equation}
 \phi_{\max} = \sin^{-1}\left(\frac{b-a}{b+a}\right), \quad \text{occurring at } \omega_m = \sqrt{ab}
-\]
+\end{equation}
 
 (d) Calculate the gain $k$ needed to place the crossover at $\omega_{gc} = 5$ rad/s.
 
@@ -49,139 +49,139 @@ to achieve:
 \textbf{Step 1: Uncompensated system at $\omega = 5$ rad/s}
 
 Evaluate the process at $s = \ii \cdot 5$:
-\[
+\begin{equation}
 P(\ii \cdot 5) = \frac{10}{\ii \cdot 5(\ii \cdot 5 + 2)} = \frac{10}{5\ii(2 + 5\ii)} = \frac{10}{10\ii - 25} = \frac{10}{-25 + 10\ii}
-\]
+\end{equation}
 
 Magnitude:
-\[
+\begin{equation}
 |P(\ii \cdot 5)| = \frac{10}{\sqrt{625 + 100}} = \frac{10}{\sqrt{725}} = \frac{10}{26.93} = 0.371
-\]
+\end{equation}
 
 Phase:
-\[
+\begin{equation}
 \angle P(\ii \cdot 5) = -90° - \tan^{-1}\left(\frac{5}{2}\right) = -90° - 68.2° = -158.2°
-\]
+\end{equation}
 
 With proportional control $C = k$, the phase margin would be:
-\[
+\begin{equation}
 \phasemargin = 180° - 158.2° = 21.8°
-\]
+\end{equation}
 
 This is too small (typically want $\phasemargin > 45°$ for good performance).
 
 \textbf{Step 2: Required phase lead}
 
 For a phase margin of 50°, the total phase at crossover must be:
-\[
+\begin{equation}
 \angle L(\ii\omega_{gc}) = -180° + 50° = -130°
-\]
+\end{equation}
 
 Currently, $\angle P(\ii \cdot 5) = -158.2°$. The lead compensator must add:
-\[
+\begin{equation}
 \phi_{\text{required}} = -130° - (-158.2°) = 28.2°
-\]
+\end{equation}
 
 To account for the shift in crossover frequency and provide margin, we typically add 5-10° extra. Let's design for:
-\[
+\begin{equation}
 \phi = 35°
-\]
+\end{equation}
 
 \textbf{Step 3: Design the lead compensator}
 
 Using the maximum phase lead formula:
-\[
+\begin{equation}
 \sin(\phi_{\max}) = \frac{b - a}{b + a}
-\]
+\end{equation}
 
 For $\phi_{\max} = 35°$:
-\[
+\begin{equation}
 \sin(35°) = 0.574 = \frac{b - a}{b + a}
-\]
+\end{equation}
 
 Solving for the ratio $\alpha = a/b$:
-\[
+\begin{equation}
 0.574(b + a) = b - a
-\]
-\[
+\end{equation}
+\begin{equation}
 0.574b + 0.574a = b - a
-\]
-\[
+\end{equation}
+\begin{equation}
 1.574a = 0.426b
-\]
-\[
+\end{equation}
+\begin{equation}
 \frac{a}{b} = \alpha = \frac{0.426}{1.574} = 0.271
-\]
+\end{equation}
 
 The maximum phase occurs at $\omega_m = \sqrt{ab}$. We want this at $\omega_{gc} = 5$ rad/s:
-\[
+\begin{equation}
 \sqrt{ab} = 5 \quad \Rightarrow \quad ab = 25
-\]
+\end{equation}
 
 With $a = \alpha b = 0.271b$:
-\[
+\begin{equation}
 0.271b \cdot b = 25 \quad \Rightarrow \quad b^2 = \frac{25}{0.271} = 92.3
-\]
-\[
+\end{equation}
+\begin{equation}
 b = 9.61, \quad a = 0.271 \times 9.61 = 2.60
-\]
+\end{equation}
 
 So the lead compensator is:
-\[
+\begin{equation}
 C_{\text{lead}}(s) = k\frac{s + 2.6}{s + 9.61}
-\]
+\end{equation}
 
 \textbf{Step 4: Calculate the required gain $k$}
 
 At crossover, we need $|L(\ii \cdot 5)| = 1$:
-\[
+\begin{equation}
 |L(\ii \cdot 5)| = |P(\ii \cdot 5)| \cdot |C_{\text{lead}}(\ii \cdot 5)| = 1
-\]
+\end{equation}
 
 We already have $|P(\ii \cdot 5)| = 0.371$.
 
 For the lead compensator at $\omega = 5$:
-\[
+\begin{equation}
 C_{\text{lead}}(\ii \cdot 5) = k\frac{\ii \cdot 5 + 2.6}{\ii \cdot 5 + 9.61} = k\frac{2.6 + 5\ii}{9.61 + 5\ii}
-\]
+\end{equation}
 
 Magnitude:
-\[
+\begin{equation}
 |C_{\text{lead}}(\ii \cdot 5)| = k\frac{\sqrt{6.76 + 25}}{\sqrt{92.35 + 25}} = k\frac{\sqrt{31.76}}{\sqrt{117.35}} = k\frac{5.636}{10.83} = 0.520k
-\]
+\end{equation}
 
 Setting $|L(\ii \cdot 5)| = 1$:
-\[
+\begin{equation}
 0.371 \times 0.520k = 1
-\]
-\[
+\end{equation}
+\begin{equation}
 k = \frac{1}{0.193} = 5.18
-\]
+\end{equation}
 
 Therefore, the complete controller is:
-\[
+\begin{equation}
 C(s) = 5.18\frac{s + 2.6}{s + 9.61}
-\]
+\end{equation}
 
 \textbf{Step 5: Verify the phase margin}
 
 Phase of lead compensator at $\omega = 5$:
-\[
+\begin{equation}
 \angle C_{\text{lead}}(\ii \cdot 5) = \tan^{-1}\left(\frac{5}{2.6}\right) - \tan^{-1}\left(\frac{5}{9.61}\right)
-\]
-\[
+\end{equation}
+\begin{equation}
 = 62.5° - 27.5° = 35.0°
-\]
+\end{equation}
 
 Total phase at crossover:
-\[
+\begin{equation}
 \angle L(\ii \cdot 5) = \angle P(\ii \cdot 5) + \angle C_{\text{lead}}(\ii \cdot 5) = -158.2° + 35.0° = -123.2°
-\]
+\end{equation}
 
 Phase margin:
-\[
+\begin{equation}
 \phasemargin = 180° - 123.2° = 56.8°
-\]
+\end{equation}
 
 This exceeds our target of 50°. ✓
 
@@ -203,9 +203,9 @@ Lag compensation increases low-frequency gain to improve steady-state accuracy w
 A process has transfer function $P(s) = \frac{1}{s+1}$. A proportional controller $C = k = 3$ gives acceptable transient response (phase margin $\phasemargin = 53°$) but poor steady-state error for ramp tracking.
 
 Design a lag compensator:
-\[
+\begin{equation}
 C(s) = k\frac{s + a}{s + b}, \quad a > b
-\]
+\end{equation}
 to achieve:
 \begin{itemize}
 \item Increase the low-frequency gain by a factor of 10 (to reduce steady-state error)
@@ -225,117 +225,117 @@ to achieve:
 \textbf{Step 1: Uncompensated system analysis}
 
 With proportional control $C = 3$:
-\[
+\begin{equation}
 L(s) = 3 \cdot \frac{1}{s+1} = \frac{3}{s+1}
-\]
+\end{equation}
 
 At crossover, $|L(\ii\omega_{gc})| = 1$:
-\[
+\begin{equation}
 \frac{3}{\sqrt{\omega_{gc}^2 + 1}} = 1 \quad \Rightarrow \quad \omega_{gc}^2 + 1 = 9 \quad \Rightarrow \quad \omega_{gc} = \sqrt{8} = 2.83 \text{ rad/s}
-\]
+\end{equation}
 
 Phase at crossover:
-\[
+\begin{equation}
 \angle L(\ii \cdot 2.83) = -\tan^{-1}(2.83) = -70.6°
-\]
+\end{equation}
 
 Phase margin:
-\[
+\begin{equation}
 \phasemargin = 180° - 70.6° = 109.4°
-\]
+\end{equation}
 
 Wait, this seems too large. Let me recalculate. Actually, for $P(s) = 1/(s+1)$, the phase is simply $-\tan^{-1}(\omega)$. At $\omega = 2.83$:
-\[
+\begin{equation}
 \angle P(\ii \cdot 2.83) = -\tan^{-1}(2.83) = -70.5°
-\]
-\[
+\end{equation}
+\begin{equation}
 \phasemargin = 180° - 70.5° = 109.5°
-\]
+\end{equation}
 
 Actually, the problem states $\phasemargin \approx 53°$, which suggests a different process or I misread. Let me use the given value and proceed with the lag design concept.
 
 \textbf{Step 2: Lag compensator design}
 
 The lag compensator has the form:
-\[
+\begin{equation}
 C_{\text{lag}}(s) = k\frac{s + a}{s + b}, \quad a > b
-\]
+\end{equation}
 
 At low frequencies ($s \to 0$):
-\[
+\begin{equation}
 C_{\text{lag}}(0) = k\frac{a}{b}
-\]
+\end{equation}
 
 To increase low-frequency gain by factor of 10:
-\[
+\begin{equation}
 \frac{a}{b} = 10 \quad \Rightarrow \quad a = 10b
-\]
+\end{equation}
 
 To minimize phase lag at the crossover frequency, we place both the zero and pole well below $\omega_{gc}$. A common rule of thumb is to place them at least one decade below:
-\[
+\begin{equation}
 a < \frac{\omega_{gc}}{10}
-\]
+\end{equation}
 
 For $\omega_{gc} \approx 1.73$ rad/s:
-\[
+\begin{equation}
 a < 0.173 \text{ rad/s}
-\]
+\end{equation}
 
 Choose $a = 0.1$ rad/s, then $b = a/10 = 0.01$ rad/s.
 
 The lag compensator is:
-\[
+\begin{equation}
 C_{\text{lag}}(s) = k\frac{s + 0.1}{s + 0.01}
-\]
+\end{equation}
 
 \textbf{Step 3: Determine the gain $k$}
 
 Since we want to maintain the same crossover frequency, and the lag compensator has approximately unity gain at $\omega_{gc}$ (both pole and zero are far below):
-\[
+\begin{equation}
 |C_{\text{lag}}(\ii \cdot 1.73)| \approx \frac{\sqrt{0.01 + 3}}{\sqrt{0.0001 + 3}} \approx \frac{\sqrt{3.01}}{\sqrt{3.0001}} \approx 1
-\]
+\end{equation}
 
 More precisely:
-\[
+\begin{equation}
 |C_{\text{lag}}(\ii \cdot 1.73)| = \frac{\sqrt{1.73^2 + 0.1^2}}{\sqrt{1.73^2 + 0.01^2}} = \frac{\sqrt{2.9929 + 0.01}}{\sqrt{2.9929 + 0.0001}} = \frac{\sqrt{3.0029}}{\sqrt{2.9930}} = \frac{1.733}{1.730} = 1.002
-\]
+\end{equation}
 
 So the gain at crossover is essentially unchanged. The proportional gain remains:
-\[
+\begin{equation}
 k = 3
-\]
+\end{equation}
 
 The complete controller is:
-\[
+\begin{equation}
 C(s) = 3\frac{s + 0.1}{s + 0.01}
-\]
+\end{equation}
 
 \textbf{Step 4: Verify phase margin preservation}
 
 Phase of lag compensator at $\omega = 1.73$ rad/s:
-\[
+\begin{equation}
 \angle C_{\text{lag}}(\ii \cdot 1.73) = \tan^{-1}\left(\frac{1.73}{0.1}\right) - \tan^{-1}\left(\frac{1.73}{0.01}\right)
-\]
-\[
+\end{equation}
+\begin{equation}
 = \tan^{-1}(17.3) - \tan^{-1}(173)
-\]
-\[
+\end{equation}
+\begin{equation}
 \approx 86.7° - 89.7° = -3°
-\]
+\end{equation}
 
 The phase lag introduced is only 3°, which is minimal. The phase margin decreases by approximately 3°, from 53° to about 50°, which is still acceptable.
 
 \textbf{Step 5: Verify low-frequency gain improvement}
 
 At DC ($s = 0$):
-\[
+\begin{equation}
 C_{\text{lag}}(0) = 3 \cdot \frac{0.1}{0.01} = 3 \times 10 = 30
-\]
+\end{equation}
 
 Compared to the original $C(0) = 3$, this is a 10× improvement. For ramp tracking, the steady-state error coefficient becomes:
-\[
+\begin{equation}
 K_v = \lim_{s \to 0} s \cdot L(s) = \lim_{s \to 0} s \cdot 30 \cdot \frac{1}{s+1} = 30
-\]
+\end{equation}
 
 Compared to the original $K_v = 3$, the steady-state error for ramp inputs is reduced by a factor of 10.
 

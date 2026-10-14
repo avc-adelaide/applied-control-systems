@@ -39,7 +39,7 @@
 	\item Assume the pole excess $\npoleexcess=n-m$ is nonnegative
 	\item The controller for the system is assumed to be a proportional controller (for simplicity) with transfer function $C(s)=k$
 		\item The closed loop characteristic polynomial is 
-\[a\closedloop(s)=a(s)+kb(s)\]
+\begin{equation}a\closedloop(s)=a(s)+kb(s)\end{equation}
 and the closed loop poles are the roots of $a\closedloop(s)$
 \item The root locus is a graph of the roots of $a\closedloop(s)$ as $k$ varies from $0$ to $\infty$
 \end{itemize}
@@ -51,10 +51,10 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 		\item Since $a\closedloop(s)$ is of degree $n$, the plot will have $n$ branches
 		\item When $k=0$, the closed loop poles are equal to the open loop poles
 		\item When there are open loop poles at $s=p_l$ with multiplicity $m$, the characteristic equation is 
-		\[(s-p_l)^m\tilde{a}(s) + kb(s)\approx (s-p_l)^m\tilde{a}(p_l)+kb(p_l)=0\]
+		\begin{equation}(s-p_l)^m\tilde{a}(s) + kb(s)\approx (s-p_l)^m\tilde{a}(p_l)+kb(p_l)=0\end{equation}
 		where $\tilde{a}(s)$ is the polynomial $a(s)$ with poles at $s=p_l$ factored out
 		\item For small $k$, the roots of this equation are given by 
-		\[s=p_l + \sqrt[m]{-kb(p_l)/\tilde{a}(p_l)}\]
+		\begin{equation}s=p_l + \sqrt[m]{-kb(p_l)/\tilde{a}(p_l)}\end{equation}
 		\item The root locus will have a star pattern with $m$ branches emanating from the open loop pole $s=p_l$, with angles between branches $2\pi/m$
 	\end{itemize}
 \end{frame}
@@ -62,7 +62,7 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 \begin{frame}{Large $k$}
 	\begin{itemize}
 		\item For large gain values we may approximate the characteristic polynomial as
-		\[a\closedloop(s) = b(s)\left(\frac{a(s)}{b(s)}+k \right) \approx b(s)\left(\frac{s^{\npoleexcess}}{b_0}+k \right)\]
+		\begin{equation}a\closedloop(s) = b(s)\left(\frac{a(s)}{b(s)}+k \right) \approx b(s)\left(\frac{s^{\npoleexcess}}{b_0}+k \right)\end{equation}
 		\item Therefore, for large $k$, the closed loop poles are approximately the roots of $b(s)$ and $\sqrt[\npoleexcess]{-b_0k}$
 		\item The asymptotes are $\npoleexcess$ lines emanating from the centre of mass of poles and zeros
 		\item When $b_0k>0$, the lines have angles $(\pi+2l\pi)/\npoleexcess$ for $l=1,\dots,\npoleexcess$ with respect to the real line
@@ -84,8 +84,8 @@ and the closed loop poles are the roots of $a\closedloop(s)$
 \begin{frame}{Some root loci}
 \begin{itemize}
 \item Consider the transfer functions
-\[P_a(s)=k\frac{s+1}{s^2}, \quad P_b(s) = k\frac{s+1}{s(s+2)(s^2+2s+4)},\]
-\[P_c(s) = k\frac{s+1}{s(s^2+1)}, \quad P_d(s) = k\frac{s^2+2s+2}{s(s^2+1)}\]
+\begin{equation}P_a(s)=k\frac{s+1}{s^2}, \quad P_b(s) = k\frac{s+1}{s(s+2)(s^2+2s+4)},\end{equation}
+\begin{equation}P_c(s) = k\frac{s+1}{s(s^2+1)}, \quad P_d(s) = k\frac{s^2+2s+2}{s(s^2+1)}\end{equation}
 \end{itemize}
 The root loci trace the roots of the characteristic equation $1 + kP(s) = 0$ as the gain $k$ increases from $k=0$ to $k=\infty$; branches originate at the poles of $P$ (\textsf{x}) and terminate at its zeros (\textsf{o}) or at infinity.
 \end{frame}
@@ -102,10 +102,10 @@ The root loci trace the roots of the characteristic equation $1 + kP(s) = 0$ as 
 \begin{frame}{Root locus for design}
 \begin{itemize}
 	\item Consider the previously defined transfer function $P_c(s)$ as a representation of PI control of a system with
-	\[P(s)=\frac{1}{s^2+1}, \quad C(s)=k\frac{s+1}{s}\]
+	\begin{equation}P(s)=\frac{1}{s^2+1}, \quad C(s)=k\frac{s+1}{s}\end{equation}
 	\item From the root locus of $P_c(s)$, the system is unstable for all gain values and hence cannot be stabilised by PI control
 	\item PID control may be implemented by using the controller
-	\[C(s)=k\frac{s^2+2s+2}{s}\]
+	\begin{equation}C(s)=k\frac{s^2+2s+2}{s}\end{equation}
 	whcih gives the transfer function $P_d(s)$
 	\item This system is stable and we can choose $k$ to place the poles in desirable locations
 \end{itemize}

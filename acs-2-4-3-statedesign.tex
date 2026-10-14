@@ -31,23 +31,23 @@
 
 \begin{frame}{Second-order dynamics}
 A general second-order system is given by the differential equation
-\[\ddot{q}+2\zeta \omega_0 \dot{q}+\omega_0^2q=k\omega_0^2u, \quad y=q.\]
+\begin{equation}\ddot{q}+2\zeta \omega_0 \dot{q}+\omega_0^2q=k\omega_0^2u, \quad y=q.\end{equation}
 The state space representation is 
-\[\frac{\mathrm{d} x}{\mathrm{d} t}=\begin{bmatrix}
+\begin{equation}\frac{\mathrm{d} x}{\mathrm{d} t}=\begin{bmatrix}
 	0 & \omega_0 \\
 	-\omega_0 & -2 \zeta \omega_0
 \end{bmatrix} x+\begin{bmatrix} 0 \\
 k \omega_0 
 \end{bmatrix}u, \quad y=\begin{bmatrix}
 	1 & 0
-\end{bmatrix} x,\]
+\end{bmatrix} x,\end{equation}
 where $x=\left(q,\tfrac{\dot{q}}{\omega_0}\right)$ is a normalised choice of states.\\
 The parameter $\omega_0$ is known as the natural frequency of the system and $\zeta$ is known as the damping ratio.
 \end{frame}
 
 \begin{frame}{Second-order dynamics}
 The eigenvalues of this general system are 
-\[\lambda=-\zeta \omega_0 \pm \omega_0 \sqrt{\zeta^2-1}.\]	
+\begin{equation}\lambda=-\zeta \omega_0 \pm \omega_0 \sqrt{\zeta^2-1}.\end{equation}	
 From this we can deduce that the system is stable if $\omega_0>0$ and $\zeta>0$. Also, the eigenvalues are complex if $\zeta<1$ and are real if $\zeta\geq 1$.\\
 
 The parameter $\zeta$ describes systems that are

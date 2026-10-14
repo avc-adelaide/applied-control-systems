@@ -90,9 +90,13 @@
 
 \newcommand\Wob{W_{\mathrm{o}}}
 
-% this is a surprising awful hack, can't believe it works:
-% https://tex.stackexchange.com/questions/32526/use-displaymath-shorthand-for-align-and-other-amsmath-environments
-\def\[#1\]{\begin{align}#1\end{align}}
+% All displayed equations should be numbered, so forbid the unnumbered shorthand.
+\DeclareRobustCommand\[{%
+  \PackageError{beamer-control-maths}
+    {In this document we want to number all equations,\MessageBreak
+     use the equation environment instead of \protect\[...\protect\]}
+    {Replace \protect\[...\protect\] with \protect\begin{equation}...\protect\end{equation}.}%
+}
 
 \newcommand\kkp{k_{\mathrm{p}}}
 \newcommand\kki{k_{\mathrm{i}}}

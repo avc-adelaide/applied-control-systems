@@ -33,11 +33,11 @@
 \item A pole is stable if it is in the left half-plane and unstable if it is in the right half-plane
 \item A \textit{fast} pole is one that has a magnitude larger than the intended closed loop bandwidth
 \item Consider a PI controller for a first-order system
-\[P(s) = \frac{b}{s+a}, \quad C(s)=\kkp+\frac{\kki}{s}\]
+\begin{equation}P(s) = \frac{b}{s+a}, \quad C(s)=\kkp+\frac{\kki}{s}\end{equation}
 \item The closed loop characteristic polynomial is
-\[s(s+a)+b(\kkp s+\kki)=s^2+(a+b\kkp)s+\kki b\]
+\begin{equation}s(s+a)+b(\kkp s+\kki)=s^2+(a+b\kkp)s+\kki b\end{equation}
 \item If we want poles at $-p_1$ and $-p_2$ we get
-\[\kkp=\frac{p_1+p_2-a}{b}, \quad \kki=\frac{p_1p_2}{b}\]
+\begin{equation}\kkp=\frac{p_1+p_2-a}{b}, \quad \kki=\frac{p_1p_2}{b}\end{equation}
 \end{itemize}
 \end{frame}
 
@@ -45,7 +45,7 @@
 \begin{frame}{Fast stable process poles}
 	\begin{itemize}
 		\item The sensitivity functions are 
-		\[S(s) = \frac{s(s+a)}{(s+p_1)(s+p_2)}, \quad T(s) = \frac{(p_1+p_2-a)s+p_1p_2}{(s+p_1)(s+p_2)}\]
+		\begin{equation}S(s) = \frac{s(s+a)}{(s+p_1)(s+p_2)}, \quad T(s) = \frac{(p_1+p_2-a)s+p_1p_2}{(s+p_1)(s+p_2)}\end{equation}
 		\item Assume that pole $a$ is faster than the closed loop poles, the proportional gain $\kkp$ is then negative and the controller has a zero in the right half-plane
 		\item There is a large sensitivity peak due to the fast stable pole $\rightarrow$ poor robustness
 	\end{itemize}
@@ -63,10 +63,10 @@
 	\begin{itemize}
 		\item A zero is \textit{slow} if its magnitude is smaller than the intended closed loop bandwidth
 		\item Consider the vehicle steering system where the transfer function from steering angle to lateral position is 
-		\[P(s)=\gamma \frac{s+1/\gamma}{s^2}\]
+		\begin{equation}P(s)=\gamma \frac{s+1/\gamma}{s^2}\end{equation}
 		\item This system has a slow stable zero at $s=-1/\gamma$
 		\item A controller based on state feedback with an observer (Example 8.4) gives a controller 
-		\[C(s) = \frac{-11516s+40000}{s^2+42.4s+6657.9}\]
+		\begin{equation}C(s) = \frac{-11516s+40000}{s^2+42.4s+6657.9}\end{equation}
 	\end{itemize}
 \end{frame}
 

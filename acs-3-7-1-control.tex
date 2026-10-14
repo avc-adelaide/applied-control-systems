@@ -103,10 +103,10 @@ PID is a standardised control methodology, with well-defined and `understandable
 \begin{frame}{Control action}
 \begin{itemize}
 	\item The control action of a PID controller is given by
-	\[u=\kkp e+\kki \int_0^t e(\tau) \, \mathrm{d} \tau+\kkd \frac{\mathrm{d} e}{\mathrm{d} t}\]
+	\begin{equation}u=\kkp e+\kki \int_0^t e(\tau) \, \mathrm{d} \tau+\kkd \frac{\mathrm{d} e}{\mathrm{d} t}\end{equation}
 	where $\kkp$ is the proportional gain, $\kki$ is the integral gain, and $\kkd$ is the derivative gain
 	\item The integral time constant $\TTi=\tfrac{\kkp}{\kki}$ and derivative time constant $\TTd = \tfrac{\kkd}{\kkp}$ provide an alternate parameterisation for the control action
-	\[u = \kkp\left(e+\frac{1}{\TTi} \int_0^t e(\tau) \, \mathrm{d} \tau+\TTd \frac{\mathrm{d} e}{\mathrm{d} t}\right)\]
+	\begin{equation}u = \kkp\left(e+\frac{1}{\TTi} \int_0^t e(\tau) \, \mathrm{d} \tau+\TTd \frac{\mathrm{d} e}{\mathrm{d} t}\right)\end{equation}
 \end{itemize}
 
 \end{frame}
@@ -168,16 +168,16 @@ PID is a standardised control methodology, with well-defined and `understandable
 
 \begin{frame}
 \frametitle{Generally cannot use a straight derivative}
-\[
+\begin{equation}
  u(t) = \kkp e(t) + \kki\int_0^t e(\tau)\dee \tau + \kkd\frac{\dee e(t)}{\dee t}
-\]
-\[
+\end{equation}
+\begin{equation}
  \frac{U(s)}{E(s)} = \kkp + \frac{k_i}{s} + \kkd s = \frac{\kkd s^2 + \kkp s + \kki}{s}
-\]
+\end{equation}
 Notice anything? Therefore:
-\[
+\begin{equation}
    \frac{U_{\text{d}}(s)}{E(s)} = \frac{\kkd s}{1 + \TTf s}
-\]
+\end{equation}
 \end{frame}
 
 \SUMMARYFRAME

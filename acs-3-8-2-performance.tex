@@ -33,7 +33,7 @@
 \begin{frame}{Tracking specifications}
 \begin{itemize}
 \item The responses of the output $y$ and control signal $u$ to the reference $r$ are described by 
-\[G_{yr} = \frac{PCF}{1+PC} \quad \text{and} \quad G_{ur} = \frac{CF}{1+PC}\]
+\begin{equation}G_{yr} = \frac{PCF}{1+PC} \quad \text{and} \quad G_{ur} = \frac{CF}{1+PC}\end{equation}
 \item Specifications for response to reference signals can be expressed in terms of features of $G_{yr}$ such as the peak value $M_r$, peak frequency $\omega_{mr}$, and bandwidth $\omega_b$
 \end{itemize}
 \begin{figure}
@@ -49,12 +49,12 @@
 		\item The transfer function $G_{yr}$ typically has unity zero frequency gain as we want the system to have step input with zero steady-state error
 		\item The behaviour at low frequencies determines the tracking error for slow reference signals
 		\item We can investigate by considering small $s$
-		\[
+		\begin{equation}
 		    G_{er}(s)\approx e_1 s+ e_2 s^2+\cdots
-		\]
+		\end{equation}
 		where $e_k$ are called error coefficients
 		\item For a reference signal $r(t)$
-		\[e(t)=r(t)-y(t)= \mathcal{L}^{-1} \{ G_{er}(s) R(s) \} = e_1 \frac{\mathrm{d}r}{\mathrm{d}t}+ e_2 \frac{\mathrm{d}^2r}{\mathrm{d}t^2}+ \cdots\]
+		\begin{equation}e(t)=r(t)-y(t)= \mathcal{L}^{-1} \{ G_{er}(s) R(s) \} = e_1 \frac{\mathrm{d}r}{\mathrm{d}t}+ e_2 \frac{\mathrm{d}^2r}{\mathrm{d}t^2}+ \cdots\end{equation}
 		as multiplying by $s$ corresponds to differentiation in time
 	\end{itemize}
 \end{frame}
@@ -126,9 +126,9 @@
 \begin{itemize}
 	\item The maximum sensitivity $\Msens$ (which occurs at $\ww_{\text{ms}}$) is a measure of the largest amplification of disturbances
 	\item It is equal to the inverse of the stability margin
-	\[
+	\begin{equation}
 	  \Msens =\frac{1}{s_{\text{m}}}
-	\]
+	\end{equation}
 	\item The sensitivity crossover frequency $\ww_{\text{sc}}$ and the maximum sensitivity $\Msens$ give a characterisation of load disturbance attenuation
 \end{itemize}
 \end{frame}
@@ -136,9 +136,9 @@
 \begin{frame}{Load disturbance transfer function}
 	\begin{itemize}
 		\item The transfer function from load disturbance $v$ to process output $y$ is 
-		\[
+		\begin{equation}
 		    G_{yv} = \frac{P}{1+PC}=PS=\frac{T}{C}
-		\]
+		\end{equation}
 		\item As load disturbances typically have low frequencies, small $s$ results in $T\approx1$ and so $G_{yv}\approx \frac{1}{C}$ for small $s$
 		\item Therefore, for a controller with integral action at small $s$, $G_{yv}\approx \frac{s}{\kki}$ and so disturbances are attenuated effectively
 		
@@ -149,9 +149,9 @@
 	\begin{itemize}
 		\item Measurement noise is typically high frequency and therefore introduces rapid variation in the control signal
 		\item The TF from measurement noise $w$ to control signal $u$ is 
-		\[
+		\begin{equation}
 		    -G_{uw} = \frac{C}{1+PC}=CS=\frac{T}{P}
-		\]
+		\end{equation}
 		\item Assuming that $S\approx 1$ for large $s$ (high frequencies), $-G_{uw}\approx C$ for large $s$
 		\item Therefore, filtering the derivative so that the controller transfer function goes to zero for large $s$ is useful to keep variations in control signal reasonable
 		

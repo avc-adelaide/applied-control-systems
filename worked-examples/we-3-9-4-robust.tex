@@ -40,81 +40,81 @@ The process transfer function is $P(s) = 2/(s+10)$ (where $b = 2$ and $a = 10$).
 The PI controller is $C(s) = k_p + k_i/s = (k_ps + k_i)/s$.
 
 The loop transfer function:
-\[
+\begin{equation}
 L(s) = P(s)C(s) = \frac{2}{s+10} \cdot \frac{k_ps + k_i}{s} = \frac{2k_ps + 2k_i}{s(s+10)}
-\]
+\end{equation}
 
 The closed-loop characteristic equation is:
-\[
+\begin{equation}
 1 + L(s) = 0 \quad \Rightarrow \quad s(s+10) + 2k_ps + 2k_i = 0
-\]
-\[
+\end{equation}
+\begin{equation}
 s^2 + (10 + 2k_p)s + 2k_i = 0
-\]
+\end{equation}
 
 \textbf{Step 2: Pole placement calculation}
 
 For poles at $s = -2 \pm \ii$, the desired characteristic polynomial is:
-\[
+\begin{equation}
 (s - (-2 + \ii))(s - (-2 - \ii)) = (s+2-\ii)(s+2+\ii) = (s+2)^2 + 1
-\]
-\[
+\end{equation}
+\begin{equation}
 = s^2 + 4s + 4 + 1 = s^2 + 4s + 5
-\]
+\end{equation}
 
 Matching coefficients with $s^2 + (10 + 2k_p)s + 2k_i = 0$:
-\[
+\begin{equation}
 10 + 2k_p = 4 \quad \Rightarrow \quad k_p = -3
-\]
-\[
+\end{equation}
+\begin{equation}
 2k_i = 5 \quad \Rightarrow \quad k_i = 2.5
-\]
+\end{equation}
 
 \textbf{Step 3: Sensitivity functions}
 
 The controller is $C(s) = -3 + 2.5/s = (-3s + 2.5)/s$.
 
 Notice that $k_p < 0$, which means the controller has a zero in the right half-plane:
-\[
+\begin{equation}
 C(s) = \frac{-3s + 2.5}{s} = -3\frac{s - 0.833}{s}
-\]
+\end{equation}
 
 The zero is at $s = 2.5/3 = 0.833$ (RHP zero).
 
 Loop transfer function:
-\[
+\begin{equation}
 L(s) = \frac{2(-3s + 2.5)}{s(s+10)} = \frac{-6s + 5}{s(s+10)}
-\]
+\end{equation}
 
 Sensitivity function:
-\[
+\begin{equation}
 S(s) = \frac{1}{1 + L(s)} = \frac{s(s+10)}{s(s+10) + (-6s + 5)} = \frac{s(s+10)}{s^2 + 4s + 5}
-\]
+\end{equation}
 
 Complementary sensitivity:
-\[
+\begin{equation}
 T(s) = \frac{L(s)}{1 + L(s)} = \frac{-6s + 5}{s^2 + 4s + 5}
-\]
+\end{equation}
 
 \textbf{Step 4: Calculate maximum sensitivities}
 
 For $M_s$, we need to find $\max_\omega |S(\ii\omega)|$:
-\[
+\begin{equation}
 S(\ii\omega) = \frac{\ii\omega(\ii\omega + 10)}{(\ii\omega)^2 + 4\ii\omega + 5} = \frac{-\omega^2 + 10\ii\omega}{-\omega^2 + 4\ii\omega + 5}
-\]
-\[
+\end{equation}
+\begin{equation}
 = \frac{(5-\omega^2) + 10\ii\omega}{(5-\omega^2) + 4\ii\omega}
-\]
+\end{equation}
 
 The magnitude is:
-\[
+\begin{equation}
 |S(\ii\omega)| = \frac{\sqrt{(5-\omega^2)^2 + 100\omega^2}}{\sqrt{(5-\omega^2)^2 + 16\omega^2}}
-\]
+\end{equation}
 
 At the resonant frequency $\omega_r = \sqrt{5} \approx 2.24$ rad/s (where the denominator is minimized):
-\[
+\begin{equation}
 |S(\ii\sqrt{5})| = \frac{\sqrt{0 + 500}}{\sqrt{0 + 80}} = \frac{\sqrt{500}}{\sqrt{80}} = \frac{22.36}{8.94} = 2.50
-\]
+\end{equation}
 
 Therefore, $M_s \approx 2.50$ (very large, indicating poor robustness!).
 
@@ -149,15 +149,15 @@ Process zeros slower than the desired bandwidth also require careful treatment t
 
 \paragraph{Problem:}
 Consider the vehicle steering system with transfer function:
-\[
+\begin{equation}
 P(s) = \gamma\frac{s + 1/\gamma}{s^2} = \frac{s + 0.2}{s^2}
-\]
+\end{equation}
 where $\gamma = 5$ m is a characteristic length and the zero is at $s = -0.2$ rad/s (slow).
 
 A state feedback controller with observer is designed to place all closed-loop poles at $s = -5$. The resulting controller transfer function is:
-\[
+\begin{equation}
 C(s) = \frac{125s + 250}{s^2 + 20s + 100}
-\]
+\end{equation}
 
 (a) Calculate the loop transfer function $L(s)$.
 
@@ -171,29 +171,29 @@ C(s) = \frac{125s + 250}{s^2 + 20s + 100}
 
 \textbf{Step 1: Loop transfer function}
 
-\[
+\begin{equation}
 L(s) = P(s)C(s) = \frac{s + 0.2}{s^2} \cdot \frac{125s + 250}{s^2 + 20s + 100}
-\]
-\[
+\end{equation}
+\begin{equation}
 = \frac{(s + 0.2)(125s + 250)}{s^2(s^2 + 20s + 100)} = \frac{125(s + 0.2)(s + 2)}{s^2(s^2 + 20s + 100)}
-\]
+\end{equation}
 
 \textbf{Step 2: Complementary sensitivity function}
 
 The complementary sensitivity is:
-\[
+\begin{equation}
 T(s) = \frac{L(s)}{1 + L(s)} = \frac{P(s)C(s)}{1 + P(s)C(s)}
-\]
+\end{equation}
 
 The closed-loop poles are all at $s = -5$ (quadruple pole), so:
-\[
+\begin{equation}
 1 + L(s) = \frac{(s+5)^4}{s^2(s^2 + 20s + 100)}
-\]
+\end{equation}
 
 Therefore:
-\[
+\begin{equation}
 T(s) = \frac{125(s + 0.2)(s + 2)}{(s+5)^4}
-\]
+\end{equation}
 
 \textbf{Step 3: Analyze maximum of $|T(\ii\omega)|$}
 
@@ -201,14 +201,14 @@ The numerator has zeros at $s = -0.2$ and $s = -2$.
 The denominator has a quadruple pole at $s = -5$.
 
 At low frequencies ($\omega \ll 0.2$), the magnitude behaves as:
-\[
+\begin{equation}
 |T(\ii\omega)| \approx \frac{125 \cdot 0.2 \cdot 2}{5^4} = \frac{50}{625} = 0.08
-\]
+\end{equation}
 
 At the slow zero frequency $\omega = 0.2$:
-\[
+\begin{equation}
 T(\ii \cdot 0.2) = \frac{125(\ii \cdot 0.2 + 0.2)(\ii \cdot 0.2 + 2)}{(\ii \cdot 0.2 + 5)^4}
-\]
+\end{equation}
 
 This is complex to evaluate analytically, but we can observe that the slow zero at $s = -0.2$ will cause a peak in $|T|$ near $\omega = 0.2$ rad/s.
 
@@ -230,14 +230,14 @@ Instead of placing all poles at $s = -5$, place one closed-loop pole near the sl
 Modified pole placement: poles at $s = -0.2, -5, -5, -5$
 
 This creates a controller pole that cancels (or nearly cancels) the process zero:
-\[
+\begin{equation}
 C_{\text{improved}}(s) = K\frac{(s + 5)^3}{s^2 + 20s + 100} \cdot \frac{1}{s + 0.2}
-\]
+\end{equation}
 
 The cancellation results in:
-\[
+\begin{equation}
 T_{\text{improved}}(s) \approx \frac{K(s + 2)}{(s+5)^3}
-\]
+\end{equation}
 
 This eliminates the slow zero from $T$, reducing the complementary sensitivity peak to $M_t \approx 1.2$, greatly improving robustness.
 

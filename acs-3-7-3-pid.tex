@@ -55,7 +55,7 @@
 \begin{itemize}
 	\item In the time domain method, the step response of a system is measured by inputting a unit step and measuring the output (or scaling the output if the step was not of magnitude $1$)
 	\item The output may be characterised by two parameters $a$ and $\tau$ and the resulting model is known as the Integrator with Time Delay (ITD) model
-	\[P(s) = \frac{a}{\tau s} \Exp{-\tau s}\]
+	\begin{equation}P(s) = \frac{a}{\tau s} \Exp{-\tau s}\end{equation}
 	\item The parameter $\tau$ approximates the time delay in the system and $\tfrac{a}{\tau}$ is the steepest slope of the step response
 \end{itemize}
 \end{frame}
@@ -120,7 +120,7 @@
 	\begin{itemize}
 		\item We can improve the tuning of PID controllers by considering a characterisation of the system using a more descriptive model
 		\item The first-order time-delay (FOTD) model
-		\[P(s) = \frac{K}{1+sT}\Exp{-\tau s}\]
+		\begin{equation}P(s) = \frac{K}{1+sT}\Exp{-\tau s}\end{equation}
 		can be used to approximate the step response of systems that achieve a steady state after a step input
 		\item The relative time delay $\tau_n = \tfrac{\tau}{\tau+T}$ (n.b.\ $0\le \tau_n \le 1$) often used to characterise the dynamics of the system in a normalised way
 		\item If $\tau_n$ is close to $0$ the dynamics are lag dominated, if $\tau_n$ is close to $1$ the dynamics are delay dominated, and the dynamics are said to be balanced for intermediate values of $\tau_n$
@@ -220,11 +220,11 @@
 \frametitle{Cohen-Coon method}{Alternate approach using FOTD}
 \begin{itemize}
 \item Uses normalised time delay and geometric definition of $a$:
-\[
+\begin{equation}
    \tau_n = \frac{\tau}{\tau+T}\,,
    \qquad
    a = \frac{P(0) \tau}{T}
-\]
+\end{equation}
 \item From a PID pole placement perspective, assigns three poles (two complex, one real) equidistant from origin to achieve a 25\% decay ratio
 \item Similar to ZN, often produces too large an overshoot for Mech systems
 \end{itemize}
@@ -289,13 +289,13 @@
 \frametitle{Relay feedback equations}
 
 For relay amplitude $d$ and process output amplitude $a$, the critical gain is
-\[
+\begin{equation}
    k_c = \frac{4d}{\pi a} \,,
-\]
+\end{equation}
 and with measured oscillation period $T_c$ the critical frequency is
-\[
+\begin{equation}
   \ww_c = \frac{2\pi}{T_c}
-\]
+\end{equation}
 These can be used as inputs into control tuning laws.
 
 \end{frame}
