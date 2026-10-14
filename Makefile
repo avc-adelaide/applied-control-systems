@@ -1,5 +1,6 @@
 .ONESHELL:
 SHELL = bash
+.SHELLFLAGS = -ec
 
 LATEX = lualatex
 BUILD = _build
@@ -106,11 +107,11 @@ $(BUILD)/%.pdf: %.tex
 	mkdir -p $(BUILD)
 	cp -f $< $(BUILD)/
 	cp -f $(texsty) $(BUILD)/
-	cp -f $(topcsrc) $(BUILD)/
+	cp -f $(topcsrc) $(pracsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
-	cd $(BUILD); $(LATEX) $*
-	cd $(BUILD); bibtex  $* || echo "BibTeX may have failed."
-	cd $(BUILD); $(LATEX) $*
+	cd "$(CURDIR)/$(BUILD)"; $(LATEX) $*
+	cd "$(CURDIR)/$(BUILD)"; bibtex  $* || echo "BibTeX may have failed."
+	cd "$(CURDIR)/$(BUILD)"; $(LATEX) $*
 	echo "\n\nDone!\n\n"
 
 %-myrio.tex: %.tex
@@ -118,11 +119,10 @@ $(BUILD)/%.pdf: %.tex
 $(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.sty
 	mkdir -p $(BUILD)/worked-examples
 	cp -f $< $(BUILD)/worked-examples/
-	cp -f worked-examples-template.sty $(BUILD)/
-	cp -f beamer-control-maths.sty $(BUILD)/
+	cp -f worked-examples-template.sty beamer-control-maths.sty $(BUILD)/worked-examples/
 	@echo "\n\nCOMPILE WORKED EXAMPLE\n\n"
-	cd $(BUILD)/worked-examples; $(LATEX) $(notdir $<)
-	cd $(BUILD)/worked-examples; $(LATEX) $(notdir $<)
+	cd "$(CURDIR)/$(BUILD)/worked-examples"; $(LATEX) $(notdir $<)
+	cd "$(CURDIR)/$(BUILD)/worked-examples"; $(LATEX) $(notdir $<)
 	echo "\n\nDone!\n\n"
 
 $(BUILD)/applied-control-systems.pdf: applied-control-systems.tex $(topcsrc)
@@ -131,7 +131,7 @@ $(BUILD)/applied-control-systems.pdf: applied-control-systems.tex $(topcsrc)
 	cp -f $(texsty) $(BUILD)/
 	cp -f $(topcsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
-	cd $(BUILD); $(LATEX) applied-control-systems
-	cd $(BUILD); bibtex  applied-control-systems || echo "BibTeX may have failed."
-	cd $(BUILD); $(LATEX) -interaction=batchmode applied-control-systems
+	cd "$(CURDIR)/$(BUILD)"; $(LATEX) applied-control-systems
+	cd "$(CURDIR)/$(BUILD)"; bibtex  applied-control-systems || echo "BibTeX may have failed."
+	cd "$(CURDIR)/$(BUILD)"; $(LATEX) -interaction=batchmode applied-control-systems
 	echo "\n\nDone!\n\n"

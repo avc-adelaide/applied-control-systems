@@ -29,7 +29,11 @@
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[auto, node distance=2cm, >=latex']
+\begin{tikzpicture}[auto, node distance=2cm, >=latex',
+    block/.style={draw, rectangle, minimum height=3em, minimum width=4em},
+    sum/.style={draw, circle, inner sep=0pt, minimum size=2mm},
+    input/.style={coordinate},
+    output/.style={coordinate}]
     % Nodes
     \node [input] (input) {};
     \node [sum, right of=input] (sum1) {};
