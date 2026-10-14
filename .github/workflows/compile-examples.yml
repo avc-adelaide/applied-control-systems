@@ -35,7 +35,7 @@ jobs:
           sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science
 
       - name: Compile worked examples
-        run: ./.github/scripts/compile-examples.sh .
+        run: bash ./.github/scripts/compile-examples.sh .
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
