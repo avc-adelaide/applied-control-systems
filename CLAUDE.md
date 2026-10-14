@@ -14,7 +14,7 @@ Adelaide University. It is a LaTeX-based document system that produces:
 - Canvas LMS content (assignments, pages, discussions, rubrics via Lua scripts)
 
 The notes supplement (not replace) the freely-available textbook *Feedback Systems: An
-Introduction for Scientists and Engineers* by Åström and Murray ("AM" — see `\astrom{}` and
+Introduction for Scientists and Engineers* by Åström and Murray ("AM" — see `\astrom[]` and
 `\AMref{}` macros in the `.tex` sources).
 
 This is a content/documentation repository, not software — there is no application code to
@@ -120,7 +120,7 @@ Run `make help` for a summary. Key targets:
 
 ### Conventions
 - Use existing macros/environments from `beamer-control.cls` and `beamer-control-maths.sty`
-  (e.g. `\CONCEPT{}`, `\SUMMARY`, `\AMref{}`, `\astrom{}`, `\INCLUDEONLY{}`) rather than
+  (e.g. `\CONCEPT{}`, `\SUMMARY`, `\AMref{}`, `\astrom[]`, `\INCLUDEONLY{}`) rather than
   reinventing formatting.
 - Keep the slide ↔ worked-example naming convention in sync — if you add/rename a topic file
   `acs-M-T-C-name.tex`, add/rename the matching `we-M-T-C-name.tex` too (and update
