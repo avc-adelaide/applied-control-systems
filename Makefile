@@ -100,7 +100,7 @@ $(BUILD)/%.pdf: %.tex
 	mkdir -p $(BUILD)
 	cp -f $< $(BUILD)/
 	cp -f $(texsty) $(BUILD)/
-	cp -f $(topcsrc) $(BUILD)/
+	cp -f $(topcsrc) $(pracsrc) $(BUILD)/
 	@echo "\n\nCOMPILE\n\n"
 	cd "$(CURDIR)/$(BUILD)"; $(LATEX) $*
 	cd "$(CURDIR)/$(BUILD)"; bibtex  $* || echo "BibTeX may have failed."
@@ -112,8 +112,7 @@ $(BUILD)/%.pdf: %.tex
 $(BUILD)/worked-examples/%.pdf: worked-examples/%.tex worked-examples-template.sty
 	mkdir -p $(BUILD)/worked-examples
 	cp -f $< $(BUILD)/worked-examples/
-	cp -f worked-examples-template.sty $(BUILD)/
-	cp -f beamer-control-maths.sty $(BUILD)/
+	cp -f worked-examples-template.sty beamer-control-maths.sty $(BUILD)/worked-examples/
 	@echo "\n\nCOMPILE WORKED EXAMPLE\n\n"
 	cd "$(CURDIR)/$(BUILD)/worked-examples"; $(LATEX) $(notdir $<)
 	cd "$(CURDIR)/$(BUILD)/worked-examples"; $(LATEX) $(notdir $<)
