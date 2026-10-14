@@ -22,7 +22,7 @@
 \begin{frame}{Robustness using Nyquist's criterion}
 \begin{itemize}
 \item It is important to design a system such that it is stable in the presence of uncertainty
-\item The Nyquist criterion suggests a measure of robustness --- the Nyquist curve of the loop transfer function should stay well away from the critical point $-1$
+\item The Nyquist criterion suggests a measure of robustness: the Nyquist curve of the loop transfer function should stay well away from the critical point $-1$
 \item Recall that the shortest distance from the Nyquist curve to the critical point is $s_m=1/M_s$
 \end{itemize}
 \end{frame}
@@ -32,22 +32,29 @@
 	\begin{itemize}
 		\item Consider a stable feedback system with process $P$ and controller $C$
 		\item Suppose the process is changed from $P$ to $P+\Delta$ (additive perturbation) where $\Delta$ is a stable transfer function
-		\item The loop transfer function becomes $PC+C\Delta$ (from $PC$) and therefore the perturbed Nyquist curve will not reach the critical point $-1$ if
-		\[|C\Delta|<|1+PC|, \quad |\Delta| <\left|\frac{1+PC}{C}\right|\]
+		\item The loop transfer function becomes $PC+\Delta C$ and therefore the perturbed Nyquist curve will not reach the critical point $-1$ if
+		\[|\Delta C|<|1+PC|, \quad |\Delta| <\left|\frac{1+PC}{C}\right|\]
 		or, for multiplicative perturbations, if
 		\[|\delta|<\frac{1}{|T|}, \quad \text{where } \delta=\frac{\Delta}{P}\]
 		\item This condition must be satisfied for all points on the Nyquist curve for robust stability
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{When does uncertainty lead to instability?}
+\framesubtitle{Sketch}
+
+\end{frame}
+
 
 \begin{frame}{Stability bounds}
 	\begin{itemize}
-		\item Variations can be large for frequencies where $T$ is small and therefore we have the estimate of permissible perturbations
-		\[|\delta(\ii\omega)|=\left|\frac{\Delta(\ii\omega)}{P(\ii\omega)} \right| <\frac{1}{M_t}\leq \frac{1}{|T(\ii\omega)|}\]
-		where $M_t$ is the largest value of the complementary sensitivity, so $|\delta|<1/M_t$ is a simple sufficient condition
-		\item This condition is quite conservative as we only need perturbations to be less than some bound in the direction of the critical point
+		\item Robust stability requires $|\delta(\ii\omega)| < 1/|T(\ii\omega)|$ at every frequency
 		\item Large relative uncertainty is tolerated at high frequencies where $|T|$ is small; at low frequencies, where $|T|\approx 1$, errors of up to about 100\% are tolerated
+		\item Since $|T(\ii\omega)| \leq M_t$ for all $\omega$, a simpler (sufficient) condition is
+		\[|\delta(\ii\omega)| < \frac{1}{M_t}\]
+		where $M_t$ is the largest value of the complementary sensitivity
+		\item Both conditions are conservative, as we only need perturbations to be less than some bound in the direction of the critical point
 	\end{itemize}
 \end{frame}
 
