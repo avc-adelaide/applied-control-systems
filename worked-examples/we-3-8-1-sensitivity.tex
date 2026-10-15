@@ -43,74 +43,74 @@ Consider a basic feedback control system with process $P(s) = \frac{5}{s(s+2)}$ 
 
 The controller is a PI controller:
 \begin{equation}
-C(s) = 3\left(1 + \frac{1}{s}\right) = 3\cdot\frac{s+1}{s} = \frac{3(s+1)}{s}
+	C(s) = 3\left(1 + \frac{1}{s}\right) = 3\cdot\frac{s+1}{s} = \frac{3(s+1)}{s}
 \end{equation}
 
 The loop transfer function is:
 \begin{equation}
-L(s) = P(s)C(s) = \frac{5}{s(s+2)} \cdot \frac{3(s+1)}{s} = \frac{15(s+1)}{s^2(s+2)}
+	L(s) = P(s)C(s) = \frac{5}{s(s+2)} \cdot \frac{3(s+1)}{s} = \frac{15(s+1)}{s^2(s+2)}
 \end{equation}
 
 \textbf{Step 2: Calculate the sensitivity function $S$}
 
 The sensitivity function is:
 \begin{equation}
-S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{15(s+1)}{s^2(s+2)}}
+	S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{15(s+1)}{s^2(s+2)}}
 \end{equation}
 
 Finding a common denominator:
 \begin{equation}
-S(s) = \frac{s^2(s+2)}{s^2(s+2) + 15(s+1)} = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15}
+	S(s) = \frac{s^2(s+2)}{s^2(s+2) + 15(s+1)} = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 Factoring the numerator and denominator:
 \begin{equation}
-S(s) = \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+	S(s) = \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 \textbf{Step 3: Calculate the complementary sensitivity function $T$}
 
 The complementary sensitivity function is:
 \begin{equation}
-T(s) = \frac{L(s)}{1 + L(s)} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
+	T(s) = \frac{L(s)}{1 + L(s)} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 Alternatively, we can use $T = 1 - S$:
 \begin{equation}
-T(s) = 1 - S(s) = \frac{s^3 + 2s^2 + 15s + 15 - s^3 - 2s^2}{s^3 + 2s^2 + 15s + 15} = \frac{15s + 15}{s^3 + 2s^2 + 15s + 15} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
+	T(s) = 1 - S(s) = \frac{s^3 + 2s^2 + 15s + 15 - s^3 - 2s^2}{s^3 + 2s^2 + 15s + 15} = \frac{15s + 15}{s^3 + 2s^2 + 15s + 15} = \frac{15(s+1)}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 \textbf{Step 4: Calculate the load sensitivity function $PS$}
 
 The load sensitivity function is:
 \begin{equation}
-PS(s) = P(s)S(s) = \frac{5}{s(s+2)} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+	PS(s) = P(s)S(s) = \frac{5}{s(s+2)} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 Simplifying:
 \begin{equation}
-PS(s) = \frac{5s}{s^3 + 2s^2 + 15s + 15}
+	PS(s) = \frac{5s}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 \textbf{Step 5: Calculate the noise sensitivity function $CS$}
 
 The noise sensitivity function is:
 \begin{equation}
-CS(s) = C(s)S(s) = \frac{3(s+1)}{s} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
+	CS(s) = C(s)S(s) = \frac{3(s+1)}{s} \cdot \frac{s^2(s+2)}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 Simplifying:
 \begin{equation}
-CS(s) = \frac{3s(s+1)(s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s(s^2+3s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s^3 + 9s^2 + 6s}{s^3 + 2s^2 + 15s + 15}
+	CS(s) = \frac{3s(s+1)(s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s(s^2+3s+2)}{s^3 + 2s^2 + 15s + 15} = \frac{3s^3 + 9s^2 + 6s}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 
 \textbf{Step 6: Verify $S + T = 1$}
 
 \begin{equation}
-S(s) + T(s) = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15} + \frac{15s + 15}{s^3 + 2s^2 + 15s + 15}
+	S(s) + T(s) = \frac{s^3 + 2s^2}{s^3 + 2s^2 + 15s + 15} + \frac{15s + 15}{s^3 + 2s^2 + 15s + 15}
 \end{equation}
 \begin{equation}
-= \frac{s^3 + 2s^2 + 15s + 15}{s^3 + 2s^2 + 15s + 15} = 1 \quad \checkmark
+	= \frac{s^3 + 2s^2 + 15s + 15}{s^3 + 2s^2 + 15s + 15} = 1 \quad \checkmark
 \end{equation}
 
 \textbf{Step 7: Evaluate at DC and interpret}
@@ -119,25 +119,25 @@ At $s = 0$ (DC or steady-state):
 
 \textbf{Sensitivity function:}
 \begin{equation}
-S(0) = \frac{0}{15} = 0
+	S(0) = \frac{0}{15} = 0
 \end{equation}
 This means load disturbances are \emph{completely attenuated} at steady state. This is a key benefit of integral action.
 
 \textbf{Complementary sensitivity function:}
 \begin{equation}
-T(0) = \frac{15}{15} = 1
+	T(0) = \frac{15}{15} = 1
 \end{equation}
 This confirms $S(0) + T(0) = 0 + 1 = 1$ and indicates perfect tracking of DC reference signals.
 
 \textbf{Load sensitivity function:}
 \begin{equation}
-PS(0) = \frac{0}{15} = 0
+	PS(0) = \frac{0}{15} = 0
 \end{equation}
 Load disturbances have zero effect on the output at steady state.
 
 \textbf{Noise sensitivity function:}
 \begin{equation}
-CS(0) = \frac{0}{15} = 0
+	CS(0) = \frac{0}{15} = 0
 \end{equation}
 Measurement noise at DC does not affect the control signal.
 
@@ -171,17 +171,17 @@ Consider a feedback system with process $P(s) = \frac{1}{s+1}$ and proportional 
 
 The loop transfer function is:
 \begin{equation}
-L(s) = P(s)C(s) = \frac{k}{s+1}
+	L(s) = P(s)C(s) = \frac{k}{s+1}
 \end{equation}
 
 The sensitivity function is:
 \begin{equation}
-S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{k}{s+1}} = \frac{s+1}{s+1+k} = \frac{s+1}{s+(1+k)}
+	S(s) = \frac{1}{1 + L(s)} = \frac{1}{1 + \frac{k}{s+1}} = \frac{s+1}{s+1+k} = \frac{s+1}{s+(1+k)}
 \end{equation}
 
 The complementary sensitivity function is:
 \begin{equation}
-T(s) = \frac{L(s)}{1 + L(s)} = \frac{k/(s+1)}{1 + k/(s+1)} = \frac{k}{s+1+k} = \frac{k}{s+(1+k)}
+	T(s) = \frac{L(s)}{1 + L(s)} = \frac{k/(s+1)}{1 + k/(s+1)} = \frac{k}{s+1+k} = \frac{k}{s+(1+k)}
 \end{equation}
 
 We can verify: $S(s) + T(s) = \frac{s+1}{s+(1+k)} + \frac{k}{s+(1+k)} = \frac{s+1+k}{s+(1+k)} = 1$ ✓
@@ -190,18 +190,18 @@ We can verify: $S(s) + T(s) = \frac{s+1}{s+(1+k)} + \frac{k}{s+(1+k)} = \frac{s+
 
 At frequency $\omega$, substitute $s = \ii\omega$:
 \begin{equation}
-S(\ii\omega) = \frac{\ii\omega + 1}{\ii\omega + (1+k)}
+	S(\ii\omega) = \frac{\ii\omega + 1}{\ii\omega + (1+k)}
 \end{equation}
 \begin{equation}
-T(\ii\omega) = \frac{k}{\ii\omega + (1+k)}
+	T(\ii\omega) = \frac{k}{\ii\omega + (1+k)}
 \end{equation}
 
 The magnitudes are:
 \begin{equation}
-|S(\ii\omega)| = \frac{\sqrt{\omega^2 + 1}}{\sqrt{\omega^2 + (1+k)^2}}
+	|S(\ii\omega)| = \frac{\sqrt{\omega^2 + 1}}{\sqrt{\omega^2 + (1+k)^2}}
 \end{equation}
 \begin{equation}
-|T(\ii\omega)| = \frac{k}{\sqrt{\omega^2 + (1+k)^2}}
+	|T(\ii\omega)| = \frac{k}{\sqrt{\omega^2 + (1+k)^2}}
 \end{equation}
 
 \textbf{Step 3: Maximum values for different gains}
@@ -210,12 +210,12 @@ The magnitudes are:
 
 At low frequencies ($\omega \to 0$):
 \begin{equation}
-|S(\ii \cdot 0)| = \frac{1}{3} = 0.333, \quad |T(\ii \cdot 0)| = \frac{2}{3} = 0.667
+	|S(\ii \cdot 0)| = \frac{1}{3} = 0.333, \quad |T(\ii \cdot 0)| = \frac{2}{3} = 0.667
 \end{equation}
 
 At high frequencies ($\omega \to \infty$):
 \begin{equation}
-|S(\ii\omega)| \to \frac{\omega}{\omega} = 1, \quad |T(\ii\omega)| \to \frac{k}{\omega} \to 0
+	|S(\ii\omega)| \to \frac{\omega}{\omega} = 1, \quad |T(\ii\omega)| \to \frac{k}{\omega} \to 0
 \end{equation}
 
 Since $|S|$ is monotonically increasing from $1/3$ to $1$: $M_s = \max |S| = 1$
@@ -224,18 +224,18 @@ Since $|T|$ is monotonically decreasing from $2/3$ to $0$: $M_t = \max |T| = 2/3
 
 \textbf{For $k = 5$:} $(1+k) = 6$
 \begin{equation}
-|S(0)| = \frac{1}{6} = 0.167, \quad M_s = 1
+	|S(0)| = \frac{1}{6} = 0.167, \quad M_s = 1
 \end{equation}
 \begin{equation}
-|T(0)| = \frac{5}{6} = 0.833, \quad M_t = 0.833
+	|T(0)| = \frac{5}{6} = 0.833, \quad M_t = 0.833
 \end{equation}
 
 \textbf{For $k = 10$:} $(1+k) = 11$
 \begin{equation}
-|S(0)| = \frac{1}{11} = 0.091, \quad M_s = 1
+	|S(0)| = \frac{1}{11} = 0.091, \quad M_s = 1
 \end{equation}
 \begin{equation}
-|T(0)| = \frac{10}{11} = 0.909, \quad M_t = 0.909
+	|T(0)| = \frac{10}{11} = 0.909, \quad M_t = 0.909
 \end{equation}
 
 \textbf{Step 4: Crossover frequency for $k = 5$}
@@ -244,28 +244,28 @@ The crossover frequency $\omega_c$ is where $|S(\ii\omega_c)| = |T(\ii\omega_c)|
 
 Since $S + T = 1$ and both are real at the crossover:
 \begin{equation}
-|S(\ii\omega_c)| = |T(\ii\omega_c)| = \frac{1}{\sqrt{2}} \approx 0.707 \text{ (or } -3 \text{ dB)}
+	|S(\ii\omega_c)| = |T(\ii\omega_c)| = \frac{1}{\sqrt{2}} \approx 0.707 \text{ (or } -3 \text{ dB)}
 \end{equation}
 
 Setting $|S(\ii\omega_c)| = 1/\sqrt{2}$:
 \begin{equation}
-\frac{\sqrt{\omega_c^2 + 1}}{\sqrt{\omega_c^2 + 36}} = \frac{1}{\sqrt{2}}
+	\frac{\sqrt{\omega_c^2 + 1}}{\sqrt{\omega_c^2 + 36}} = \frac{1}{\sqrt{2}}
 \end{equation}
 
 Squaring both sides:
 \begin{equation}
-\frac{\omega_c^2 + 1}{\omega_c^2 + 36} = \frac{1}{2}
+	\frac{\omega_c^2 + 1}{\omega_c^2 + 36} = \frac{1}{2}
 \end{equation}
 
 Cross-multiplying:
 \begin{equation}
-2(\omega_c^2 + 1) = \omega_c^2 + 36
+	2(\omega_c^2 + 1) = \omega_c^2 + 36
 \end{equation}
 \begin{equation}
-2\omega_c^2 + 2 = \omega_c^2 + 36
+	2\omega_c^2 + 2 = \omega_c^2 + 36
 \end{equation}
 \begin{equation}
-\omega_c^2 = 34 \quad \Rightarrow \quad \omega_c = \sqrt{34} \approx 5.83 \text{ rad/s}
+	\omega_c^2 = 34 \quad \Rightarrow \quad \omega_c = \sqrt{34} \approx 5.83 \text{ rad/s}
 \end{equation}
 
 \textbf{Step 5: Interpretation of trade-offs}

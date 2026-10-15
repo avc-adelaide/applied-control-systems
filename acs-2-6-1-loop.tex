@@ -47,7 +47,9 @@ provides a way to analyze stability and introduce measures of degrees of stabili
 
 \begin{frame}{Loop transfer function}
 Rather than calculating the characteristic polynomial of the closed loop system (which is limited in aiding design of a controller), we may instead analyse the \alert{loop transfer function}
-\begin{equation}L(s)=P(s)C(s)\end{equation}
+\begin{equation}
+	L(s)=P(s)C(s)
+\end{equation}
 which represents the transfer function from input at A to output at B multiplied by $-1$ (to account for negative feedback).
 
 \begin{figure}
@@ -63,7 +65,9 @@ which represents the transfer function from input at A to output at B multiplied
 \begin{itemize}
 	\item Consider inputting a sinusoidal input of frequency $\omega_0$ at A
 	\item To maintain the oscillation, the signal at B will also be a sinusoid with frequency $\omega_0$ and therefore
-	\begin{equation}L(\jj\omega_0)=-1.\end{equation}
+	\begin{equation}
+		L(\jj\omega_0)=-1.
+	\end{equation}
 	\item This condition says that our frequency response passes through the value of $-1$, known as the \alert{critical point}
 	\item If we require stability at a frequency $\omega_c$ such that $\angle L\left(\jj \omega_{\mathrm{c}}\right)=180^{\circ}$, we therefore want our signal at B to have a smaller amplitude than the input at A and so $|L(\jj\omega_c)|<1$
 \end{itemize}
@@ -76,11 +80,17 @@ which represents the transfer function from input at A to output at B multiplied
 \begin{itemize}
 \item Consider an electric motor with inertia $J$ and damping $c$ with proportional feedback controller and small delay in measurement of the motor position
 \item The process dynamics are 
-\begin{equation}P(s) = \frac{k_I}{Js^2+cs}\end{equation}
+\begin{equation}
+	P(s) = \frac{k_I}{Js^2+cs}
+\end{equation}
 \item The controller is of the form
-\begin{equation}C(s) = \kkp\end{equation}
+\begin{equation}
+	C(s) = \kkp
+\end{equation}
 \item Therefore the loop transfer function (with added delay $\tau$) is
-\begin{equation}L(s) = P(s) C(s) e^{-\tau s} = \frac{k_I\kkp}{Js^2+cs}e^{-\tau s}\end{equation}
+\begin{equation}
+	L(s) = P(s) C(s) e^{-\tau s} = \frac{k_I\kkp}{Js^2+cs}e^{-\tau s}
+\end{equation}
 \end{itemize}
 \end{frame}
 
@@ -90,7 +100,9 @@ which represents the transfer function from input at A to output at B multiplied
 \item Therefore we may get oscillations in the closed loop system if delay is present
 \item We can use the Bode plots of the loop transfer function to assess what the magnitude of the output signal of the loop transfer function is corresponding to a phase of $180^\circ$
 \item If $\theta_0$ is the phase of the undelayed system at a frequency $\omega_0$, then a time delay of 
-\begin{equation}\tau_c=\frac{\pi+\theta_0}{\omega_0}\end{equation}
+\begin{equation}
+	\tau_c=\frac{\pi+\theta_0}{\omega_0}
+\end{equation}
 will cause $L(\jj\omega_0)$ to be equal to $-1$
 \end{itemize}
 \end{frame}

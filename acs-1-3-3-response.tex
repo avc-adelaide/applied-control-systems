@@ -78,40 +78,40 @@ Use $\tilde A$ to analyse more convenient/canonical solution, then transform bac
 
 Original:
 \begin{equation}
-\Deriv{}{t}\Matr{q_1\\q_2\\\dot q_1\\\dot q_2} =
-\underbrace{\begin{bmatrix}
-0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 1 \\
--\frac{2k}{m} & \frac{k}{m} & -\frac{c}{m} & 0 \\
-\frac{k}{m} & -\frac{2k}{m} & 0 & -\frac{c}{m}
-\end{bmatrix}}_{A}
-\Matr{q_1\\q_2\\\dot q_1\\\dot q_2} +
-\begin{bmatrix}
-0 \\
-0 \\
-0 \\
-\frac{k}{m}
-\end{bmatrix}
-u
+	\Deriv{}{t}\Matr{q_1\\q_2\\\dot q_1\\\dot q_2} =
+	\underbrace{\begin{bmatrix}
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 \\
+	-\frac{2k}{m} & \frac{k}{m} & -\frac{c}{m} & 0 \\
+	\frac{k}{m} & -\frac{2k}{m} & 0 & -\frac{c}{m}
+	\end{bmatrix}}_{A}
+	\Matr{q_1\\q_2\\\dot q_1\\\dot q_2} +
+	\begin{bmatrix}
+	0 \\
+	0 \\
+	0 \\
+	\frac{k}{m}
+	\end{bmatrix}
+	u
 \end{equation}
 Transformation:
 \begin{equation}
-z = T x = \frac{1}{2}
-\begin{bmatrix}
-1 & 1 & 0 & 0 \\
-0 & 0 & 1 & 1 \\
-1 & -1 & 0 & 0 \\
-0 & 0 & 1 & -1
-\end{bmatrix}
-x
-=
-\frac12
-\begin{bmatrix}
-q_1 + q_2 \\
-\dot{q}_1 + \dot{q}_2 \\
-q_1 - q_2 \\
-\dot{q}_1 - \dot{q}_2
-\end{bmatrix}
+	z = T x = \frac{1}{2}
+	\begin{bmatrix}
+	1 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 1 \\
+	1 & -1 & 0 & 0 \\
+	0 & 0 & 1 & -1
+	\end{bmatrix}
+	x
+	=
+	\frac12
+	\begin{bmatrix}
+	q_1 + q_2 \\
+	\dot{q}_1 + \dot{q}_2 \\
+	q_1 - q_2 \\
+	\dot{q}_1 - \dot{q}_2
+	\end{bmatrix}
 \end{equation}
 
 
@@ -121,21 +121,21 @@ q_1 - q_2 \\
 \frametitle{Coupled dynamics}
 Transformed:
 \begin{equation}
-\Deriv{z}{t} =
-\begin{bmatrix}
-0 & 1 & 0 & 0 \\
--\frac{k}{m} & -\frac{c}{m} & 0 & 0 \\
-0 & 0 & 0 & 1 \\
-0 & 0 & -\frac{3k}{m} & -\frac{c}{m}
-\end{bmatrix}
-z +
-\begin{bmatrix}
-0 \\
-\frac{k}{2m} \\
-0 \\
--\frac{k}{2m}
-\end{bmatrix}
-u
+	\Deriv{z}{t} =
+	\begin{bmatrix}
+	0 & 1 & 0 & 0 \\
+	-\frac{k}{m} & -\frac{c}{m} & 0 & 0 \\
+	0 & 0 & 0 & 1 \\
+	0 & 0 & -\frac{3k}{m} & -\frac{c}{m}
+	\end{bmatrix}
+	z +
+	\begin{bmatrix}
+	0 \\
+	\frac{k}{2m} \\
+	0 \\
+	-\frac{k}{2m}
+	\end{bmatrix}
+	u
 \end{equation}
 \begin{align}
 \tilde A &= TAT^{-1} =
@@ -234,7 +234,9 @@ M &= |G(\ii \ww)| \,, & \theta &= \arg G(\ii \ww)
 \begin{frame}
 \frametitle{Frequency response characteristics}
 \begin{description}
-\item[Zero frequency gain, $\DCgain$] ~\\Gain for constant inputs (i.e., zero frequency): \begin{equation}\DCgain = \lim_{\ww\to0}|G(\ii\ww)| = -CA^{-1}B+D\end{equation}
+\item[Zero frequency gain, $\DCgain$] ~\\Gain for constant inputs (i.e., zero frequency): \begin{equation}
+	\DCgain = \lim_{\ww\to0}|G(\ii\ww)| = -CA^{-1}B+D
+\end{equation}
 \item[Bandwidth, $\wb$] ~\\Frequency range above $\sqrt{\frac12}$ of `reference' (zero frequency gain, usually)
 \item[Resonance peak $\Mpeak$ and peak frequency $\wres$] ~\\Maximum amplitude of frequency response gain, and corresponding frequency at which this occurs
 \end{description}

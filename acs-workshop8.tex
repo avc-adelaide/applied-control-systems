@@ -15,7 +15,7 @@ In this workshop, we will explore frequency domain design methods for control sy
 	
 	Define the following transfer function
 	\begin{equation}
-	P = \frac{3000(s+4)}{(s+1)(s+6)(s+10)(s+100)(s^2+2s+2)} \,.
+		P = \frac{3000(s+4)}{(s+1)(s+6)(s+10)(s+100)(s^2+2s+2)} \,.
 	\end{equation}
 	Define a PID controller $C$ with gains $K_p=1$, $\TTi=2.9$, $\TTd=0.9$, $N=100$. \\[10pt]
 	Plot the closed loop step response and note the characteristics of the system.\\[10pt]
@@ -28,13 +28,21 @@ In this workshop, we will explore frequency domain design methods for control sy
 Calculate the Gang of Four transfer functions in Matlab
 \begin{itemize}
 	\item The sensitivity function is 
-\begin{equation}S=\frac{1}{1+PC}\end{equation}
+\begin{equation}
+	S=\frac{1}{1+PC}
+\end{equation}
 \item The load (or input) sensitivity function is 
-\begin{equation}PS=\frac{P}{1+PC}\end{equation}
+\begin{equation}
+	PS=\frac{P}{1+PC}
+\end{equation}
 \item The complementary sensitivity function is 
-\begin{equation}T=\frac{PC}{1+PC}\end{equation}
+\begin{equation}
+	T=\frac{PC}{1+PC}
+\end{equation}
 \item The noise (or output) sensitivity function is
-\begin{equation}CS = \frac{C}{1+PC}\end{equation}
+\begin{equation}
+	CS = \frac{C}{1+PC}
+\end{equation}
 \end{itemize}
 \end{frame}
 

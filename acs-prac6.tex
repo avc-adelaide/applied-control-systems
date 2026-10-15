@@ -23,13 +23,13 @@ This practical will consist of the following parts:
 \begin{frame}{Transfer function}
 The closed-loop transfer function for the pole-placement-controlled plant from Practical 5 can be linearly approximated as 
 \begin{equation}
-G_{CL}(s)=
-\frac{k\omega_n^2}
-{s^2+2\zeta\omega_n s+\omega_n^2}
+	G_{CL}(s)=
+	\frac{k\omega_n^2}
+	{s^2+2\zeta\omega_n s+\omega_n^2}
 \end{equation}
 where $k$ is the DC gain, $\omega_n$ is the natural frequency, and $\zeta$ is the damping ratio. For the compound pendulum system, the DC gain is the ratio of the steady-state output angle in radians to the input voltage,
 \begin{equation}
-k = \frac{\theta_{\mathrm{ss}}}{V_{\mathrm{in}}}.
+	k = \frac{\theta_{\mathrm{ss}}}{V_{\mathrm{in}}}.
 \end{equation}
 As the physical system is nonlinear, the DC gain varies with the operating point. Therefore, the chosen DC gain should be determined at an operating point representative of the expected operating range.
 \end{frame}
@@ -189,9 +189,13 @@ In this procedure you will take your PID controller from Practicals 3 or 4 and i
 
 \begin{frame}{Compound pendulum}
 The theoretical model for the compound pendulum system is given by the transfer function
-\begin{equation}\frac{\theta_m(s)}{v_m(s)} = \frac{114.1}{s^2 + 5.248s+235.1}. \end{equation}
+\begin{equation}
+	\frac{\theta_m(s)}{v_m(s)} = \frac{114.1}{s^2 + 5.248s+235.1}.
+\end{equation}
 Suppose someone implements a poor low-pass filter in the electronics/hardware, say a low pass filter with a cutoff frequency of 10 rad/s. The transfer function with this filter is then
-\begin{equation}\frac{\theta_m(s)}{v_m(s)} = \frac{114.1}{s^2 + 5.248s+235.1}\frac{10}{s+10}. \end{equation}
+\begin{equation}
+	\frac{\theta_m(s)}{v_m(s)} = \frac{114.1}{s^2 + 5.248s+235.1}\frac{10}{s+10}.
+\end{equation}
 This part does not use the hardware. In Part 3, you will \textbf{create a new Simulink block diagram} i.e. we will not reuse anything from Part 1 except the CUBE block. You will to add the problematic low-pass filter before or after the QUBE block, input a sine wave, and log the data using a scope. 
 \end{frame}
 

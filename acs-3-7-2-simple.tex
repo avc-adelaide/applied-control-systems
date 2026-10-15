@@ -30,10 +30,14 @@
 \begin{frame}{Static models}
 \begin{itemize}
 	\item Any stable system can be modelled by a static system if its inputs are sufficiently slow, which approximates the transfer function by a constant 
-	\begin{equation}K=P(0)\end{equation}
+	\begin{equation}
+		K=P(0)
+	\end{equation}
 	\item Using integral control, the controller is $K\tfrac{\kki}{s}$ with closed loop characteristic polynomial $s+K\kki$
 	\item Specifying the performance of the controlled system by the desired time constant $T_{\text{cl}}$ of the closed loop system, we have
-	\begin{equation}\kki = \frac{1}{T_{\text{cl}} P(0)}\end{equation}
+	\begin{equation}
+		\kki = \frac{1}{T_{\text{cl}} P(0)}
+	\end{equation}
 	\item A reasonable criterion for the process transfer function to be well approximated by a constant is that the average residence time $T_{\text{ar}}=\tfrac{-P'(0)}{P(0)}$ satisfies $T_{\text{ar}}<T_{\text{cl}}$
 \end{itemize}
 \end{frame}
@@ -42,9 +46,13 @@
 \begin{itemize}
 	\item We may instead approximate the dynamics by a first-order system to achieve higher performance
 	\item The process dynamics are then approximated as 
-	\begin{equation}P(s) \approx \frac{P(0)}{1+sT_{\text{ar}}}\end{equation}
+	\begin{equation}
+		P(s) \approx \frac{P(0)}{1+sT_{\text{ar}}}
+	\end{equation}
 	\item To achieve a step response with small overshoot and reasonable response time we may choose an integral controller with gain
-	\begin{equation}\kki = \frac{1}{2P(0)T_{\text{ar}}}\end{equation}
+	\begin{equation}
+		\kki = \frac{1}{2P(0)T_{\text{ar}}}
+	\end{equation}
 	\item This controller has $\omega_0 = \tfrac{1}{T_{\text{ar}}\sqrt{2}}$, with rise time of $3.1 T_{\text{ar}}$, settling time of $7.9T_{\text{ar}}$, and overshoot of 4\%
 \end{itemize}
 \end{frame}
@@ -57,11 +65,17 @@
 \item Another approach is to use the gains of the controller to set the location of the closed loop poles
 \item PI has two gains to set the CL poles for simple models
 \item Consider a first-order system with transfer function 
-\begin{equation}P(s) = \frac{b}{s+a}\end{equation}
+\begin{equation}
+	P(s) = \frac{b}{s+a}
+\end{equation}
 \item Comparing the desired and closed loop characteristic polynomials with a PI controller
-\begin{equation}s^2+a_1s+a_2 = s^2+(a+b\kkp)s+b\kki\end{equation}
+\begin{equation}
+	s^2+a_1s+a_2 = s^2+(a+b\kkp)s+b\kki
+\end{equation}
 \item We may therefore assign arbitrary values of the closed loop poles via PI control
-\begin{equation}\kkp=\frac{a_1-a}{b}, \quad \kki = \frac{a_2}{b}\end{equation}
+\begin{equation}
+	\kkp=\frac{a_1-a}{b}, \quad \kki = \frac{a_2}{b}
+\end{equation}
 \end{itemize}
 \end{frame}
 

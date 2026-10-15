@@ -87,24 +87,24 @@ x^2 = a^2 + 2a(x - a) + (x - a)^2
 \frametitle{Jacobian linearisation}
 The Jacobian $\frac{\partial {f}}{\partial {x}}$ is defined as a matrix of partial derivatives:
 \begin{equation}
-{f} : \mathbb{R}^n \to \mathbb{R}^m, \quad
-{f}(x_1, x_2, \ldots, x_n) = 
-\begin{bmatrix}
-f_1(x_1, \ldots, x_n) \\
-f_2(x_1, \ldots, x_n) \\
-\vdots \\
-f_m(x_1, \ldots, x_n)
-\end{bmatrix}
+	{f} : \mathbb{R}^n \to \mathbb{R}^m, \quad
+	{f}(x_1, x_2, \ldots, x_n) =
+	\begin{bmatrix}
+	f_1(x_1, \ldots, x_n) \\
+	f_2(x_1, \ldots, x_n) \\
+	\vdots \\
+	f_m(x_1, \ldots, x_n)
+	\end{bmatrix}
 \end{equation}
 
 \begin{equation}
-\frac{\partial {f}}{\partial {x}} =
-\begin{bmatrix}
-\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n} \\
-\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
-\vdots & \vdots & \ddots & \vdots \\
-\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
-\end{bmatrix}
+	\frac{\partial {f}}{\partial {x}} =
+	\begin{bmatrix}
+	\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+	\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
+	\end{bmatrix}
 \end{equation}
 
 \end{frame}

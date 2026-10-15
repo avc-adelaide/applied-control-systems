@@ -44,7 +44,9 @@
 	\item The robustness of the system is determined by the shape of the loop transfer function around the crossover frequency $\ww\gaincrossover$
 	\item It is desirable to transition from high loop gain at low frequencies to low loop gain quickly, but robustness requirements (see Bode's relations) impose restrictions on how fast the gain can decrease
 	\item For a gain curve of constant slope around $\ww\gaincrossover$, the slope $n\gaincrossover$ is related to the phase margin $\phasemargin$ (in degrees) by
-	\begin{equation}n\gaincrossover \approx -2 + \frac{\phasemargin}{90}\end{equation}
+	\begin{equation}
+		n\gaincrossover \approx -2 + \frac{\phasemargin}{90}
+	\end{equation}
 	for minimum-phase systems
 	\item So, a steeper slope gives a smaller phase margin
 \end{itemize}
@@ -56,10 +58,14 @@
 \begin{frame}{A simple way to shape loops}
 \begin{itemize}
 \item One method for loop shaping is to start with the transfer function of the process and add simple compensators with the transfer function
-\begin{equation}C(s)=k\frac{s+a}{s+b}, \quad a>0, b>0\end{equation}
+\begin{equation}
+	C(s)=k\frac{s+a}{s+b}, \quad a>0, b>0
+\end{equation}
 \item This compensator is known as a \textit{lead compensator} if $a<b$ and a \textit{lag compensator} if $a>b$
 \item As this transfer function is first-order, it can provide up to $90^\circ$ of phase lead and larger phase lead can be obtained by using a higher-order lead compensator
-\begin{equation}C(s)=k\frac{(s+a)^n}{(s+b)^n}, \quad a<b\end{equation}
+\begin{equation}
+	C(s)=k\frac{(s+a)^n}{(s+b)^n}, \quad a<b
+\end{equation}
 \end{itemize}
 \end{frame}
 

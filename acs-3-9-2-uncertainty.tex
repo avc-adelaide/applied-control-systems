@@ -33,9 +33,13 @@
 		\item Consider a stable feedback system with process $P$ and controller $C$
 		\item Suppose the process is changed from $P$ to $P+\Delta$ (additive perturbation) where $\Delta$ is a stable transfer function
 		\item The loop transfer function becomes $PC+\Delta C$ and therefore the perturbed Nyquist curve will not reach the critical point $-1$ if
-		\begin{equation}|\Delta C|<|1+PC|, \quad |\Delta| <\left|\frac{1+PC}{C}\right|\end{equation}
+		\begin{equation}
+			|\Delta C|<|1+PC|, \quad |\Delta| <\left|\frac{1+PC}{C}\right|
+		\end{equation}
 		or, for multiplicative perturbations, if
-		\begin{equation}|\delta|<\frac{1}{|T|}, \quad \text{where } \delta=\frac{\Delta}{P}\end{equation}
+		\begin{equation}
+			|\delta|<\frac{1}{|T|}, \quad \text{where } \delta=\frac{\Delta}{P}
+		\end{equation}
 		\item This condition must be satisfied for all points on the Nyquist curve for robust stability
 	\end{itemize}
 \end{frame}
@@ -52,7 +56,9 @@
 		\item Robust stability requires $|\delta(\ii\omega)| < 1/|T(\ii\omega)|$ at every frequency
 		\item Large relative uncertainty is tolerated at high frequencies where $|T|$ is small; at low frequencies, where $|T|\approx 1$, errors of up to about 100\% are tolerated
 		\item Since $|T(\ii\omega)| \leq M_t$ for all $\omega$, a simpler (sufficient) condition is
-		\begin{equation}|\delta(\ii\omega)| < \frac{1}{M_t}\end{equation}
+		\begin{equation}
+			|\delta(\ii\omega)| < \frac{1}{M_t}
+		\end{equation}
 		where $M_t$ is the largest value of the complementary sensitivity
 		\item Both conditions are conservative, as we only need perturbations to be less than some bound in the direction of the critical point
 	\end{itemize}
@@ -66,10 +72,14 @@
 \begin{frame}{Load disturbance attenuation}
 \begin{itemize}
 \item The transfer function from load disturbances $v$ to process output $y$ gives a characterisation of the effect of feedback on disturbances
-\begin{equation}G_{yv}=\frac{P}{1+PC}=PS\end{equation}
+\begin{equation}
+	G_{yv}=\frac{P}{1+PC}=PS
+\end{equation}
 \item As load disturbances are typically low frequency, we want $G_{yv}$ to be small for low frequencies
 \item Differentiating $G_{yv}$ with respect to $P$ and rearranging we get the relation that for small process variations
-\begin{equation}\frac{\mathrm{d}G_{yv}}{G_{yv}}=S\frac{\mathrm{d}P}{P}\end{equation}
+\begin{equation}
+	\frac{\mathrm{d}G_{yv}}{G_{yv}}=S\frac{\mathrm{d}P}{P}
+\end{equation}
 \item Relative error in $G_{yv}$ is determined by relative error in $P$, scaled by $S$ --- response to load disturbances is insensitive to process variation for frequencies where $S$ is small
 \end{itemize}
 \end{frame}
@@ -78,10 +88,14 @@
 \begin{frame}{Measurement noise attenuation}
 	\begin{itemize}
 		\item The effect of measurement noise can be investigated by the transfer function from measurement noise $w$ to controller output $u$
-		\begin{equation}G_{uw}=-\frac{C}{1+PC}=-\frac{T}{P}\end{equation}
+		\begin{equation}
+			G_{uw}=-\frac{C}{1+PC}=-\frac{T}{P}
+		\end{equation}
 		\item As measurement noise is typically high frequency, we want $G_{uw}$ to be small for high frequencies (high-frequency roll-off for $C$)
 		\item We get a similar relation from differentiation with respect to $P$
-		\begin{equation}\frac{\mathrm{d}G_{uw}}{G_{uw}}=-T\frac{\mathrm{d}P}{P}\end{equation}
+		\begin{equation}
+			\frac{\mathrm{d}G_{uw}}{G_{uw}}=-T\frac{\mathrm{d}P}{P}
+		\end{equation}
 		\item If $PC$ is small for high frequencies, then $T$ is small, and response to measurement noise is insensitive to process variation at these high frequencies
 	\end{itemize}
 \end{frame}
@@ -90,9 +104,13 @@
 \begin{frame}{Response to reference signals}
 	\begin{itemize}
 		\item The transfer function that represents reference input to output (with feedforward/prefilter $F$) is
-		\begin{equation}G_{yr} = \frac{PCF}{1+PC}=TF\end{equation}
+		\begin{equation}
+			G_{yr} = \frac{PCF}{1+PC}=TF
+		\end{equation}
 		\item Differentiating with respect to $P$ and rearranging we get
-		\begin{equation}\frac{\mathrm{d}G_{yr}}{G_{yr}}=S\frac{\mathrm{d}P}{P}\end{equation}
+		\begin{equation}
+			\frac{\mathrm{d}G_{yr}}{G_{yr}}=S\frac{\mathrm{d}P}{P}
+		\end{equation}
 		\item The relative error in the closed loop transfer function is related to the product of the relative error of the process with the sensitivity
 		\item The response to reference signals is insensitive to process variations when the sensitivity is small
 	\end{itemize}

@@ -98,7 +98,7 @@ In this workshop, we will introduce the Matlab and Simulink environments and use
 \item You may have previously solved ODEs analytically; we don't do much of that in this course
 \item Consider the classical mass-spring-damper linear model:
 \begin{equation}
-   m\ddot x + c\dot x + k x = 0
+	m\ddot x + c\dot x + k x = 0
 \end{equation} 
 \item Copy the code to simulate this ODE shown over the page\\
  (If you are using quite an old version of Matlab, you'll need to put the function at the end of the file)
@@ -121,7 +121,7 @@ In this workshop, we will introduce the Matlab and Simulink environments and use
 \item Let's model this system in the frequency domain instead:%
 \footnote{\emph{You don't need to understand the derivation to get to this equation, but hopefully the form of the equation makes it obvious we have the same system represented differently}}
 \begin{equation}
-  P(s) = \frac{1}{ms^2+cs+k}
+	P(s) = \frac{1}{ms^2+cs+k}
 \end{equation}
 \item Use the code on the following slide to simulate this system. Do you see similar characteristics?
 \item What is an impulse response?
@@ -214,7 +214,7 @@ You can now set up a model in Simulink and produce results in a nicely general w
 \frametitle{Dynamic model in Simulink}
 There are lots of ways of creating dynamic models in Simulink; we start out only using low level block to model a mass-spring-damper system:
 \begin{equation}
-   \sum F = m\ddot x = - c\dot x - kx + f
+	\sum F = m\ddot x = - c\dot x - kx + f
 \end{equation}
 You'll need the following blocks:
 \begin{itemize}

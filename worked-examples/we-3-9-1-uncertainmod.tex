@@ -23,7 +23,7 @@ Understanding parametric uncertainty is crucial for designing robust control sys
 \paragraph{Problem:} 
 A cruise control system is designed with a PI controller for a car with nominal mass $m_0 = 1600$ kg. The linearised vehicle dynamics around a constant speed are given by:
 \begin{equation}
-m\ddot{x} = F - c\dot{x} - mg\sin\theta
+	m\ddot{x} = F - c\dot{x} - mg\sin\theta
 \end{equation}
 where $x$ is position, $F$ is the drive force, $c = 10$ N·s/m is the drag coefficient, $g = 9.81$ m/s$^2$, and $\theta$ is the road slope.
 
@@ -41,27 +41,27 @@ The PI controller is designed as $C(s) = k_p + k_i/s$ with $k_p = 50$ and $k_i =
 
 For velocity control at constant speed, let $v = \dot{x}$ and linearise around a slope angle $\theta$. The transfer function from force to velocity is:
 \begin{equation}
-P(s) = \frac{V(s)}{F(s)} = \frac{1}{ms + c}
+	P(s) = \frac{V(s)}{F(s)} = \frac{1}{ms + c}
 \end{equation}
 
 For $m_0 = 1600$ kg and $c = 10$:
 \begin{equation}
-P_0(s) = \frac{1}{1600s + 10} = \frac{1/1600}{s + 0.00625}
+	P_0(s) = \frac{1}{1600s + 10} = \frac{1/1600}{s + 0.00625}
 \end{equation}
 
 \textbf{Step 2: Closed-loop characteristic equation}
 
 With PI controller $C(s) = k_p + k_i/s = (k_ps + k_i)/s$, the loop transfer function is:
 \begin{equation}
-L(s) = P(s)C(s) = \frac{1}{ms + c} \cdot \frac{k_ps + k_i}{s} = \frac{k_ps + k_i}{s(ms + c)}
+	L(s) = P(s)C(s) = \frac{1}{ms + c} \cdot \frac{k_ps + k_i}{s} = \frac{k_ps + k_i}{s(ms + c)}
 \end{equation}
 
 The closed-loop characteristic equation is $1 + L(s) = 0$:
 \begin{equation}
-s(ms + c) + k_ps + k_i = 0
+	s(ms + c) + k_ps + k_i = 0
 \end{equation}
 \begin{equation}
-ms^2 + (c + k_p)s + k_i = 0
+	ms^2 + (c + k_p)s + k_i = 0
 \end{equation}
 
 \textbf{Step 3: Stability analysis}
@@ -79,17 +79,17 @@ For a second-order system, if all coefficients are positive, the system is stabl
 
 While the system remains stable, performance degrades with increasing mass. The natural frequency and damping ratio are:
 \begin{equation}
-\omega_n = \sqrt{\frac{k_i}{m}}, \quad \zeta = \frac{c + k_p}{2\sqrt{mk_i}}
+	\omega_n = \sqrt{\frac{k_i}{m}}, \quad \zeta = \frac{c + k_p}{2\sqrt{mk_i}}
 \end{equation}
 
 For $m = 1600$ kg (nominal):
 \begin{equation}
-\omega_n = \sqrt{\frac{20}{1600}} = 0.112 \text{ rad/s}, \quad \zeta = \frac{10 + 50}{2\sqrt{1600 \cdot 20}} = \frac{60}{253} = 0.237
+	\omega_n = \sqrt{\frac{20}{1600}} = 0.112 \text{ rad/s}, \quad \zeta = \frac{10 + 50}{2\sqrt{1600 \cdot 20}} = \frac{60}{253} = 0.237
 \end{equation}
 
 For $m = 2000$ kg (25\% increase):
 \begin{equation}
-\omega_n = \sqrt{\frac{20}{2000}} = 0.100 \text{ rad/s}, \quad \zeta = \frac{60}{2\sqrt{2000 \cdot 20}} = \frac{60}{283} = 0.212
+	\omega_n = \sqrt{\frac{20}{2000}} = 0.100 \text{ rad/s}, \quad \zeta = \frac{60}{2\sqrt{2000 \cdot 20}} = \frac{60}{283} = 0.212
 \end{equation}
 
 The response becomes slower (lower $\omega_n$) and slightly less damped (lower $\zeta$), leading to longer settling time and potentially larger overshoot.
@@ -120,39 +120,39 @@ A nominal process model is $P(s) = 1/(s+1)$. However, the actual system has unmo
 
 By definition of multiplicative uncertainty:
 \begin{equation}
-P_{\text{actual}}(s) = P(s)(1 + \delta(s))
+	P_{\text{actual}}(s) = P(s)(1 + \delta(s))
 \end{equation}
 
 Solving for $\delta(s)$:
 \begin{equation}
-\delta(s) = \frac{P_{\text{actual}}(s)}{P(s)} - 1 = \frac{P_{\text{actual}}(s) - P(s)}{P(s)}
+	\delta(s) = \frac{P_{\text{actual}}(s)}{P(s)} - 1 = \frac{P_{\text{actual}}(s) - P(s)}{P(s)}
 \end{equation}
 
 Substituting the given models:
 \begin{equation}
-\delta(s) = \frac{\frac{1}{(s+1)(0.1s+1)} - \frac{1}{s+1}}{\frac{1}{s+1}} = \frac{1}{(s+1)(0.1s+1)} \cdot (s+1) - 1
+	\delta(s) = \frac{\frac{1}{(s+1)(0.1s+1)} - \frac{1}{s+1}}{\frac{1}{s+1}} = \frac{1}{(s+1)(0.1s+1)} \cdot (s+1) - 1
 \end{equation}
 \begin{equation}
-= \frac{1}{0.1s+1} - 1 = \frac{1 - (0.1s+1)}{0.1s+1} = \frac{-0.1s}{0.1s+1}
+	= \frac{1}{0.1s+1} - 1 = \frac{1 - (0.1s+1)}{0.1s+1} = \frac{-0.1s}{0.1s+1}
 \end{equation}
 
 \textbf{Step 2: Frequency response of the uncertainty}
 
 At frequency $\omega$, substitute $s = \ii\omega$:
 \begin{equation}
-\delta(\ii\omega) = \frac{-0.1\ii\omega}{0.1\ii\omega + 1} = \frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}
+	\delta(\ii\omega) = \frac{-0.1\ii\omega}{0.1\ii\omega + 1} = \frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}
 \end{equation}
 
 The magnitude is:
 \begin{equation}
-|\delta(\ii\omega)| = \left|\frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}\right| = \frac{0.1\omega}{\sqrt{1 + (0.1\omega)^2}}
+	|\delta(\ii\omega)| = \left|\frac{-\ii 0.1\omega}{1 + \ii 0.1\omega}\right| = \frac{0.1\omega}{\sqrt{1 + (0.1\omega)^2}}
 \end{equation}
 
 \textbf{Step 3: Analyze the uncertainty bound}
 
 To find the maximum, take the derivative with respect to $\omega$ and set to zero. Alternatively, observe that:
 \begin{equation}
-|\delta(\ii\omega)| = \frac{0.1\omega}{\sqrt{1 + 0.01\omega^2}}
+	|\delta(\ii\omega)| = \frac{0.1\omega}{\sqrt{1 + 0.01\omega^2}}
 \end{equation}
 
 As $\omega \to 0$: $|\delta| \to 0$
@@ -163,12 +163,12 @@ The function is monotonically increasing and approaches 1 asymptotically.
 
 At $\omega = 10$ rad/s:
 \begin{equation}
-|\delta(\ii \cdot 10)| = \frac{1}{\sqrt{1 + 1}} = \frac{1}{\sqrt{2}} = 0.707
+	|\delta(\ii \cdot 10)| = \frac{1}{\sqrt{1 + 1}} = \frac{1}{\sqrt{2}} = 0.707
 \end{equation}
 
 At $\omega = 100$ rad/s:
 \begin{equation}
-|\delta(\ii \cdot 100)| = \frac{10}{\sqrt{1 + 100}} = \frac{10}{\sqrt{101}} = 0.995
+	|\delta(\ii \cdot 100)| = \frac{10}{\sqrt{1 + 100}} = \frac{10}{\sqrt{101}} = 0.995
 \end{equation}
 
 \textbf{Step 4: Physical interpretation}
