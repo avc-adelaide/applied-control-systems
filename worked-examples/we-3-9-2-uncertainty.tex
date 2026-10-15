@@ -21,7 +21,7 @@
 Robust stability ensures a control system remains stable despite model uncertainties. This example applies the multiplicative uncertainty condition.
 
 \paragraph{Problem:}
-Consider a feedback system with nominal process $P(s) = 5/(s+2)$ and controller $C(s) = 2$. 
+Consider a feedback system with nominal process $P(s) = 5/(s+2)$ and controller $C(s) = 2$.
 
 (a) Calculate the complementary sensitivity function $T(s)$.
 
@@ -37,31 +37,31 @@ Consider a feedback system with nominal process $P(s) = 5/(s+2)$ and controller 
 
 The loop transfer function is:
 \begin{equation}
-	L(s) = P(s)C(s) = \frac{5}{s+2} \cdot 2 = \frac{10}{s+2}
+  L(s) = P(s)C(s) = \frac{5}{s+2} \cdot 2 = \frac{10}{s+2}
 \end{equation}
 
 The complementary sensitivity function is:
 \begin{equation}
-	T(s) = \frac{L(s)}{1 + L(s)} = \frac{10/(s+2)}{1 + 10/(s+2)} = \frac{10}{s+2+10} = \frac{10}{s+12}
+  T(s) = \frac{L(s)}{1 + L(s)} = \frac{10/(s+2)}{1 + 10/(s+2)} = \frac{10}{s+2+10} = \frac{10}{s+12}
 \end{equation}
 
 \textbf{Step 2: Frequency response of $T$}
 
 At frequency $\omega$, substitute $s = \ii\omega$:
 \begin{equation}
-	T(\ii\omega) = \frac{10}{\ii\omega + 12}
+  T(\ii\omega) = \frac{10}{\ii\omega + 12}
 \end{equation}
 
 The magnitude is:
 \begin{equation}
-	|T(\ii\omega)| = \frac{10}{\sqrt{\omega^2 + 144}}
+  |T(\ii\omega)| = \frac{10}{\sqrt{\omega^2 + 144}}
 \end{equation}
 
 \textbf{Step 3: Find maximum magnitude $M_t$}
 
 Since $|T(\ii\omega)|$ is monotonically decreasing with $\omega$:
 \begin{equation}
-	M_t = \max_\omega |T(\ii\omega)| = |T(\ii \cdot 0)| = \frac{10}{12} = 0.833
+  M_t = \max_\omega |T(\ii\omega)| = |T(\ii \cdot 0)| = \frac{10}{12} = 0.833
 \end{equation}
 
 This occurs at $\omega = 0$ (DC gain).
@@ -72,33 +72,33 @@ The robust stability condition states: $|\delta(\ii\omega)| < 1/|T(\ii\omega)|$
 
 At $\omega = 0$ rad/s:
 \begin{equation}
-	|T(\ii \cdot 0)| = \frac{10}{12} = 0.833 \quad \Rightarrow \quad |\delta| < \frac{1}{0.833} = 1.20
+  |T(\ii \cdot 0)| = \frac{10}{12} = 0.833 \quad \Rightarrow \quad |\delta| < \frac{1}{0.833} = 1.20
 \end{equation}
 
 At $\omega = 2$ rad/s:
 \begin{equation}
-	|T(\ii \cdot 2)| = \frac{10}{\sqrt{4 + 144}} = \frac{10}{\sqrt{148}} = 0.822 \quad \Rightarrow \quad |\delta| < 1.22
+  |T(\ii \cdot 2)| = \frac{10}{\sqrt{4 + 144}} = \frac{10}{\sqrt{148}} = 0.822 \quad \Rightarrow \quad |\delta| < 1.22
 \end{equation}
 
 At $\omega = 10$ rad/s:
 \begin{equation}
-	|T(\ii \cdot 10)| = \frac{10}{\sqrt{100 + 144}} = \frac{10}{\sqrt{244}} = 0.640 \quad \Rightarrow \quad |\delta| < 1.56
+  |T(\ii \cdot 10)| = \frac{10}{\sqrt{100 + 144}} = \frac{10}{\sqrt{244}} = 0.640 \quad \Rightarrow \quad |\delta| < 1.56
 \end{equation}
 
 \textbf{Step 5: Interpretation}
 
 \begin{itemize}
-\item At low frequencies ($\omega \approx 0$), the uncertainty bound is tighter: $|\delta| < 1.20$
-\item At high frequencies ($\omega = 10$), larger uncertainties are tolerable: $|\delta| < 1.56$
-\item This makes sense: the controller has more gain at low frequencies, making the system more sensitive to model errors
-\item The maximum uncertainty across all frequencies is limited by the minimum of $1/|T(\ii\omega)|$, which equals $1/M_t = 1.20$
+  \item At low frequencies ($\omega \approx 0$), the uncertainty bound is tighter: $|\delta| < 1.20$
+  \item At high frequencies ($\omega = 10$), larger uncertainties are tolerable: $|\delta| < 1.56$
+  \item This makes sense: the controller has more gain at low frequencies, making the system more sensitive to model errors
+  \item The maximum uncertainty across all frequencies is limited by the minimum of $1/|T(\ii\omega)|$, which equals $1/M_t = 1.20$
 \end{itemize}
 
 \textbf{Key insights:}
 \begin{itemize}
-\item Keeping $M_t$ small (equivalently, the sensitivity peak $M_s$ small) improves robustness
-\item The complementary sensitivity $T$ determines tolerance to high-frequency uncertainty
-\item Trade-off: high controller gain improves disturbance rejection but reduces robustness margins
+  \item Keeping $M_t$ small (equivalently, the sensitivity peak $M_s$ small) improves robustness
+  \item The complementary sensitivity $T$ determines tolerance to high-frequency uncertainty
+  \item Trade-off: high controller gain improves disturbance rejection but reduces robustness margins
 \end{itemize}
 
 \subsection{Example 2: Performance Under Uncertainty - Load Disturbance Attenuation}
@@ -122,41 +122,41 @@ A process has nominal model $P_0(s) = 1/(s+1)$ with multiplicative uncertainty $
 
 With nominal process $P_0(s) = 1/(s+1)$ and controller $C(s) = 5$:
 \begin{equation}
-	L_0(s) = P_0(s)C(s) = \frac{5}{s+1}
+  L_0(s) = P_0(s)C(s) = \frac{5}{s+1}
 \end{equation}
 
 The sensitivity function is:
 \begin{equation}
-	S_0(s) = \frac{1}{1 + L_0(s)} = \frac{1}{1 + 5/(s+1)} = \frac{s+1}{s+1+5} = \frac{s+1}{s+6}
+  S_0(s) = \frac{1}{1 + L_0(s)} = \frac{1}{1 + 5/(s+1)} = \frac{s+1}{s+1+5} = \frac{s+1}{s+6}
 \end{equation}
 
 \textbf{Step 2: Load disturbance transfer function (nominal)}
 
 The transfer function from load disturbance to output is:
 \begin{equation}
-	G_{yv,0}(s) = P_0(s)S_0(s) = \frac{1}{s+1} \cdot \frac{s+1}{s+6} = \frac{1}{s+6}
+  G_{yv,0}(s) = P_0(s)S_0(s) = \frac{1}{s+1} \cdot \frac{s+1}{s+6} = \frac{1}{s+6}
 \end{equation}
 
 \textbf{Step 3: Actual system with uncertainty}
 
 With $\delta = 0.2$, the actual process is:
 \begin{equation}
-	P(s) = P_0(s)(1 + \delta) = \frac{1}{s+1} \cdot 1.2 = \frac{1.2}{s+1}
+  P(s) = P_0(s)(1 + \delta) = \frac{1}{s+1} \cdot 1.2 = \frac{1.2}{s+1}
 \end{equation}
 
 The actual loop transfer function:
 \begin{equation}
-	L(s) = P(s)C(s) = \frac{1.2}{s+1} \cdot 5 = \frac{6}{s+1}
+  L(s) = P(s)C(s) = \frac{1.2}{s+1} \cdot 5 = \frac{6}{s+1}
 \end{equation}
 
 The actual sensitivity:
 \begin{equation}
-	S(s) = \frac{1}{1 + 6/(s+1)} = \frac{s+1}{s+7}
+  S(s) = \frac{1}{1 + 6/(s+1)} = \frac{s+1}{s+7}
 \end{equation}
 
 The actual disturbance transfer function:
 \begin{equation}
-	G_{yv}(s) = P(s)S(s) = \frac{1.2}{s+1} \cdot \frac{s+1}{s+7} = \frac{1.2}{s+7}
+  G_{yv}(s) = P(s)S(s) = \frac{1.2}{s+1} \cdot \frac{s+1}{s+7} = \frac{1.2}{s+7}
 \end{equation}
 
 \textbf{Step 4: Relative error analysis}
@@ -169,22 +169,22 @@ Actual: $G_{yv}(0) = 1.2/7 = 0.171$
 
 Relative error:
 \begin{equation}
-	\frac{G_{yv}(0) - G_{yv,0}(0)}{G_{yv,0}(0)} = \frac{0.171 - 0.167}{0.167} = 0.024 = 2.4\%
+  \frac{G_{yv}(0) - G_{yv,0}(0)}{G_{yv,0}(0)} = \frac{0.171 - 0.167}{0.167} = 0.024 = 2.4\%
 \end{equation}
 
 Using the theoretical relation $\frac{\mathrm{d}G_{yv}}{G_{yv}} = S\frac{\mathrm{d}P}{P}$:
 
 At low frequency where $S_0(0) = 1/6$:
 \begin{equation}
-	\frac{\Delta G_{yv}}{G_{yv}} \approx S_0(0) \cdot \frac{\Delta P}{P} = \frac{1}{6} \cdot 0.2 = 0.033 = 3.3\%
+  \frac{\Delta G_{yv}}{G_{yv}} \approx S_0(0) \cdot \frac{\Delta P}{P} = \frac{1}{6} \cdot 0.2 = 0.033 = 3.3\%
 \end{equation}
 
 The small discrepancy is due to the linearization approximation.
 
 \textbf{Key insights:}
 \begin{itemize}
-\item Load disturbance attenuation is relatively insensitive to process variations at frequencies where $S$ is small
-\item The sensitivity function $S$ acts as a "scaling factor" for how process uncertainty affects disturbance rejection
-\item Good feedback design (small $S$ at low frequencies) provides both good disturbance rejection AND insensitivity to model errors
+  \item Load disturbance attenuation is relatively insensitive to process variations at frequencies where $S$ is small
+  \item The sensitivity function $S$ acts as a "scaling factor" for how process uncertainty affects disturbance rejection
+  \item Good feedback design (small $S$ at low frequencies) provides both good disturbance rejection AND insensitivity to model errors
 \end{itemize}
 \end{document}

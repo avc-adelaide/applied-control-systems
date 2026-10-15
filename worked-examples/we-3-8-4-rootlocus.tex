@@ -23,7 +23,7 @@ The root locus method visualizes how closed-loop pole locations change as a cont
 \paragraph{Problem:}
 Consider a process with transfer function:
 \begin{equation}
-	P(s) = \frac{s+1}{s^2(s+2)}
+  P(s) = \frac{s+1}{s^2(s+2)}
 \end{equation}
 and a proportional controller $C(s) = k$.
 
@@ -43,7 +43,7 @@ and a proportional controller $C(s) = k$.
 
 The loop transfer function is:
 \begin{equation}
-	L(s) = P(s)C(s) = k\frac{s+1}{s^2(s+2)}
+  L(s) = P(s)C(s) = k\frac{s+1}{s^2(s+2)}
 \end{equation}
 
 \textbf{Zeros:} $z_1 = -1$ (one zero)
@@ -52,10 +52,10 @@ The loop transfer function is:
 
 The closed-loop characteristic equation is:
 \begin{equation}
-	1 + L(s) = 0 \quad \Rightarrow \quad s^2(s+2) + k(s+1) = 0
+  1 + L(s) = 0 \quad \Rightarrow \quad s^2(s+2) + k(s+1) = 0
 \end{equation}
 \begin{equation}
-	s^3 + 2s^2 + ks + k = 0
+  s^3 + 2s^2 + ks + k = 0
 \end{equation}
 
 \textbf{Step 2: Root locus branches}
@@ -64,14 +64,14 @@ The root locus has $n = 3$ branches (equal to the number of poles).
 
 \textbf{Starting points ($k = 0$):} The branches start at the open-loop poles:
 \begin{itemize}
-\item Two branches at $s = 0$ (double pole)
-\item One branch at $s = -2$
+  \item Two branches at $s = 0$ (double pole)
+  \item One branch at $s = -2$
 \end{itemize}
 
 \textbf{Ending points ($k \to \infty$):}
 \begin{itemize}
-\item $m = 1$ branch ends at the zero $s = -1$
-\item $n - m = 3 - 1 = 2$ branches go to infinity
+  \item $m = 1$ branch ends at the zero $s = -1$
+  \item $n - m = 3 - 1 = 2$ branches go to infinity
 \end{itemize}
 
 \textbf{Step 3: Asymptotes}
@@ -80,12 +80,12 @@ The pole excess is $\npoleexcess = n - m = 3 - 1 = 2$.
 
 The asymptotes emanate from the centroid (center of mass of poles and zeros):
 \begin{equation}
-	\sigma_a = \frac{\sum \text{poles} - \sum \text{zeros}}{n - m} = \frac{(0 + 0 - 2) - (-1)}{2} = \frac{-2 + 1}{2} = \frac{-1}{2} = -0.5
+  \sigma_a = \frac{\sum \text{poles} - \sum \text{zeros}}{n - m} = \frac{(0 + 0 - 2) - (-1)}{2} = \frac{-2 + 1}{2} = \frac{-1}{2} = -0.5
 \end{equation}
 
 The angles of the asymptotes are:
 \begin{equation}
-	\theta_l = \frac{(2l + 1)\pi}{\npoleexcess} = \frac{(2l + 1)\pi}{2}, \quad l = 0, 1
+  \theta_l = \frac{(2l + 1)\pi}{\npoleexcess} = \frac{(2l + 1)\pi}{2}, \quad l = 0, 1
 \end{equation}
 
 For $l = 0$: $\theta_0 = \frac{\pi}{2} = 90°$
@@ -100,10 +100,10 @@ The root locus exists on the real axis to the left of an odd number of poles and
 
 Counting from right to left:
 \begin{itemize}
-\item $(0, \infty)$: 0 poles/zeros to the right → not on locus
-\item $(-1, 0)$: 2 poles at 0 to the right → not on locus
-\item $(-2, -1)$: 2 poles at 0 and 1 zero at -1 = 3 total → \textbf{on locus}
-\item $(-\infty, -2)$: 2 poles at 0, 1 zero at -1, 1 pole at -2 = 4 total → not on locus
+  \item $(0, \infty)$: 0 poles/zeros to the right → not on locus
+  \item $(-1, 0)$: 2 poles at 0 to the right → not on locus
+  \item $(-2, -1)$: 2 poles at 0 and 1 zero at -1 = 3 total → \textbf{on locus}
+  \item $(-\infty, -2)$: 2 poles at 0, 1 zero at -1, 1 pole at -2 = 4 total → not on locus
 \end{itemize}
 
 So the root locus on the real axis is the segment $[-2, -1]$.
@@ -116,39 +116,39 @@ At a breakaway point, $\frac{\mathrm{d}k}{\mathrm{d}s} = 0$.
 
 From the characteristic equation $s^3 + 2s^2 + ks + k = 0$:
 \begin{equation}
-	k = -\frac{s^3 + 2s^2}{s + 1} = -\frac{s^2(s + 2)}{s + 1}
+  k = -\frac{s^3 + 2s^2}{s + 1} = -\frac{s^2(s + 2)}{s + 1}
 \end{equation}
 
 Taking the derivative:
 \begin{equation}
-	\frac{\mathrm{d}k}{\mathrm{d}s} = -\frac{(2s(s+2) + s^2)(s+1) - s^2(s+2)}{(s+1)^2}
+  \frac{\mathrm{d}k}{\mathrm{d}s} = -\frac{(2s(s+2) + s^2)(s+1) - s^2(s+2)}{(s+1)^2}
 \end{equation}
 \begin{equation}
-	= -\frac{(2s^2 + 4s + s^2)(s+1) - s^2(s+2)}{(s+1)^2}
+  = -\frac{(2s^2 + 4s + s^2)(s+1) - s^2(s+2)}{(s+1)^2}
 \end{equation}
 \begin{equation}
-	= -\frac{(3s^2 + 4s)(s+1) - s^2(s+2)}{(s+1)^2}
+  = -\frac{(3s^2 + 4s)(s+1) - s^2(s+2)}{(s+1)^2}
 \end{equation}
 \begin{equation}
-	= -\frac{3s^3 + 3s^2 + 4s^2 + 4s - s^3 - 2s^2}{(s+1)^2}
+  = -\frac{3s^3 + 3s^2 + 4s^2 + 4s - s^3 - 2s^2}{(s+1)^2}
 \end{equation}
 \begin{equation}
-	= -\frac{2s^3 + 5s^2 + 4s}{(s+1)^2}
+  = -\frac{2s^3 + 5s^2 + 4s}{(s+1)^2}
 \end{equation}
 
 Setting $\frac{\mathrm{d}k}{\mathrm{d}s} = 0$:
 \begin{equation}
-	2s^3 + 5s^2 + 4s = 0
+  2s^3 + 5s^2 + 4s = 0
 \end{equation}
 \begin{equation}
-	s(2s^2 + 5s + 4) = 0
+  s(2s^2 + 5s + 4) = 0
 \end{equation}
 
 Solutions: $s = 0$ (at a pole, not valid) or $2s^2 + 5s + 4 = 0$
 
 Using the quadratic formula:
 \begin{equation}
-	s = \frac{-5 \pm \sqrt{25 - 32}}{4} = \frac{-5 \pm \sqrt{-7}}{4}
+  s = \frac{-5 \pm \sqrt{25 - 32}}{4} = \frac{-5 \pm \sqrt{-7}}{4}
 \end{equation}
 
 These are complex, so there's no real breakaway point on $[-2, -1]$. Let me reconsider...
@@ -157,7 +157,7 @@ Actually, for a double pole at $s=0$, two branches leave immediately in a star p
 
 Actually, examining the characteristic equation more carefully, let's find where multiple roots occur. Setting $s = -1.5$ as a test:
 \begin{equation}
-	k = -\frac{(-1.5)^2(-1.5 + 2)}{-1.5 + 1} = -\frac{2.25 \times 0.5}{-0.5} = -\frac{1.125}{-0.5} = 2.25
+  k = -\frac{(-1.5)^2(-1.5 + 2)}{-1.5 + 1} = -\frac{2.25 \times 0.5}{-0.5} = -\frac{1.125}{-0.5} = 2.25
 \end{equation}
 
 We can verify this numerically or graphically. The breakaway point is approximately at $s \approx -1.5$ with $k \approx 2.25$.
@@ -166,24 +166,24 @@ We can verify this numerically or graphically. The breakaway point is approximat
 
 The characteristic equation is:
 \begin{equation}
-	s^3 + 2s^2 + ks + k = 0
+  s^3 + 2s^2 + ks + k = 0
 \end{equation}
 
 Using the Routh-Hurwitz criterion:
 \begin{equation}
-	\begin{array}{c|cc}
-	s^3 & 1 & k \\
-	s^2 & 2 & k \\
-	s^1 & \frac{4 - k}{2} & 0 \\
-	s^0 & k & \\
-	\end{array}
+  \begin{array}{c|cc}
+    s^3 & 1 & k \\
+    s^2 & 2 & k \\
+    s^1 & \frac{4 - k}{2} & 0 \\
+    s^0 & k & \\
+  \end{array}
 \end{equation}
 
 For stability, all entries in the first column must be positive:
 \begin{itemize}
-\item $2 > 0$ ✓
-\item $\frac{4 - k}{2} > 0 \Rightarrow k < 4$
-\item $k > 0$
+  \item $2 > 0$ ✓
+  \item $\frac{4 - k}{2} > 0 \Rightarrow k < 4$
+  \item $k > 0$
 \end{itemize}
 
 Therefore, the system is stable for $0 < k < 4$.
@@ -192,13 +192,13 @@ At $k = 4$, the system has poles on the imaginary axis (marginally stable).
 
 \textbf{Key insights:}
 \begin{itemize}
-\item The root locus provides a graphical method to understand how gain affects closed-loop pole locations
-\item Branches start at open-loop poles and end at open-loop zeros or infinity
-\item The number of branches equals the number of poles
-\item Asymptotes show the direction branches take as $k \to \infty$
-\item The system is stable only for a limited range of gains when poles can cross into the RHP
-\item The double pole at $s = 0$ creates two branches that initially move along the real axis toward $s = -1$
-\item One branch reaches the zero at $s = -1$ and terminates; the other continues toward the asymptote
+  \item The root locus provides a graphical method to understand how gain affects closed-loop pole locations
+  \item Branches start at open-loop poles and end at open-loop zeros or infinity
+  \item The number of branches equals the number of poles
+  \item Asymptotes show the direction branches take as $k \to \infty$
+  \item The system is stable only for a limited range of gains when poles can cross into the RHP
+  \item The double pole at $s = 0$ creates two branches that initially move along the real axis toward $s = -1$
+  \item One branch reaches the zero at $s = -1$ and terminates; the other continues toward the asymptote
 \end{itemize}
 
 \subsection{Example 2: Using Root Locus for PI and PID Controller Design}
@@ -220,7 +220,7 @@ Consider a process $P(s) = \frac{1}{s^2 + 1}$ (undamped oscillator) that needs s
 
 With PI controller $C_{PI}(s) = k\frac{s+a}{s}$:
 \begin{equation}
-	L_{PI}(s) = P(s)C_{PI}(s) = \frac{1}{s^2 + 1} \cdot k\frac{s+a}{s} = \frac{k(s+a)}{s(s^2+1)}
+  L_{PI}(s) = P(s)C_{PI}(s) = \frac{1}{s^2 + 1} \cdot k\frac{s+a}{s} = \frac{k(s+a)}{s(s^2+1)}
 \end{equation}
 
 \textbf{Open-loop poles:} $p_1 = 0$, $p_2 = +\ii$, $p_3 = -\ii$ (three poles)
@@ -233,7 +233,7 @@ For the poles at $s = \pm \ii$, they lie on the imaginary axis. As $k$ increases
 
 The asymptotes: $\npoleexcess = 3 - 1 = 2$
 \begin{equation}
-	\sigma_a = \frac{(0 + \ii - \ii) - (-a)}{2} = \frac{a}{2}
+  \sigma_a = \frac{(0 + \ii - \ii) - (-a)}{2} = \frac{a}{2}
 \end{equation}
 
 The asymptotes have angles $\pm 90°$ and emanate from $\sigma = a/2 > 0$ (in the RHP if $a > 0$).
@@ -246,12 +246,12 @@ Therefore, \textbf{PI control cannot stabilize this system}.
 
 With PID controller $C_{PID}(s) = k\frac{s^2 + 2s + 2}{s}$:
 \begin{equation}
-	L_{PID}(s) = \frac{1}{s^2 + 1} \cdot k\frac{s^2 + 2s + 2}{s} = \frac{k(s^2 + 2s + 2)}{s(s^2+1)}
+  L_{PID}(s) = \frac{1}{s^2 + 1} \cdot k\frac{s^2 + 2s + 2}{s} = \frac{k(s^2 + 2s + 2)}{s(s^2+1)}
 \end{equation}
 
 \textbf{Open-loop zeros:} The zeros are roots of $s^2 + 2s + 2 = 0$:
 \begin{equation}
-	s = \frac{-2 \pm \sqrt{4 - 8}}{2} = \frac{-2 \pm 2\ii}{2} = -1 \pm \ii
+  s = \frac{-2 \pm \sqrt{4 - 8}}{2} = \frac{-2 \pm 2\ii}{2} = -1 \pm \ii
 \end{equation}
 
 So $z_1 = -1 + \ii$ and $z_2 = -1 - \ii$ (two complex zeros in the LHP).
@@ -260,13 +260,13 @@ The root locus has 3 branches (from poles at $0, +\ii, -\ii$), and 2 branches en
 
 The closed-loop characteristic equation is:
 \begin{equation}
-	s(s^2+1) + k(s^2 + 2s + 2) = 0
+  s(s^2+1) + k(s^2 + 2s + 2) = 0
 \end{equation}
 \begin{equation}
-	s^3 + s + ks^2 + 2ks + 2k = 0
+  s^3 + s + ks^2 + 2ks + 2k = 0
 \end{equation}
 \begin{equation}
-	s^3 + ks^2 + (2k+1)s + 2k = 0
+  s^3 + ks^2 + (2k+1)s + 2k = 0
 \end{equation}
 
 \textbf{Step 3: Root locus sketch}
@@ -279,7 +279,7 @@ The branch from $s = 0$ moves left along the real axis initially.
 
 \textbf{For $k = 1$:}
 \begin{equation}
-	s^3 + s^2 + 3s + 2 = 0
+  s^3 + s^2 + 3s + 2 = 0
 \end{equation}
 
 Testing $s = -1$: $(-1)^3 + (-1)^2 + 3(-1) + 2 = -1 + 1 - 3 + 2 = -1 \neq 0$
@@ -288,31 +288,31 @@ Testing $s = -2$: $(-2)^3 + (-2)^2 + 3(-2) + 2 = -8 + 4 - 6 + 2 = -8 \neq 0$
 
 Using numerical methods or the cubic formula, the poles are approximately:
 \begin{equation}
-	s_1 \approx -0.6, \quad s_{2,3} \approx -0.2 \pm 1.4\ii
+  s_1 \approx -0.6, \quad s_{2,3} \approx -0.2 \pm 1.4\ii
 \end{equation}
 
 All poles are in the LHP, so the system is stable.
 
 \textbf{For $k = 2$:}
 \begin{equation}
-	s^3 + 2s^2 + 5s + 4 = 0
+  s^3 + 2s^2 + 5s + 4 = 0
 \end{equation}
 
 Testing $s = -1$: $-1 + 2 - 5 + 4 = 0$ ✓
 
 So $(s + 1)$ is a factor. Dividing:
 \begin{equation}
-	s^3 + 2s^2 + 5s + 4 = (s+1)(s^2 + s + 4)
+  s^3 + 2s^2 + 5s + 4 = (s+1)(s^2 + s + 4)
 \end{equation}
 
 The other poles are:
 \begin{equation}
-	s = \frac{-1 \pm \sqrt{1 - 16}}{2} = \frac{-1 \pm \sqrt{-15}}{2} = -0.5 \pm 1.94\ii
+  s = \frac{-1 \pm \sqrt{1 - 16}}{2} = \frac{-1 \pm \sqrt{-15}}{2} = -0.5 \pm 1.94\ii
 \end{equation}
 
 The closed-loop poles are:
 \begin{equation}
-	s_1 = -1, \quad s_{2,3} = -0.5 \pm 1.94\ii
+  s_1 = -1, \quad s_{2,3} = -0.5 \pm 1.94\ii
 \end{equation}
 
 All in the LHP, so stable. The poles are closer to the imaginary axis than for $k=1$, indicating faster oscillations.
@@ -320,20 +320,20 @@ All in the LHP, so stable. The poles are closer to the imaginary axis than for $
 \textbf{Step 5: System behavior comparison}
 
 \begin{itemize}
-\item \textbf{$k = 1$:} Slower response, more damping, poles further from imaginary axis
-\item \textbf{$k = 2$:} Faster response, less damping, one pole at the PID zero location $s = -1$
-\item Higher $k$ moves poles closer to the imaginary axis, creating faster but more oscillatory response
-\item The PID controller successfully stabilizes the system by placing zeros in the LHP that attract the originally undamped poles
+  \item \textbf{$k = 1$:} Slower response, more damping, poles further from imaginary axis
+  \item \textbf{$k = 2$:} Faster response, less damping, one pole at the PID zero location $s = -1$
+  \item Higher $k$ moves poles closer to the imaginary axis, creating faster but more oscillatory response
+  \item The PID controller successfully stabilizes the system by placing zeros in the LHP that attract the originally undamped poles
 \end{itemize}
 
 \textbf{Key insights:}
 \begin{itemize}
-\item Systems with poles on the imaginary axis (like undamped oscillators) require careful controller design
-\item PI control adds a zero but also a pole at the origin, which doesn't provide enough phase lead to stabilize marginally stable systems
-\item PID control adds two zeros (typically complex conjugates) without additional RHP poles, providing the phase lead needed for stabilization
-\item The root locus shows that placing controller zeros in the LHP attracts poles away from the imaginary axis
-\item For systems with imaginary axis poles, the controller zeros should be designed to "pull" those poles into the stable region
-\item The choice of $k$ determines the final pole locations and thus the closed-loop damping and natural frequency
-\item This example demonstrates why model-based controller design (like root locus or pole placement) is essential for systems that simple PI cannot stabilize
+  \item Systems with poles on the imaginary axis (like undamped oscillators) require careful controller design
+  \item PI control adds a zero but also a pole at the origin, which doesn't provide enough phase lead to stabilize marginally stable systems
+  \item PID control adds two zeros (typically complex conjugates) without additional RHP poles, providing the phase lead needed for stabilization
+  \item The root locus shows that placing controller zeros in the LHP attracts poles away from the imaginary axis
+  \item For systems with imaginary axis poles, the controller zeros should be designed to "pull" those poles into the stable region
+  \item The choice of $k$ determines the final pole locations and thus the closed-loop damping and natural frequency
+  \item This example demonstrates why model-based controller design (like root locus or pole placement) is essential for systems that simple PI cannot stabilize
 \end{itemize}
 \end{document}

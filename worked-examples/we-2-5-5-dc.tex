@@ -20,7 +20,7 @@
 
 \paragraph{Problem:} For the transfer function:
 \begin{align}
-G(s) = \frac{10(s+2)}{(s+1)(s+5)}
+  G(s) = \frac{10(s+2)}{(s+1)(s+5)}
 \end{align}
 
 Find: (a) the DC gain, and (b) the steady-state output for a unit step input.
@@ -31,32 +31,32 @@ Find: (a) the DC gain, and (b) the steady-state output for a unit step input.
 
 The DC gain is the value of the transfer function at $s = 0$:
 \begin{align}
-G(0) = \frac{10(0+2)}{(0+1)(0+5)} = \frac{20}{5} = 4
+  G(0) = \frac{10(0+2)}{(0+1)(0+5)} = \frac{20}{5} = 4
 \end{align}
 
 \textbf{Part (b): Steady-State Response to Unit Step}
 
 For a unit step input, $U(s) = \frac{1}{s}$, the output is:
 \begin{align}
-Y(s) = G(s)U(s) = \frac{10(s+2)}{(s+1)(s+5)} \cdot \frac{1}{s}
+  Y(s) = G(s)U(s) = \frac{10(s+2)}{(s+1)(s+5)} \cdot \frac{1}{s}
 \end{align}
 
 Using the final value theorem:
 \begin{align}
-y_{ss} = \lim_{t \to \infty} y(t) = \lim_{s \to 0} sY(s)
+  y_{ss} = \lim_{t \to \infty} y(t) = \lim_{s \to 0} sY(s)
 \end{align}
 
 Compute:
 \begin{align}
-y_{ss} &= \lim_{s \to 0} s \cdot \frac{10(s+2)}{s(s+1)(s+5)} \\
-&= \lim_{s \to 0} \frac{10(s+2)}{(s+1)(s+5)} \\
-&= \frac{10(2)}{(1)(5)} = \frac{20}{5} = 4
+  y_{ss} &= \lim_{s \to 0} s \cdot \frac{10(s+2)}{s(s+1)(s+5)} \\
+  &= \lim_{s \to 0} \frac{10(s+2)}{(s+1)(s+5)} \\
+  &= \frac{10(2)}{(1)(5)} = \frac{20}{5} = 4
 \end{align}
 
-\textbf{Result:} 
+\textbf{Result:}
 \begin{itemize}
-\item DC gain: $G(0) = 4$
-\item Steady-state step response: $y_{ss} = 4$
+  \item DC gain: $G(0) = 4$
+  \item Steady-state step response: $y_{ss} = 4$
 \end{itemize}
 
 \textbf{Interpretation:} The DC gain equals the steady-state response to a unit step input, which is a fundamental property of stable systems. An input step of magnitude 1 results in an output that settles to a value of 4.

@@ -5,14 +5,14 @@
 \CONCEPT{Integrator Windup}
 
 \begin{SUMMARY}
-\begin{itemize}
-\item Saturation and windup
-\item Avoiding windup
-\end{itemize}
-\vfill References:
-\begin{itemize}
-\item \astrom[§11.4]
-\end{itemize}
+  \begin{itemize}
+    \item Saturation and windup
+    \item Avoiding windup
+  \end{itemize}
+  \vfill References:
+  \begin{itemize}
+    \item \astrom[§11.4]
+  \end{itemize}
 \end{SUMMARY}
 
 
@@ -20,127 +20,127 @@
 \SUBCONCEPT{Saturation and windup}
 
 \begin{frame}{Actuator saturation}
-\begin{itemize}
-\item We have mostly analysed control systems from the perspective of linear systems but the effects of nonlinear systems must be considered
-\item A nonlinear phenomenon of importance is saturation -- limitations in actuators such as speed limits of motors, region of movement of a robotic arm, or a valve's limitations of not being more than fully opened or fully closed
-\item All actuators have physical limitations
-\end{itemize}
+  \begin{itemize}
+    \item We have mostly analysed control systems from the perspective of linear systems but the effects of nonlinear systems must be considered
+    \item A nonlinear phenomenon of importance is saturation -- limitations in actuators such as speed limits of motors, region of movement of a robotic arm, or a valve's limitations of not being more than fully opened or fully closed
+    \item All actuators have physical limitations
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Breaking up PID response}
-\centerline{\includegraphics[width=1.2\linewidth,clip,trim=0 150 0 150]{windup_blocks}}
+  \centerline{\includegraphics[width=1.2\linewidth,clip,trim=0 150 0 150]{windup_blocks}}
 \end{frame}
 
 \begin{frame}{With $K_p=5$, $K_i=K_d=0$}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_kp}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_kp}
 \end{frame}
 
 \begin{frame}{Add I term}{With $K_p=5$, $K_i=1$, $K_d=0$}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_ki}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_ki}
 \end{frame}
 
 \begin{frame}{Add D term}{With $K_p=5$, $K_i=1$, $K_d=1$}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_kd}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_kd}
 \end{frame}
 
 
 \begin{frame}{Effect of saturation}
-\begin{itemize}
-\item When saturation is achieved, the feedback loop is broken and the system effectively runs in open loop with the actuator remaining at the limiting value as long as it is still saturated
-\item In these cases, the integral term and the controller input may become very large and it may take a long time for the integrator and controller to come out of saturation
-\item When the integral term grows unchecked, this results in very large transient behaviour and is known as \alert{integrator windup}
-\item This can occur in any controller with integral action
-\end{itemize}
+  \begin{itemize}
+    \item When saturation is achieved, the feedback loop is broken and the system effectively runs in open loop with the actuator remaining at the limiting value as long as it is still saturated
+    \item In these cases, the integral term and the controller input may become very large and it may take a long time for the integrator and controller to come out of saturation
+    \item When the integral term grows unchecked, this results in very large transient behaviour and is known as \alert{integrator windup}
+    \item This can occur in any controller with integral action
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Windup example -- cruise control}
-\begin{itemize}
-	\item Consider the cruise control system when a car encounters a hill (at $t=5$) that is so steep ($6^\circ$) that the throttle saturates when the cruise controller attempts to maintain speed
-	\item The torque required is so large that the throttle saturates
-\end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\linewidth]{figure11.10a}
-	\\
-	\textbf{Figure 11.10 (a)}: Simulation of PI cruise control with windup.
-\end{figure}
+  \begin{itemize}
+    \item Consider the cruise control system when a car encounters a hill (at $t=5$) that is so steep ($6^\circ$) that the throttle saturates when the cruise controller attempts to maintain speed
+    \item The torque required is so large that the throttle saturates
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figure11.10a}
+    \\
+    \textbf{Figure 11.10 (a)}: Simulation of PI cruise control with windup.
+  \end{figure}
 \end{frame}
 
 
 \begin{frame}{Add saturation}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s1}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s1}
 \end{frame}
 
 \begin{frame}{Saturation gums up the works}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s2}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s2}
 \end{frame}
 
 \begin{frame}{Saturation with an integrator}{This is where it gets really bad}
-\begin{align}
-P&=\frac{1}{s(s+1)} & C &= \mathrm{PID}(K_p,T_i,T_d) = \mathrm{PID}(2.7,7.5,0.8)
-\end{align}
-Define saturation here as $U_{\mathrm{sat}}=\pm0.1$.
-\begin{itemize}
-\item This might sound extreme but consider systems like satellite reaction wheels
-\item Integrator means no problem (eventually) reaching desired steady state
-\end{itemize}
+  \begin{align}
+    P&=\frac{1}{s(s+1)} & C &= \mathrm{PID}(K_p,T_i,T_d) = \mathrm{PID}(2.7,7.5,0.8)
+  \end{align}
+  Define saturation here as $U_{\mathrm{sat}}=\pm0.1$.
+  \begin{itemize}
+    \item This might sound extreme but consider systems like satellite reaction wheels
+    \item Integrator means no problem (eventually) reaching desired steady state
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Saturation with an integrator}{This is where it gets really bad}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s3}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_s3}
 \end{frame}
 
 
 \SUBCONCEPT{Avoiding windup}
 
 \begin{frame}{PID controllers}
-\begin{itemize}
-\item One method for avoiding windup in PID controllers is to add an extra feedback path generated by a model of the saturating actuator
-\item We measure the difference between the output of the controller and the actuator model $e_s=u-u_a$, so when there is no saturation the feedback loop is as normal but at saturation this error signal is fed back to the integrator as well
-\item The result is the controller output is kept close to the saturation limit
-\item We can adjust the rate at which the controller output is reset by the gain $k_{\text{aw}}$, where a larger gain value indicates a shorter reset time
-\end{itemize}
+  \begin{itemize}
+    \item One method for avoiding windup in PID controllers is to add an extra feedback path generated by a model of the saturating actuator
+    \item We measure the difference between the output of the controller and the actuator model $e_s=u-u_a$, so when there is no saturation the feedback loop is as normal but at saturation this error signal is fed back to the integrator as well
+    \item The result is the controller output is kept close to the saturation limit
+    \item We can adjust the rate at which the controller output is reset by the gain $k_{\text{aw}}$, where a larger gain value indicates a shorter reset time
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{PID controllers}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{figure11.11}
-	\\
-	\textbf{Figure 11.11}: PID controller with filtering, anti-windup, and manual control.
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure11.11}
+    \\
+    \textbf{Figure 11.11}: PID controller with filtering, anti-windup, and manual control.
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Anti-windup example -- cruise control}
-\begin{itemize}
-	\item When anti-windup is implemented in the cruise control system, the large overshoot is avoided and the controller output is close to the saturation limit
-\end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\linewidth]{figure11.10b}
-	\\
-	\textbf{Figure 11.10 (b)}: Simulation of PI cruise control with anti-windup.
-\end{figure}
+  \begin{itemize}
+    \item When anti-windup is implemented in the cruise control system, the large overshoot is avoided and the controller output is close to the saturation limit
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figure11.10b}
+    \\
+    \textbf{Figure 11.10 (b)}: Simulation of PI cruise control with anti-windup.
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Saturation with an integrator}{Using tracking time constant for anti-windup}
-\includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_anti_Tt}
+  \includegraphics[width=\linewidth,clip,trim=50 0 50 0]{windup_anti_Tt}
 \end{frame}
 
 
 
 \begin{frame}{Anti-windup for general controllers}
-	\begin{itemize}
-		\item The ideas for anti-windup for PID controllers can be extended to general controllers like state space designs
-		\item We simply need to include a model for the saturating actuator and feed its output back to adjust the entire controller state (instead of just the integrator state)
-		\item Below is an example implementing anti-windup to a controller based on state feedback and an observer
-\end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figure11.12}
-	\\
-	\textbf{Figure 11.12}: Anti-windup for a general controller architecture.
-\end{figure}
+  \begin{itemize}
+    \item The ideas for anti-windup for PID controllers can be extended to general controllers like state space designs
+    \item We simply need to include a model for the saturating actuator and feed its output back to adjust the entire controller state (instead of just the integrator state)
+    \item Below is an example implementing anti-windup to a controller based on state feedback and an observer
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figure11.12}
+    \\
+    \textbf{Figure 11.12}: Anti-windup for a general controller architecture.
+  \end{figure}
 
 \end{frame}
 

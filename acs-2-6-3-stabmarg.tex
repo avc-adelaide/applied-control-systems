@@ -5,14 +5,14 @@
 \CONCEPT{Stability Margins}
 
 \begin{SUMMARY}
-\begin{itemize}
-\item Descriptions of stability
-\item Calculating stability margins
-\end{itemize}
-\vfill References:
-\begin{itemize}
-\item \astrom[§10.3]
-\end{itemize}
+  \begin{itemize}
+    \item Descriptions of stability
+    \item Calculating stability margins
+  \end{itemize}
+  \vfill References:
+  \begin{itemize}
+    \item \astrom[§10.3]
+  \end{itemize}
 \end{SUMMARY}
 
 
@@ -20,47 +20,47 @@
 \SUBCONCEPT{Descriptions of stability}
 
 \begin{frame}{The critical point --- stable vs unstable}
-\includegraphics[width=0.5\linewidth]{gh1-nyq.pdf}%
-\includegraphics[width=0.5\linewidth]{gh1-pzmap.pdf}
+  \includegraphics[width=0.5\linewidth]{gh1-nyq.pdf}%
+  \includegraphics[width=0.5\linewidth]{gh1-pzmap.pdf}
 \end{frame}
 
 \begin{frame}{How stable is a system?}
-\begin{itemize}
-\item The Nyquist criterion tells us when a system will be unstable in closed loop -- dependent on encirclement of the critical point
-\item In practice, a system may be stable but very close to instability and so we would like a way to capture how far from instability a system is
-\item Stability margins express how well the Nyquist curve of a system avoids the critical point by representing how much gain or phase must be added to the system to make it unstable
-\item This tells us how robust the system is to perturbation or control parameters
-\end{itemize}
+  \begin{itemize}
+    \item The Nyquist criterion tells us when a system will be unstable in closed loop -- dependent on encirclement of the critical point
+    \item In practice, a system may be stable but very close to instability and so we would like a way to capture how far from instability a system is
+    \item Stability margins express how well the Nyquist curve of a system avoids the critical point by representing how much gain or phase must be added to the system to make it unstable
+    \item This tells us how robust the system is to perturbation or control parameters
+  \end{itemize}
 \end{frame}
 
 
 \begin{frame}{The three stability margins}
-\begin{itemize}
-	\item The \alert{stability margin} $s_m$ describes the shortest distance of the Nyquist curve to the critical point
-\end{itemize}
+  \begin{itemize}
+    \item The \alert{stability margin} $s_m$ describes the shortest distance of the Nyquist curve to the critical point
+  \end{itemize}
 
-\centering
-\includegraphics[scale=0.6]{nyq-plain3}
-
-\end{frame}
-
-\begin{frame}{The three stability margins}
-\begin{itemize}
-	\item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $\gainmargin$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<\gainmargin<5$)
-\end{itemize}
-
-\centering
-\includegraphics[scale=0.6]{nyq-plain1}
+  \centering
+  \includegraphics[scale=0.6]{nyq-plain3}
 
 \end{frame}
 
 \begin{frame}{The three stability margins}
-\begin{itemize}
-	\item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\phasemargin$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \phasemargin < 60^\circ$)
-\end{itemize}
+  \begin{itemize}
+    \item As increasing the controller gain expands the Nyquist curve radially, the \alert{gain margin} $\gainmargin$ is defined as the smallest multiplier of the loop gain that makes the system unstable (recommended range $2<\gainmargin<5$)
+  \end{itemize}
 
-\centering
-\includegraphics[scale=0.6]{nyq-plain2}
+  \centering
+  \includegraphics[scale=0.6]{nyq-plain1}
+
+\end{frame}
+
+\begin{frame}{The three stability margins}
+  \begin{itemize}
+    \item As increasing the phase of the controller turns the Nyquist curve clockwise, the \alert{phase margin} $\phasemargin$ is the amount of phase lag required to make the system unstable (recommended range $30^\circ < \phasemargin < 60^\circ$)
+  \end{itemize}
+
+  \centering
+  \includegraphics[scale=0.6]{nyq-plain2}
 
 \end{frame}
 
@@ -69,12 +69,12 @@
   \includegraphics[width=0.5\linewidth]{timedelaynyq}
 
   \begin{equation}
-  	G_{\text{delay}} = \Exp{-s\tau} \,, \qquad \varphi_{\text{delay}} = -\ww\tau
+    G_{\text{delay}} = \Exp{-s\tau} \,, \qquad \varphi_{\text{delay}} = -\ww\tau
   \end{equation}
 
   This gives us the \alert{delay margin} $\delaymargin$:
   \begin{equation}
-  	\phasemargin = \ww\gaincrossover \delaymargin
+    \phasemargin = \ww\gaincrossover \delaymargin
   \end{equation}
 \end{frame}
 
@@ -82,70 +82,70 @@
 \SUBCONCEPT{Calculating stability margins}
 
 \begin{frame}{Margins from Nyquist}
-\begin{itemize}
-	\item The \alert{stability margin} $\stabilitymargin$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
-	\item The \alert{gain margin} $\gainmargin$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
-	\item The \alert{phase margin} $\phasemargin$ is the angle between the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
-\end{itemize}
+  \begin{itemize}
+    \item The \alert{stability margin} $\stabilitymargin$ is determined by finding the closest point on the Nyquist curve to the critical point and calculating this distance
+    \item The \alert{gain margin} $\gainmargin$ is the inverse of the distance between the origin and the point between $-1$ and $0$ where the loop transfer function crosses the negative real axis
+    \item The \alert{phase margin} $\phasemargin$ is the angle between the negative real axis and the line joining the origin with the point where the loop transfer function intersects the unit circle below the real axis
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Margins from Nyquist}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figure10.11}
-	\\
-	\textbf{Figure 10.11:} Stability margins for a third-order loop transfer function.
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figure10.11}
+    \\
+    \textbf{Figure 10.11:} Stability margins for a third-order loop transfer function.
+  \end{figure}
 \end{frame}
 
 
 \begin{frame}{Example}
-\begin{itemize}
-	\item Consider the loop transfer function $L=\tfrac{3}{(s+1)^3}$
-	\item From the Nyquist plot we get $\stabilitymargin=0.464$, $\gainmargin = 2.67$, $\phasemargin=41.7^\circ$
-\end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figure10.12}
-	\\
-	\textbf{Figure 10.12:} Stability margins for a third-order loop transfer function.
-\end{figure}
+  \begin{itemize}
+    \item Consider the loop transfer function $L=\tfrac{3}{(s+1)^3}$
+    \item From the Nyquist plot we get $\stabilitymargin=0.464$, $\gainmargin = 2.67$, $\phasemargin=41.7^\circ$
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figure10.12}
+    \\
+    \textbf{Figure 10.12:} Stability margins for a third-order loop transfer function.
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Three pole system: Nyquist}
-\begin{columns}
-\column{0.4\linewidth}
-\begin{align*}
-GH &= \frac{100}{(s+2)(s+4)(s+5)} \\
-\mathrm{GM} &= -\frac{1}{-0.265} = 3.77 \\
-3.77 &\equiv \SI{11.5}{dB} \\
-\mathrm{PM} &= \arctan(0.854/0.517) \\
-            &= \ang{58.8}
-\end{align*}
+  \begin{columns}
+    \column{0.4\linewidth}
+    \begin{align*}
+      GH &= \frac{100}{(s+2)(s+4)(s+5)} \\
+      \mathrm{GM} &= -\frac{1}{-0.265} = 3.77 \\
+      3.77 &\equiv \SI{11.5}{dB} \\
+      \mathrm{PM} &= \arctan(0.854/0.517) \\
+      &= \ang{58.8}
+    \end{align*}
 
-\column{0.6\linewidth}
-\includegraphics[width=0.9\linewidth]{gmpm_nyq_ex}
-\end{columns}
+    \column{0.6\linewidth}
+    \includegraphics[width=0.9\linewidth]{gmpm_nyq_ex}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Three pole system: Bode (shows $\ww_{\text{pc}}$ and $\ww_{\text{gc}}$)}
-\begin{columns}
-\column{0.4\linewidth}
-\begin{equation}
-	GH = \frac{100}{(s+2)(s+4)(s+5)}
-\end{equation}
+  \begin{columns}
+    \column{0.4\linewidth}
+    \begin{equation}
+      GH = \frac{100}{(s+2)(s+4)(s+5)}
+    \end{equation}
 
-\begin{align*}
-\mathrm{GM} &= \SI{0}{dB} - (\SI{-11.5}{dB}) \\
-            &= \SI{11.5}{dB} \\
-\mathrm{PM} &= \ang{-121.2} - (\ang{-180}) \\
-            &= \ang{58.8}
-\end{align*}
-(+ve values for stability)
+    \begin{align*}
+      \mathrm{GM} &= \SI{0}{dB} - (\SI{-11.5}{dB}) \\
+      &= \SI{11.5}{dB} \\
+      \mathrm{PM} &= \ang{-121.2} - (\ang{-180}) \\
+      &= \ang{58.8}
+    \end{align*}
+    (+ve values for stability)
 
-\column{0.6\linewidth}
-\includegraphics[width=0.9\linewidth]{gmpm_bode_ex}
-\end{columns}
+    \column{0.6\linewidth}
+    \includegraphics[width=0.9\linewidth]{gmpm_bode_ex}
+  \end{columns}
 \end{frame}
 
 \SUMMARYFRAME

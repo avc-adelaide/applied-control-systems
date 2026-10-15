@@ -20,62 +20,62 @@
 
 \paragraph{Problem:} Find the transfer function $G(s) = Y(s)/U(s)$ for the state-space system:
 \begin{align}
-\frac{dx}{dt} = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}x + \begin{bmatrix} 1 \\ 1 \end{bmatrix}u, \quad y = \begin{bmatrix} 1 & 2 \end{bmatrix}x
+  \frac{dx}{dt} = \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix}x + \begin{bmatrix} 1 \\ 1 \end{bmatrix}u, \quad y = \begin{bmatrix} 1 & 2 \end{bmatrix}x
 \end{align}
 
 \paragraph{Solution:}
 
 The transfer function from state-space is given by:
 \begin{align}
-G(s) = C(sI - A)^{-1}B + D
+  G(s) = C(sI - A)^{-1}B + D
 \end{align}
 
 where $D = 0$ (no direct feedthrough).
 
 First, compute $sI - A$:
 \begin{align}
-sI - A = \begin{bmatrix} s & 0 \\ 0 & s \end{bmatrix} - \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix} = \begin{bmatrix} s+2 & -1 \\ 0 & s+3 \end{bmatrix}
+  sI - A = \begin{bmatrix} s & 0 \\ 0 & s \end{bmatrix} - \begin{bmatrix} -2 & 1 \\ 0 & -3 \end{bmatrix} = \begin{bmatrix} s+2 & -1 \\ 0 & s+3 \end{bmatrix}
 \end{align}
 
 Find the inverse using the adjugate method. For a $2 \times 2$ matrix, the adjugate (also called adjoint) is the transpose of the cofactor matrix:
 \begin{align}
-(sI-A)^{-1} = \frac{1}{\det(sI-A)}\text{adj}(sI-A)
+  (sI-A)^{-1} = \frac{1}{\det(sI-A)}\text{adj}(sI-A)
 \end{align}
 
 Determinant:
 \begin{align}
-\det(sI-A) = (s+2)(s+3) = s^2 + 5s + 6
+  \det(sI-A) = (s+2)(s+3) = s^2 + 5s + 6
 \end{align}
 
 Adjugate (swap diagonal, negate off-diagonal):
 \begin{align}
-\text{adj}(sI-A) = \begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}
+  \text{adj}(sI-A) = \begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}
 \end{align}
 
 Therefore:
 \begin{align}
-(sI-A)^{-1} = \frac{1}{s^2+5s+6}\begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}
+  (sI-A)^{-1} = \frac{1}{s^2+5s+6}\begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}
 \end{align}
 
 Compute $(sI-A)^{-1}B$:
 \begin{align}
-(sI-A)^{-1}B &= \frac{1}{s^2+5s+6}\begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}\begin{bmatrix} 1 \\ 1 \end{bmatrix} \\
-&= \frac{1}{s^2+5s+6}\begin{bmatrix} s+4 \\ s+2 \end{bmatrix}
+  (sI-A)^{-1}B &= \frac{1}{s^2+5s+6}\begin{bmatrix} s+3 & 1 \\ 0 & s+2 \end{bmatrix}\begin{bmatrix} 1 \\ 1 \end{bmatrix} \\
+  &= \frac{1}{s^2+5s+6}\begin{bmatrix} s+4 \\ s+2 \end{bmatrix}
 \end{align}
 
 Finally, multiply by $C$:
 \begin{align}
-G(s) &= C(sI-A)^{-1}B \\
-&= \begin{bmatrix} 1 & 2 \end{bmatrix}\frac{1}{s^2+5s+6}\begin{bmatrix} s+4 \\ s+2 \end{bmatrix} \\
-&= \frac{(s+4) + 2(s+2)}{s^2+5s+6} \\
-&= \frac{s+4+2s+4}{s^2+5s+6} \\
-&= \frac{3s+8}{s^2+5s+6} \\
-&= \frac{3s+8}{(s+2)(s+3)}
+  G(s) &= C(sI-A)^{-1}B \\
+  &= \begin{bmatrix} 1 & 2 \end{bmatrix}\frac{1}{s^2+5s+6}\begin{bmatrix} s+4 \\ s+2 \end{bmatrix} \\
+  &= \frac{(s+4) + 2(s+2)}{s^2+5s+6} \\
+  &= \frac{s+4+2s+4}{s^2+5s+6} \\
+  &= \frac{3s+8}{s^2+5s+6} \\
+  &= \frac{3s+8}{(s+2)(s+3)}
 \end{align}
 
 \textbf{Result:} The transfer function is:
 \begin{align}
-G(s) = \frac{3s+8}{(s+2)(s+3)}
+  G(s) = \frac{3s+8}{(s+2)(s+3)}
 \end{align}
 
 The poles are at $s = -2$ and $s = -3$ (eigenvalues of $A$).

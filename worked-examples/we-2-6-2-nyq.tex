@@ -20,7 +20,7 @@
 
 \paragraph{Problem:} Use the Nyquist criterion to determine the stability of a unity feedback system with open-loop transfer function:
 \begin{align}
-L(s) = \frac{K}{(s+1)(s+2)}
+  L(s) = \frac{K}{(s+1)(s+2)}
 \end{align}
 
 for $K = 5$.
@@ -29,14 +29,14 @@ for $K = 5$.
 
 The Nyquist stability criterion states that for a closed-loop system:
 \begin{align}
-N = P - Z
+  N = P - Z
 \end{align}
 
 where:
 \begin{itemize}
-\item $N$ = number of clockwise encirclements of the point $-1 + j0$ by the Nyquist plot
-\item $P$ = number of open-loop poles in the right half-plane
-\item $Z$ = number of closed-loop poles in the right half-plane
+  \item $N$ = number of clockwise encirclements of the point $-1 + j0$ by the Nyquist plot
+  \item $P$ = number of open-loop poles in the right half-plane
+  \item $Z$ = number of closed-loop poles in the right half-plane
 \end{itemize}
 
 For stability, we need $Z = 0$, which requires $N = P$.
@@ -50,42 +50,42 @@ Therefore: $P = 0$
 
 For the frequency response $L(j\omega)$ with $K = 5$:
 \begin{align}
-L(j\omega) = \frac{5}{(j\omega+1)(j\omega+2)} = \frac{5}{(1+j\omega)(2+j\omega)}
+  L(j\omega) = \frac{5}{(j\omega+1)(j\omega+2)} = \frac{5}{(1+j\omega)(2+j\omega)}
 \end{align}
 
 Key points:
 \begin{itemize}
-\item At $\omega = 0$: $L(j0) = \frac{5}{1 \cdot 2} = 2.5$ (on positive real axis)
-\item As $\omega \to \infty$: $L(j\omega) \to 0$ (magnitude approaches 0)
-\item Phase is always negative (two poles, no zeros)
+  \item At $\omega = 0$: $L(j0) = \frac{5}{1 \cdot 2} = 2.5$ (on positive real axis)
+  \item As $\omega \to \infty$: $L(j\omega) \to 0$ (magnitude approaches 0)
+  \item Phase is always negative (two poles, no zeros)
 \end{itemize}
 
 To check if the plot crosses the negative real axis at $-1$:
 
 At crossover, the imaginary part is zero and real part is negative. For $L(j\omega)$ to be real and negative:
 \begin{align}
-\text{Im}[L(j\omega)] = 0
+  \text{Im}[L(j\omega)] = 0
 \end{align}
 
 Converting to magnitude and phase:
 \begin{align}
-|L(j\omega)| &= \frac{5}{\sqrt{(1+\omega^2)(4+\omega^2)}} \\
-\angle L(j\omega) &= -\arctan(\omega) - \arctan(\omega/2)
+  |L(j\omega)| &= \frac{5}{\sqrt{(1+\omega^2)(4+\omega^2)}} \\
+  \angle L(j\omega) &= -\arctan(\omega) - \arctan(\omega/2)
 \end{align}
 
 The phase crosses $-180°$ when:
 \begin{align}
-\arctan(\omega) + \arctan(\omega/2) = 180° = \pi
+  \arctan(\omega) + \arctan(\omega/2) = 180° = \pi
 \end{align}
 
 This never happens for finite $\omega$ (only as $\omega \to \infty$, where magnitude is 0).
 
 The Nyquist plot:
 \begin{itemize}
-\item Starts at 2.5 on the positive real axis ($\omega = 0$)
-\item Curves through the lower half-plane (negative imaginary part)
-\item Approaches origin as $\omega \to \infty$
-\item Never encircles $-1 + j0$
+  \item Starts at 2.5 on the positive real axis ($\omega = 0$)
+  \item Curves through the lower half-plane (negative imaginary part)
+  \item Approaches origin as $\omega \to \infty$
+  \item Never encircles $-1 + j0$
 \end{itemize}
 
 Therefore: $N = 0$
@@ -93,7 +93,7 @@ Therefore: $N = 0$
 \textbf{Step 3: Apply Nyquist criterion}
 
 \begin{align}
-Z = P - N = 0 - 0 = 0
+  Z = P - N = 0 - 0 = 0
 \end{align}
 
 \textbf{Result:} The closed-loop system is stable for $K = 5$ since there are no closed-loop poles in the right half-plane ($Z = 0$).
