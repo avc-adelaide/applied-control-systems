@@ -65,29 +65,29 @@ Has time delay: $e^{-0.5s}$ $\times$
 \textbf{Summary Table:}
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-System & LHP Zeros & LHP Poles & No Delay & Minimum Phase? \\
-\hline
-$G_1(s)$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & Yes \\
-$G_2(s)$ & $\times$ (RHP zero) & $\checkmark$ & $\checkmark$ & No \\
-$G_3(s)$ & $\checkmark$ & $\checkmark$ & $\times$ (has delay) & No \\
-\hline
-\end{tabular}
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    System & LHP Zeros & LHP Poles & No Delay & Minimum Phase? \\
+    \hline
+    $G_1(s)$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & Yes \\
+    $G_2(s)$ & $\times$ (RHP zero) & $\checkmark$ & $\checkmark$ & No \\
+    $G_3(s)$ & $\checkmark$ & $\checkmark$ & $\times$ (has delay) & No \\
+    \hline
+  \end{tabular}
 \end{center}
 
 \textbf{Key Properties of Minimum Phase Systems:}
 \begin{itemize}
-\item Unique relationship between magnitude and phase response
-\item Phase can be reconstructed from magnitude (and vice versa)
-\item Minimum possible phase lag for a given magnitude response
-\item Generally easier to control than non-minimum phase systems
+  \item Unique relationship between magnitude and phase response
+  \item Phase can be reconstructed from magnitude (and vice versa)
+  \item Minimum possible phase lag for a given magnitude response
+  \item Generally easier to control than non-minimum phase systems
 \end{itemize}
 
 \textbf{Practical Implications:}
 \begin{itemize}
-\item Non-minimum phase zeros (RHP zeros) impose fundamental limitations on achievable bandwidth and performance
-\item Time delays make control more challenging and limit achievable phase margin
-\item Example: inverted pendulum has non-minimum phase dynamics
+  \item Non-minimum phase zeros (RHP zeros) impose fundamental limitations on achievable bandwidth and performance
+  \item Time delays make control more challenging and limit achievable phase margin
+  \item Example: inverted pendulum has non-minimum phase dynamics
 \end{itemize}
 \end{document}

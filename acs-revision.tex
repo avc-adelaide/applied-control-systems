@@ -127,73 +127,73 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[plain]
-\centerline{\includegraphics{au-logo}}
-\maketitle
+  \centerline{\includegraphics{au-logo}}
+  \maketitle
 \end{frame}
 
 \begin{frame}{How to use this deck}
-\begin{itemize}
-\item One pass through the whole course: Modules I $\to$ II $\to$ III
-\item Each topic gets a short recap of the ideas and equations you need to know
-\item The box at the foot of each recap shows where the idea \emph{came from} and where it is \emph{used next}
-\item The course map is clickable: jump to any topic and come back with \beamerbutton{Course map}
-\item At the end:
   \begin{itemize}
-  \item the same ideas seen in three `languages' (state space, transfer function, frequency response)
-  \item running examples traced through the course
-  \item a design workflow, a formula sheet, common pitfalls, and self-test questions
+    \item One pass through the whole course: Modules I $\to$ II $\to$ III
+    \item Each topic gets a short recap of the ideas and equations you need to know
+    \item The box at the foot of each recap shows where the idea \emph{came from} and where it is \emph{used next}
+    \item The course map is clickable: jump to any topic and come back with \beamerbutton{Course map}
+    \item At the end:
+      \begin{itemize}
+        \item the same ideas seen in three `languages' (state space, transfer function, frequency response)
+        \item running examples traced through the course
+        \item a design workflow, a formula sheet, common pitfalls, and self-test questions
+      \end{itemize}
   \end{itemize}
-\end{itemize}
-\bigskip
-\alert{This deck is a map, not a replacement.} Use the topic slides, worked examples and \astrom[] for detail.
+  \bigskip
+  \alert{This deck is a map, not a replacement.} Use the topic slides, worked examples and \astrom[] for detail.
 \end{frame}
 
 \begin{frame}{The question behind the whole course}
-\begin{center}
-\large\emph{How do we make a dynamical system do what we want,\\ reliably, despite disturbances, noise and model error?}
-\end{center}
-\bigskip
-\begin{columns}[t]
-\column{0.32\linewidth}
-\textbf{\color{NorthTce}Module I}\\ \emph{What does the system do on its own?}\par\smallskip
-\scriptsize Models, states, equilibria, stability, linear response
-\column{0.32\linewidth}
-\textbf{\color{NorthTce}Module II}\\ \emph{How does feedback change it, and how do we analyse that?}\par\smallskip
-\scriptsize State feedback, observers, transfer functions, Bode, Nyquist, margins
-\column{0.32\linewidth}
-\textbf{\color{NorthTce}Module III}\\ \emph{How do we design a controller that survives reality?}\par\smallskip
-\scriptsize PID, sensitivity, loop shaping, root locus, uncertainty, limits
-\end{columns}
+  \begin{center}
+    \large\emph{How do we make a dynamical system do what we want,\\ reliably, despite disturbances, noise and model error?}
+  \end{center}
+  \bigskip
+  \begin{columns}[t]
+    \column{0.32\linewidth}
+    \textbf{\color{NorthTce}Module I}\\ \emph{What does the system do on its own?}\par\smallskip
+    \scriptsize Models, states, equilibria, stability, linear response
+    \column{0.32\linewidth}
+    \textbf{\color{NorthTce}Module II}\\ \emph{How does feedback change it, and how do we analyse that?}\par\smallskip
+    \scriptsize State feedback, observers, transfer functions, Bode, Nyquist, margins
+    \column{0.32\linewidth}
+    \textbf{\color{NorthTce}Module III}\\ \emph{How do we design a controller that survives reality?}\par\smallskip
+    \scriptsize PID, sensitivity, loop shaping, root locus, uncertainty, limits
+  \end{columns}
 \end{frame}
 
 \begin{frame}[label=coursemap]{Course map}
-\centering
-\COURSEMAP{}
-\par\medskip
-{\scriptsize Linear models (T3) feed both state-space (T4) and transfer-function (T5) methods; pole placement (T4) returns in PID (T7); margins (T6) become sensitivity (T8) and robustness (T9). Click a topic to jump to its recap.\par}
+  \centering
+  \COURSEMAP{}
+  \par\medskip
+  {\scriptsize Linear models (T3) feed both state-space (T4) and transfer-function (T5) methods; pole placement (T4) returns in PID (T7); margins (T6) become sensitivity (T8) and robustness (T9). Click a topic to jump to its recap.\par}
 \end{frame}
 
 \begin{frame}{The one diagram to remember}
-\centering
-\LOOPDIAGRAM
-\par\bigskip
-\begin{columns}[t]
-\column{0.48\linewidth}
-\footnotesize
-\begin{itemize}
-\item $r$ reference, $y$ measured output, $\eta$ true output
-\item $v$ load disturbance (usually low frequency)
-\item $w$ measurement noise (usually high frequency)
-\item $C$ feedback controller, $F$ feedforward/prefilter
-\end{itemize}
-\column{0.48\linewidth}
-\footnotesize
-\begin{itemize}
-\item Module I: understanding $P$
-\item Module II: what $C$ (or $K$, $L$) does to the loop
-\item Module III: choosing $C$ and $F$, and how the loop responds to $r$, $v$, $w$ and to errors in $P$
-\end{itemize}
-\end{columns}
+  \centering
+  \LOOPDIAGRAM
+  \par\bigskip
+  \begin{columns}[t]
+    \column{0.48\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item $r$ reference, $y$ measured output, $\eta$ true output
+      \item $v$ load disturbance (usually low frequency)
+      \item $w$ measurement noise (usually high frequency)
+      \item $C$ feedback controller, $F$ feedforward/prefilter
+    \end{itemize}
+    \column{0.48\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item Module I: understanding $P$
+      \item Module II: what $C$ (or $K$, $L$) does to the loop
+      \item Module III: choosing $C$ and $F$, and how the loop responds to $r$, $v$, $w$ and to errors in $P$
+    \end{itemize}
+  \end{columns}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -206,162 +206,162 @@
 \TOPIC{Introduction and System Modelling}
 
 \begin{frame}[label=topic1]{Topic 1 recap: models}
-\KEYIDEA{A dynamical system has \emph{states} that evolve in time. Write it as a first-order vector ODE, and control means adding sensors, a controller and actuators to change those dynamics.}
-\begin{align*}
-\Deriv{x}{t} &= f(x,u) & y &= h(x,u) & &\text{(standard control equation)}\\
-\dot x &= Ax + Bu & y &= Cx + Du & &\text{(linear time-invariant)}
-\end{align*}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-Mass--spring--damper $m\ddot q + c\dot q + kq = f$:
-\begin{align*}
-x &= \Matr{q\\\dot q}, &
-A &= \Matr{0 & 1\\ -k/m & -c/m}, &
-B &= \Matr{0\\1/m}
-\end{align*}
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item Feedback: act on measured output; feedforward: act on known inputs
-\item Why feedback: robustness to uncertainty, design of dynamics
-\item Costs: stability, coupling, complexity
-\item Discrete time: $x[k{+}1] = Ax[k] + Bu[k]$
-\end{itemize}
-\end{columns}
-\LINKS{(start of the course)}{Every later topic uses $\dot x = f(x,u)$ or $\dot x = Ax+Bu$. Difference equations return in PID implementation (T7).}
+  \KEYIDEA{A dynamical system has \emph{states} that evolve in time. Write it as a first-order vector ODE, and control means adding sensors, a controller and actuators to change those dynamics.}
+  \begin{align*}
+    \Deriv{x}{t} &= f(x,u) & y &= h(x,u) & &\text{(standard control equation)}\\
+    \dot x &= Ax + Bu & y &= Cx + Du & &\text{(linear time-invariant)}
+  \end{align*}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    Mass--spring--damper $m\ddot q + c\dot q + kq = f$:
+    \begin{align*}
+      x &= \Matr{q\\\dot q}, &
+      A &= \Matr{0 & 1\\ -k/m & -c/m}, &
+      B &= \Matr{0\\1/m}
+    \end{align*}
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item Feedback: act on measured output; feedforward: act on known inputs
+      \item Why feedback: robustness to uncertainty, design of dynamics
+      \item Costs: stability, coupling, complexity
+      \item Discrete time: $x[k{+}1] = Ax[k] + Bu[k]$
+    \end{itemize}
+  \end{columns}
+  \LINKS{(start of the course)}{Every later topic uses $\dot x = f(x,u)$ or $\dot x = Ax+Bu$. Difference equations return in PID implementation (T7).}
 \end{frame}
 
 \begin{frame}{Topic 1 recap: models from experiments}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Step-response models}
-\begin{itemize}
-\item ITD: integrator + time delay ($a$, $\TimeDel$)
-\item FOTD: $\StaticGain$, $\TimeDel$, $\TimeConst$ (63\% rise)
-\item SOTD: $\StaticGain$, overshoot, peak time, rise/settling time
-\end{itemize}
-\textbf{Normalise and scale} inputs/outputs by $r_{\max}$, $y_{\max}$ so results generalise.
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Second order} ($m\ddot q + c\dot q + kq = f$)
-\begin{align*}
-\wn &= \sqrt{k/m} & \zz &= \frac{c}{2\sqrt{km}}\\
-\wdamp &= \wn\sqrt{1-\zz^2} & \wdamp &\approx \frac{2\pi}{T_2-T_1}
-\end{align*}
-Decay ratio of successive peaks $d$:
-\begin{align*}
-\zz \approx \frac{1}{\sqrt{1+\left(2\pi/\ln d\right)^2}}
-\end{align*}
-\end{columns}
-\LINKS{Step response features (T1).}{ITD/FOTD models are exactly what Ziegler--Nichols, CHR and Cohen--Coon tuning use (T7). $\zz$, $\wn$ return in pole placement (T4).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Step-response models}
+    \begin{itemize}
+      \item ITD: integrator + time delay ($a$, $\TimeDel$)
+      \item FOTD: $\StaticGain$, $\TimeDel$, $\TimeConst$ (63\% rise)
+      \item SOTD: $\StaticGain$, overshoot, peak time, rise/settling time
+    \end{itemize}
+    \textbf{Normalise and scale} inputs/outputs by $r_{\max}$, $y_{\max}$ so results generalise.
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Second order} ($m\ddot q + c\dot q + kq = f$)
+    \begin{align*}
+      \wn &= \sqrt{k/m} & \zz &= \frac{c}{2\sqrt{km}}\\
+      \wdamp &= \wn\sqrt{1-\zz^2} & \wdamp &\approx \frac{2\pi}{T_2-T_1}
+    \end{align*}
+    Decay ratio of successive peaks $d$:
+    \begin{align*}
+      \zz \approx \frac{1}{\sqrt{1+\left(2\pi/\ln d\right)^2}}
+    \end{align*}
+  \end{columns}
+  \LINKS{Step response features (T1).}{ITD/FOTD models are exactly what Ziegler--Nichols, CHR and Cohen--Coon tuning use (T7). $\zz$, $\wn$ return in pole placement (T4).}
 \end{frame}
 
 \TOPIC{Dynamic Behaviour}
 
 \begin{frame}[label=topic2]{Topic 2 recap: qualitative behaviour and stability}
-\KEYIDEA{Close the loop with $u=\alpha(x)$ and you get $\dot x = F(x)$. Its equilibria and their stability tell you most of what matters.}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item Equilibrium: $F(x_e) = 0$
-\item Vector field / phase portrait: pictures of $F(x)$ and of trajectories
-\item Limit cycle: isolated closed trajectory (oscillators, friction)
-\item Nonlinear surprises: finite escape time ($\dot x = x^2$), multiple equilibria (pendulum up/down)
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item \textbf{Lyapunov stable}: start close, stay close
-\item \textbf{Asymptotically stable}: and converge
-\item \textbf{Local} vs \textbf{global} (ball $B_r(a)$)
-\item Lyapunov function $V(x)$: energy-like; $\dot V<0 \Rightarrow$ stable
-\item \alert{Linear: stable $\iff \Real\lambda_j(A)<0$ for all $j$}, and stability is global
-\end{itemize}
-\end{columns}
-\smallskip
-\footnotesize Running examples introduced here: \textbf{cruise control} (nonlinear model + PI) and \textbf{inverted pendulum / balance system}.
-\LINKS{State models (T1).}{Eigenvalue test justified via the matrix exponential (T3). Stability of the \emph{closed loop} judged by Nyquist (T6).}
+  \KEYIDEA{Close the loop with $u=\alpha(x)$ and you get $\dot x = F(x)$. Its equilibria and their stability tell you most of what matters.}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item Equilibrium: $F(x_e) = 0$
+      \item Vector field / phase portrait: pictures of $F(x)$ and of trajectories
+      \item Limit cycle: isolated closed trajectory (oscillators, friction)
+      \item Nonlinear surprises: finite escape time ($\dot x = x^2$), multiple equilibria (pendulum up/down)
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item \textbf{Lyapunov stable}: start close, stay close
+      \item \textbf{Asymptotically stable}: and converge
+      \item \textbf{Local} vs \textbf{global} (ball $B_r(a)$)
+      \item Lyapunov function $V(x)$: energy-like; $\dot V<0 \Rightarrow$ stable
+      \item \alert{Linear: stable $\iff \Real\lambda_j(A)<0$ for all $j$}, and stability is global
+    \end{itemize}
+  \end{columns}
+  \smallskip
+  \footnotesize Running examples introduced here: \textbf{cruise control} (nonlinear model + PI) and \textbf{inverted pendulum / balance system}.
+  \LINKS{State models (T1).}{Eigenvalue test justified via the matrix exponential (T3). Stability of the \emph{closed loop} judged by Nyquist (T6).}
 \end{frame}
 
 \TOPIC{Linear Systems}
 
 \begin{frame}[label=topic3]{Topic 3 recap: linear systems}
-\KEYIDEA{Linearity gives superposition, so the whole response follows from the matrix exponential, and $\ee^{At}$ is built from the modes $\ee^{\lambda_j t}$.}
-\vspace{-1ex}
-\begin{align*}
-x(t) &= \ee^{At}x(0) + \int_0^t \ee^{A(t-\tau)}Bu(\tau)\,\dee\tau & &\text{(convolution equation)}\\
-\ee^{At} &= I + At + \tfrac{1}{2}A^2t^2 + \cdots & \ee^{\lambda t} &= \ee^{\sigma t}(\cos\ww t + \ii\sin\ww t)
-\end{align*}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item LTI: superposition + time invariance
-\item Diagonal/Jordan form $J = T^{-1}AT$ exposes the eigenvalues
-\item Coordinate changes do not change eigenvalues
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item Step steady state: $D - CA^{-1}B$
-\item Frequency response: $G(\ii\ww) = C(\ii\ww I-A)^{-1}B + D$
-\item Gain $|G(\ii\ww)|$, phase $\arg G(\ii\ww)$, bandwidth $\wb$, peak $\Mpeak$
-\end{itemize}
-\end{columns}
-\LINKS{Stability via eigenvalues (T2).}{$G(s)=C(sI-A)^{-1}B+D$ becomes the transfer function (T5); $D-CA^{-1}B$ becomes DC gain $G(0)$ (T5).}
+  \KEYIDEA{Linearity gives superposition, so the whole response follows from the matrix exponential, and $\ee^{At}$ is built from the modes $\ee^{\lambda_j t}$.}
+  \vspace{-1ex}
+  \begin{align*}
+    x(t) &= \ee^{At}x(0) + \int_0^t \ee^{A(t-\tau)}Bu(\tau)\,\dee\tau & &\text{(convolution equation)}\\
+    \ee^{At} &= I + At + \tfrac{1}{2}A^2t^2 + \cdots & \ee^{\lambda t} &= \ee^{\sigma t}(\cos\ww t + \ii\sin\ww t)
+  \end{align*}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item LTI: superposition + time invariance
+      \item Diagonal/Jordan form $J = T^{-1}AT$ exposes the eigenvalues
+      \item Coordinate changes do not change eigenvalues
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item Step steady state: $D - CA^{-1}B$
+      \item Frequency response: $G(\ii\ww) = C(\ii\ww I-A)^{-1}B + D$
+      \item Gain $|G(\ii\ww)|$, phase $\arg G(\ii\ww)$, bandwidth $\wb$, peak $\Mpeak$
+    \end{itemize}
+  \end{columns}
+  \LINKS{Stability via eigenvalues (T2).}{$G(s)=C(sI-A)^{-1}B+D$ becomes the transfer function (T5); $D-CA^{-1}B$ becomes DC gain $G(0)$ (T5).}
 \end{frame}
 
 \begin{frame}{Topic 3 recap: linearisation}
-\begin{columns}[t]
-\column{0.55\linewidth}
-\footnotesize
-\textbf{Jacobian linearisation} about $(x_e,u_e)$:
-\begin{align*}
-z &= x-x_e, \quad v = u-u_e, \quad w = y - h(x_e,u_e)\\
-\dot z &= Az + Bv, \qquad w = Cz + Dv\\
-A &= \left.\PDeriv{f}{x}\right|_{e} \quad B = \left.\PDeriv{f}{u}\right|_{e} \quad
-C = \left.\PDeriv{h}{x}\right|_{e} \quad D = \left.\PDeriv{h}{u}\right|_{e}
-\end{align*}
-\begin{itemize}
-\item Always shift to the equilibrium first (linear, not affine)
-\item Valid only near the operating point
-\end{itemize}
-\column{0.42\linewidth}
-\footnotesize
-\textbf{Feedback linearisation}
-\begin{itemize}
-\item Cancel a \emph{known} nonlinearity: $\dot x = x^2+u$, $u = -x^2-kx$
-\item Dynamic inversion: $u = B^{-1}(Mv + C)$ gives $\ddot q = v$
-\item Relies on an accurate model and capable actuators
-\end{itemize}
-\end{columns}
-\bigskip
-\footnotesize
-Example: pendulum $\dot x = \Matr{x_2\\ \sin x_1 - cx_2}$. Upright: $A=\Matr{0&1\\1&-c}$, one eigenvalue $>0$: \alert{unstable}. Hanging: $A=\Matr{0&1\\-1&-c}$: stable for $c>0$.
-\LINKS{Nonlinear models (T1, T2).}{Every linear tool in Modules II and III assumes this step has been done. Parameters depending on the operating point become \emph{parametric uncertainty} (T9).}
+  \begin{columns}[t]
+    \column{0.55\linewidth}
+    \footnotesize
+    \textbf{Jacobian linearisation} about $(x_e,u_e)$:
+    \begin{align*}
+      z &= x-x_e, \quad v = u-u_e, \quad w = y - h(x_e,u_e)\\
+      \dot z &= Az + Bv, \qquad w = Cz + Dv\\
+      A &= \left.\PDeriv{f}{x}\right|_{e} \quad B = \left.\PDeriv{f}{u}\right|_{e} \quad
+      C = \left.\PDeriv{h}{x}\right|_{e} \quad D = \left.\PDeriv{h}{u}\right|_{e}
+    \end{align*}
+    \begin{itemize}
+      \item Always shift to the equilibrium first (linear, not affine)
+      \item Valid only near the operating point
+    \end{itemize}
+    \column{0.42\linewidth}
+    \footnotesize
+    \textbf{Feedback linearisation}
+    \begin{itemize}
+      \item Cancel a \emph{known} nonlinearity: $\dot x = x^2+u$, $u = -x^2-kx$
+      \item Dynamic inversion: $u = B^{-1}(Mv + C)$ gives $\ddot q = v$
+      \item Relies on an accurate model and capable actuators
+    \end{itemize}
+  \end{columns}
+  \bigskip
+  \footnotesize
+  Example: pendulum $\dot x = \Matr{x_2\\ \sin x_1 - cx_2}$. Upright: $A=\Matr{0&1\\1&-c}$, one eigenvalue $>0$: \alert{unstable}. Hanging: $A=\Matr{0&1\\-1&-c}$: stable for $c>0$.
+  \LINKS{Nonlinear models (T1, T2).}{Every linear tool in Modules II and III assumes this step has been done. Parameters depending on the operating point become \emph{parametric uncertainty} (T9).}
 \end{frame}
 
 \begin{frame}{Bridge I $\to$ II: everything is in the eigenvalues}
-\begin{theorem}
-The system $\dot x = Ax$ is asymptotically stable if and only if all eigenvalues of $A$ have strictly negative real part.
-\end{theorem}
-\medskip
-Write each eigenvalue as $\lambda = \sigma \pm \ii\ww$:
-\begin{itemize}
-\item $\sigma$ sets growth/decay $\to$ \emph{stability} and \emph{settling time}
-\item $\ww$ sets oscillation $\to$ \emph{damped frequency}
-\item the angle from the negative real axis sets \emph{damping ratio}: $\zz = \cos\varphi$
-\end{itemize}
-\bigskip
-So the natural next questions are:
-\begin{enumerate}
-\item Can feedback \emph{move} the eigenvalues? \hfill \alert{$\to$ T4 state feedback}
-\item Is there a simpler description of the input/output map? \hfill \alert{$\to$ T5 transfer functions}
-\item Can we judge closed-loop stability without computing eigenvalues? \hfill \alert{$\to$ T6 Nyquist}
-\end{enumerate}
+  \begin{theorem}
+    The system $\dot x = Ax$ is asymptotically stable if and only if all eigenvalues of $A$ have strictly negative real part.
+  \end{theorem}
+  \medskip
+  Write each eigenvalue as $\lambda = \sigma \pm \ii\ww$:
+  \begin{itemize}
+    \item $\sigma$ sets growth/decay $\to$ \emph{stability} and \emph{settling time}
+    \item $\ww$ sets oscillation $\to$ \emph{damped frequency}
+    \item the angle from the negative real axis sets \emph{damping ratio}: $\zz = \cos\varphi$
+  \end{itemize}
+  \bigskip
+  So the natural next questions are:
+  \begin{enumerate}
+    \item Can feedback \emph{move} the eigenvalues? \hfill \alert{$\to$ T4 state feedback}
+    \item Is there a simpler description of the input/output map? \hfill \alert{$\to$ T5 transfer functions}
+    \item Can we judge closed-loop stability without computing eigenvalues? \hfill \alert{$\to$ T6 Nyquist}
+  \end{enumerate}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -374,266 +374,266 @@ So the natural next questions are:
 \TOPIC{State Feedback}
 
 \begin{frame}[label=topic4]{Topic 4 recap: reachability and state feedback}
-\KEYIDEA{If the system is reachable, state feedback $u=-Kx+k_f r$ can put the closed-loop eigenvalues anywhere.}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Reachability}
-\begin{align*}
-W_r = \Matr{B & AB & \cdots & A^{n-1}B}
-\end{align*}
-Reachable $\iff W_r$ full rank (invertible for single input). For linear systems, reachable $\iff$ controllable.
-\par\medskip
-\textbf{Closed loop}
-\begin{align*}
-\dot x = (A-BK)x + Bk_f r
-\end{align*}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Eigenvalue assignment}
-\begin{enumerate}
-\item $\det(sI-A) = s^n + a_1 s^{n-1} + \cdots + a_n$
-\item Choose $p(s) = s^n + p_1 s^{n-1} + \cdots + p_n$
-\item $K = \Matr{p_1-a_1 & \cdots & p_n-a_n}\tilde W_r W_r^{-1}$
-\item $k_f$ for unity DC gain:\\ $k_f = -1/\bigl(C(A-BK)^{-1}B\bigr)$
-\end{enumerate}
-Matlab: \texttt{place}, \texttt{acker}
-\end{columns}
-\LINKS{$A$, $B$, eigenvalues and $D-CA^{-1}B$ (T3).}{Same pole-placement idea for PI/PID (T7). Placing poles badly hurts robustness (T9).}
+  \KEYIDEA{If the system is reachable, state feedback $u=-Kx+k_f r$ can put the closed-loop eigenvalues anywhere.}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Reachability}
+    \begin{align*}
+      W_r = \Matr{B & AB & \cdots & A^{n-1}B}
+    \end{align*}
+    Reachable $\iff W_r$ full rank (invertible for single input). For linear systems, reachable $\iff$ controllable.
+    \par\medskip
+    \textbf{Closed loop}
+    \begin{align*}
+      \dot x = (A-BK)x + Bk_f r
+    \end{align*}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Eigenvalue assignment}
+    \begin{enumerate}
+      \item $\det(sI-A) = s^n + a_1 s^{n-1} + \cdots + a_n$
+      \item Choose $p(s) = s^n + p_1 s^{n-1} + \cdots + p_n$
+      \item $K = \Matr{p_1-a_1 & \cdots & p_n-a_n}\tilde W_r W_r^{-1}$
+      \item $k_f$ for unity DC gain:\\ $k_f = -1/\bigl(C(A-BK)^{-1}B\bigr)$
+    \end{enumerate}
+    Matlab: \texttt{place}, \texttt{acker}
+  \end{columns}
+  \LINKS{$A$, $B$, eigenvalues and $D-CA^{-1}B$ (T3).}{Same pole-placement idea for PI/PID (T7). Placing poles badly hurts robustness (T9).}
 \end{frame}
 
 \begin{frame}{Topic 4 recap: choosing poles, integral action}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Second-order design targets}\\
-$\ddot q + 2\zz\ww_0\dot q + \ww_0^2 q = k\ww_0^2 u$,\quad $\lambda = -\zz\ww_0 \pm \ww_0\sqrt{\zz^2-1}$
-\par\smallskip
-\renewcommand\arraystretch{1.3}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Overshoot & $M_p = \ee^{-\pi\zz/\sqrt{1-\zz^2}}$\\
-2\% settling & $T_s \approx 4/(\zz\ww_0)$\\
-Rise time & $T_r = \ee^{\varphi/\tan\varphi}/\ww_0$, $\varphi=\arccos\zz$\\
-\bottomrule
-\end{tabular}
-\par\smallskip
-Higher order: place the \alert{dominant} (slowest) pair for the specs, the rest faster.
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Integral action}: augment with $z = \int (y-r)\,\dee t$
-\begin{align*}
-\Deriv{}{t}\Matr{x\\z} &= \Matr{Ax+Bu\\ Cx-r}\\
-u &= -Kx - \kki z + k_f r
-\end{align*}
-At steady state $\dot z = 0 \Rightarrow y = r$, even with model error or constant disturbances.
-\par\smallskip
-Cruise control, $P = b/(s+a)$:
-\begin{align*}
-\kkp = \frac{a_1 - a}{b}, \quad \kki = \frac{a_2}{b}
-\end{align*}
-\end{columns}
-\LINKS{Second-order response (T1, T3).}{The \emph{same} $\kkp$, $\kki$ formulas reappear as PI pole placement (T7). Integral action $\leftrightarrow$ $1/s$ in $C$ $\leftrightarrow$ $G_{yv}\approx s/\kki$ (T8).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Second-order design targets}\\
+    $\ddot q + 2\zz\ww_0\dot q + \ww_0^2 q = k\ww_0^2 u$,\quad $\lambda = -\zz\ww_0 \pm \ww_0\sqrt{\zz^2-1}$
+    \par\smallskip
+    \renewcommand\arraystretch{1.3}
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+      Overshoot & $M_p = \ee^{-\pi\zz/\sqrt{1-\zz^2}}$\\
+      2\% settling & $T_s \approx 4/(\zz\ww_0)$\\
+      Rise time & $T_r = \ee^{\varphi/\tan\varphi}/\ww_0$, $\varphi=\arccos\zz$\\
+      \bottomrule
+    \end{tabular}
+    \par\smallskip
+    Higher order: place the \alert{dominant} (slowest) pair for the specs, the rest faster.
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Integral action}: augment with $z = \int (y-r)\,\dee t$
+    \begin{align*}
+      \Deriv{}{t}\Matr{x\\z} &= \Matr{Ax+Bu\\ Cx-r}\\
+      u &= -Kx - \kki z + k_f r
+    \end{align*}
+    At steady state $\dot z = 0 \Rightarrow y = r$, even with model error or constant disturbances.
+    \par\smallskip
+    Cruise control, $P = b/(s+a)$:
+    \begin{align*}
+      \kkp = \frac{a_1 - a}{b}, \quad \kki = \frac{a_2}{b}
+    \end{align*}
+  \end{columns}
+  \LINKS{Second-order response (T1, T3).}{The \emph{same} $\kkp$, $\kki$ formulas reappear as PI pole placement (T7). Integral action $\leftrightarrow$ $1/s$ in $C$ $\leftrightarrow$ $G_{yv}\approx s/\kki$ (T8).}
 \end{frame}
 
 \begin{frame}{Topic 4 recap: observers and output feedback}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Observability}
-\begin{align*}
-\Wob = \Matr{C\\CA\\\vdots\\CA^{n-1}}
-\end{align*}
-Observable $\iff \Wob$ has rank $n$.
-\par\medskip
-\textbf{Observer}
-\begin{align*}
-\Deriv{\hat x}{t} &= A\hat x + Bu + L(y - C\hat x)\\
-\Deriv{\tilde x}{t} &= (A-LC)\tilde x, \quad \tilde x = x - \hat x
-\end{align*}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Duality}: $A\leftrightarrow A\Tr$, $B\leftrightarrow C\Tr$, $K\leftrightarrow L\Tr$, $W_r\leftrightarrow \Wob\Tr$\\
-(same \texttt{place}/\texttt{acker} algorithms)
-\par\medskip
-\textbf{Controller + observer}, $u = -K\hat x + k_f r$:
-\begin{align*}
-\Deriv{}{t}\Matr{x\\\tilde x} = \Matr{A-BK & BK\\ 0 & A-LC}\Matr{x\\\tilde x} + \Matr{Bk_f\\0}r
-\end{align*}
-Block triangular, so
-\begin{align*}
-p(s) = \det(sI-A+BK)\,\det(sI-A+LC)
-\end{align*}
-\end{columns}
-\LINKS{Reachability and eigenvalue assignment (this topic).}{An observer-based controller is just a transfer function $C(s)$ (T5); its robustness is checked with the Gang of Four (T8, T9).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Observability}
+    \begin{align*}
+      \Wob = \Matr{C\\CA\\\vdots\\CA^{n-1}}
+    \end{align*}
+    Observable $\iff \Wob$ has rank $n$.
+    \par\medskip
+    \textbf{Observer}
+    \begin{align*}
+      \Deriv{\hat x}{t} &= A\hat x + Bu + L(y - C\hat x)\\
+      \Deriv{\tilde x}{t} &= (A-LC)\tilde x, \quad \tilde x = x - \hat x
+    \end{align*}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Duality}: $A\leftrightarrow A\Tr$, $B\leftrightarrow C\Tr$, $K\leftrightarrow L\Tr$, $W_r\leftrightarrow \Wob\Tr$\\
+    (same \texttt{place}/\texttt{acker} algorithms)
+    \par\medskip
+    \textbf{Controller + observer}, $u = -K\hat x + k_f r$:
+    \begin{align*}
+      \Deriv{}{t}\Matr{x\\\tilde x} = \Matr{A-BK & BK\\ 0 & A-LC}\Matr{x\\\tilde x} + \Matr{Bk_f\\0}r
+    \end{align*}
+    Block triangular, so
+    \begin{align*}
+      p(s) = \det(sI-A+BK)\,\det(sI-A+LC)
+    \end{align*}
+  \end{columns}
+  \LINKS{Reachability and eigenvalue assignment (this topic).}{An observer-based controller is just a transfer function $C(s)$ (T5); its robustness is checked with the Gang of Four (T8, T9).}
 \end{frame}
 
 \TOPIC{Transfer Functions}
 
 \begin{frame}[label=topic5]{Topic 5 recap: transfer functions}
-\KEYIDEA{For input $\ee^{st}$, an LTI system returns $G(s)\ee^{st}$. The transfer function $G(s)$ is unique even though $A,B,C,D$ are not.}
-\vspace{-1ex}
-\begin{align*}
-G(s) = C(sI-A)^{-1}B + D = \frac{b(s)}{a(s)} = \frac{b_0 s^m + \cdots + b_m}{s^n + a_1 s^{n-1} + \cdots + a_n}
-\end{align*}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item \alert{Poles} = roots of $a(s)$ = eigenvalues of $A$ (modes $\ee^{pt}$)
-\item \alert{Zeros} = roots of $b(s)$ (blocked signals $\ee^{qt}$)
-\item Pole excess $\npoleexcess = n-m$; proper if $\npoleexcess\ge 0$
-\item Minimal realisation removes cancelled pole/zero pairs
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Laplace essentials}
-\begin{align*}
-\Lapl\{\dot f\} &= sF(s) & \Lapl\left\{\textstyle\int f\right\} &= F(s)/s\\
-f(\infty) &= \lim_{s\to 0} sF(s) & f(0^+) &= \lim_{s\to\infty} sF(s)
-\end{align*}
-Step input $R=1/s$: \alert{$y(\infty) = G(0)$}, the DC gain
-\begin{align*}
-G(0) = \frac{b_m}{a_n} = D - CA^{-1}B
-\end{align*}
-\end{columns}
-\LINKS{Frequency response and steady state (T3).}{Loop transfer function $L=PC$ (T6); Gang of Four (T8).}
+  \KEYIDEA{For input $\ee^{st}$, an LTI system returns $G(s)\ee^{st}$. The transfer function $G(s)$ is unique even though $A,B,C,D$ are not.}
+  \vspace{-1ex}
+  \begin{align*}
+    G(s) = C(sI-A)^{-1}B + D = \frac{b(s)}{a(s)} = \frac{b_0 s^m + \cdots + b_m}{s^n + a_1 s^{n-1} + \cdots + a_n}
+  \end{align*}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item \alert{Poles} = roots of $a(s)$ = eigenvalues of $A$ (modes $\ee^{pt}$)
+      \item \alert{Zeros} = roots of $b(s)$ (blocked signals $\ee^{qt}$)
+      \item Pole excess $\npoleexcess = n-m$; proper if $\npoleexcess\ge 0$
+      \item Minimal realisation removes cancelled pole/zero pairs
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Laplace essentials}
+    \begin{align*}
+      \Lapl\{\dot f\} &= sF(s) & \Lapl\left\{\textstyle\int f\right\} &= F(s)/s\\
+      f(\infty) &= \lim_{s\to 0} sF(s) & f(0^+) &= \lim_{s\to\infty} sF(s)
+    \end{align*}
+    Step input $R=1/s$: \alert{$y(\infty) = G(0)$}, the DC gain
+    \begin{align*}
+      G(0) = \frac{b_m}{a_n} = D - CA^{-1}B
+    \end{align*}
+  \end{columns}
+  \LINKS{Frequency response and steady state (T3).}{Loop transfer function $L=PC$ (T6); Gang of Four (T8).}
 \end{frame}
 
 \begin{frame}{Topic 5 recap: block diagrams and pole/zero cancellation}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Feedback loop} (negative feedback, $F=1$):
-\begin{align*}
-G_{yr} = \frac{PC}{1+PC}, \quad
-G_{yv} = \frac{P}{1+PC}, \quad
-G_{yw} = \frac{1}{1+PC}
-\end{align*}
-Block algebra: series multiply, parallel add, loop $\frac{\text{forward}}{1+\text{loop}}$.
-\par\medskip
-\textbf{Algebraic loops}: a direct feedthrough ($D\neq 0$) inside a loop needs an iterative solver in simulation.
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Pole/zero cancellation trap}
-\begin{align*}
-P &= \frac{s-1}{(s+1)(s+5)}, & C &= \frac{s+1}{(s-1)(s+2)}
-\end{align*}
-$PC$ looks stable, but:
-\begin{itemize}
-\item the controller itself is unstable
-\item cancellation is never exact in practice
-\item the unstable pole is still visible in other paths, e.g.\ $G_{yv}$
-\end{itemize}
-\alert{Never cancel RHP poles or zeros.}
-\end{columns}
-\LINKS{TF algebra (this topic).}{All six closed-loop TFs (Gang of Six) and internal stability (T8).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Feedback loop} (negative feedback, $F=1$):
+    \begin{align*}
+      G_{yr} = \frac{PC}{1+PC}, \quad
+      G_{yv} = \frac{P}{1+PC}, \quad
+      G_{yw} = \frac{1}{1+PC}
+    \end{align*}
+    Block algebra: series multiply, parallel add, loop $\frac{\text{forward}}{1+\text{loop}}$.
+    \par\medskip
+    \textbf{Algebraic loops}: a direct feedthrough ($D\neq 0$) inside a loop needs an iterative solver in simulation.
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Pole/zero cancellation trap}
+    \begin{align*}
+      P &= \frac{s-1}{(s+1)(s+5)}, & C &= \frac{s+1}{(s-1)(s+2)}
+    \end{align*}
+    $PC$ looks stable, but:
+    \begin{itemize}
+      \item the controller itself is unstable
+      \item cancellation is never exact in practice
+      \item the unstable pole is still visible in other paths, e.g.\ $G_{yv}$
+    \end{itemize}
+    \alert{Never cancel RHP poles or zeros.}
+  \end{columns}
+  \LINKS{TF algebra (this topic).}{All six closed-loop TFs (Gang of Six) and internal stability (T8).}
 \end{frame}
 
 \begin{frame}{Topic 5 recap: Bode plots and time delays}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Sketching rules}
-\begin{itemize}
-\item Start at DC gain, slope \SI{0}{dB/dec}
-\item Each pole: $-\SI{20}{dB/dec}$, phase $-\ang{90}$ over about a decade
-\item Each zero: $+\SI{20}{dB/dec}$, phase $+\ang{90}$
-\item Integrator = pole at $0$; differentiator = zero at $0$
-\item $\theta_0 = -\ang{90}(N_I-N_D)$, $\theta_\infty = -\ang{90}(N_P-N_Z)$
-\end{itemize}
-\textbf{dB}: $20\log_{10}|G|$;\; $\times 10 = +\SI{20}{dB}$;\; $\times 2 \approx +\SI{6}{dB}$;\; $1/\sqrt2 \approx -\SI{3}{dB}$
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Time delay} $\ee^{-\tau s}$
-\begin{itemize}
-\item $|\cdot| = 1$, phase $-\ww\tau$ (unbounded lag)
-\item Padé: $\ee^{-\tau s}\approx \dfrac{1-\tau s/2}{1+\tau s/2}$, a \alert{RHP zero} at $2/\tau$
-\end{itemize}
-\textbf{Experimental FRF}: stepped sine, chirp or noise; \texttt{tfestimate}, \texttt{tfest}
-\par\medskip
-\textbf{RHP zeros and delays} add phase lag without changing gain: \emph{non-minimum phase}.
-\end{columns}
-\LINKS{$G(\ii\ww)$ (T3).}{Bode plot of $L$ gives gain and phase margins (T6); loop shaping is done on the Bode plot (T8); delays and RHP zeros limit performance (T9).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Sketching rules}
+    \begin{itemize}
+      \item Start at DC gain, slope \SI{0}{dB/dec}
+      \item Each pole: $-\SI{20}{dB/dec}$, phase $-\ang{90}$ over about a decade
+      \item Each zero: $+\SI{20}{dB/dec}$, phase $+\ang{90}$
+      \item Integrator = pole at $0$; differentiator = zero at $0$
+      \item $\theta_0 = -\ang{90}(N_I-N_D)$, $\theta_\infty = -\ang{90}(N_P-N_Z)$
+    \end{itemize}
+    \textbf{dB}: $20\log_{10}|G|$;\; $\times 10 = +\SI{20}{dB}$;\; $\times 2 \approx +\SI{6}{dB}$;\; $1/\sqrt2 \approx -\SI{3}{dB}$
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Time delay} $\ee^{-\tau s}$
+    \begin{itemize}
+      \item $|\cdot| = 1$, phase $-\ww\tau$ (unbounded lag)
+      \item Padé: $\ee^{-\tau s}\approx \dfrac{1-\tau s/2}{1+\tau s/2}$, a \alert{RHP zero} at $2/\tau$
+    \end{itemize}
+    \textbf{Experimental FRF}: stepped sine, chirp or noise; \texttt{tfestimate}, \texttt{tfest}
+    \par\medskip
+    \textbf{RHP zeros and delays} add phase lag without changing gain: \emph{non-minimum phase}.
+  \end{columns}
+  \LINKS{$G(\ii\ww)$ (T3).}{Bode plot of $L$ gives gain and phase margins (T6); loop shaping is done on the Bode plot (T8); delays and RHP zeros limit performance (T9).}
 \end{frame}
 
 \TOPIC{Frequency Domain Analysis}
 
 \begin{frame}[label=topic6]{Topic 6 recap: loop transfer function and Nyquist}
-\KEYIDEA{Judge \emph{closed-loop} stability from the \emph{open-loop} $L = PC$: a sinusoid that returns around the loop with gain 1 and phase $-\ang{180}$ ($L(\ii\ww)=-1$) is self-sustaining.}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Nyquist criterion}
-\begin{align*}
-n_Z = n_P + n_N
-\end{align*}
-\begin{itemize}
-\item $n_Z$: RHP closed-loop poles (zeros of $1+L$)
-\item $n_P$: RHP open-loop poles of $L$ (known)
-\item $n_N$: clockwise encirclements of $-1$
-\end{itemize}
-Stable $L$ ($n_P=0$): \alert{no encirclements of $-1$}.\\
-Unstable $L$: need $n_P$ \emph{counter}-clockwise encirclements.
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Example} $L = \dfrac{k}{s(s+1)^2}$
-\begin{itemize}
-\item phase $-\ang{180}$ at $\ww=1$, where $L(\ii) = -k/2$
-\item encircles $-1$ for $k>2$: unstable
-\end{itemize}
-\textbf{Delay}: $L\,\ee^{-\tau s}$ keeps $|L|$ but rotates the curve; the critical delay is
-\begin{align*}
-\tau_c = \frac{\pi + \theta_0}{\ww_0}
-\end{align*}
-\end{columns}
-\LINKS{Eigenvalue stability (T2, T3), $G(\ii\ww)$ and Bode (T5).}{Distance to $-1$ becomes $\Msens$ and sensitivity (T8) and robust stability (T9). ZN frequency tuning uses the $-\ang{180}$ point (T7).}
+  \KEYIDEA{Judge \emph{closed-loop} stability from the \emph{open-loop} $L = PC$: a sinusoid that returns around the loop with gain 1 and phase $-\ang{180}$ ($L(\ii\ww)=-1$) is self-sustaining.}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Nyquist criterion}
+    \begin{align*}
+      n_Z = n_P + n_N
+    \end{align*}
+    \begin{itemize}
+      \item $n_Z$: RHP closed-loop poles (zeros of $1+L$)
+      \item $n_P$: RHP open-loop poles of $L$ (known)
+      \item $n_N$: clockwise encirclements of $-1$
+    \end{itemize}
+    Stable $L$ ($n_P=0$): \alert{no encirclements of $-1$}.\\
+    Unstable $L$: need $n_P$ \emph{counter}-clockwise encirclements.
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Example} $L = \dfrac{k}{s(s+1)^2}$
+    \begin{itemize}
+      \item phase $-\ang{180}$ at $\ww=1$, where $L(\ii) = -k/2$
+      \item encircles $-1$ for $k>2$: unstable
+    \end{itemize}
+    \textbf{Delay}: $L\,\ee^{-\tau s}$ keeps $|L|$ but rotates the curve; the critical delay is
+    \begin{align*}
+      \tau_c = \frac{\pi + \theta_0}{\ww_0}
+    \end{align*}
+  \end{columns}
+  \LINKS{Eigenvalue stability (T2, T3), $G(\ii\ww)$ and Bode (T5).}{Distance to $-1$ becomes $\Msens$ and sensitivity (T8) and robust stability (T9). ZN frequency tuning uses the $-\ang{180}$ point (T7).}
 \end{frame}
 
 \begin{frame}{Topic 6 recap: stability margins}
-\begin{columns}[c]
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{figure10.11}
-\par{\tiny \AMref*{Fig.\ 10.11}\par}
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item \textbf{Gain margin} $\gainmargin$: factor on $|L|$ to reach $-1$ at phase crossover. Aim $2<\gainmargin<5$
-\item \textbf{Phase margin} $\phasemargin$: extra lag to reach $-1$ at gain crossover $\ww\gaincrossover$. Aim $\ang{30}<\phasemargin<\ang{60}$
-\item \textbf{Stability margin} $\stabilitymargin$: shortest distance from $L(\ii\ww)$ to $-1$
-\item \textbf{Delay margin}: $\phasemargin = \ww\gaincrossover\delaymargin$ ($\phasemargin$ in rad)
-\end{itemize}
-\end{columns}
-\medskip
-\footnotesize
-Example $L = 3/(s+1)^3$: $\stabilitymargin = 0.464$, $\gainmargin = 2.67$, $\phasemargin = \ang{41.7}$.
-\par
-\textbf{Bode's relation} (minimum phase): slope $n$ on the gain curve $\Rightarrow$ phase $\approx n\cdot\ang{90}$. RHP zeros, RHP poles and delays add extra lag.
-\LINKS{Nyquist criterion (this topic), Bode plots (T5).}{$\Msens = 1/\stabilitymargin$ (T8); target slope $-1$ at crossover in loop shaping (T8); margins quantify robustness (T9).}
+  \begin{columns}[c]
+    \column{0.5\linewidth}
+    \includegraphics[width=\linewidth]{figure10.11}
+    \par{\tiny \AMref*{Fig.\ 10.11}\par}
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item \textbf{Gain margin} $\gainmargin$: factor on $|L|$ to reach $-1$ at phase crossover. Aim $2<\gainmargin<5$
+      \item \textbf{Phase margin} $\phasemargin$: extra lag to reach $-1$ at gain crossover $\ww\gaincrossover$. Aim $\ang{30}<\phasemargin<\ang{60}$
+      \item \textbf{Stability margin} $\stabilitymargin$: shortest distance from $L(\ii\ww)$ to $-1$
+      \item \textbf{Delay margin}: $\phasemargin = \ww\gaincrossover\delaymargin$ ($\phasemargin$ in rad)
+    \end{itemize}
+  \end{columns}
+  \medskip
+  \footnotesize
+  Example $L = 3/(s+1)^3$: $\stabilitymargin = 0.464$, $\gainmargin = 2.67$, $\phasemargin = \ang{41.7}$.
+  \par
+  \textbf{Bode's relation} (minimum phase): slope $n$ on the gain curve $\Rightarrow$ phase $\approx n\cdot\ang{90}$. RHP zeros, RHP poles and delays add extra lag.
+  \LINKS{Nyquist criterion (this topic), Bode plots (T5).}{$\Msens = 1/\stabilitymargin$ (T8); target slope $-1$ at crossover in loop shaping (T8); margins quantify robustness (T9).}
 \end{frame}
 
 \begin{frame}{Bridge II $\to$ III: one fact, three views}
-\begin{center}
-\small
-\renewcommand\arraystretch{1.4}
-\setlength\tabcolsep{4pt}\begin{tabular}{@{}>{\raggedright}p{2.3cm}>{\raggedright}p{2.6cm}>{\raggedright}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
-\toprule
-& \textbf{State space (T4)} & \textbf{Transfer fn (T5)} & \textbf{Frequency (T6)}\\
-\midrule
-Closed-loop char.\ polynomial & $\det(sI-A+BK)$ & $a(s)+k\,b(s)$ \newline (num.\ of $1+L$) & zeros of $1+L(s)$\\
-Stable when & $\Real\lambda(A-BK)<0$ & CL poles in LHP & $n_Z = n_P + n_N = 0$\\
-Steady state & $D - CA^{-1}B$ & $G(0)$, FVT & low-$\ww$ gain\\
-How much margin & pole locations & pole locations & $\gainmargin$, $\phasemargin$, $\stabilitymargin$\\
-\bottomrule
-\end{tabular}
-\end{center}
-\bigskip
-Module III asks: \emph{given these tools, how do we pick a good controller?}
-\begin{itemize}
-\item a simple, model-free structure \hfill \alert{$\to$ T7 PID}
-\item shaping $L$ so the loop handles $r$, $v$, $w$ well \hfill \alert{$\to$ T8 sensitivity, loop shaping}
-\item checking it still works when $P$ is wrong \hfill \alert{$\to$ T9 robustness, limits}
-\end{itemize}
+  \begin{center}
+    \small
+    \renewcommand\arraystretch{1.4}
+    \setlength\tabcolsep{4pt}\begin{tabular}{@{}>{\raggedright}p{2.3cm}>{\raggedright}p{2.6cm}>{\raggedright}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+      \toprule
+      & \textbf{State space (T4)} & \textbf{Transfer fn (T5)} & \textbf{Frequency (T6)}\\
+      \midrule
+      Closed-loop char.\ polynomial & $\det(sI-A+BK)$ & $a(s)+k\,b(s)$ \newline (num.\ of $1+L$) & zeros of $1+L(s)$\\
+      Stable when & $\Real\lambda(A-BK)<0$ & CL poles in LHP & $n_Z = n_P + n_N = 0$\\
+      Steady state & $D - CA^{-1}B$ & $G(0)$, FVT & low-$\ww$ gain\\
+      How much margin & pole locations & pole locations & $\gainmargin$, $\phasemargin$, $\stabilitymargin$\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \bigskip
+  Module III asks: \emph{given these tools, how do we pick a good controller?}
+  \begin{itemize}
+    \item a simple, model-free structure \hfill \alert{$\to$ T7 PID}
+    \item shaping $L$ so the loop handles $r$, $v$, $w$ well \hfill \alert{$\to$ T8 sensitivity, loop shaping}
+    \item checking it still works when $P$ is wrong \hfill \alert{$\to$ T9 robustness, limits}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -646,270 +646,270 @@ Module III asks: \emph{given these tools, how do we pick a good controller?}
 \TOPIC{PID Control}
 
 \begin{frame}[label=topic7]{Topic 7 recap: PID structure}
-\KEYIDEA{P acts on the present error, I on the past, D on the predicted future. Three knobs control most industrial loops.}
-\vspace{-1ex}
-\begin{align*}
-u &= \kkp e + \kki\int_0^t e\,\dee\tau + \kkd\Deriv{e}{t}
-= \kkp\Bigl(e + \frac{1}{\TTi}\int_0^t e\,\dee\tau + \TTd\Deriv{e}{t}\Bigr)\\
-\TTi &= \kkp/\kki, \qquad \TTd = \kkd/\kkp
-\end{align*}
-\begin{center}
-\footnotesize
-\renewcommand\arraystretch{1.2}
-\begin{tabular}{@{}lll@{}}
-\toprule
-Term & Increasing the gain\ldots & Watch out for\ldots\\
-\midrule
-P & faster, smaller (but nonzero) steady-state error & oscillation, instability\\
-I & removes steady-state error, rejects load disturbances & overshoot, windup\\
-D & adds damping, reduces overshoot & noise amplification\\
-\bottomrule
-\end{tabular}
-\end{center}
-\footnotesize
-\begin{itemize}
-\item $\kkd s$ is improper: filter it, $\dfrac{\kkd s}{1+s\TTf}$ with $\TTf = \TTd/N$, $5\le N\le 20$
-\item PI on $P=b/(s+a)$: $s^2 + (a+b\kkp)s + b\kki$, so $\kkp = (a_1-a)/b$, $\kki = a_2/b$ \alert{(identical to T4)}
-\end{itemize}
-\LINKS{Integral action and pole placement (T4), simple models (T1).}{PD with filter = lead compensator, PI = lag compensator (T8).}
+  \KEYIDEA{P acts on the present error, I on the past, D on the predicted future. Three knobs control most industrial loops.}
+  \vspace{-1ex}
+  \begin{align*}
+    u &= \kkp e + \kki\int_0^t e\,\dee\tau + \kkd\Deriv{e}{t}
+    = \kkp\Bigl(e + \frac{1}{\TTi}\int_0^t e\,\dee\tau + \TTd\Deriv{e}{t}\Bigr)\\
+    \TTi &= \kkp/\kki, \qquad \TTd = \kkd/\kkp
+  \end{align*}
+  \begin{center}
+    \footnotesize
+    \renewcommand\arraystretch{1.2}
+    \begin{tabular}{@{}lll@{}}
+      \toprule
+      Term & Increasing the gain\ldots & Watch out for\ldots\\
+      \midrule
+      P & faster, smaller (but nonzero) steady-state error & oscillation, instability\\
+      I & removes steady-state error, rejects load disturbances & overshoot, windup\\
+      D & adds damping, reduces overshoot & noise amplification\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \footnotesize
+  \begin{itemize}
+    \item $\kkd s$ is improper: filter it, $\dfrac{\kkd s}{1+s\TTf}$ with $\TTf = \TTd/N$, $5\le N\le 20$
+    \item PI on $P=b/(s+a)$: $s^2 + (a+b\kkp)s + b\kki$, so $\kkp = (a_1-a)/b$, $\kki = a_2/b$ \alert{(identical to T4)}
+  \end{itemize}
+  \LINKS{Integral action and pole placement (T4), simple models (T1).}{PD with filter = lead compensator, PI = lag compensator (T8).}
 \end{frame}
 
 \begin{frame}{Topic 7 recap: tuning}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Ziegler--Nichols (1942)}
-\begin{itemize}
-\item Step method: ITD model $P = \frac{a}{\tau s}\ee^{-\tau s}$
-\item Frequency method: raise $\kkp$ until oscillation: critical gain $k_c$, period $T_c$; this is the \alert{$-\ang{180}$ point on the Nyquist curve}
-\item Good starting point; often too much overshoot for mechanical systems
-\end{itemize}
-\textbf{Improved rules on FOTD} $\frac{K}{1+sT}\ee^{-\tau s}$
-\begin{itemize}
-\item $\tau_n = \tau/(\tau+T)$: lag ($\to 0$) vs delay ($\to 1$) dominated
-\item CHR (0\% or 20\% overshoot; set point or disturbance), Cohen--Coon
-\end{itemize}
-\column{0.5\linewidth}
-\scriptsize
-\textbf{Ziegler--Nichols rules} \AMref{Table 11.1}\par\smallskip
-\begin{tabular}{@{}llll@{}}
-\toprule
-Step & $\kkp$ & $\TTi$ & $\TTd$\\
-\midrule
-P & $1/a$ & & \\
-PI & $0.9/a$ & $\tau/0.3$ & \\
-PID & $1.2/a$ & $\tau/0.5$ & $0.5\tau$\\
-\bottomrule
-\end{tabular}\par\smallskip
-\begin{tabular}{@{}llll@{}}
-\toprule
-Freq. & $\kkp$ & $\TTi$ & $\TTd$\\
-\midrule
-P & $0.5k_c$ & & \\
-PI & $0.45k_c$ & $T_c/1.2$ & \\
-PID & $0.6k_c$ & $T_c/2$ & $T_c/8$\\
-\bottomrule
-\end{tabular}
-\par\medskip
-\footnotesize
-\textbf{Relay autotuning}: relay amplitude $d$, output amplitude $a$
-\begin{align*}
-k_c = \frac{4d}{\pi a}, \qquad \ww_c = \frac{2\pi}{T_c}
-\end{align*}
-\end{columns}
-\LINKS{ITD/FOTD step-response models (T1), Nyquist critical point (T6).}{Check the tuned loop's margins and sensitivity peaks (T6, T8).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Ziegler--Nichols (1942)}
+    \begin{itemize}
+      \item Step method: ITD model $P = \frac{a}{\tau s}\ee^{-\tau s}$
+      \item Frequency method: raise $\kkp$ until oscillation: critical gain $k_c$, period $T_c$; this is the \alert{$-\ang{180}$ point on the Nyquist curve}
+      \item Good starting point; often too much overshoot for mechanical systems
+    \end{itemize}
+    \textbf{Improved rules on FOTD} $\frac{K}{1+sT}\ee^{-\tau s}$
+    \begin{itemize}
+      \item $\tau_n = \tau/(\tau+T)$: lag ($\to 0$) vs delay ($\to 1$) dominated
+      \item CHR (0\% or 20\% overshoot; set point or disturbance), Cohen--Coon
+    \end{itemize}
+    \column{0.5\linewidth}
+    \scriptsize
+    \textbf{Ziegler--Nichols rules} \AMref{Table 11.1}\par\smallskip
+    \begin{tabular}{@{}llll@{}}
+      \toprule
+      Step & $\kkp$ & $\TTi$ & $\TTd$\\
+      \midrule
+      P & $1/a$ & & \\
+      PI & $0.9/a$ & $\tau/0.3$ & \\
+      PID & $1.2/a$ & $\tau/0.5$ & $0.5\tau$\\
+      \bottomrule
+    \end{tabular}\par\smallskip
+    \begin{tabular}{@{}llll@{}}
+      \toprule
+      Freq. & $\kkp$ & $\TTi$ & $\TTd$\\
+      \midrule
+      P & $0.5k_c$ & & \\
+      PI & $0.45k_c$ & $T_c/1.2$ & \\
+      PID & $0.6k_c$ & $T_c/2$ & $T_c/8$\\
+      \bottomrule
+    \end{tabular}
+    \par\medskip
+    \footnotesize
+    \textbf{Relay autotuning}: relay amplitude $d$, output amplitude $a$
+    \begin{align*}
+      k_c = \frac{4d}{\pi a}, \qquad \ww_c = \frac{2\pi}{T_c}
+    \end{align*}
+  \end{columns}
+  \LINKS{ITD/FOTD step-response models (T1), Nyquist critical point (T6).}{Check the tuned loop's margins and sensitivity peaks (T6, T8).}
 \end{frame}
 
 \begin{frame}{Topic 7 recap: windup and implementation}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Integrator windup}
-\begin{itemize}
-\item Saturated actuator $\Rightarrow$ loop is effectively open
-\item Integrator keeps growing $\Rightarrow$ large overshoot, slow recovery
-\item Fix: \alert{anti-windup} feedback of $e_s = u_{\text{sat}} - u$ into the integrator with gain $k_{\text{aw}}$ (tracking)
-\item Applies to any controller with integral action, including state-space designs
-\end{itemize}
-\textbf{Setpoint weighting} (2-DOF PID):
-\begin{align*}
-u = \kkp(\beta r - y) + \kki\!\int\!(r-y) + \kkd\Bigl(\gamma\dot r - \dot y\Bigr)
-\end{align*}
-Changes response to $r$ only, not to $v$ or $w$.
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Digital implementation} (sample time $h$)
-\begin{align*}
-P(t_k) &= \kkp\bigl(\beta r(t_k) - y(t_k)\bigr)\\
-I(t_{k+1}) &= I(t_k) + \kki h\, e(t_k) + \tfrac{h}{T_{\text{aw}}}\bigl(\mathrm{sat}(u)-u\bigr)\\
-D(t_k) &= \tfrac{\TTf}{\TTf+h}D(t_{k-1}) - \tfrac{\kkd}{\TTf+h}\bigl(y(t_k)-y(t_{k-1})\bigr)
-\end{align*}
-Same idea as the discrete PI in T1:
-\begin{align*}
-u_i[k+1] = u_i[k] + h\,e[k]
-\end{align*}
-\end{columns}
-\LINKS{Difference equations (T1), saturation in block diagrams (T1).}{Actuator limits as a fundamental performance limit (T9).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Integrator windup}
+    \begin{itemize}
+      \item Saturated actuator $\Rightarrow$ loop is effectively open
+      \item Integrator keeps growing $\Rightarrow$ large overshoot, slow recovery
+      \item Fix: \alert{anti-windup} feedback of $e_s = u_{\text{sat}} - u$ into the integrator with gain $k_{\text{aw}}$ (tracking)
+      \item Applies to any controller with integral action, including state-space designs
+    \end{itemize}
+    \textbf{Setpoint weighting} (2-DOF PID):
+    \begin{align*}
+      u = \kkp(\beta r - y) + \kki\!\int\!(r-y) + \kkd\Bigl(\gamma\dot r - \dot y\Bigr)
+    \end{align*}
+    Changes response to $r$ only, not to $v$ or $w$.
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Digital implementation} (sample time $h$)
+    \begin{align*}
+      P(t_k) &= \kkp\bigl(\beta r(t_k) - y(t_k)\bigr)\\
+      I(t_{k+1}) &= I(t_k) + \kki h\, e(t_k) + \tfrac{h}{T_{\text{aw}}}\bigl(\mathrm{sat}(u)-u\bigr)\\
+      D(t_k) &= \tfrac{\TTf}{\TTf+h}D(t_{k-1}) - \tfrac{\kkd}{\TTf+h}\bigl(y(t_k)-y(t_{k-1})\bigr)
+    \end{align*}
+    Same idea as the discrete PI in T1:
+    \begin{align*}
+      u_i[k+1] = u_i[k] + h\,e[k]
+    \end{align*}
+  \end{columns}
+  \LINKS{Difference equations (T1), saturation in block diagrams (T1).}{Actuator limits as a fundamental performance limit (T9).}
 \end{frame}
 
 \TOPIC{Frequency Domain Design}
 
 \begin{frame}[label=topic8]{Topic 8 recap: Gang of Four}
-\KEYIDEA{Four transfer functions describe how the feedback loop responds to disturbances and noise. $S+T=1$ means you cannot make both small at the same frequency.}
-\begin{columns}[c]
-\column{0.5\linewidth}
-\footnotesize
-\renewcommand\arraystretch{1.5}
-\begin{tabular}{@{}ll@{}}
-\toprule
-$S = \dfrac{1}{1+PC}$ & sensitivity: $v$-rejection, tracking\\
-$T = \dfrac{PC}{1+PC}$ & complementary: noise $\to y$\\
-$PS = \dfrac{P}{1+PC}$ & load disturbance $v \to y$\\
-$CS = \dfrac{C}{1+PC}$ & noise $w \to u$\\
-\bottomrule
-\end{tabular}
-\column{0.5\linewidth}
-\footnotesize
-\begin{itemize}
-\item \textbf{Internally stable} $\iff$ all four are stable (catches hidden cancellations, T5)
-\item Gang of Six adds $G_{yr} = TF$ and $G_{ur} = CSF$, which are shaped by the feedforward $F$
-\item $|S(\ii\ww)|<1$: disturbance attenuated; $>1$: amplified
-\item $\Msens = \max|S| = 1/\stabilitymargin$ \alert{(the Nyquist distance from T6)}
-\end{itemize}
-\end{columns}
-\medskip
-\footnotesize
-Low frequency: integral action gives $G_{yv}\approx s/\kki \to 0$. High frequency: $-G_{uw}\approx C$, so roll off $C$ (filter D).
-\LINKS{Block diagram TFs and cancellation (T5), stability margin (T6).}{Sensitivity to model error $\frac{\dee G}{G} = S\frac{\dee P}{P}$, robust stability $|\delta|<1/|T|$ (T9).}
+  \KEYIDEA{Four transfer functions describe how the feedback loop responds to disturbances and noise. $S+T=1$ means you cannot make both small at the same frequency.}
+  \begin{columns}[c]
+    \column{0.5\linewidth}
+    \footnotesize
+    \renewcommand\arraystretch{1.5}
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+      $S = \dfrac{1}{1+PC}$ & sensitivity: $v$-rejection, tracking\\
+      $T = \dfrac{PC}{1+PC}$ & complementary: noise $\to y$\\
+      $PS = \dfrac{P}{1+PC}$ & load disturbance $v \to y$\\
+      $CS = \dfrac{C}{1+PC}$ & noise $w \to u$\\
+      \bottomrule
+    \end{tabular}
+    \column{0.5\linewidth}
+    \footnotesize
+    \begin{itemize}
+      \item \textbf{Internally stable} $\iff$ all four are stable (catches hidden cancellations, T5)
+      \item Gang of Six adds $G_{yr} = TF$ and $G_{ur} = CSF$, which are shaped by the feedforward $F$
+      \item $|S(\ii\ww)|<1$: disturbance attenuated; $>1$: amplified
+      \item $\Msens = \max|S| = 1/\stabilitymargin$ \alert{(the Nyquist distance from T6)}
+    \end{itemize}
+  \end{columns}
+  \medskip
+  \footnotesize
+  Low frequency: integral action gives $G_{yv}\approx s/\kki \to 0$. High frequency: $-G_{uw}\approx C$, so roll off $C$ (filter D).
+  \LINKS{Block diagram TFs and cancellation (T5), stability margin (T6).}{Sensitivity to model error $\frac{\dee G}{G} = S\frac{\dee P}{P}$, robust stability $|\delta|<1/|T|$ (T9).}
 \end{frame}
 
 \begin{frame}{Topic 8 recap: specifications and loop shaping}
-\begin{columns}[t]
-\column{0.48\linewidth}
-\includegraphics[width=\linewidth]{figure12.8}
-\par{\tiny \AMref*{Fig.\ 12.8}\par}
-\footnotesize
-\begin{itemize}
-\item High $|L|$ at low $\ww$: tracking, disturbance rejection
-\item Low $|L|$ at high $\ww$: noise immunity, robustness
-\item Crossover slope $n\gaincrossover \approx -2 + \phasemargin/\ang{90}$
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Specs}: overshoot, rise time, settling time $\leftrightarrow$ peak $M_r$, bandwidth $\wb$, $\ww\gaincrossover$, $\Msens$, $M_t$
-\begin{itemize}
-\item Rise time--bandwidth: $T_r\wb \approx 3$
-\item Large overshoot $\leftrightarrow$ large resonant peak
-\item Ramp error $= v_0 e_1$, from $G_{er}\approx e_1 s + e_2 s^2 + \cdots$
-\end{itemize}
-\textbf{Lead/lag}: $C = k\dfrac{s+a}{s+b}$
-\begin{itemize}
-\item Lead ($a<b$): adds phase near crossover; = filtered PD
-\item Lag ($a>b$): raises low-$\ww$ gain; PI is lag with $b=0$
-\end{itemize}
-\end{columns}
-\LINKS{Bode sketching (T5), Bode's gain--phase relation (T6), PID (T7).}{Bode's integral limits how far $|S|$ can be pushed down (T9).}
+  \begin{columns}[t]
+    \column{0.48\linewidth}
+    \includegraphics[width=\linewidth]{figure12.8}
+    \par{\tiny \AMref*{Fig.\ 12.8}\par}
+    \footnotesize
+    \begin{itemize}
+      \item High $|L|$ at low $\ww$: tracking, disturbance rejection
+      \item Low $|L|$ at high $\ww$: noise immunity, robustness
+      \item Crossover slope $n\gaincrossover \approx -2 + \phasemargin/\ang{90}$
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Specs}: overshoot, rise time, settling time $\leftrightarrow$ peak $M_r$, bandwidth $\wb$, $\ww\gaincrossover$, $\Msens$, $M_t$
+    \begin{itemize}
+      \item Rise time--bandwidth: $T_r\wb \approx 3$
+      \item Large overshoot $\leftrightarrow$ large resonant peak
+      \item Ramp error $= v_0 e_1$, from $G_{er}\approx e_1 s + e_2 s^2 + \cdots$
+    \end{itemize}
+    \textbf{Lead/lag}: $C = k\dfrac{s+a}{s+b}$
+    \begin{itemize}
+      \item Lead ($a<b$): adds phase near crossover; = filtered PD
+      \item Lag ($a>b$): raises low-$\ww$ gain; PI is lag with $b=0$
+    \end{itemize}
+  \end{columns}
+  \LINKS{Bode sketching (T5), Bode's gain--phase relation (T6), PID (T7).}{Bode's integral limits how far $|S|$ can be pushed down (T9).}
 \end{frame}
 
 \begin{frame}{Topic 8 recap: root locus}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-Closed-loop poles as one gain $k$ varies, $C = k$:
-\begin{align*}
-a\closedloop(s) = a(s) + k\,b(s) = 0
-\end{align*}
-\begin{itemize}
-\item $n$ branches start at the open-loop poles ($k=0$)
-\item They end at open-loop zeros or go to infinity
-\item $\npoleexcess$ asymptotes from the centroid, angles $(\pi + 2l\pi)/\npoleexcess$
-\item RHP zeros, or $\npoleexcess \ge 3$: \alert{unstable for large gain}
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Example}: $P = 1/(s^2+1)$
-\begin{itemize}
-\item PI, $C = k\frac{s+1}{s}$: unstable for all $k$
-\item PID, $C = k\frac{s^2+2s+2}{s}$: stable, choose $k$ to place poles
-\end{itemize}
-\textbf{Example}: $L = \dfrac{k(s-2)}{(s+4)^2}$
-\begin{itemize}
-\item $s^2 + (8+k)s + (16-2k)$: unstable for $k>8$
-\item One branch heads to the RHP zero at $s=2$
-\end{itemize}
-\end{columns}
-\LINKS{Characteristic polynomial (T4, T5), PID pole placement (T7).}{RHP zeros as a fundamental limit (T9).}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    Closed-loop poles as one gain $k$ varies, $C = k$:
+    \begin{align*}
+      a\closedloop(s) = a(s) + k\,b(s) = 0
+    \end{align*}
+    \begin{itemize}
+      \item $n$ branches start at the open-loop poles ($k=0$)
+      \item They end at open-loop zeros or go to infinity
+      \item $\npoleexcess$ asymptotes from the centroid, angles $(\pi + 2l\pi)/\npoleexcess$
+      \item RHP zeros, or $\npoleexcess \ge 3$: \alert{unstable for large gain}
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Example}: $P = 1/(s^2+1)$
+    \begin{itemize}
+      \item PI, $C = k\frac{s+1}{s}$: unstable for all $k$
+      \item PID, $C = k\frac{s^2+2s+2}{s}$: stable, choose $k$ to place poles
+    \end{itemize}
+    \textbf{Example}: $L = \dfrac{k(s-2)}{(s+4)^2}$
+    \begin{itemize}
+      \item $s^2 + (8+k)s + (16-2k)$: unstable for $k>8$
+      \item One branch heads to the RHP zero at $s=2$
+    \end{itemize}
+  \end{columns}
+  \LINKS{Characteristic polynomial (T4, T5), PID pole placement (T7).}{RHP zeros as a fundamental limit (T9).}
 \end{frame}
 
 \TOPIC{Robust Performance \& Fundamental Limits}
 
 \begin{frame}[label=topic9]{Topic 9 recap: uncertainty and robustness}
-\KEYIDEA{Every model is wrong. Feedback tolerates model error where $|S|$ and $|T|$ allow it, and some limits cannot be removed by any controller.}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Uncertainty types}
-\begin{itemize}
-\item Parametric (e.g.\ vehicle mass in cruise control)
-\item Unmodelled dynamics: additive $\Delta$, multiplicative $\delta = \Delta/P$
-\item Open-loop similarity can mislead: compare systems in closed loop
-\end{itemize}
-\textbf{Robust stability}
-\begin{align*}
-|\delta(\ii\ww)| < \frac{1}{|T(\ii\ww)|}\;\forall\ww
-\quad\Leftarrow\quad |\delta| < \frac{1}{M_t}
-\end{align*}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Robust performance}
-\begin{align*}
-\frac{\dee G_{yr}}{G_{yr}} = S\frac{\dee P}{P}, \qquad
-\frac{\dee G_{uw}}{G_{uw}} = -T\frac{\dee P}{P}
-\end{align*}
-\begin{itemize}
-\item Where $|S|$ is small (low $\ww$), the response is insensitive to $P$
-\item Where $|T|$ is small (high $\ww$), large relative errors are tolerated
-\end{itemize}
-\textbf{Robust pole placement}
-\begin{itemize}
-\item Cancel \emph{slow stable} zeros with controller poles
-\item Put controller zeros near \emph{fast stable} poles
-\end{itemize}
-\end{columns}
-\LINKS{Gang of Four (T8), Nyquist distance to $-1$ (T6), pole placement (T4, T7).}{(end of the course)}
+  \KEYIDEA{Every model is wrong. Feedback tolerates model error where $|S|$ and $|T|$ allow it, and some limits cannot be removed by any controller.}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Uncertainty types}
+    \begin{itemize}
+      \item Parametric (e.g.\ vehicle mass in cruise control)
+      \item Unmodelled dynamics: additive $\Delta$, multiplicative $\delta = \Delta/P$
+      \item Open-loop similarity can mislead: compare systems in closed loop
+    \end{itemize}
+    \textbf{Robust stability}
+    \begin{align*}
+      |\delta(\ii\ww)| < \frac{1}{|T(\ii\ww)|}\;\forall\ww
+      \quad\Leftarrow\quad |\delta| < \frac{1}{M_t}
+    \end{align*}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Robust performance}
+    \begin{align*}
+      \frac{\dee G_{yr}}{G_{yr}} = S\frac{\dee P}{P}, \qquad
+      \frac{\dee G_{uw}}{G_{uw}} = -T\frac{\dee P}{P}
+    \end{align*}
+    \begin{itemize}
+      \item Where $|S|$ is small (low $\ww$), the response is insensitive to $P$
+      \item Where $|T|$ is small (high $\ww$), large relative errors are tolerated
+    \end{itemize}
+    \textbf{Robust pole placement}
+    \begin{itemize}
+      \item Cancel \emph{slow stable} zeros with controller poles
+      \item Put controller zeros near \emph{fast stable} poles
+    \end{itemize}
+  \end{columns}
+  \LINKS{Gang of Four (T8), Nyquist distance to $-1$ (T6), pole placement (T4, T7).}{(end of the course)}
 \end{frame}
 
 \begin{frame}{Topic 9 recap: fundamental limits}
-\begin{columns}[t]
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Stabilisability}
-\begin{itemize}
-\item Reachable $\Rightarrow$ stabilisable; otherwise the unreachable part must be stable
-\item PBH: $\operatorname{rank}\Matr{A-\lambda I & B} = n$ for all $\lambda$ (reachable), for $\Real\lambda\ge 0$ (stabilisable)
-\item Strongly stabilisable (stable $C$) $\iff$ an even number of real poles between every pair of real RHP zeros
-\end{itemize}
-\textbf{RHP zeros and delays}
-\begin{itemize}
-\item Zeros depend on sensor/actuator placement: sometimes redesign removes them (vehicle steering)
-\item Delays act like RHP zeros (Padé zero at $2/\tau$)
-\end{itemize}
-\column{0.5\linewidth}
-\footnotesize
-\textbf{Bode's integral} (internally stable, $sL\to 0$)
-\begin{align*}
-\int_0^\infty \log|S(\ii\ww)|\,\dee\ww = \pi\sum p_k
-\end{align*}
-$p_k$: RHP poles of $L$. Pushing $|S|$ down somewhere pushes it up elsewhere: the \alert{waterbed effect}.
-\par\medskip
-\textbf{Nonlinear limits}
-\begin{itemize}
-\item Actuator amplitude/rate limits (minimum-time moves, windup)
-\item Measurement noise (actuator wear, saturation)
-\item Friction (limit cycles in balance systems)
-\end{itemize}
-\end{columns}
-\LINKS{Reachability (T4), RHP zeros and delays (T5, T6), windup (T7), sensitivity (T8).}{Practice: the pracs and the project rig hit most of these limits.}
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Stabilisability}
+    \begin{itemize}
+      \item Reachable $\Rightarrow$ stabilisable; otherwise the unreachable part must be stable
+      \item PBH: $\operatorname{rank}\Matr{A-\lambda I & B} = n$ for all $\lambda$ (reachable), for $\Real\lambda\ge 0$ (stabilisable)
+      \item Strongly stabilisable (stable $C$) $\iff$ an even number of real poles between every pair of real RHP zeros
+    \end{itemize}
+    \textbf{RHP zeros and delays}
+    \begin{itemize}
+      \item Zeros depend on sensor/actuator placement: sometimes redesign removes them (vehicle steering)
+      \item Delays act like RHP zeros (Padé zero at $2/\tau$)
+    \end{itemize}
+    \column{0.5\linewidth}
+    \footnotesize
+    \textbf{Bode's integral} (internally stable, $sL\to 0$)
+    \begin{align*}
+      \int_0^\infty \log|S(\ii\ww)|\,\dee\ww = \pi\sum p_k
+    \end{align*}
+    $p_k$: RHP poles of $L$. Pushing $|S|$ down somewhere pushes it up elsewhere: the \alert{waterbed effect}.
+    \par\medskip
+    \textbf{Nonlinear limits}
+    \begin{itemize}
+      \item Actuator amplitude/rate limits (minimum-time moves, windup)
+      \item Measurement noise (actuator wear, saturation)
+      \item Friction (limit cycles in balance systems)
+    \end{itemize}
+  \end{columns}
+  \LINKS{Reachability (T4), RHP zeros and delays (T5, T6), windup (T7), sensitivity (T8).}{Practice: the pracs and the project rig hit most of these limits.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -921,201 +921,201 @@ $p_k$: RHP poles of $L$. Pushing $|S|$ down somewhere pushes it up elsewhere: th
 \section{Putting it all together}
 
 \begin{frame}[plain]
-\centering
-\vfill
-{\usebeamerfont{part title}\usebeamercolor[fg]{part title}Putting it all together\par}
-\bigskip
-\COURSEMAP{1,2,3,4,5,6,7,8,9}
-\vfill
+  \centering
+  \vfill
+  {\usebeamerfont{part title}\usebeamercolor[fg]{part title}Putting it all together\par}
+  \bigskip
+  \COURSEMAP{1,2,3,4,5,6,7,8,9}
+  \vfill
 \end{frame}
 
 \begin{frame}{Same idea, three languages}
-\begin{center}
-\scriptsize
-\renewcommand\arraystretch{1.5}
-\setlength\tabcolsep{4pt}\begin{tabular}{@{}>{\raggedright}p{1.6cm}>{\raggedright}p{2.8cm}>{\raggedright}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
-\toprule
-\textbf{Idea} & \textbf{State space} & \textbf{Transfer function} & \textbf{Frequency response}\\
-\midrule
-Stability & $\Real\lambda_j(A)<0$ & poles in LHP & Nyquist: $n_Z = 0$\\
-Steady state & $D-CA^{-1}B$ & $G(0)$, final value thm & low-frequency gain\\
-Speed & dominant eigenvalue, $T_s\approx 4/(\zz\ww_0)$ & dominant pole & bandwidth, $T_r\wb\approx 3$\\
-Damping & $\zz = \cos\varphi$ (eigenvalue angle) & $\zz$ of dominant poles & resonant peak, phase margin\\
-Zero SS error & augment $z=\int(y-r)$ & pole at $s=0$ in $C$ & $|L|\to\infty$ as $\ww\to 0$\\
-Noise immunity & slower observer poles & roll-off in $C$ & small $|T|$, $|CS|$ at high $\ww$\\
-Robustness & robust pole placement rules & avoid RHP cancellation & $\gainmargin$, $\phasemargin$, $\Msens$, $|\delta|<1/|T|$\\
-\bottomrule
-\end{tabular}
-\end{center}
-\medskip
-\footnotesize
-Being able to translate between these columns is what links the course together, and is what exam questions spanning several topics test.
+  \begin{center}
+    \scriptsize
+    \renewcommand\arraystretch{1.5}
+    \setlength\tabcolsep{4pt}\begin{tabular}{@{}>{\raggedright}p{1.6cm}>{\raggedright}p{2.8cm}>{\raggedright}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
+      \toprule
+      \textbf{Idea} & \textbf{State space} & \textbf{Transfer function} & \textbf{Frequency response}\\
+      \midrule
+      Stability & $\Real\lambda_j(A)<0$ & poles in LHP & Nyquist: $n_Z = 0$\\
+      Steady state & $D-CA^{-1}B$ & $G(0)$, final value thm & low-frequency gain\\
+      Speed & dominant eigenvalue, $T_s\approx 4/(\zz\ww_0)$ & dominant pole & bandwidth, $T_r\wb\approx 3$\\
+      Damping & $\zz = \cos\varphi$ (eigenvalue angle) & $\zz$ of dominant poles & resonant peak, phase margin\\
+      Zero SS error & augment $z=\int(y-r)$ & pole at $s=0$ in $C$ & $|L|\to\infty$ as $\ww\to 0$\\
+      Noise immunity & slower observer poles & roll-off in $C$ & small $|T|$, $|CS|$ at high $\ww$\\
+      Robustness & robust pole placement rules & avoid RHP cancellation & $\gainmargin$, $\phasemargin$, $\Msens$, $|\delta|<1/|T|$\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \medskip
+  \footnotesize
+  Being able to translate between these columns is what links the course together, and is what exam questions spanning several topics test.
 \end{frame}
 
 \begin{frame}{Running examples through the course}
-\begin{center}
-\scriptsize
-\renewcommand\arraystretch{1.45}
-\begin{tabular}{@{}p{2.1cm}p{9.0cm}@{}}
-\toprule
-\textbf{Example} & \textbf{Where it appears}\\
-\midrule
-Mass--spring--damper & T1 state model and second-order relations $\to$ T2 eigenvalues $\to$ T3 matrix exponential and coordinate changes $\to$ T5 $\frac{1}{ms^2+cs+k}$, DC gain $1/k$ by final value theorem\\
-Cruise control & T2 nonlinear model with PI controller $\to$ T4 integral action ($\kkp=\frac{a_1-a}{b}$, $\kki=\frac{a_2}{b}$) $\to$ T7 windup on a steep hill $\to$ T9 uncertain vehicle mass\\
-Balance system / inverted pendulum & T1 Segway model $\to$ T2 equilibria $\to$ T3 linearisation $\to$ T4 reachability and state feedback $\to$ T9 friction-induced oscillation\\
-Vehicle steering & T4 state feedback design $\to$ T6 zero location and minimum phase $\to$ T9 RHP zero when reversing, slow zero and robust pole placement\\
-Electric motor with delay & T6 critical delay $\tau_c$ $\to$ delay margin $\to$ T9 delays as a fundamental limit\\
-\bottomrule
-\end{tabular}
-\end{center}
-\medskip
-\footnotesize
-Revising one example end to end is a good way to rehearse the whole course.
+  \begin{center}
+    \scriptsize
+    \renewcommand\arraystretch{1.45}
+    \begin{tabular}{@{}p{2.1cm}p{9.0cm}@{}}
+      \toprule
+      \textbf{Example} & \textbf{Where it appears}\\
+      \midrule
+      Mass--spring--damper & T1 state model and second-order relations $\to$ T2 eigenvalues $\to$ T3 matrix exponential and coordinate changes $\to$ T5 $\frac{1}{ms^2+cs+k}$, DC gain $1/k$ by final value theorem\\
+      Cruise control & T2 nonlinear model with PI controller $\to$ T4 integral action ($\kkp=\frac{a_1-a}{b}$, $\kki=\frac{a_2}{b}$) $\to$ T7 windup on a steep hill $\to$ T9 uncertain vehicle mass\\
+      Balance system / inverted pendulum & T1 Segway model $\to$ T2 equilibria $\to$ T3 linearisation $\to$ T4 reachability and state feedback $\to$ T9 friction-induced oscillation\\
+      Vehicle steering & T4 state feedback design $\to$ T6 zero location and minimum phase $\to$ T9 RHP zero when reversing, slow zero and robust pole placement\\
+      Electric motor with delay & T6 critical delay $\tau_c$ $\to$ delay margin $\to$ T9 delays as a fundamental limit\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \medskip
+  \footnotesize
+  Revising one example end to end is a good way to rehearse the whole course.
 \end{frame}
 
 \begin{frame}{A design workflow}
-\centering
-\begin{tikzpicture}[node distance=3mm, >=Latex, thick, font=\scriptsize,
-    wfstep/.style={draw=NorthTce, rounded corners=3pt, fill=NorthTce!8, text width=3.6cm, align=center, minimum height=7mm},
-    note/.style={text width=5.2cm, align=left, font=\scriptsize}]
-  \node[wfstep] (s1) {Model the plant};
-  \node[wfstep, below=of s1] (s2) {Linearise at operating point};
-  \node[wfstep, below=of s2] (s3) {Check structure};
-  \node[wfstep, below=of s3] (s4) {Design controller};
-  \node[wfstep, below=of s4] (s5) {Analyse the loop};
-  \node[wfstep, below=of s5] (s6) {Check robustness \& limits};
-  \node[wfstep, below=of s6] (s7) {Implement};
-  \foreach \a/\b in {s1/s2,s2/s3,s3/s4,s4/s5,s5/s6,s6/s7} \draw[->] (\a) -- (\b);
-  \draw[->, gray] (s6.west) -- ++(-0.5,0) |- node[pos=0.25, left, font=\tiny, text=gray]{iterate} (s4.west);
-  \node[note, right=4mm of s1] {first principles or step/FRF data (T1, T5)};
-  \node[note, right=4mm of s2] {Jacobian $A,B,C,D$; equilibria (T2, T3)};
-  \node[note, right=4mm of s3] {stable? reachable? observable? RHP zeros, delays? (T2, T4, T5)};
-  \node[note, right=4mm of s4] {PID tuning, pole placement + observer, or loop shaping (T4, T7, T8)};
-  \node[note, right=4mm of s5] {Nyquist/Bode margins, Gang of Four, step response (T6, T8)};
-  \node[note, right=4mm of s6] {$\Msens$, $|\delta|<1/|T|$, Bode integral, saturation (T9)};
-  \node[note, right=4mm of s7] {filter D, anti-windup, setpoint weights, discretise (T1, T7)};
-\end{tikzpicture}
+  \centering
+  \begin{tikzpicture}[node distance=3mm, >=Latex, thick, font=\scriptsize,
+      wfstep/.style={draw=NorthTce, rounded corners=3pt, fill=NorthTce!8, text width=3.6cm, align=center, minimum height=7mm},
+      note/.style={text width=5.2cm, align=left, font=\scriptsize}]
+    \node[wfstep] (s1) {Model the plant};
+    \node[wfstep, below=of s1] (s2) {Linearise at operating point};
+    \node[wfstep, below=of s2] (s3) {Check structure};
+    \node[wfstep, below=of s3] (s4) {Design controller};
+    \node[wfstep, below=of s4] (s5) {Analyse the loop};
+    \node[wfstep, below=of s5] (s6) {Check robustness \& limits};
+    \node[wfstep, below=of s6] (s7) {Implement};
+    \foreach \a/\b in {s1/s2,s2/s3,s3/s4,s4/s5,s5/s6,s6/s7} \draw[->] (\a) -- (\b);
+    \draw[->, gray] (s6.west) -- ++(-0.5,0) |- node[pos=0.25, left, font=\tiny, text=gray]{iterate} (s4.west);
+    \node[note, right=4mm of s1] {first principles or step/FRF data (T1, T5)};
+    \node[note, right=4mm of s2] {Jacobian $A,B,C,D$; equilibria (T2, T3)};
+    \node[note, right=4mm of s3] {stable? reachable? observable? RHP zeros, delays? (T2, T4, T5)};
+    \node[note, right=4mm of s4] {PID tuning, pole placement + observer, or loop shaping (T4, T7, T8)};
+    \node[note, right=4mm of s5] {Nyquist/Bode margins, Gang of Four, step response (T6, T8)};
+    \node[note, right=4mm of s6] {$\Msens$, $|\delta|<1/|T|$, Bode integral, saturation (T9)};
+    \node[note, right=4mm of s7] {filter D, anti-windup, setpoint weights, discretise (T1, T7)};
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Which tool answers which question?}
-\begin{center}
-\scriptsize
-\renewcommand\arraystretch{1.35}
-\begin{tabular}{@{}p{4.6cm}p{4.9cm}l@{}}
-\toprule
-\textbf{Question} & \textbf{Tool} & \textbf{Topic}\\
-\midrule
-Is this equilibrium stable? & eigenvalues of the Jacobian $A$ & T2, T3\\
-What is the response to an input or initial condition? & convolution equation, $\ee^{At}$ & T3\\
-Can I steer the state anywhere? & rank of $W_r$ & T4\\
-Can I reconstruct the state from $y$? & rank of $\Wob$ & T4\\
-Where does a step response settle? & $G(0)$, final value theorem & T5\\
-Is the closed loop stable, from open-loop data? & Nyquist: $n_Z = n_P + n_N$ & T6\\
-How close is it to instability? & $\gainmargin$, $\phasemargin$, $\stabilitymargin = 1/\Msens$ & T6, T8\\
-Quick controller with little model knowledge? & PID with ZN/CHR/Cohen--Coon/relay tuning & T7\\
-Trade-off between disturbance and noise? & $S$, $T$, Gang of Four, loop shape & T8\\
-What does one gain do to the poles? & root locus & T8\\
-Will it still work if the model is wrong? & $|\delta|<1/|T|$, $\frac{\dee G}{G} = S\frac{\dee P}{P}$ & T9\\
-Is the performance fundamentally limited? & RHP poles/zeros, delays, Bode integral, saturation & T9\\
-\bottomrule
-\end{tabular}
-\end{center}
+  \begin{center}
+    \scriptsize
+    \renewcommand\arraystretch{1.35}
+    \begin{tabular}{@{}p{4.6cm}p{4.9cm}l@{}}
+      \toprule
+      \textbf{Question} & \textbf{Tool} & \textbf{Topic}\\
+      \midrule
+      Is this equilibrium stable? & eigenvalues of the Jacobian $A$ & T2, T3\\
+      What is the response to an input or initial condition? & convolution equation, $\ee^{At}$ & T3\\
+      Can I steer the state anywhere? & rank of $W_r$ & T4\\
+      Can I reconstruct the state from $y$? & rank of $\Wob$ & T4\\
+      Where does a step response settle? & $G(0)$, final value theorem & T5\\
+      Is the closed loop stable, from open-loop data? & Nyquist: $n_Z = n_P + n_N$ & T6\\
+      How close is it to instability? & $\gainmargin$, $\phasemargin$, $\stabilitymargin = 1/\Msens$ & T6, T8\\
+      Quick controller with little model knowledge? & PID with ZN/CHR/Cohen--Coon/relay tuning & T7\\
+      Trade-off between disturbance and noise? & $S$, $T$, Gang of Four, loop shape & T8\\
+      What does one gain do to the poles? & root locus & T8\\
+      Will it still work if the model is wrong? & $|\delta|<1/|T|$, $\frac{\dee G}{G} = S\frac{\dee P}{P}$ & T9\\
+      Is the performance fundamentally limited? & RHP poles/zeros, delays, Bode integral, saturation & T9\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
 \end{frame}
 
 \begin{frame}{Formula sheet (1/2): Modules I and II}
-\scriptsize
-\begin{columns}[t]
-\column{0.5\linewidth}
-\textbf{Models and response}
-\begin{align*}
-&\dot x = Ax+Bu,\quad y=Cx+Du\\
-&x(t) = \ee^{At}x(0) + \textstyle\int_0^t \ee^{A(t-\tau)}Bu(\tau)\,\dee\tau\\
-&A = \PDeriv{f}{x}\Big|_e,\; B = \PDeriv{f}{u}\Big|_e,\; C = \PDeriv{h}{x}\Big|_e,\; D = \PDeriv{h}{u}\Big|_e\\
-&\wn = \sqrt{k/m},\quad \zz = c/(2\sqrt{km}),\quad \wdamp = \wn\sqrt{1-\zz^2}\\
-&M_p = \ee^{-\pi\zz/\sqrt{1-\zz^2}},\quad T_s\approx 4/(\zz\wn)
-\end{align*}
-\textbf{State feedback and observers}
-\begin{align*}
-&W_r = [B\;\, AB\;\cdots\; A^{n-1}B],\quad \Wob = [C;\, CA;\, \cdots;\, CA^{n-1}]\\
-&u = -Kx + k_f r,\quad \dot x = (A-BK)x + Bk_f r\\
-&k_f = -1/\bigl(C(A-BK)^{-1}B\bigr)\\
-&\dot{\hat x} = A\hat x + Bu + L(y - C\hat x),\quad \dot{\tilde x} = (A-LC)\tilde x
-\end{align*}
-\column{0.5\linewidth}
-\textbf{Transfer functions}
-\begin{align*}
-&G(s) = C(sI-A)^{-1}B + D = b(s)/a(s)\\
-&G(0) = D - CA^{-1}B = b_m/a_n\\
-&\lim_{t\to\infty} f(t) = \lim_{s\to 0} sF(s),\quad \lim_{t\to 0} f(t) = \lim_{s\to\infty} sF(s)\\
-&\frac{1}{ms^2+cs+k},\qquad \frac{K\wn^2}{s^2+2\zz\wn s+\wn^2}\\
-&\ee^{-\tau s}\approx \frac{1-\tau s/2}{1+\tau s/2},\quad \arg \ee^{-\ii\ww\tau} = -\ww\tau
-\end{align*}
-\textbf{Frequency domain analysis}
-\begin{align*}
-&L = PC,\quad n_Z = n_P + n_N\\
-&\gainmargin = 1/|L(\ii\ww_{\text{pc}})|,\quad \phasemargin = \ang{180} + \arg L(\ii\ww\gaincrossover)\\
-&\phasemargin = \ww\gaincrossover\delaymargin,\quad \stabilitymargin = \min_\ww|1+L(\ii\ww)|
-\end{align*}
-\end{columns}
+  \scriptsize
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \textbf{Models and response}
+    \begin{align*}
+      &\dot x = Ax+Bu,\quad y=Cx+Du\\
+      &x(t) = \ee^{At}x(0) + \textstyle\int_0^t \ee^{A(t-\tau)}Bu(\tau)\,\dee\tau\\
+      &A = \PDeriv{f}{x}\Big|_e,\; B = \PDeriv{f}{u}\Big|_e,\; C = \PDeriv{h}{x}\Big|_e,\; D = \PDeriv{h}{u}\Big|_e\\
+      &\wn = \sqrt{k/m},\quad \zz = c/(2\sqrt{km}),\quad \wdamp = \wn\sqrt{1-\zz^2}\\
+      &M_p = \ee^{-\pi\zz/\sqrt{1-\zz^2}},\quad T_s\approx 4/(\zz\wn)
+    \end{align*}
+    \textbf{State feedback and observers}
+    \begin{align*}
+      &W_r = [B\;\, AB\;\cdots\; A^{n-1}B],\quad \Wob = [C;\, CA;\, \cdots;\, CA^{n-1}]\\
+      &u = -Kx + k_f r,\quad \dot x = (A-BK)x + Bk_f r\\
+      &k_f = -1/\bigl(C(A-BK)^{-1}B\bigr)\\
+      &\dot{\hat x} = A\hat x + Bu + L(y - C\hat x),\quad \dot{\tilde x} = (A-LC)\tilde x
+    \end{align*}
+    \column{0.5\linewidth}
+    \textbf{Transfer functions}
+    \begin{align*}
+      &G(s) = C(sI-A)^{-1}B + D = b(s)/a(s)\\
+      &G(0) = D - CA^{-1}B = b_m/a_n\\
+      &\lim_{t\to\infty} f(t) = \lim_{s\to 0} sF(s),\quad \lim_{t\to 0} f(t) = \lim_{s\to\infty} sF(s)\\
+      &\frac{1}{ms^2+cs+k},\qquad \frac{K\wn^2}{s^2+2\zz\wn s+\wn^2}\\
+      &\ee^{-\tau s}\approx \frac{1-\tau s/2}{1+\tau s/2},\quad \arg \ee^{-\ii\ww\tau} = -\ww\tau
+    \end{align*}
+    \textbf{Frequency domain analysis}
+    \begin{align*}
+      &L = PC,\quad n_Z = n_P + n_N\\
+      &\gainmargin = 1/|L(\ii\ww_{\text{pc}})|,\quad \phasemargin = \ang{180} + \arg L(\ii\ww\gaincrossover)\\
+      &\phasemargin = \ww\gaincrossover\delaymargin,\quad \stabilitymargin = \min_\ww|1+L(\ii\ww)|
+    \end{align*}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Formula sheet (2/2): Module III}
-\scriptsize
-\begin{columns}[t]
-\column{0.5\linewidth}
-\textbf{PID}
-\begin{align*}
-&C(s) = \kkp + \frac{\kki}{s} + \frac{\kkd s}{1+s\TTf},\quad \TTi = \frac{\kkp}{\kki},\; \TTd = \frac{\kkd}{\kkp}\\
-&\TTf = \TTd/N,\quad 5\le N\le 20\\
-&P=\tfrac{b}{s+a},\;\text{PI}:\; \kkp = \tfrac{a_1-a}{b},\; \kki = \tfrac{a_2}{b}\\
-&\text{ITD: } \tfrac{a}{\tau s}\ee^{-\tau s},\quad \text{FOTD: } \tfrac{K}{1+sT}\ee^{-\tau s},\quad \tau_n = \tfrac{\tau}{\tau+T}\\
-&\text{relay: } k_c = \tfrac{4d}{\pi a},\quad \ww_c = 2\pi/T_c\\
-&I(t_{k+1}) = I(t_k) + \kki h e(t_k) + \tfrac{h}{T_{\text{aw}}}(\mathrm{sat}(u)-u)
-\end{align*}
-\textbf{Root locus}
-\begin{align*}
-&a(s) + k\,b(s) = 0,\quad \text{asymptote angles } \tfrac{\pi + 2l\pi}{\npoleexcess}
-\end{align*}
-\column{0.5\linewidth}
-\textbf{Sensitivity and loop shaping}
-\begin{align*}
-&S = \tfrac{1}{1+PC},\; T = \tfrac{PC}{1+PC},\; PS,\; CS,\quad S + T = 1\\
-&\Msens = \max_\ww|S(\ii\ww)| = 1/\stabilitymargin\\
-&T_r\wb\approx 3,\quad n\gaincrossover\approx -2 + \phasemargin/\ang{90}\\
-&C = k\tfrac{s+a}{s+b}:\; \text{lead } a<b,\; \text{lag } a>b
-\end{align*}
-\textbf{Robustness and limits}
-\begin{align*}
-&\delta = \Delta/P,\quad |\delta(\ii\ww)| < 1/|T(\ii\ww)|\\
-&\frac{\dee G_{yr}}{G_{yr}} = S\frac{\dee P}{P},\quad \frac{\dee G_{uw}}{G_{uw}} = -T\frac{\dee P}{P}\\
-&\operatorname{rank}[A-\lambda I\;\; B] = n\quad\text{(PBH)}\\
-&\textstyle\int_0^\infty \log|S(\ii\ww)|\,\dee\ww = \pi\sum p_k
-\end{align*}
-\end{columns}
+  \scriptsize
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \textbf{PID}
+    \begin{align*}
+      &C(s) = \kkp + \frac{\kki}{s} + \frac{\kkd s}{1+s\TTf},\quad \TTi = \frac{\kkp}{\kki},\; \TTd = \frac{\kkd}{\kkp}\\
+      &\TTf = \TTd/N,\quad 5\le N\le 20\\
+      &P=\tfrac{b}{s+a},\;\text{PI}:\; \kkp = \tfrac{a_1-a}{b},\; \kki = \tfrac{a_2}{b}\\
+      &\text{ITD: } \tfrac{a}{\tau s}\ee^{-\tau s},\quad \text{FOTD: } \tfrac{K}{1+sT}\ee^{-\tau s},\quad \tau_n = \tfrac{\tau}{\tau+T}\\
+      &\text{relay: } k_c = \tfrac{4d}{\pi a},\quad \ww_c = 2\pi/T_c\\
+      &I(t_{k+1}) = I(t_k) + \kki h e(t_k) + \tfrac{h}{T_{\text{aw}}}(\mathrm{sat}(u)-u)
+    \end{align*}
+    \textbf{Root locus}
+    \begin{align*}
+      &a(s) + k\,b(s) = 0,\quad \text{asymptote angles } \tfrac{\pi + 2l\pi}{\npoleexcess}
+    \end{align*}
+    \column{0.5\linewidth}
+    \textbf{Sensitivity and loop shaping}
+    \begin{align*}
+      &S = \tfrac{1}{1+PC},\; T = \tfrac{PC}{1+PC},\; PS,\; CS,\quad S + T = 1\\
+      &\Msens = \max_\ww|S(\ii\ww)| = 1/\stabilitymargin\\
+      &T_r\wb\approx 3,\quad n\gaincrossover\approx -2 + \phasemargin/\ang{90}\\
+      &C = k\tfrac{s+a}{s+b}:\; \text{lead } a<b,\; \text{lag } a>b
+    \end{align*}
+    \textbf{Robustness and limits}
+    \begin{align*}
+      &\delta = \Delta/P,\quad |\delta(\ii\ww)| < 1/|T(\ii\ww)|\\
+      &\frac{\dee G_{yr}}{G_{yr}} = S\frac{\dee P}{P},\quad \frac{\dee G_{uw}}{G_{uw}} = -T\frac{\dee P}{P}\\
+      &\operatorname{rank}[A-\lambda I\;\; B] = n\quad\text{(PBH)}\\
+      &\textstyle\int_0^\infty \log|S(\ii\ww)|\,\dee\ww = \pi\sum p_k
+    \end{align*}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Common pitfalls}
-\footnotesize
-\begin{columns}[t]
-\column{0.5\linewidth}
-\begin{itemize}
-\item \textbf{Units}: rad/s vs Hz; degrees vs radians (delay margin needs $\phasemargin$ in rad)
-\item \textbf{dB}: gain margin as a ratio vs $20\log_{10}$
-\item \textbf{Nyquist}: count encirclements of $-1$, not the origin; $n_P$ counts \emph{RHP} poles of $L$; clockwise is positive
-\item \textbf{Cancellation}: never cancel a RHP pole or zero; check internal stability (all of the Gang of Four)
-\item \textbf{Linearise about the equilibrium} (shift coordinates first)
-\item \textbf{Transforms}: notes use both $x=Tz$ (T3 Jordan form) and $z=Tx$ (T3 coordinate change, T4 canonical forms): check which
-\end{itemize}
-\column{0.5\linewidth}
-\begin{itemize}
-\item \textbf{Frequencies}: resonance $\wres = \wn\sqrt{1-2\zz^2}$ $\neq$ damped $\wdamp = \wn\sqrt{1-\zz^2}$
-\item \textbf{Rank}: $W_r$, $\Wob$ need rank $n$, not just `nonzero'
-\item \textbf{Integral action} needs $b_n\neq 0$ (no zero at $s=0$) for the augmented system to be reachable
-\item \textbf{Pure derivative} is improper: always filter
-\item \textbf{Saturation}: linear analysis ignores it; check for windup
-\item \textbf{Open-loop similarity} doesn't imply closed-loop similarity (T9)
-\end{itemize}
-\end{columns}
+  \footnotesize
+  \begin{columns}[t]
+    \column{0.5\linewidth}
+    \begin{itemize}
+      \item \textbf{Units}: rad/s vs Hz; degrees vs radians (delay margin needs $\phasemargin$ in rad)
+      \item \textbf{dB}: gain margin as a ratio vs $20\log_{10}$
+      \item \textbf{Nyquist}: count encirclements of $-1$, not the origin; $n_P$ counts \emph{RHP} poles of $L$; clockwise is positive
+      \item \textbf{Cancellation}: never cancel a RHP pole or zero; check internal stability (all of the Gang of Four)
+      \item \textbf{Linearise about the equilibrium} (shift coordinates first)
+      \item \textbf{Transforms}: notes use both $x=Tz$ (T3 Jordan form) and $z=Tx$ (T3 coordinate change, T4 canonical forms): check which
+    \end{itemize}
+    \column{0.5\linewidth}
+    \begin{itemize}
+      \item \textbf{Frequencies}: resonance $\wres = \wn\sqrt{1-2\zz^2}$ $\neq$ damped $\wdamp = \wn\sqrt{1-\zz^2}$
+      \item \textbf{Rank}: $W_r$, $\Wob$ need rank $n$, not just `nonzero'
+      \item \textbf{Integral action} needs $b_n\neq 0$ (no zero at $s=0$) for the augmented system to be reachable
+      \item \textbf{Pure derivative} is improper: always filter
+      \item \textbf{Saturation}: linear analysis ignores it; check for windup
+      \item \textbf{Open-loop similarity} doesn't imply closed-loop similarity (T9)
+    \end{itemize}
+  \end{columns}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1123,60 +1123,60 @@ Is the performance fundamentally limited? & RHP poles/zeros, delays, Bode integr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Self-test (1/3): Module I}
-\footnotesize
-\begin{enumerate}
-\item For $\ddot x + 6\dot x + 5x = f$, find the poles, $\zz$, and the steady-state response to a unit step force.
-  \uncover<2->{\par\alert{$s^2+6s+5=(s+1)(s+5)$: poles $-1$, $-5$. $\zz = 6/(2\sqrt5)\approx 1.34$ (overdamped). $x(\infty) = G(0) = 1/5$.}}
-\item The pendulum $\dot x_1 = x_2$, $\dot x_2 = \sin x_1 - cx_2$ has equilibria at $x_1 = 0$ and $x_1 = \pi$. Which is stable?
-  \uncover<3->{\par\alert{At $0$: $A=\Matr{0&1\\1&-c}$, $\lambda^2+c\lambda-1=0$ has a positive root: unstable (upright). At $\pi$: $A=\Matr{0&1\\-1&-c}$, stable for $c>0$.}}
-\item Why must a model be shifted to its equilibrium before writing $\dot x = Ax+Bu$?
-  \uncover<4->{\par\alert{A linear model has its only equilibrium at the origin; a constant offset makes it affine, not linear (T3).}}
-\end{enumerate}
+  \footnotesize
+  \begin{enumerate}
+    \item For $\ddot x + 6\dot x + 5x = f$, find the poles, $\zz$, and the steady-state response to a unit step force.
+      \uncover<2->{\par\alert{$s^2+6s+5=(s+1)(s+5)$: poles $-1$, $-5$. $\zz = 6/(2\sqrt5)\approx 1.34$ (overdamped). $x(\infty) = G(0) = 1/5$.}}
+    \item The pendulum $\dot x_1 = x_2$, $\dot x_2 = \sin x_1 - cx_2$ has equilibria at $x_1 = 0$ and $x_1 = \pi$. Which is stable?
+      \uncover<3->{\par\alert{At $0$: $A=\Matr{0&1\\1&-c}$, $\lambda^2+c\lambda-1=0$ has a positive root: unstable (upright). At $\pi$: $A=\Matr{0&1\\-1&-c}$, stable for $c>0$.}}
+    \item Why must a model be shifted to its equilibrium before writing $\dot x = Ax+Bu$?
+      \uncover<4->{\par\alert{A linear model has its only equilibrium at the origin; a constant offset makes it affine, not linear (T3).}}
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Self-test (2/3): Module II}
-\footnotesize
-\begin{enumerate}
-\item Is $A = \Matr{0&1\\0&0}$, $B=\Matr{0\\1}$ reachable? Design $K$ for closed-loop poles at $-2\pm 2\ii$.
-  \uncover<2->{\par\alert{$W_r = \Matr{0&1\\1&0}$, rank 2: reachable. $\det(sI-A+BK) = s^2 + k_2 s + k_1 = s^2+4s+8$, so $K = \Matr{8 & 4}$.}}
-\item For $L = k/\bigl(s(s+1)^2\bigr)$, for which $k$ is the closed loop stable?
-  \uncover<3->{\par\alert{$\arg L = -\ang{180}$ at $\ww=1$ where $L(\ii)=-k/2$: stable for $0<k<2$, so $\gainmargin = 2/k$.}}
-\item A loop has $\ww\gaincrossover = \SI{5}{rad/s}$ and $\phasemargin = \ang{45}$. Will an extra \SI{0.1}{s} delay destabilise it?
-  \uncover<4->{\par\alert{$\delaymargin = \phasemargin/\ww\gaincrossover = (\pi/4)/5 \approx \SI{0.157}{s} > \SI{0.1}{s}$: still stable, with reduced margin.}}
-\item Why does the observer not change the closed-loop poles set by $K$?
-  \uncover<5->{\par\alert{The $(x,\tilde x)$ dynamics are block triangular: $p(s) = \det(sI-A+BK)\det(sI-A+LC)$.}}
-\end{enumerate}
+  \footnotesize
+  \begin{enumerate}
+    \item Is $A = \Matr{0&1\\0&0}$, $B=\Matr{0\\1}$ reachable? Design $K$ for closed-loop poles at $-2\pm 2\ii$.
+      \uncover<2->{\par\alert{$W_r = \Matr{0&1\\1&0}$, rank 2: reachable. $\det(sI-A+BK) = s^2 + k_2 s + k_1 = s^2+4s+8$, so $K = \Matr{8 & 4}$.}}
+    \item For $L = k/\bigl(s(s+1)^2\bigr)$, for which $k$ is the closed loop stable?
+      \uncover<3->{\par\alert{$\arg L = -\ang{180}$ at $\ww=1$ where $L(\ii)=-k/2$: stable for $0<k<2$, so $\gainmargin = 2/k$.}}
+    \item A loop has $\ww\gaincrossover = \SI{5}{rad/s}$ and $\phasemargin = \ang{45}$. Will an extra \SI{0.1}{s} delay destabilise it?
+      \uncover<4->{\par\alert{$\delaymargin = \phasemargin/\ww\gaincrossover = (\pi/4)/5 \approx \SI{0.157}{s} > \SI{0.1}{s}$: still stable, with reduced margin.}}
+    \item Why does the observer not change the closed-loop poles set by $K$?
+      \uncover<5->{\par\alert{The $(x,\tilde x)$ dynamics are block triangular: $p(s) = \det(sI-A+BK)\det(sI-A+LC)$.}}
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Self-test (3/3): Module III}
-\footnotesize
-\begin{enumerate}
-\item Design a PI controller for $P = b/(s+a)$ giving closed-loop poles with $\zz$ and $\ww_0$.
-  \uncover<2->{\par\alert{$s^2 + (a+b\kkp)s + b\kki = s^2 + 2\zz\ww_0 s + \ww_0^2$: $\kkp = (2\zz\ww_0 - a)/b$, $\kki = \ww_0^2/b$.}}
-\item A relay with $d=1$ produces a process oscillation of amplitude $0.5$. What is the critical gain?
-  \uncover<3->{\par\alert{$k_c = 4d/(\pi a) = 4/(0.5\pi)\approx 2.55$.}}
-\item $L = 3/(s+1)^3$ has $\stabilitymargin = 0.464$. What is the peak sensitivity, and what does it mean?
-  \uncover<4->{\par\alert{$\Msens = 1/0.464\approx 2.2$: disturbances near $\ww_{\text{ms}}$ are amplified about $2.2\times$ by feedback.}}
-\item With integral action, what is the steady-state output after a step load disturbance?
-  \uncover<5->{\par\alert{$G_{yv}\approx s/\kki$ at low $\ww$, so by the final value theorem $y(\infty) = \lim_{s\to0} s\cdot\tfrac{s}{\kki}\cdot\tfrac{1}{s} = 0$.}}
-\item $L$ has one RHP pole at $s=2$. How does that change the Bode integral, and why does it matter?
-  \uncover<6->{\par\alert{$\int_0^\infty\log|S|\,\dee\ww = 2\pi > 0$: more sensitivity amplification overall, so a worse waterbed effect.}}
-\end{enumerate}
+  \footnotesize
+  \begin{enumerate}
+    \item Design a PI controller for $P = b/(s+a)$ giving closed-loop poles with $\zz$ and $\ww_0$.
+      \uncover<2->{\par\alert{$s^2 + (a+b\kkp)s + b\kki = s^2 + 2\zz\ww_0 s + \ww_0^2$: $\kkp = (2\zz\ww_0 - a)/b$, $\kki = \ww_0^2/b$.}}
+    \item A relay with $d=1$ produces a process oscillation of amplitude $0.5$. What is the critical gain?
+      \uncover<3->{\par\alert{$k_c = 4d/(\pi a) = 4/(0.5\pi)\approx 2.55$.}}
+    \item $L = 3/(s+1)^3$ has $\stabilitymargin = 0.464$. What is the peak sensitivity, and what does it mean?
+      \uncover<4->{\par\alert{$\Msens = 1/0.464\approx 2.2$: disturbances near $\ww_{\text{ms}}$ are amplified about $2.2\times$ by feedback.}}
+    \item With integral action, what is the steady-state output after a step load disturbance?
+      \uncover<5->{\par\alert{$G_{yv}\approx s/\kki$ at low $\ww$, so by the final value theorem $y(\infty) = \lim_{s\to0} s\cdot\tfrac{s}{\kki}\cdot\tfrac{1}{s} = 0$.}}
+    \item $L$ has one RHP pole at $s=2$. How does that change the Bode integral, and why does it matter?
+      \uncover<6->{\par\alert{$\int_0^\infty\log|S|\,\dee\ww = 2\pi > 0$: more sensitivity amplification overall, so a worse waterbed effect.}}
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Closing}
-\begin{itemize}
-\item Module I: \emph{model} the system and understand its behaviour through equilibria and eigenvalues
-\item Module II: \emph{analyse} feedback, in state space (pole placement, observers) and in frequency (transfer functions, Bode, Nyquist, margins)
-\item Module III: \emph{design} with PID and loop shaping, and respect the limits set by sensitivity, uncertainty, RHP zeros, delays and saturation
-\end{itemize}
-\bigskip
-\begin{center}
-\emph{Stability and performance are linked:\\ every design is a compromise.}
-\end{center}
-\bigskip
-\footnotesize
-Next steps for revision: work through the worked examples for each concept, redo the workshop problems, and retrace one running example from model to implementation.
+  \begin{itemize}
+    \item Module I: \emph{model} the system and understand its behaviour through equilibria and eigenvalues
+    \item Module II: \emph{analyse} feedback, in state space (pole placement, observers) and in frequency (transfer functions, Bode, Nyquist, margins)
+    \item Module III: \emph{design} with PID and loop shaping, and respect the limits set by sensitivity, uncertainty, RHP zeros, delays and saturation
+  \end{itemize}
+  \bigskip
+  \begin{center}
+    \emph{Stability and performance are linked:\\ every design is a compromise.}
+  \end{center}
+  \bigskip
+  \footnotesize
+  Next steps for revision: work through the worked examples for each concept, redo the workshop problems, and retrace one running example from model to implementation.
 \end{frame}
 
 \end{document}

@@ -2,21 +2,21 @@
 \usepackage{beamer-control-prac}
 \begin{document}
 
-	\TOPIC[1]{System Response}
-	\CONCEPT[2]{Week 2: Characterising and modelling systems}
+\TOPIC[1]{System Response}
+\CONCEPT[2]{Week 2: Characterising and modelling systems}
 
 \begin{frame}
-\frametitle{Introduction}
-In this practical, you will learn how to derive a first-principles model of the inertia disk plant as well as how to characterise its output response.
+  \frametitle{Introduction}
+  In this practical, you will learn how to derive a first-principles model of the inertia disk plant as well as how to characterise its output response.
 
-\vfill
+  \vfill
 
-This practical will consist of the following parts:
-\begin{itemize}
-\item First-principles modelling
-\item Characterising the output response and comparing real and simulated models
-\item Looping multiple simulations
-\end{itemize}
+  This practical will consist of the following parts:
+  \begin{itemize}
+    \item First-principles modelling
+    \item Characterising the output response and comparing real and simulated models
+    \item Looping multiple simulations
+  \end{itemize}
 \end{frame}
 
 
@@ -24,248 +24,248 @@ This practical will consist of the following parts:
 
 \begin{frame}{Deriving the model}
 
-Ensure you have done the initial housekeeping:
-\begin{itemize}
-\item Create a new folder for “\textsf{Prac\_2}” in your student U: drive;
-\item Copy the Simulink template (or your configured Simulink model) from Practical 1.
-\item Add an empty MATLAB script to the folder.
-\end{itemize}
+  Ensure you have done the initial housekeeping:
+  \begin{itemize}
+    \item Create a new folder for “\textsf{Prac\_2}” in your student U: drive;
+    \item Copy the Simulink template (or your configured Simulink model) from Practical 1.
+    \item Add an empty MATLAB script to the folder.
+  \end{itemize}
 
-We begin by deriving a first principles model of the inertia disk. A schematic diagram of the motor armature circuit is shown below.
+  We begin by deriving a first principles model of the inertia disk. A schematic diagram of the motor armature circuit is shown below.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=10cm]{prac2_schematic.png}
-	\caption{Motor armature circuit schematic diagram.}
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=10cm]{prac2_schematic.png}
+    \caption{Motor armature circuit schematic diagram.}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Deriving the model}
-The DC motor shaft with moment of inertia $J_m$ is connected to the load hub which is a metal disc used to mount the inertia disc and has a moment of inertia of $J_h$. The back-emf (electromotive) voltage $e_b(t)$ depends on the speed of the motor shaft, $\omega_m$, and the back-emf constant of the motor $k_m$ and opposes the current flow. The back-emf voltage is given by
-\begin{equation}
-	e_b(t) = k_m \omega _m (t)
-\end{equation}
-Using Kirchoff's Voltage Law, we can write
-\begin{equation}
-	v_m(t) - R_m i_m(t)-L_m \frac{\mathrm{d} i_m(t)}{\mathrm{d} t} - k_m \omega_m (t) = 0
-\end{equation}
+  The DC motor shaft with moment of inertia $J_m$ is connected to the load hub which is a metal disc used to mount the inertia disc and has a moment of inertia of $J_h$. The back-emf (electromotive) voltage $e_b(t)$ depends on the speed of the motor shaft, $\omega_m$, and the back-emf constant of the motor $k_m$ and opposes the current flow. The back-emf voltage is given by
+  \begin{equation}
+    e_b(t) = k_m \omega _m (t)
+  \end{equation}
+  Using Kirchoff's Voltage Law, we can write
+  \begin{equation}
+    v_m(t) - R_m i_m(t)-L_m \frac{\mathrm{d} i_m(t)}{\mathrm{d} t} - k_m \omega_m (t) = 0
+  \end{equation}
 
 \end{frame}
 
 \begin{frame}{Deriving the model}
-Since the motor inductance $L_m$ is much less than its resistance $R_m$, it can be ignored and we get
-\begin{equation}
-	i_m(t) = \frac{v_m(t) - k_m \omega_m (t)}{R_m} .
-\end{equation}
-The motor shaft equation is
-\begin{equation}
-	(J_m+J_h+J_d)\dot{\omega}_m (t) + D_r \omega _m = \tau_m(t)
-\end{equation}
-where $D_r$ is the rotor viscous damping coefficient and $\tau_m$ is the applied torque to the DC motor based on the current,
-\begin{equation}
-	\tau_m(t) = k_m i_m (t).
-\end{equation}
-The moment of inertia about the disk can be determined by
-\begin{equation}
-	J_d = \tfrac{1}{2} m_d r_d^2.
-\end{equation}
+  Since the motor inductance $L_m$ is much less than its resistance $R_m$, it can be ignored and we get
+  \begin{equation}
+    i_m(t) = \frac{v_m(t) - k_m \omega_m (t)}{R_m} .
+  \end{equation}
+  The motor shaft equation is
+  \begin{equation}
+    (J_m+J_h+J_d)\dot{\omega}_m (t) + D_r \omega _m = \tau_m(t)
+  \end{equation}
+  where $D_r$ is the rotor viscous damping coefficient and $\tau_m$ is the applied torque to the DC motor based on the current,
+  \begin{equation}
+    \tau_m(t) = k_m i_m (t).
+  \end{equation}
+  The moment of inertia about the disk can be determined by
+  \begin{equation}
+    J_d = \tfrac{1}{2} m_d r_d^2.
+  \end{equation}
 \end{frame}
 
 
 \begin{frame}{Deriving the model}
-These linear differential equations can be assembled in a state space representation as
-\begin{equation}
-	\dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad
-\end{equation}
-where the state and output vectors are
-\begin{equation}
-	\mathbf{x} = \begin{bmatrix}
-	\theta_m \\ \omega_m
-	\end{bmatrix}
-	\quad \text{and} \quad \mathbf{y} = \theta_m .
-\end{equation}
-Setting the input as $\mathbf{u}=v_m$, the matrices are
-\begin{equation}
-	\mathbf{A}=\begin{bmatrix}
-		0 & 1 \\
-		0 & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_d)}\right)
-	\end{bmatrix},
-	\mathbf{B} = \begin{bmatrix}
-		0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_d)}
-	\end{bmatrix},
-	\mathbf{C} = \begin{bmatrix}
-		1 & 0
-	\end{bmatrix},
-	\mathbf{D} = \begin{bmatrix}
-		0
-	\end{bmatrix}
-\end{equation}
+  These linear differential equations can be assembled in a state space representation as
+  \begin{equation}
+    \dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad
+  \end{equation}
+  where the state and output vectors are
+  \begin{equation}
+    \mathbf{x} = \begin{bmatrix}
+      \theta_m \\ \omega_m
+    \end{bmatrix}
+    \quad \text{and} \quad \mathbf{y} = \theta_m .
+  \end{equation}
+  Setting the input as $\mathbf{u}=v_m$, the matrices are
+  \begin{equation}
+    \mathbf{A}=\begin{bmatrix}
+      0 & 1 \\
+      0 & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_d)}\right)
+    \end{bmatrix},
+    \mathbf{B} = \begin{bmatrix}
+      0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_d)}
+    \end{bmatrix},
+    \mathbf{C} = \begin{bmatrix}
+      1 & 0
+    \end{bmatrix},
+    \mathbf{D} = \begin{bmatrix}
+      0
+    \end{bmatrix}
+  \end{equation}
 \end{frame}
 
 \begin{frame}{Simulating the model}
-The required parameter values for the QUBE inertia disk are $R_m=8.4\Omega$, $k_m=0.042$ V/(rad/s), $D_r=2\times 10^{-5}$ N.m.s/rad, $J_m = 4\times 10^{-6}$ kg.m$^2$, $J_h = 0.65 \times 10^{-6}$ kg.m$^2$, $m_d=0.053$ kg, and $r_d = 0.0248$ m.
+  The required parameter values for the QUBE inertia disk are $R_m=8.4\Omega$, $k_m=0.042$ V/(rad/s), $D_r=2\times 10^{-5}$ N.m.s/rad, $J_m = 4\times 10^{-6}$ kg.m$^2$, $J_h = 0.65 \times 10^{-6}$ kg.m$^2$, $m_d=0.053$ kg, and $r_d = 0.0248$ m.
 
-Using these values
-\begin{enumerate}
-	\item Define the matrices $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ in Matlab
-	\item Use the code on the following slide to set up the state space model in Matlab
-	\item Run the code to simulate the systems reponse to a step input
-\end{enumerate}
+  Using these values
+  \begin{enumerate}
+    \item Define the matrices $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ in Matlab
+    \item Use the code on the following slide to set up the state space model in Matlab
+    \item Run the code to simulate the systems reponse to a step input
+  \end{enumerate}
 
-How would you find (and plot) the slope of this line?
+  How would you find (and plot) the slope of this line?
 
-\PORTFOLIO{Take a screenshot of the figure output from 0-1.5 seconds.}
+  \PORTFOLIO{Take a screenshot of the figure output from 0-1.5 seconds.}
 
 \end{frame}
 
 \begin{frame}{Simulating the model}
-\includematlab{prac1.m}{part1}
-\end{frame}
-
-
-\begin{frame}{Simulating the model}
-Similarly, we can use Simulink to simulate the state space model.
-\begin{enumerate}
-	\item Create a state-space block in Simulink and use the $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ matrices as defined by your Matlab script (Simulink can use these matrices if they are in your Matlab workspace)
-	\item Input the same step input into the state-space block as the real plant and connect the output to the same scope
-	\item Run the Simulink model and compare the model with the physical plant
-\end{enumerate}
-
-What do you notice?
-
-Remember to always label your plot axes and signals (lines in the Simulink block diagram).
-
-\PORTFOLIO{Take a screenshot of the scope output.}
-
+  \includematlab{prac1.m}{part1}
 \end{frame}
 
 
 \begin{frame}{Simulating the model}
-	 \begin{figure}
-		\centering
-		\includegraphics[width=10cm]{prac2_ss_simulink.png}
-		\caption{Simulink model with physical plant and state space model.}
-	\end{figure}
+  Similarly, we can use Simulink to simulate the state space model.
+  \begin{enumerate}
+    \item Create a state-space block in Simulink and use the $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ matrices as defined by your Matlab script (Simulink can use these matrices if they are in your Matlab workspace)
+    \item Input the same step input into the state-space block as the real plant and connect the output to the same scope
+    \item Run the Simulink model and compare the model with the physical plant
+  \end{enumerate}
+
+  What do you notice?
+
+  Remember to always label your plot axes and signals (lines in the Simulink block diagram).
+
+  \PORTFOLIO{Take a screenshot of the scope output.}
+
+\end{frame}
+
+
+\begin{frame}{Simulating the model}
+  \begin{figure}
+    \centering
+    \includegraphics[width=10cm]{prac2_ss_simulink.png}
+    \caption{Simulink model with physical plant and state space model.}
+  \end{figure}
 \end{frame}
 
 
 \SUBCONCEPT{Characterising the output response}
 
 \begin{frame}{Parameter calculation}
-An alternative method to deriving a first principles model is to identify the system by fitting a curve to the output response.
+  An alternative method to deriving a first principles model is to identify the system by fitting a curve to the output response.
 
-\begin{itemize}
-	\item The open loop (no feedback) response of the inertia disk may be modelled as an Integrator with Time Delay (ITD) model which requires two parameters, $a$ and $\tau$
-	\item The intercept $a$ and the time lag $\tau$ may be calculated according to the definition in the notes (also shown in the following figure)
-\end{itemize}
+  \begin{itemize}
+    \item The open loop (no feedback) response of the inertia disk may be modelled as an Integrator with Time Delay (ITD) model which requires two parameters, $a$ and $\tau$
+    \item The intercept $a$ and the time lag $\tau$ may be calculated according to the definition in the notes (also shown in the following figure)
+  \end{itemize}
 
 
 \end{frame}
 
 \begin{frame}{Parameter calculation}
-	\begin{figure}
-		\centering
-		\includegraphics[width=8cm]{itd-at}
-		\caption{Integrator with Time Delay (ITD) model.}
-	\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=8cm]{itd-at}
+    \caption{Integrator with Time Delay (ITD) model.}
+  \end{figure}
 \end{frame}
 
 \begin{frame}{Diagnostic --- model check}
 
-The Simulink real-time hardware connection (Quarc) runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default.
-To make sure all data is collected correctly:
-\begin{itemize}
+  The Simulink real-time hardware connection (Quarc) runs the model in Simulink External Mode, whose data buffer holds 1000 samples per run by default.
+  To make sure all data is collected correctly:
+  \begin{itemize}
     \item Ensure the sample time is \qty{0.01}{s} (\textsf{Modelling} $\to$ \textsf{Model Settings} $\to$ \textsf{Solver} $\to$ \textsf{Solver details} $\to$ \textsf{Sample time})
     \item Set the \textsf{Stop Time} of the model to \qty{9}{s}
-\end{itemize}
-When characterising the system to find $\tau$ and $a$ based on the ITD model, we need to ensure the step response starts at $t=\qty{0}{s}$:
-\begin{itemize}
+  \end{itemize}
+  When characterising the system to find $\tau$ and $a$ based on the ITD model, we need to ensure the step response starts at $t=\qty{0}{s}$:
+  \begin{itemize}
     \item Double click the Step Input block and change the Step Time to \texttt{0}
-\end{itemize}
+  \end{itemize}
 
 \end{frame}
 
 \begin{frame}{Characterising the response}
-	Approximate the ITD parameters $a$ and $\tau$ of the open-loop inertia disk.
-	\begin{enumerate}
-		\item Run the Simulink model (\textsf{Monitor \& Tune} button) to receive the output response to a step input
-		\item Open the Scope and click Tools > Measurements > Cursor Measurements to assist in identifying individual points
-		\item The vertical lines which appear may be dragged left and right to select points and specific data is given in the Cursor Measurements box on the right of the scope window
-		\item Use the following Matlab code to simulate the ITD model
-		\end{enumerate}
-	\includematlab{prac1.m}{part2}
+  Approximate the ITD parameters $a$ and $\tau$ of the open-loop inertia disk.
+  \begin{enumerate}
+    \item Run the Simulink model (\textsf{Monitor \& Tune} button) to receive the output response to a step input
+    \item Open the Scope and click Tools > Measurements > Cursor Measurements to assist in identifying individual points
+    \item The vertical lines which appear may be dragged left and right to select points and specific data is given in the Cursor Measurements box on the right of the scope window
+    \item Use the following Matlab code to simulate the ITD model
+  \end{enumerate}
+  \includematlab{prac1.m}{part2}
 \end{frame}
 
 \begin{frame}{Simulink scope measurements}
-	\begin{figure}
-		\centering
-		\includegraphics[width=10cm]{prac2_scope_slope.PNG}
-		\caption{A quick method for finding ITD model parameters. Ensure the system has reached a `steady-state' response.}
-	\end{figure}
-    \PORTFOLIO{Show how you determined your ITD model parameters.}
+  \begin{figure}
+    \centering
+    \includegraphics[width=10cm]{prac2_scope_slope.PNG}
+    \caption{A quick method for finding ITD model parameters. Ensure the system has reached a `steady-state' response.}
+  \end{figure}
+  \PORTFOLIO{Show how you determined your ITD model parameters.}
 \end{frame}
 
 \begin{frame}{Model comparison}
-    \begin{itemize}
-        \item Compare all results on the same plot. Ensure the scope is appropriately set up to log data. If unsure, refer to Practical 1 (or your Portfolio).
-        \item You may need to adjust the time-domain signals to ensure all step responses begin at the same time. Alternatively, you can adjust the step starting time within Simulink.
-        \item What is the difference between the MATLAB and Simulink state-space models?
-    \end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[width=5cm]{prac2_combined_plot_zoom.PNG}\hfill
-        \includegraphics[width=5cm]{prac2_combined_plot.PNG}
-		\caption{Comparison of the state-space model, ITD model, and real system.}
-	\end{figure}
+  \begin{itemize}
+    \item Compare all results on the same plot. Ensure the scope is appropriately set up to log data. If unsure, refer to Practical 1 (or your Portfolio).
+    \item You may need to adjust the time-domain signals to ensure all step responses begin at the same time. Alternatively, you can adjust the step starting time within Simulink.
+    \item What is the difference between the MATLAB and Simulink state-space models?
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=5cm]{prac2_combined_plot_zoom.PNG}\hfill
+    \includegraphics[width=5cm]{prac2_combined_plot.PNG}
+    \caption{Comparison of the state-space model, ITD model, and real system.}
+  \end{figure}
 \end{frame}
 \begin{frame}{Model comparison}
-\PORTFOLIO{Take a screenshot of the figure(s).}
+  \PORTFOLIO{Take a screenshot of the figure(s).}
 
-    \PORTFOLIO{Comment on what model `worked best'.}
+  \PORTFOLIO{Comment on what model `worked best'.}
 \end{frame}
 
 \SUBCONCEPT{Looping multiple simulations (extension material)}
 
 \begin{frame}{Iterating through Simulink parameters}
-    \begin{enumerate}
-        \item Copy the following code and create two arrays (\texttt{amp} and \texttt{freq}) with 2 different parameters each.
-    \end{enumerate}
-    \includematlab{Prac_2.m}{part1}
+  \begin{enumerate}
+    \item Copy the following code and create two arrays (\texttt{amp} and \texttt{freq}) with 2 different parameters each.
+  \end{enumerate}
+  \includematlab{Prac_2.m}{part1}
 \end{frame}
 \begin{frame}{Looping multiple simulations}
-    \begin{enumerate}
-        \setcounter{enumi}{1}
-        \item Copy the following code which loops through all combinations of  \texttt{amp} and \texttt{freq}. In each loop the Simulink model is updated and started, then the code waits for the simulation to finish.
-    \end{enumerate}
-    \includematlab{Prac_2.m}{part2}
+  \begin{enumerate}
+    \setcounter{enumi}{1}
+    \item Copy the following code which loops through all combinations of  \texttt{amp} and \texttt{freq}. In each loop the Simulink model is updated and started, then the code waits for the simulation to finish.
+  \end{enumerate}
+  \includematlab{Prac_2.m}{part2}
 \end{frame}
 
 \begin{frame}{Looping multiple simulations}
-    \begin{enumerate}
-        \setcounter{enumi}{2}
-        \item In Simulink, replace the Step block with the Sine Wave block.
-        \item Copy the following code and find an appropriate location to place it!
-    \end{enumerate}
-    \includematlab{Prac_2.m}{part3}
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+    \item In Simulink, replace the Step block with the Sine Wave block.
+    \item Copy the following code and find an appropriate location to place it!
+  \end{enumerate}
+  \includematlab{Prac_2.m}{part3}
 \end{frame}
 
 \begin{frame}{.}
-	\begin{figure}
-		\centering
-		\includegraphics[width=9cm]{prac2_iteration.png}
-		\caption{Observing and simulating the system across a range of sinusoidal inputs, varying voltage (amplitude) and frequency.}
-	\end{figure}
-    \vspace*{-2ex}
-    \PORTFOLIO{\small Take a screenshot of your simulated model.}
-    \PORTFOLIO{\small Comment on the state-space model accuracy with varying parameters.}
+  \begin{figure}
+    \centering
+    \includegraphics[width=9cm]{prac2_iteration.png}
+    \caption{Observing and simulating the system across a range of sinusoidal inputs, varying voltage (amplitude) and frequency.}
+  \end{figure}
+  \vspace*{-2ex}
+  \PORTFOLIO{\small Take a screenshot of your simulated model.}
+  \PORTFOLIO{\small Comment on the state-space model accuracy with varying parameters.}
 \end{frame}
 
 \begin{frame}{Next week}
-This week you derived a state-space model of the inertia disk and characterised its output as an ITD model.
+  This week you derived a state-space model of the inertia disk and characterised its output as an ITD model.
 
-When we start looking at controlling a system to reach a desired output we will see that deriving models or characterising output responses give us methods of determining good initial control gains for our controllers.
+  When we start looking at controlling a system to reach a desired output we will see that deriving models or characterising output responses give us methods of determining good initial control gains for our controllers.
 
-Next week we will be introduced to the concept of feedback to control the inertia disk to reach a desired angle.
+  Next week we will be introduced to the concept of feedback to control the inertia disk to reach a desired angle.
 \end{frame}
 
 
