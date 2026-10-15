@@ -37,23 +37,23 @@
 \begin{frame}{Integral action}
 Defn $z$, the integral of the error between the output $y$ and the desired output $r$:
 \begin{equation}
-z = \int y-r \,\mathrm{d}t \,.
+	z = \int y-r \,\mathrm{d}t \,.
 \end{equation}
 Add integral feedback to the controller, now dependent on the state $x$, desired output $r$, and new $z$ term:
 \begin{equation}
-  u = -K x - \kki z + k_f r \,.
+	u = -K x - \kki z + k_f r \,.
 \end{equation}
 Include this in the model by augmenting the system with the new state, $z$:
 \begin{equation}
-  \frac{\mathrm{d}}{\mathrm{d} t} 
-\begin{bmatrix}
-	x \\ z
-\end{bmatrix} = 
-\begin{bmatrix}
-	Ax+Bu\\ y-r
-\end{bmatrix} = \begin{bmatrix}
-Ax+Bu\\ Cx-r
-\end{bmatrix}.
+	  \frac{\mathrm{d}}{\mathrm{d} t}
+	\begin{bmatrix}
+		x \\ z
+	\end{bmatrix} =
+	\begin{bmatrix}
+		Ax+Bu\\ y-r
+	\end{bmatrix} = \begin{bmatrix}
+	Ax+Bu\\ Cx-r
+	\end{bmatrix}.
 \end{equation}
 To stabilise this system we require $\dot{z}=0$ and therefore $y=r$  (the output matches the desired output).\\
 \end{frame}
@@ -63,27 +63,29 @@ To stabilise this system we require $\dot{z}=0$ and therefore $y=r$  (the output
 \begin{frame}{Example}
 The linearised dynamics around an equilibrium point $v_e$, $u_e$, of a cruise control system are 
 \begin{equation}
-  \tfrac{\mathrm{d}}{\mathrm{d}t} x = -ax-b_g\theta +bw, 
-  \quad y=v=x+v_e.
+	\tfrac{\mathrm{d}}{\mathrm{d}t} x = -ax-b_g\theta +bw,
+	\quad y=v=x+v_e.
 \end{equation}
 The error term would be:
 \begin{equation}
-   \tfrac{\mathrm{d}}{\mathrm{d}t} z = y-v_r = x+v_e-v_r, 
+	\tfrac{\mathrm{d}}{\mathrm{d}t} z = y-v_r = x+v_e-v_r,
 \end{equation}
 The system may be augmented with an integrator to become
-\begin{equation}\frac{\mathrm{d}}{\mathrm{d}t} \begin{bmatrix}
+\begin{equation}
+	\frac{\mathrm{d}}{\mathrm{d}t} \begin{bmatrix}
+		x \\ z
+	\end{bmatrix} = \begin{bmatrix}
+	-a & 0 \\ 1 & 0
+	\end{bmatrix}  \begin{bmatrix}
 	x \\ z
-\end{bmatrix} = \begin{bmatrix}
--a & 0 \\ 1 & 0
-\end{bmatrix}  \begin{bmatrix}
-x \\ z
-\end{bmatrix} +  \begin{bmatrix}
-b \\ 0
-\end{bmatrix} w +  \begin{bmatrix}
--b_g\\ 0
-\end{bmatrix} \theta +  \begin{bmatrix}
-0 \\ v_e-v_r
-\end{bmatrix}\end{equation}
+	\end{bmatrix} +  \begin{bmatrix}
+	b \\ 0
+	\end{bmatrix} w +  \begin{bmatrix}
+	-b_g\\ 0
+	\end{bmatrix} \theta +  \begin{bmatrix}
+	0 \\ v_e-v_r
+	\end{bmatrix}
+\end{equation}
 
 The constants $a$, $b$, $b_g$ depend on properties of the system, 
 $x=v-v_e$ is the speed around the equilibrium, 
@@ -94,15 +96,21 @@ $\theta$ is the angle of the road.
 \begin{frame}{Example continued}
 The controller will be of the form 
 \begin{equation}
-w=-\kkp x-\kki z+k_fv_r=-Kx+k_fv_r,  \qquad K = \Matr{\kkp & \kki}
+	w=-\kkp x-\kki z+k_fv_r=-Kx+k_fv_r,  \qquad K = \Matr{\kkp & \kki}
 \end{equation}
 where $v_r$ is the desired reference speed.
 If we wish to design the closed-loop system to have the desired characteristic polynomial
-\begin{equation}p(s)=s^2+a_1s+a_2\end{equation}
+\begin{equation}
+	p(s)=s^2+a_1s+a_2
+\end{equation}
 then we must compare with the characteristic polynomial of 
-\begin{equation}\operatorname{det}(sI-A+BK) = s^2+(b\kkp+a)s+b\kki.\end{equation}
+\begin{equation}
+	\operatorname{det}(sI-A+BK) = s^2+(b\kkp+a)s+b\kki.
+\end{equation}
 Therefore, 
-\begin{equation}\kkp=\frac{a_1-a}{b}, \quad \kki=\frac{a_2}{b}, \quad k_f=\frac{a_1}{a}.\end{equation}
+\begin{equation}
+	\kkp=\frac{a_1-a}{b}, \quad \kki=\frac{a_2}{b}, \quad k_f=\frac{a_1}{a}.
+\end{equation}
 \end{frame}
 
 \begin{frame}{Example continued}
@@ -121,10 +129,12 @@ The figure below shows an example of the cruise control system with reference sp
 \begin{itemize}
 \item As we have seen, eigenvalue assignment requires a system to be reachable
 \item The reachability matrix for the augmented system is
-\begin{equation}W_r = \begin{bmatrix}
-	B & AB & \cdots & A^n B \\
-	0 & CB & \cdots & CA^{n-1}B
-\end{bmatrix}\end{equation}
+\begin{equation}
+	W_r = \begin{bmatrix}
+		B & AB & \cdots & A^n B \\
+		0 & CB & \cdots & CA^{n-1}B
+	\end{bmatrix}
+\end{equation}
 \item The condition of reachability for the augmented system is equivalent to the condition that $b_n\neq 0$ (the original system does not contain a pure derivative term in the input/output response)
 \item In the previous example we see that if $b=0$, there are no values of $\kki$ that make the constant term of our characteristic polynomial equal to the constant term of the desired characteristic polynomial $a_2$
 \end{itemize}

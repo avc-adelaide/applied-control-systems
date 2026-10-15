@@ -49,8 +49,12 @@ where $f$ is the weighting kernel $f(\omega)=\frac{2}{\pi^2} \log \left|\frac{\o
 	\begin{gather}G(s)=s^n\end{gather}
 \begin{itemize}
 	\item We have $\log G(s) = n\log s$ and hence $\tfrac{\mathrm{d}\log G(s)}{\mathrm{d} \log s}=n$ so
-	\begin{equation}\operatorname{arg}G(\jj\omega_0) = \frac{\pi}{2}\int^\infty_0 f(\omega) \frac{\mathrm{d}\log |G(\jj\omega)|}{\mathrm{d}\log \omega} \frac{\mathrm{d}\omega}{\omega}=n\frac{\pi}{2}\int^\infty_0 f(\omega)  \frac{\mathrm{d}\omega}{\omega}\end{equation}
-	\begin{equation}\operatorname{arg}G(\jj\omega_0) = n\frac{\pi}{2}\end{equation}
+	\begin{equation}
+		\operatorname{arg}G(\jj\omega_0) = \frac{\pi}{2}\int^\infty_0 f(\omega) \frac{\mathrm{d}\log |G(\jj\omega)|}{\mathrm{d}\log \omega} \frac{\mathrm{d}\omega}{\omega}=n\frac{\pi}{2}\int^\infty_0 f(\omega)  \frac{\mathrm{d}\omega}{\omega}
+	\end{equation}
+	\begin{equation}
+		\operatorname{arg}G(\jj\omega_0) = n\frac{\pi}{2}
+	\end{equation}
 	\item Therefore, if the gain curve has a constant slope $n$, the phase curve is a horizontal line $\operatorname{arg}G(\jj\omega)=\tfrac{n\pi}{2}$
 \end{itemize}
 \end{frame}
@@ -101,7 +105,7 @@ In the below plots, the phase curve of the corresponding minimum phase system wi
 \item Initially introduced in \AMref*{Example 3.11 and Example 6.13}
 \item TF for steering angle to lateral position:
 \begin{equation}
-    P(s) = \frac{av_0 s + v_0^2}{bs^2}
+	P(s) = \frac{av_0 s + v_0^2}{bs^2}
 \end{equation}
 where $v_0$ is the vehicle velocity ($a,b>0$)
 \item Plant has a zero at $s=-v_0/a$

@@ -38,11 +38,17 @@
 \begin{frame}{Controller structure}
 	\begin{itemize}
 		\item Consider a system described by
-		\begin{equation} \frac{\mathrm{d} x}{\mathrm{d} t}=A x+B u, \quad y=C x+D u\end{equation}
+		\begin{equation}
+			\frac{\mathrm{d} x}{\mathrm{d} t}=A x+B u, \quad y=C x+D u
+		\end{equation}
 		\item A linear control law dependent on the state $x$ and reference input $r$ can be given by 
-		\begin{equation}u = -Kx + k_f r\end{equation} 
+		\begin{equation}
+			u = -Kx + k_f r
+		\end{equation} 
 		giving the closed loop state space representation 
-		\begin{equation}\frac{\mathrm{d} x}{\mathrm{d} t} = (A-BK)x + Bk_f r \end{equation}
+		\begin{equation}
+			\frac{\mathrm{d} x}{\mathrm{d} t} = (A-BK)x + Bk_f r
+		\end{equation}
 	\end{itemize}
 \end{frame}
 
@@ -51,7 +57,9 @@
 	\begin{itemize}
 		\item We can therefore determine the characteristic polynomial of the closed loop system from our state space representation
 		\item Comparing this to a \textit{desired} characteristic polynomial,
-		\begin{equation}p(s) = s^n + p_1 s^{n-1} + \cdots p_{n-1} s + p_n\end{equation} 
+		\begin{equation}
+			p(s) = s^n + p_1 s^{n-1} + \cdots p_{n-1} s + p_n
+		\end{equation} 
 		we can design our gains $K$ and $k_f$ to meet performance specifications 
 		\item Typically we want a stable equilibrium point, but maybe we care about rise time, settling time, overshoot as well 
 		\item See \textbf{Example 7.4 Vehicle Steering} for a worked example
@@ -63,24 +71,30 @@
 \begin{frame}{Reachable canonical form}
 \begin{itemize}
 \item Consider a system in reachable canonical form
-\begin{equation}\frac{\mathrm{d} z}{\mathrm{d} t}=\tilde{A} z+\tilde{B} u=\begin{bmatrix}
-	-a_1 & -a_2 & -a_3 & \ldots & -a_n \\
-	1 & 0 & & &  \\
-	& 1 & 0 & & \\
-	& & \ddots & \ddots & \\
-	& & & 1 & 0
-\end{bmatrix} z+\begin{bmatrix}
-	1 \\
-	0 \\
-	0 \\
-	\vdots \\
-	0
-\end{bmatrix} u\end{equation}
-\begin{equation}  y=\tilde{C} z=\begin{bmatrix}
-	b_1 & b_2 & \cdots & b_n
-\end{bmatrix}z \end{equation}
+\begin{equation}
+	\frac{\mathrm{d} z}{\mathrm{d} t}=\tilde{A} z+\tilde{B} u=\begin{bmatrix}
+		-a_1 & -a_2 & -a_3 & \ldots & -a_n \\
+		1 & 0 & & &  \\
+		& 1 & 0 & & \\
+		& & \ddots & \ddots & \\
+		& & & 1 & 0
+	\end{bmatrix} z+\begin{bmatrix}
+		1 \\
+		0 \\
+		0 \\
+		\vdots \\
+		0
+	\end{bmatrix} u
+\end{equation}
+\begin{equation}
+	y=\tilde{C} z=\begin{bmatrix}
+		b_1 & b_2 & \cdots & b_n
+	\end{bmatrix}z
+\end{equation}
 \item From the \alert{Reachability} lecture slides, the open loop system has characteristic polynomial
-\begin{equation}\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n\end{equation}
+\begin{equation}
+	\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n
+\end{equation}
 \end{itemize}
 \end{frame}
 
@@ -88,29 +102,33 @@
 	\begin{itemize}
 		\item 
 		For control law 
-		\begin{equation} 
-		  u = -\tilde{K} z + k_f r
-		    = -\tilde{k}_1 z_1 - \tilde{k}_2 z_2 - \cdots - \tilde{k}_n z_n + k_f r,
+		\begin{equation}
+			u = -\tilde{K} z + k_f r
+			  = -\tilde{k}_1 z_1 - \tilde{k}_2 z_2 - \cdots - \tilde{k}_n z_n + k_f r,
 		\end{equation}
 		the closed loop system is 
 		\small
-		\begin{equation}  \frac{\mathrm{d} z}{\mathrm{d} t}=\begin{bmatrix}
-			-a_1-\tilde{k}_1 & -a_2-\tilde{k}_2 & -a_3-\tilde{k}_3 & \ldots & -a_n-\tilde{k}_n \\
-			1 & 0 & & & \\
-			& 1 & 0 & & \\
-			&  & \ddots & \ddots & \\
-			& & & 1 & 0
-		\end{bmatrix} z+\begin{bmatrix}
-			k_{\mathrm{f}} \\
-			0 \\
-			0 \\
-			\vdots \\
-			0
-		\end{bmatrix} r  \end{equation}
+		\begin{equation}
+			\frac{\mathrm{d} z}{\mathrm{d} t}=\begin{bmatrix}
+				-a_1-\tilde{k}_1 & -a_2-\tilde{k}_2 & -a_3-\tilde{k}_3 & \ldots & -a_n-\tilde{k}_n \\
+				1 & 0 & & & \\
+				& 1 & 0 & & \\
+				&  & \ddots & \ddots & \\
+				& & & 1 & 0
+			\end{bmatrix} z+\begin{bmatrix}
+				k_{\mathrm{f}} \\
+				0 \\
+				0 \\
+				\vdots \\
+				0
+			\end{bmatrix} r
+		\end{equation}
 		\normalsize
-		\begin{equation}y = \begin{bmatrix}
-			b_1 & b_2 & \cdots & b_n
-		\end{bmatrix}z\end{equation}
+		\begin{equation}
+			y = \begin{bmatrix}
+				b_1 & b_2 & \cdots & b_n
+			\end{bmatrix}z
+		\end{equation}
 		\item The closed loop system has characteristic polynomial
 		\begin{align}
 		\operatorname{det}(sI-A+BK) &= s^n+\left(a_1+\tilde{k}_1\right) s^{n-1}+\left(a_2+\tilde{k}_2\right) s^{n-2}\\
@@ -122,11 +140,15 @@
 \begin{frame}{Reachable canonical form}
 \begin{itemize}
 	\item Therefore, we find that relating the desired characteristic polynomial to the closed loop characteristic polynomial we have
-	\begin{equation}\tilde{K} = \begin{bmatrix}
-		p_1-a_1 & p_2-a_2 & \cdots & p_n-a_n
-	\end{bmatrix}\end{equation}
+	\begin{equation}
+		\tilde{K} = \begin{bmatrix}
+			p_1-a_1 & p_2-a_2 & \cdots & p_n-a_n
+		\end{bmatrix}
+	\end{equation}
 	\item Further, to have zero frequency gain equal to unity we have
-	\begin{equation}k_f = \frac{a_n+\tilde{k}_n}{b_n}=\frac{p_n}{b_n}\end{equation}
+	\begin{equation}
+		k_f = \frac{a_n+\tilde{k}_n}{b_n}=\frac{p_n}{b_n}
+	\end{equation}
 \end{itemize}
 \end{frame}
 
@@ -137,17 +159,21 @@
 This process allows us to assign the eigenvalues of the closed loop system to the eigenvalues of a desired system only if the system is reachable
 \begin{enumerate}
 	\item Given a linear state space model, $A$, $B$, $C$, and $D$, calculate the characteristic polynomial
-	\begin{equation}\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n\end{equation}
+	\begin{equation}
+		\operatorname{det}(sI-A) = s^n+a_1s^{n-1}+\cdots + a_{n-1}s+a_n
+	\end{equation}
 	\item Calculate gains in reachable canonical form  
-	by determining  \begin{equation}W_r = \begin{bmatrix}
-		B & AB & A^2 B & \cdots & A^{n-1}B
-	\end{bmatrix},\quad \tiny{\tilde{W}_r = \begin{bmatrix}
-		1 & -a_1 & a_1^2-a_2 & & \\
-		0 & 1 & -a_1 & & * \\
-		& & \ddots & \ddots & \\
-		&  & & 1 & -a_1 \\
-		& & & & 1
-	\end{bmatrix}}\end{equation}
+	by determining  \begin{equation}
+		W_r = \begin{bmatrix}
+			B & AB & A^2 B & \cdots & A^{n-1}B
+		\end{bmatrix},\quad \tiny{\tilde{W}_r = \begin{bmatrix}
+			1 & -a_1 & a_1^2-a_2 & & \\
+			0 & 1 & -a_1 & & * \\
+			& & \ddots & \ddots & \\
+			&  & & 1 & -a_1 \\
+			& & & & 1
+		\end{bmatrix}}
+	\end{equation}
 \end{enumerate}
 \end{frame}
 
@@ -155,12 +181,18 @@ This process allows us to assign the eigenvalues of the closed loop system to th
 \begin{enumerate}
 	\setcounter{enumi}{2}
 	\item The feedback gains to give a closed loop system with unity zero frequency gain between $r$ and $y$ and characteristic polynomial
-	\begin{equation}p(s) = s^n+p_1 s^{n-1}+ \cdots p_{n-1}s+p_n\end{equation}
+	\begin{equation}
+		p(s) = s^n+p_1 s^{n-1}+ \cdots p_{n-1}s+p_n
+	\end{equation}
 	is given by 
-	\begin{equation}K=\tilde{K}T = \begin{bmatrix}
-		p_1-a_1 & p_2-a_2 & \cdots & p_n-a_n
-	\end{bmatrix} \tilde{W}_r W_r^{-1}\end{equation}
-	\begin{equation}k_f = \frac{p_n}{b_n}\end{equation}
+	\begin{equation}
+		K=\tilde{K}T = \begin{bmatrix}
+			p_1-a_1 & p_2-a_2 & \cdots & p_n-a_n
+		\end{bmatrix} \tilde{W}_r W_r^{-1}
+	\end{equation}
+	\begin{equation}
+		k_f = \frac{p_n}{b_n}
+	\end{equation}
 \end{enumerate}
 This method is implemented in Matlab in the functions \textbf{acker} and \textbf{place}
 \end{frame}
@@ -170,7 +202,9 @@ This method is implemented in Matlab in the functions \textbf{acker} and \textbf
 
 \begin{frame}{Example — recall §4.7}
 The predator-prey model is given by 
-\begin{equation}\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL\end{equation}
+\begin{equation}
+	\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL
+\end{equation}
 where the population of an ecosystem can be regulated by controlling the food supply
 
 \begin{figure}
@@ -185,20 +219,24 @@ where the population of an ecosystem can be regulated by controlling the food su
 
 \begin{frame}{Example continued}
 Choosing parameters $a=3.2$, $b=0.6$, $c=50$, $d=0.56$, $k=125$,  $r=1.6$, taking the growth rate for hares as the input to the system $u$ (potentially controlled by a food source for the hares), taking the number of lynxes $L$ as the output, and linearising around the equilibrium point we get 
-	\begin{equation}\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
-		z_1 \\ z_2
-	\end{bmatrix} = \begin{bmatrix}
-		0.13 & -0.93 \\ 0.57 & 0
-	\end{bmatrix} \begin{bmatrix}
-		z_1 \\ z_2
-	\end{bmatrix}  + \begin{bmatrix}
-		17.2 \\ 0
-	\end{bmatrix} v\end{equation}
-	\begin{equation}w=\begin{bmatrix}
-		0& 1
-	\end{bmatrix}  \begin{bmatrix}
-		z_1 \\ z_2
-	\end{bmatrix} \end{equation}
+	\begin{equation}
+		\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
+			z_1 \\ z_2
+		\end{bmatrix} = \begin{bmatrix}
+			0.13 & -0.93 \\ 0.57 & 0
+		\end{bmatrix} \begin{bmatrix}
+			z_1 \\ z_2
+		\end{bmatrix}  + \begin{bmatrix}
+			17.2 \\ 0
+		\end{bmatrix} v
+	\end{equation}
+	\begin{equation}
+		w=\begin{bmatrix}
+			0& 1
+		\end{bmatrix}  \begin{bmatrix}
+			z_1 \\ z_2
+		\end{bmatrix}
+	\end{equation}
 where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$.	
 This system is reachable (by showing that the reachability matrix is full rank) and therefore we can assign the eignenvalues using state feedback
 

@@ -37,11 +37,15 @@ Grab the yellow compound pendulum and position the QUBE on its side, such that t
 \begin{frame}{Compound pendulum}
 	We begin by deriving a model of the system.
 The nonlinear equation of motion for the pendulum is 
-\begin{equation}\tau(t) = (J_m+J_h+J_p) \ddot{\theta}(t) + D_r \dot{\theta}(t) + m_b r_p g \sin \left(\theta (t)\right), \end{equation}
+\begin{equation}
+	\tau(t) = (J_m+J_h+J_p) \ddot{\theta}(t) + D_r \dot{\theta}(t) + m_b r_p g \sin \left(\theta (t)\right),
+\end{equation}
 where $\tau$ is the torque applied to the joint and $\theta$ is the angular displacement of the pendulum. The constants in this equation are the moments of inertia of the mass, hub, and pendulum $J_m$, $J_h$, and $J_p$, the mass of the bob $m_b$, centre of gravity of the pendulum $r_p$, viscous damping of the pivot $D_r$, and the gravitational acceleration $g$.\\
 
 Using the small angle approximation, applying the Laplace transform, and rearranging the second-order transfer function for the compound pendulum is 
-\begin{equation} G(s) = \frac{\theta(s)}{\tau (s)} = \frac{1}{(J_m+J_h+J_p)s^2 + D_r s + m_b r_p g } .\end{equation}
+\begin{equation}
+	G(s) = \frac{\theta(s)}{\tau (s)} = \frac{1}{(J_m+J_h+J_p)s^2 + D_r s + m_b r_p g } .
+\end{equation}
 
 \end{frame}
 
@@ -52,27 +56,29 @@ The moment of inertia of a pendulum is given by the parallel axis theorem as $J_
 
 The second-order transfer function may be transformed into a two-dimensional linear state-space model given by the matrices
 \begin{equation}
-\mathbf{A}=\begin{bmatrix}
-	0 & 1 \\
-	-\tfrac{m_br_p g }{J_m+J_h+J_p} & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_p)}\right)
-\end{bmatrix},
-\mathbf{B} = \begin{bmatrix}
-	0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_p)}
-\end{bmatrix},
+	\mathbf{A}=\begin{bmatrix}
+		0 & 1 \\
+		-\tfrac{m_br_p g }{J_m+J_h+J_p} & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_p)}\right)
+	\end{bmatrix},
+	\mathbf{B} = \begin{bmatrix}
+		0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_p)}
+	\end{bmatrix},
 \end{equation}  \\
 \begin{equation}
-\mathbf{C} = \begin{bmatrix}
-	1 & 0
-\end{bmatrix},
-\mathbf{D} = \begin{bmatrix}
-	0
-\end{bmatrix}
+	\mathbf{C} = \begin{bmatrix}
+		1 & 0
+	\end{bmatrix},
+	\mathbf{D} = \begin{bmatrix}
+		0
+	\end{bmatrix}
 \end{equation}  
 where 
-\begin{equation}\mathbf{x} = \begin{bmatrix}
-	\theta_m \\ \dot{\theta}_m
-\end{bmatrix}
-\quad , \quad \mathbf{y} = \theta_m \quad  \text{and} \quad u=v_m.\end{equation}
+\begin{equation}
+	\mathbf{x} = \begin{bmatrix}
+		\theta_m \\ \dot{\theta}_m
+	\end{bmatrix}
+	\quad , \quad \mathbf{y} = \theta_m \quad  \text{and} \quad u=v_m.
+\end{equation}
 \end{frame}
 \begin{frame}{Compound pendulum}
 In this procedure you will create your own Simulink model to compare an experimental and theoretical plant response.
@@ -95,30 +101,30 @@ time-series window (with \(x_1\) and \(x_2\) being the first ratio,
 \(x_2\) and \(x_3\) the second, and so on):
 %
 \begin{equation}
-    \delta
-    =
-    \frac{1}{N-1}
-    \sum_{i=1}^{N-1}
-    \ln\left(\frac{x_i}{x_{i+1}}\right).
+	\delta
+	=
+	\frac{1}{N-1}
+	\sum_{i=1}^{N-1}
+	\ln\left(\frac{x_i}{x_{i+1}}\right).
 \end{equation}
 
 The ratio of successive amplitudes gives the damping ratio of an
 underdamped system:
 %
 \begin{equation}
-    \zeta
-    =
-    \frac{\delta}
-    {\sqrt{4\pi^2+\delta^2}}.
+	\zeta
+	=
+	\frac{\delta}
+	{\sqrt{4\pi^2+\delta^2}}.
 \end{equation}
 
 This damping ratio is used to convert the observed damped natural frequency (underdamped system)
 into the undamped natural frequency:
 %
 \begin{equation}
-    \omega_n
-    =
-    \frac{\omega_d}{\sqrt{1-\zeta^2}}.
+	\omega_n
+	=
+	\frac{\omega_d}{\sqrt{1-\zeta^2}}.
 \end{equation}
 
 \end{frame}
@@ -143,7 +149,9 @@ The following figure is an example of a free vibration response, also known as a
 Given the transfer function model of the compound pendulum, one method of control is to design state feedback such that the resulting poles of the closed loop system provide a desired response
 
 For a general second-order system, the pair of complex poles are given by  
-\begin{equation}s=\omega_n (-\zeta_n \pm j \sqrt{1-\zeta_n^2})\end{equation}
+\begin{equation}
+	s=\omega_n (-\zeta_n \pm j \sqrt{1-\zeta_n^2})
+\end{equation}
 
 \begin{figure}
 	\centering

@@ -23,7 +23,7 @@ One of the most common misconceptions about the matrix exponential is that it ca
 \paragraph{Problem:} 
 Consider the matrix 
 \begin{equation}
-A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+	A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
 \end{equation}
 Compare the \emph{true} matrix exponential $\ee^A$ with the \emph{element-wise} exponential of $A$.
 
@@ -33,26 +33,26 @@ Compare the \emph{true} matrix exponential $\ee^A$ with the \emph{element-wise} 
 
 If we naively take the exponential of each element:
 \begin{equation}
-\text{Element-wise: } \begin{bmatrix} \ee^1 & \ee^1 \\ \ee^0 & \ee^1 \end{bmatrix} = \begin{bmatrix} \ee & \ee \\ 1 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 1 & 2.718 \end{bmatrix}
+	\text{Element-wise: } \begin{bmatrix} \ee^1 & \ee^1 \\ \ee^0 & \ee^1 \end{bmatrix} = \begin{bmatrix} \ee & \ee \\ 1 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 1 & 2.718 \end{bmatrix}
 \end{equation}
 
 \textbf{Step 2: Correct approach using Taylor series}
 
 The matrix exponential is defined as:
 \begin{equation}
-\ee^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots = \sum_{k=0}^{\infty} \frac{1}{k!}A^k
+	\ee^A = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots = \sum_{k=0}^{\infty} \frac{1}{k!}A^k
 \end{equation}
 
 Let's compute the first few powers of $A$:
 \begin{equation}
-A^0 = I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
-A^1 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+	A^0 = I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
+	A^1 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
 \end{equation}
 \begin{equation}
-A^2 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}
+	A^2 = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}
 \end{equation}
 \begin{equation}
-A^3 = A^2 \cdot A = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 3 \\ 0 & 1 \end{bmatrix}
+	A^3 = A^2 \cdot A = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 3 \\ 0 & 1 \end{bmatrix}
 \end{equation}
 
 We can see a pattern: $A^k = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$
@@ -61,7 +61,7 @@ We can see a pattern: $A^k = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$
 
 Now substitute into the series:
 \begin{equation}
-\ee^A = \sum_{k=0}^{\infty} \frac{1}{k!}\begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} \sum_{k=0}^{\infty} \frac{1}{k!} & \sum_{k=0}^{\infty} \frac{k}{k!} \\ 0 & \sum_{k=0}^{\infty} \frac{1}{k!} \end{bmatrix}
+	\ee^A = \sum_{k=0}^{\infty} \frac{1}{k!}\begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} \sum_{k=0}^{\infty} \frac{1}{k!} & \sum_{k=0}^{\infty} \frac{k}{k!} \\ 0 & \sum_{k=0}^{\infty} \frac{1}{k!} \end{bmatrix}
 \end{equation}
 
 For the diagonal terms: $\sum_{k=0}^{\infty} \frac{1}{k!} = \ee^1 = \ee$
@@ -70,7 +70,7 @@ For the off-diagonal term: $\sum_{k=0}^{\infty} \frac{k}{k!} = \sum_{k=1}^{\inft
 
 Therefore, the \textbf{correct} matrix exponential is:
 \begin{equation}
-\ee^A = \begin{bmatrix} \ee & \ee \\ 0 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 0 & 2.718 \end{bmatrix}
+	\ee^A = \begin{bmatrix} \ee & \ee \\ 0 & \ee \end{bmatrix} \approx \begin{bmatrix} 2.718 & 2.718 \\ 0 & 2.718 \end{bmatrix}
 \end{equation}
 
 \textbf{Step 4: Verification}
@@ -87,7 +87,7 @@ This example demonstrates the complete process of using the matrix exponential t
 \paragraph{Problem:}
 Consider a mass-spring-damper system described by:
 \begin{equation}
-\ddot{q} + 2\zz\ww_0\dot{q} + \ww_0^2 q = 0
+	\ddot{q} + 2\zz\ww_0\dot{q} + \ww_0^2 q = 0
 \end{equation}
 with parameters $\ww_0 = 2$ rad/s (natural frequency) and $\zz = 0.2$ (damping ratio).
 
@@ -101,24 +101,24 @@ Define state variables: $x_1 = q$ and $x_2 = \dot{q}$
 
 The system becomes:
 \begin{equation}
-\Deriv{}{t}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -\ww_0^2 & -2\zz\ww_0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+	\Deriv{}{t}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -\ww_0^2 & -2\zz\ww_0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
 \end{equation}
 
 Substituting the parameter values $\ww_0 = 2$ and $\zz = 0.2$:
 \begin{equation}
-A = \begin{bmatrix} 0 & 1 \\ -4 & -0.8 \end{bmatrix}
+	A = \begin{bmatrix} 0 & 1 \\ -4 & -0.8 \end{bmatrix}
 \end{equation}
 
 \textbf{Step 2: Find eigenvalues of $A$}
 
 The characteristic equation is:
 \begin{equation}
-\det(A - \lambda I) = \det\begin{bmatrix} -\lambda & 1 \\ -4 & -0.8-\lambda \end{bmatrix} = \lambda^2 + 0.8\lambda + 4 = 0
+	\det(A - \lambda I) = \det\begin{bmatrix} -\lambda & 1 \\ -4 & -0.8-\lambda \end{bmatrix} = \lambda^2 + 0.8\lambda + 4 = 0
 \end{equation}
 
 Using the quadratic formula:
 \begin{equation}
-\lambda = \frac{-0.8 \pm \sqrt{0.64 - 16}}{2} = \frac{-0.8 \pm \sqrt{-15.36}}{2} = -0.4 \pm 1.96\ii
+	\lambda = \frac{-0.8 \pm \sqrt{0.64 - 16}}{2} = \frac{-0.8 \pm \sqrt{-15.36}}{2} = -0.4 \pm 1.96\ii
 \end{equation}
 
 We can write these as $\lambda_{1,2} = -\zz\ww_0 \pm \ii\wdamp$ where $\wdamp = \ww_0\sqrt{1-\zz^2} = 2\sqrt{1-0.04} = 1.96$ rad/s.
@@ -127,7 +127,7 @@ We can write these as $\lambda_{1,2} = -\zz\ww_0 \pm \ii\wdamp$ where $\wdamp = 
 
 For a system with complex eigenvalues $\lambda = \sigma \pm \ii\ww$ where $\sigma = -\zz\ww_0 = -0.4$ and $\ww = \wdamp = 1.96$, the matrix exponential for a damped oscillator has the form:
 \begin{equation}
-\ee^{At} = \ee^{\sigma t}\begin{bmatrix} \cos(\ww t) + \frac{\sigma}{\ww}\sin(\ww t) & \frac{1}{\ww}\sin(\ww t) \\ -\frac{\ww_0^2}{\ww}\sin(\ww t) & \cos(\ww t) - \frac{\sigma}{\ww}\sin(\ww t) \end{bmatrix}
+	\ee^{At} = \ee^{\sigma t}\begin{bmatrix} \cos(\ww t) + \frac{\sigma}{\ww}\sin(\ww t) & \frac{1}{\ww}\sin(\ww t) \\ -\frac{\ww_0^2}{\ww}\sin(\ww t) & \cos(\ww t) - \frac{\sigma}{\ww}\sin(\ww t) \end{bmatrix}
 \end{equation}
 
 \textbf{Step 4: Evaluate at $t = 1$ second}
@@ -142,21 +142,21 @@ First calculate the trigonometric and exponential terms:
 
 Now construct the matrix using the formula:
 \begin{equation}
-\ee^{At} = 0.670\begin{bmatrix} -0.379 + \frac{-0.4}{1.96}(0.925) & \frac{1}{1.96}(0.925) \\ -\frac{4}{1.96}(0.925) & -0.379 - \frac{-0.4}{1.96}(0.925) \end{bmatrix}
+	\ee^{At} = 0.670\begin{bmatrix} -0.379 + \frac{-0.4}{1.96}(0.925) & \frac{1}{1.96}(0.925) \\ -\frac{4}{1.96}(0.925) & -0.379 - \frac{-0.4}{1.96}(0.925) \end{bmatrix}
 \end{equation}
 \begin{equation}
-= 0.670\begin{bmatrix} -0.379 - 0.189 & 0.472 \\ -1.888 & -0.379 + 0.189 \end{bmatrix}
-= 0.670\begin{bmatrix} -0.568 & 0.472 \\ -1.888 & -0.190 \end{bmatrix}
+	= 0.670\begin{bmatrix} -0.379 - 0.189 & 0.472 \\ -1.888 & -0.379 + 0.189 \end{bmatrix}
+	= 0.670\begin{bmatrix} -0.568 & 0.472 \\ -1.888 & -0.190 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\ee^{At} \approx \begin{bmatrix} -0.381 & 0.316 \\ -1.265 & -0.127 \end{bmatrix}
+	\ee^{At} \approx \begin{bmatrix} -0.381 & 0.316 \\ -1.265 & -0.127 \end{bmatrix}
 \end{equation}
 
 \textbf{Alternative: Direct computation with scipy.linalg.expm}
 
 For verification, we can compute the matrix exponential numerically:
 \begin{equation}
-\ee^{At} \approx \begin{bmatrix} -0.127 & 0.317 \\ -1.266 & -0.381 \end{bmatrix}
+	\ee^{At} \approx \begin{bmatrix} -0.127 & 0.317 \\ -1.266 & -0.381 \end{bmatrix}
 \end{equation}
 
 Note: The discrepancy comes from using the approximate formula for damped oscillators versus the exact matrix exponential. For precise calculations, use numerical methods.
@@ -165,7 +165,7 @@ Note: The discrepancy comes from using the approximate formula for damped oscill
 
 The solution is $x(t) = \ee^{At}x(0)$. Using the numerically computed matrix exponential:
 \begin{equation}
-x(1) = \begin{bmatrix} -0.127 & 0.317 \\ -1.266 & -0.381 \end{bmatrix}\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} -0.127 \\ -1.266 \end{bmatrix}
+	x(1) = \begin{bmatrix} -0.127 & 0.317 \\ -1.266 & -0.381 \end{bmatrix}\begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} -0.127 \\ -1.266 \end{bmatrix}
 \end{equation}
 
 Therefore, at $t = 1$ second:
@@ -184,7 +184,7 @@ This example demonstrates how to compute the Jordan form of a matrix and use it 
 \paragraph{Problem:}
 Find the Jordan form of the matrix
 \begin{equation}
-A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}
+	A = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}
 \end{equation}
 and use it to compute $\ee^{At}$.
 
@@ -194,7 +194,7 @@ and use it to compute $\ee^{At}$.
 
 The characteristic polynomial is:
 \begin{equation}
-\det(A - \lambda I) = \det\begin{bmatrix} 2-\lambda & 1 & 0 \\ 0 & 2-\lambda & 0 \\ 0 & 0 & 3-\lambda \end{bmatrix} = (2-\lambda)^2(3-\lambda)
+	\det(A - \lambda I) = \det\begin{bmatrix} 2-\lambda & 1 & 0 \\ 0 & 2-\lambda & 0 \\ 0 & 0 & 3-\lambda \end{bmatrix} = (2-\lambda)^2(3-\lambda)
 \end{equation}
 
 Eigenvalues: $\lambda_1 = 2$ (with multiplicity 2) and $\lambda_2 = 3$ (with multiplicity 1).
@@ -203,22 +203,22 @@ Eigenvalues: $\lambda_1 = 2$ (with multiplicity 2) and $\lambda_2 = 3$ (with mul
 
 For $\lambda_1 = 2$:
 \begin{equation}
-(A - 2I)v = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v = 0
+	(A - 2I)v = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v = 0
 \end{equation}
 This gives us only one eigenvector: $v_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$
 
 Since we have a repeated eigenvalue but only one eigenvector, we need a generalized eigenvector $v_2$ satisfying:
 \begin{equation}
-(A - 2I)v_2 = v_1
+	(A - 2I)v_2 = v_1
 \end{equation}
 \begin{equation}
-\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v_2 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+	\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}v_2 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
 \end{equation}
 This gives $v_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$
 
 For $\lambda_2 = 3$:
 \begin{equation}
-(A - 3I)v = \begin{bmatrix} -1 & 1 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix}v = 0
+	(A - 3I)v = \begin{bmatrix} -1 & 1 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix}v = 0
 \end{equation}
 This gives $v_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$
 
@@ -226,17 +226,17 @@ This gives $v_3 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$
 
 The transformation matrix is:
 \begin{equation}
-T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = I
+	T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = I
 \end{equation}
 
 Wait, let me recalculate. Using $v_1, v_2, v_3$ as columns:
 \begin{equation}
-T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+	T = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
 \end{equation}
 
 The Jordan form is:
 \begin{equation}
-J = T\Inv AT = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix} = A
+	J = T\Inv AT = \begin{bmatrix} 2 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix} = A
 \end{equation}
 
 Notice that $A$ is already in Jordan form! This happens when the matrix is upper triangular.
@@ -245,24 +245,24 @@ Notice that $A$ is already in Jordan form! This happens when the matrix is upper
 
 For a Jordan block with eigenvalue $\lambda$ and size $2 \times 2$:
 \begin{equation}
-J_1 = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}, \quad \ee^{J_1 t} = \ee^{2t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
+	J_1 = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}, \quad \ee^{J_1 t} = \ee^{2t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
 \end{equation}
 
 For a $1 \times 1$ Jordan block:
 \begin{equation}
-J_2 = [3], \quad \ee^{J_2 t} = [\ee^{3t}]
+	J_2 = [3], \quad \ee^{J_2 t} = [\ee^{3t}]
 \end{equation}
 
 Therefore:
 \begin{equation}
-\ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
+	\ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
 \end{equation}
 
 \textbf{Step 5: Transform back (if needed)}
 
 Since $A = J$ (the matrix was already in Jordan form), we have:
 \begin{equation}
-\ee^{At} = \ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
+	\ee^{At} = \ee^{Jt} = \begin{bmatrix} \ee^{2t} & t\ee^{2t} & 0 \\ 0 & \ee^{2t} & 0 \\ 0 & 0 & \ee^{3t} \end{bmatrix}
 \end{equation}
 
 \textbf{Key observations:}
@@ -276,10 +276,10 @@ Since $A = J$ (the matrix was already in Jordan form), we have:
 \textbf{General formula for $2\times 2$ Jordan blocks:}
 For a Jordan block $J = \begin{bmatrix} \lambda & 1 \\ 0 & \lambda \end{bmatrix}$, the exponential is:
 \begin{equation}
-\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
+	\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t \\ 0 & 1 \end{bmatrix}
 \end{equation}
 For an $n \times n$ Jordan block with eigenvalue $\lambda$:
 \begin{equation}
-\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\ 0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\ \vdots & \ddots & \ddots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & 1 \end{bmatrix}
+	\ee^{Jt} = \ee^{\lambda t}\begin{bmatrix} 1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\ 0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\ \vdots & \ddots & \ddots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & 1 \end{bmatrix}
 \end{equation}
 \end{document}

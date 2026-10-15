@@ -39,56 +39,56 @@ Consider a feedback system with process $P(s) = \frac{1}{(s+1)^3}$ and a PI cont
 
 The PI controller is:
 \begin{equation}
-C(s) = k_p + \frac{k_i}{s} = 0.6 + \frac{0.5}{s} = \frac{0.6s + 0.5}{s}
+	C(s) = k_p + \frac{k_i}{s} = 0.6 + \frac{0.5}{s} = \frac{0.6s + 0.5}{s}
 \end{equation}
 
 The loop transfer function is:
 \begin{equation}
-L(s) = P(s)C(s) = \frac{1}{(s+1)^3} \cdot \frac{0.6s + 0.5}{s} = \frac{0.6s + 0.5}{s(s+1)^3}
+	L(s) = P(s)C(s) = \frac{1}{(s+1)^3} \cdot \frac{0.6s + 0.5}{s} = \frac{0.6s + 0.5}{s(s+1)^3}
 \end{equation}
 
 \textbf{Step 2: Transfer function from reference to output}
 
 With $F = 1$ (unity feedforward):
 \begin{equation}
-G_{yr}(s) = \frac{PC}{1+PC} = \frac{L(s)}{1+L(s)} = T(s)
+	G_{yr}(s) = \frac{PC}{1+PC} = \frac{L(s)}{1+L(s)} = T(s)
 \end{equation}
 
 The complementary sensitivity function is:
 \begin{equation}
-T(s) = \frac{0.6s + 0.5}{s(s+1)^3 + 0.6s + 0.5}
+	T(s) = \frac{0.6s + 0.5}{s(s+1)^3 + 0.6s + 0.5}
 \end{equation}
 
 Expanding the denominator:
 \begin{equation}
-s(s+1)^3 = s(s^3 + 3s^2 + 3s + 1) = s^4 + 3s^3 + 3s^2 + s
+	s(s+1)^3 = s(s^3 + 3s^2 + 3s + 1) = s^4 + 3s^3 + 3s^2 + s
 \end{equation}
 \begin{equation}
-s(s+1)^3 + 0.6s + 0.5 = s^4 + 3s^3 + 3s^2 + 1.6s + 0.5
+	s(s+1)^3 + 0.6s + 0.5 = s^4 + 3s^3 + 3s^2 + 1.6s + 0.5
 \end{equation}
 
 Therefore:
 \begin{equation}
-T(s) = G_{yr}(s) = \frac{0.6s + 0.5}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+	T(s) = G_{yr}(s) = \frac{0.6s + 0.5}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
 \end{equation}
 
 \textbf{Step 3: Sensitivity function}
 
 Using $S = 1 - T$:
 \begin{equation}
-S(s) = \frac{s^4 + 3s^3 + 3s^2 + s}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+	S(s) = \frac{s^4 + 3s^3 + 3s^2 + s}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
 \end{equation}
 
 Alternatively, directly:
 \begin{equation}
-S(s) = \frac{1}{1+L(s)} = \frac{s(s+1)^3}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
+	S(s) = \frac{1}{1+L(s)} = \frac{s(s+1)^3}{s^4 + 3s^3 + 3s^2 + 1.6s + 0.5}
 \end{equation}
 
 \textbf{Step 4: Maximum sensitivity $M_s$}
 
 The maximum sensitivity occurs at a frequency where $|S(\ii\omega)|$ peaks. For this system, we need to evaluate:
 \begin{equation}
-|S(\ii\omega)| = \left|\frac{\ii\omega(\ii\omega + 1)^3}{(\ii\omega)^4 + 3(\ii\omega)^3 + 3(\ii\omega)^2 + 1.6\ii\omega + 0.5}\right|
+	|S(\ii\omega)| = \left|\frac{\ii\omega(\ii\omega + 1)^3}{(\ii\omega)^4 + 3(\ii\omega)^3 + 3(\ii\omega)^2 + 1.6\ii\omega + 0.5}\right|
 \end{equation}
 
 At $\omega = 0$: $|S(0)| = \frac{0}{0.5} = 0$
@@ -99,40 +99,40 @@ The peak typically occurs at a mid-range frequency. By numerical evaluation or u
 
 At $\omega = 1$ rad/s:
 \begin{equation}
-S(\ii) = \frac{\ii(1+\ii)^3}{(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5}
+	S(\ii) = \frac{\ii(1+\ii)^3}{(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5}
 \end{equation}
 
 Computing $(1+\ii)^3$:
 \begin{equation}
-(1+\ii)^2 = 1 + 2\ii - 1 = 2\ii
+	(1+\ii)^2 = 1 + 2\ii - 1 = 2\ii
 \end{equation}
 \begin{equation}
-(1+\ii)^3 = (1+\ii) \cdot 2\ii = 2\ii + 2\ii^2 = 2\ii - 2 = -2 + 2\ii
+	(1+\ii)^3 = (1+\ii) \cdot 2\ii = 2\ii + 2\ii^2 = 2\ii - 2 = -2 + 2\ii
 \end{equation}
 
 So:
 \begin{equation}
-\ii(1+\ii)^3 = \ii(-2 + 2\ii) = -2\ii - 2 = -2 - 2\ii
+	\ii(1+\ii)^3 = \ii(-2 + 2\ii) = -2\ii - 2 = -2 - 2\ii
 \end{equation}
 
 The denominator at $s = \ii$:
 \begin{equation}
-(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5 = 1 - 3\ii - 3 + 1.6\ii + 0.5 = -1.5 - 1.4\ii
+	(\ii)^4 + 3(\ii)^3 + 3(\ii)^2 + 1.6\ii + 0.5 = 1 - 3\ii - 3 + 1.6\ii + 0.5 = -1.5 - 1.4\ii
 \end{equation}
 
 Therefore:
 \begin{equation}
-S(\ii) = \frac{-2 - 2\ii}{-1.5 - 1.4\ii}
+	S(\ii) = \frac{-2 - 2\ii}{-1.5 - 1.4\ii}
 \end{equation}
 
 Computing the magnitude:
 \begin{equation}
-|S(\ii)| = \frac{\sqrt{4 + 4}}{\sqrt{2.25 + 1.96}} = \frac{\sqrt{8}}{\sqrt{4.21}} = \frac{2.828}{2.052} = 1.378
+	|S(\ii)| = \frac{\sqrt{4 + 4}}{\sqrt{2.25 + 1.96}} = \frac{\sqrt{8}}{\sqrt{4.21}} = \frac{2.828}{2.052} = 1.378
 \end{equation}
 
 Testing $\omega = 0.8$ rad/s would give a value closer to the peak. Through numerical optimization, we find:
 \begin{equation}
-M_s \approx 1.4, \quad \omega_{ms} \approx 0.9 \text{ rad/s}
+	M_s \approx 1.4, \quad \omega_{ms} \approx 0.9 \text{ rad/s}
 \end{equation}
 
 \textbf{Step 5: Bandwidth calculation}
@@ -143,14 +143,14 @@ At DC: $|G_{yr}(0)| = \frac{0.5}{0.5} = 1$
 
 As frequency increases, the magnitude decreases. By numerical evaluation or graphical methods:
 \begin{equation}
-\omega_b \approx 1.0 \text{ rad/s}
+	\omega_b \approx 1.0 \text{ rad/s}
 \end{equation}
 
 \textbf{Step 6: Rise time estimation}
 
 Using the rise time-bandwidth product approximation:
 \begin{equation}
-T_r \approx \frac{3}{\omega_b} = \frac{3}{1.0} = 3 \text{ seconds}
+	T_r \approx \frac{3}{\omega_b} = \frac{3}{1.0} = 3 \text{ seconds}
 \end{equation}
 
 This can be verified by simulating the step response and measuring the time from 10\% to 90\% of the final value.
@@ -194,71 +194,71 @@ Consider a unity feedback system with process $P(s) = \frac{1}{s(s+1)}$ (a type-
 
 Loop transfer function:
 \begin{equation}
-L_A(s) = P(s)C_A(s) = \frac{1}{s(s+1)} \cdot 5 = \frac{5}{s(s+1)}
+	L_A(s) = P(s)C_A(s) = \frac{1}{s(s+1)} \cdot 5 = \frac{5}{s(s+1)}
 \end{equation}
 
 Error transfer function:
 \begin{equation}
-G_{er,A}(s) = \frac{1}{1+L_A(s)} = \frac{1}{1 + \frac{5}{s(s+1)}} = \frac{s(s+1)}{s(s+1) + 5} = \frac{s^2 + s}{s^2 + s + 5}
+	G_{er,A}(s) = \frac{1}{1+L_A(s)} = \frac{1}{1 + \frac{5}{s(s+1)}} = \frac{s(s+1)}{s(s+1) + 5} = \frac{s^2 + s}{s^2 + s + 5}
 \end{equation}
 
 \textbf{Step 2: Power series expansion for Controller A}
 
 To find the error coefficients, we expand $G_{er,A}(s)$ for small $s$:
 \begin{equation}
-G_{er,A}(s) = \frac{s^2 + s}{s^2 + s + 5} = \frac{s^2 + s}{5} \cdot \frac{1}{1 + \frac{s^2 + s}{5}}
+	G_{er,A}(s) = \frac{s^2 + s}{s^2 + s + 5} = \frac{s^2 + s}{5} \cdot \frac{1}{1 + \frac{s^2 + s}{5}}
 \end{equation}
 
 Using the expansion $\frac{1}{1+x} \approx 1 - x + x^2 - \cdots$ for small $x$:
 \begin{equation}
-G_{er,A}(s) \approx \frac{s^2 + s}{5}\left(1 - \frac{s^2 + s}{5} + \cdots\right)
+	G_{er,A}(s) \approx \frac{s^2 + s}{5}\left(1 - \frac{s^2 + s}{5} + \cdots\right)
 \end{equation}
 \begin{equation}
-\approx \frac{s + s^2}{5} - \frac{(s + s^2)^2}{25} + \cdots
+	\approx \frac{s + s^2}{5} - \frac{(s + s^2)^2}{25} + \cdots
 \end{equation}
 \begin{equation}
-\approx \frac{s}{5} + \frac{s^2}{5} + O(s^2)
+	\approx \frac{s}{5} + \frac{s^2}{5} + O(s^2)
 \end{equation}
 
 Therefore:
 \begin{equation}
-e_0 = 0, \quad e_1 = \frac{1}{5}, \quad e_2 = \frac{1}{5}
+	e_0 = 0, \quad e_1 = \frac{1}{5}, \quad e_2 = \frac{1}{5}
 \end{equation}
 
 \textbf{Step 3: Error transfer function for Controller B}
 
 Loop transfer function:
 \begin{equation}
-L_B(s) = P(s)C_B(s) = \frac{1}{s(s+1)} \cdot \frac{2(s+1)}{s} = \frac{2(s+1)}{s^2(s+1)} = \frac{2}{s^2}
+	L_B(s) = P(s)C_B(s) = \frac{1}{s(s+1)} \cdot \frac{2(s+1)}{s} = \frac{2(s+1)}{s^2(s+1)} = \frac{2}{s^2}
 \end{equation}
 
 Error transfer function:
 \begin{equation}
-G_{er,B}(s) = \frac{1}{1 + \frac{2}{s^2}} = \frac{s^2}{s^2 + 2}
+	G_{er,B}(s) = \frac{1}{1 + \frac{2}{s^2}} = \frac{s^2}{s^2 + 2}
 \end{equation}
 
 \textbf{Step 4: Power series expansion for Controller B}
 
 For small $s$:
 \begin{equation}
-G_{er,B}(s) = \frac{s^2}{s^2 + 2} = \frac{s^2}{2} \cdot \frac{1}{1 + \frac{s^2}{2}}
+	G_{er,B}(s) = \frac{s^2}{s^2 + 2} = \frac{s^2}{2} \cdot \frac{1}{1 + \frac{s^2}{2}}
 \end{equation}
 
 Using $\frac{1}{1+x} \approx 1 - x + \cdots$:
 \begin{equation}
-G_{er,B}(s) \approx \frac{s^2}{2}\left(1 - \frac{s^2}{2} + \cdots\right) \approx \frac{s^2}{2} + O(s^4)
+	G_{er,B}(s) \approx \frac{s^2}{2}\left(1 - \frac{s^2}{2} + \cdots\right) \approx \frac{s^2}{2} + O(s^4)
 \end{equation}
 
 Therefore:
 \begin{equation}
-e_0 = 0, \quad e_1 = 0, \quad e_2 = \frac{1}{2}
+	e_0 = 0, \quad e_1 = 0, \quad e_2 = \frac{1}{2}
 \end{equation}
 
 \textbf{Step 5: Steady-state errors}
 
 The steady-state error for a reference signal $r(t)$ is:
 \begin{equation}
-e_{ss} = e_0 r(t) + e_1 \dot{r}(t) + e_2 \ddot{r}(t) + \cdots
+	e_{ss} = e_0 r(t) + e_1 \dot{r}(t) + e_2 \ddot{r}(t) + \cdots
 \end{equation}
 
 \textbf{For a step input $r(t) = R_0$:}

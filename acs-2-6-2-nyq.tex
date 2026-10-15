@@ -84,7 +84,7 @@ Here, we could analytically determine $k=8$ is the threshold between stability a
 \item Let $L(s)$ be the loop transfer function for a negative feedback system and assume (initially) that $L$ has no poles in the closed right half-plane except possibly at the origin
 \item Then the closed loop system 
 \begin{equation}
-G\closedloop=\frac{L(s)}{1+L(s)}
+	G\closedloop=\frac{L(s)}{1+L(s)}
 \end{equation}
 is stable iff the image of $L$ along the closed contour $\Gamma$ has no net encirclements of the critical point $-1$ in the complex plane
 \item The number of encirclements is called the winding number
@@ -100,7 +100,9 @@ is stable iff the image of $L$ along the closed contour $\Gamma$ has no net enci
 \begin{frame}{Example}
 \begin{itemize}
 	\item Consider the transfer function 
-	\begin{equation}L(s) = \frac{k}{s(s+1)^2}\end{equation} 
+	\begin{equation}
+		L(s) = \frac{k}{s(s+1)^2}
+	\end{equation} 
 	with nominal gain value $k=1$
 	\item The system has a single pole at $s=0$ and a double pole at $s=-1$
 	\item The Bode plot thus has the slope $-1$ for low frequencies, and at the double pole the slope changes to $-3$
@@ -141,7 +143,7 @@ is stable iff the image of $L$ along the closed contour $\Gamma$ has no net enci
 \begin{frame}{The Cauchy criterion}
 When taking a closed contour in the complex plane, and mapping it through a complex function $L(s)$:
 \begin{equation}
-  n_N = n_Z - n_P
+	n_N = n_Z - n_P
 \end{equation}
 where:
 \begin{itemize}
@@ -197,7 +199,7 @@ Note that positive $n_N$ = same direction as the original contour
 Cauchy Criterion reformulated as the Nyquist Stability Criterion:
 \FORMULA{n_Z = n_P + n_N}
 \begin{equation}
-\theFORMULA
+	\theFORMULA
 \end{equation}
 For loop transfer function $L$:
 \begin{itemize}

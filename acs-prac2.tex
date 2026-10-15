@@ -42,47 +42,63 @@ We begin by deriving a first principles model of the inertia disk. A schematic d
 
 \begin{frame}{Deriving the model}
 The DC motor shaft with moment of inertia $J_m$ is connected to the load hub which is a metal disc used to mount the inertia disc and has a moment of inertia of $J_h$. The back-emf (electromotive) voltage $e_b(t)$ depends on the speed of the motor shaft, $\omega_m$, and the back-emf constant of the motor $k_m$ and opposes the current flow. The back-emf voltage is given by
-\begin{equation}e_b(t) = k_m \omega _m (t) \end{equation}
+\begin{equation}
+	e_b(t) = k_m \omega _m (t)
+\end{equation}
 Using Kirchoff's Voltage Law, we can write
-\begin{equation}v_m(t) - R_m i_m(t)-L_m \frac{\mathrm{d} i_m(t)}{\mathrm{d} t} - k_m \omega_m (t) = 0\end{equation}
+\begin{equation}
+	v_m(t) - R_m i_m(t)-L_m \frac{\mathrm{d} i_m(t)}{\mathrm{d} t} - k_m \omega_m (t) = 0
+\end{equation}
 
 \end{frame}
 
 \begin{frame}{Deriving the model}
 Since the motor inductance $L_m$ is much less than its resistance $R_m$, it can be ignored and we get
-\begin{equation}i_m(t) = \frac{v_m(t) - k_m \omega_m (t)}{R_m} .\end{equation}
+\begin{equation}
+	i_m(t) = \frac{v_m(t) - k_m \omega_m (t)}{R_m} .
+\end{equation}
 The motor shaft equation is
-\begin{equation}(J_m+J_h+J_d)\dot{\omega}_m (t) + D_r \omega _m = \tau_m(t)\end{equation}
+\begin{equation}
+	(J_m+J_h+J_d)\dot{\omega}_m (t) + D_r \omega _m = \tau_m(t)
+\end{equation}
 where $D_r$ is the rotor viscous damping coefficient and $\tau_m$ is the applied torque to the DC motor based on the current,
-\begin{equation} \tau_m(t) = k_m i_m (t).\end{equation}
+\begin{equation}
+	\tau_m(t) = k_m i_m (t).
+\end{equation}
 The moment of inertia about the disk can be determined by
-\begin{equation}J_d = \tfrac{1}{2} m_d r_d^2.\end{equation}
+\begin{equation}
+	J_d = \tfrac{1}{2} m_d r_d^2.
+\end{equation}
 \end{frame}
 
 
 \begin{frame}{Deriving the model}
 These linear differential equations can be assembled in a state space representation as
-\begin{equation}\dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad \end{equation}
+\begin{equation}
+	\dot{\mathbf{x}} =\mathbf{A}\mathbf{x} + \mathbf{B} \mathbf{u} \quad \text{and} \quad \mathbf{y} =\mathbf{C}\mathbf{x} + \mathbf{D} \mathbf{u} \quad
+\end{equation}
 where the state and output vectors are
-\begin{equation}\mathbf{x} = \begin{bmatrix}
-\theta_m \\ \omega_m
-\end{bmatrix}
-\quad \text{and} \quad \mathbf{y} = \theta_m .\end{equation}
+\begin{equation}
+	\mathbf{x} = \begin{bmatrix}
+	\theta_m \\ \omega_m
+	\end{bmatrix}
+	\quad \text{and} \quad \mathbf{y} = \theta_m .
+\end{equation}
 Setting the input as $\mathbf{u}=v_m$, the matrices are
 \begin{equation}
-\mathbf{A}=\begin{bmatrix}
-	0 & 1 \\
-	0 & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_d)}\right)
-\end{bmatrix},
-\mathbf{B} = \begin{bmatrix}
-	0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_d)}
-\end{bmatrix},
-\mathbf{C} = \begin{bmatrix}
-	1 & 0
-\end{bmatrix},
-\mathbf{D} = \begin{bmatrix}
-	0
-\end{bmatrix}
+	\mathbf{A}=\begin{bmatrix}
+		0 & 1 \\
+		0 & -\left(\tfrac{R_m D_r + k_m^2}{R_m(J_m+J_h+J_d)}\right)
+	\end{bmatrix},
+	\mathbf{B} = \begin{bmatrix}
+		0 \\ \tfrac{k_m}{R_m(J_m+J_h+J_d)}
+	\end{bmatrix},
+	\mathbf{C} = \begin{bmatrix}
+		1 & 0
+	\end{bmatrix},
+	\mathbf{D} = \begin{bmatrix}
+		0
+	\end{bmatrix}
 \end{equation}
 \end{frame}
 

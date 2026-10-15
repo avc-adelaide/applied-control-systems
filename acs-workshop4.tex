@@ -15,7 +15,9 @@ In this workshop, we will explore state feedback control design techniques by us
 In previous workshops you have seen how to simulate and plot a dynamical system. Let us start by recreating Figure 4.20 from the notes: simulated results for an uncontrolled predator-prey system.
 
 This system is governed by the two differential equations
-\begin{equation}\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL.\end{equation}  
+\begin{equation}
+	\frac{\mathrm{d}H}{\mathrm{d}t} = (r+u)H\left(1-\frac{H}{k} \right)-\frac{aHL}{c+H}, \quad \frac{\mathrm{d}L}{\mathrm{d}t} = \frac{baHL}{c+H}-dL.
+\end{equation}  
 The variables are  
 \begin{itemize}
 	\item  $H$: Hare population 
@@ -39,9 +41,13 @@ The parameters are
 	\frametitle{Matlab}
 First let's consider the uncontrolled system. We will use the parameters used in the text book: \\
 \vspace{-0.5cm}
-\begin{equation}a=3.2, \quad b=0.6, \quad c=50,\end{equation}
+\begin{equation}
+	a=3.2, \quad b=0.6, \quad c=50,
+\end{equation}
 \vspace{-0.8cm}
-\begin{equation}d=0.56, \quad k=125, \quad r=1.6.\end{equation}
+\begin{equation}
+	d=0.56, \quad k=125, \quad r=1.6.
+\end{equation}
 
 \includematlab{workshop4.m}{part1}
 
@@ -86,20 +92,24 @@ First let's consider the uncontrolled system. We will use the parameters used in
 \begin{frame}
 \frametitle{Linearising}
 Taking the number of lynxes $L$ as the output, and linearising around the equilibrium point (as we have done in the previous workshop) we get
-\begin{equation}\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
-	z_1 \\ z_2
-\end{bmatrix} = \begin{bmatrix}
-	0.13 & -0.93 \\ 0.57 & 0
-\end{bmatrix} \begin{bmatrix}
-	z_1 \\ z_2
-\end{bmatrix}  + \begin{bmatrix}
-	17.2 \\ 0
-\end{bmatrix} v\end{equation}
-\begin{equation}w=\begin{bmatrix}
-	0& 1
-\end{bmatrix}  \begin{bmatrix}
-	z_1 \\ z_2
-\end{bmatrix} \end{equation}
+\begin{equation}
+	\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}
+		z_1 \\ z_2
+	\end{bmatrix} = \begin{bmatrix}
+		0.13 & -0.93 \\ 0.57 & 0
+	\end{bmatrix} \begin{bmatrix}
+		z_1 \\ z_2
+	\end{bmatrix}  + \begin{bmatrix}
+		17.2 \\ 0
+	\end{bmatrix} v
+\end{equation}
+\begin{equation}
+	w=\begin{bmatrix}
+		0& 1
+	\end{bmatrix}  \begin{bmatrix}
+		z_1 \\ z_2
+	\end{bmatrix}
+\end{equation}
 where $z_1=H-H_e$, $z_2=L-L_e$, and $v=u$
 
 Putting this into Matlab, we can set up our linearised state space representation.

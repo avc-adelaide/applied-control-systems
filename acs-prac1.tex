@@ -214,7 +214,7 @@ Sensors will always contain measurement noise, and digital sensors will be discr
 For this we will use a simple low pass filter using the block called \textsf{Transfer Fcn}. 
 The low pass filter has transfer function
 \begin{equation}
-G(s) = \frac{\omega_c}{s+\omega_c},
+	G(s) = \frac{\omega_c}{s+\omega_c},
 \end{equation}
 and may be constructed by selecting a \alert{cut-off frequency} in radians per second ($\omega_c$), after which the signal is attenuated. If you need to select the cut-off frequency $f_c$ in Hertz, use $\omega_c = 2\pi f_c$.
 
