@@ -130,6 +130,10 @@ Run `make help` for a summary. Key targets:
   prefer PDF/SVG.
 - Add new references to `control.bib`.
 - Update `CHANGELOG.md` for notable content additions.
+- Indent `.tex` sources with two spaces, no tabs, using the repo's latexindent settings:
+  `latexindent -s -l=latexindent.yaml -wd FILE.tex` (run from the repo root).
+- Number displayed equations with `\begin{equation}` (body on its own indented line);
+  `\[…\]` is deliberately an error in `beamer-control-maths.sty`.
 
 ## CI/CD
 

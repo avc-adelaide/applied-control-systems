@@ -1,0 +1,47 @@
+# latexindent settings for this repository.
+#
+# Reindent a file in place (run from the repository root):
+#   latexindent -s -l=latexindent.yaml -wd FILE.tex
+# -wd only overwrites (and writes a FILE.bak0 backup) when something changed.
+# latexindent also writes indent.log in the current directory; both are gitignored.
+
+# Two spaces per level, no tabs.
+defaultIndent: "  "
+
+# Continuation lines of an \item get the same two-space indent.
+indentRules:
+  item: "  "
+
+# Leave the column alignment of & in tables and maths as written.
+lookForAlignDelims:
+  tabular: 0
+  tabularx: 0
+  longtable: 0
+  array: 0
+  matrix: 0
+  bmatrix: 0
+  pmatrix: 0
+  Bmatrix: 0
+  vmatrix: 0
+  Vmatrix: 0
+  align: 0
+  align*: 0
+  alignat: 0
+  alignat*: 0
+  aligned: 0
+  split: 0
+  eqnarray: 0
+  eqnarray*: 0
+  cases: 0
+  dcases: 0
+  smallmatrix: 0
+  tabbing: 0
+  matrix*: 0
+  bmatrix*: 0
+  pmatrix*: 0
+  gather: 0
+  multline: 0
+
+removeTrailingWhitespace:
+  beforeProcessing: 1
+  afterProcessing: 1

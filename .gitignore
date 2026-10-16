@@ -34,3 +34,6 @@ cache/
 upload/
 get/
 
+
+# latexindent backups
+*.bak[0-9]*
