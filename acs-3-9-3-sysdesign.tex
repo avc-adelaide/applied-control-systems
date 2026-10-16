@@ -21,12 +21,12 @@
 \SUBCONCEPT{Stabilisability}
 
 \begin{frame}{Stabilising unstable dynamics}
-  \begin{itemize}
-    \item One important question is when can we stabilise an unstable system, this is known as stabilisability
-    \item A stronger condition is when we can stabilise an unstable system with a stable controller, this is known as strong stabilisability
-    \item This is related to reachability, where we can find a state feedback that places closed loop eigenvalues in arbitrary positions
-    \item Stabilisability is slightly different --- we only have to be able to modify the unstable eigenvalues of the system
-  \end{itemize}
+\begin{itemize}
+\item One important question is when can we stabilise an unstable system, this is known as stabilisability
+\item A stronger condition is when we can stabilise an unstable system with a stable controller, this is known as strong stabilisability
+\item This is related to reachability, where we can find a state feedback that places closed loop eigenvalues in arbitrary positions\\ (see Concept 2.4.1 \emph{Reachability} and Concept 2.4.2 \emph{Stabilisation by State Feedback})
+\item Stabilisability is slightly different --- we only have to be able to modify the unstable eigenvalues of the system
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Stabilisability conditions}
@@ -37,9 +37,9 @@
       \begin{equation}
         \operatorname{rank}([A-\lambda I \quad B]) = n
       \end{equation}
-      for all $\lambda\in\mathbb{C}$, and stabilisable for all $\lambda$ in the right half-plane ($\operatorname{Re} s \geq 0$)
-    \item For output feedback, it is always possible to construct a stabilising controller for a system that is stabilisable and observable
-  \end{itemize}
+		for all $\lambda\in\mathbb{C}$, and stabilisable for all $\lambda$ in the right half-plane ($\operatorname{Re} s \geq 0$)
+		\item For output feedback, it is always possible to construct a stabilising controller for a system that is stabilisable and observable\\ (see Concept 2.4.5 \emph{Output Feedback Basics})
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Strong stabilisability}
@@ -71,8 +71,8 @@
 \end{frame}
 
 \begin{frame}{RHP zeros - Example}
-  \begin{itemize}
-    \item Consider the vehicle steering system
+	\begin{itemize}
+		\item Consider the vehicle steering system relating lateral velocity to steering angle (see Concept 2.6.4 \emph{Bode's Relations and Minimum Phase Systems}, which used lateral position, adding a factor of $1/s$)
       \begin{equation}
         P(s) = \frac{av_0s+v_0^2}{bs}
       \end{equation}
@@ -88,11 +88,11 @@
 
 
 \begin{frame}{Time delays}
-  \begin{itemize}
-    \item Time delays are another source of limitations to closed loop performance which adds significant phase lag
-    \item These delays may appear through the process, communication of information, and computation and hence cannot generally be avoided by sensor/actuator location
-    \item However they have similar effects to right half-plane zeros, which can be illustrated through their Pad\'{e} approximations
-  \end{itemize}
+	\begin{itemize}
+		\item Time delays are another source of limitations to closed loop performance which adds significant phase lag
+		\item These delays may appear through the process, communication of information, and computation and hence cannot generally be avoided by sensor/actuator location
+		\item However they have similar effects to right half-plane zeros, which can be illustrated through their Pad\'{e} approximations (see Concept 2.5.6 \emph{The Bode Plot})
+	\end{itemize}
 \end{frame}
 
 
@@ -111,13 +111,13 @@
 \SUBCONCEPT{Bode's Integral Formula}
 
 \begin{frame}{Limits of improvement}
-  \begin{itemize}
-    \item Another limitation to controller design is that it is not possible to uniformly improve certain closed loop performance characteristics
-    \item Recall the sensitivity function $S$ that attenuates disturbances of frequency $\omega$ if $|S(\ii\omega)|<1$ and amplifies disturbances if $|S(\ii\omega)|>1$
-    \item The sensitivity function cannot be made small over a wide frequency range
-    \item Bode's Integral Formula is a conserved quantity that implies that reducing the sensitivity at one frequency increases it at another
-    \item Control design is always a compromise
-  \end{itemize}
+\begin{itemize}
+	\item Another limitation to controller design is that it is not possible to uniformly improve certain closed loop performance characteristics
+	\item Recall the sensitivity function $S$ that attenuates disturbances of frequency $\omega$ if $|S(\ii\omega)|<1$ and amplifies disturbances if $|S(\ii\omega)|>1$ (see Concept 3.8.1 \emph{Sensitivity Functions})
+	\item The sensitivity function cannot be made small over a wide frequency range
+	\item Bode's Integral Formula is a conserved quantity that implies that reducing the sensitivity at one frequency increases it at another
+	\item Control design is always a compromise
+\end{itemize}
 \end{frame}
 
 
