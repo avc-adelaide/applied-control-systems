@@ -1,9 +1,12 @@
 # latexindent settings for this repository.
 #
-# Reindent a file in place (run from the repository root):
+# Reindent every tracked .tex file in place:
+#   make indent
+# or a single file (run from the repository root):
 #   latexindent -s -l=latexindent.yaml -wd FILE.tex
 # -wd only overwrites (and writes a FILE.bak0 backup) when something changed.
-# latexindent also writes indent.log in the current directory; both are gitignored.
+# latexindent also writes indent.log; both are gitignored, and `make indent`
+# puts them in _build/.
 
 # Two spaces per level, no tabs.
 defaultIndent: "  "
