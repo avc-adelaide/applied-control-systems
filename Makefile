@@ -47,7 +47,7 @@ pdfuploadrev  = $(addprefix $(UPLOAD)/,$(revpdf))
 uploadextra   = $(addprefix $(EXTRA)/,$(extrafiles))
 
 
-.PHONY: help edit topics pracs workshops notes examples revision all upload uploadnotes clean figures
+.PHONY: help edit topics pracs workshops notes examples revision all upload uploadnotes clean figures indent
 
 help:
 	@echo 'APPL CONTROL SLIDES MAKEFILE:'
@@ -62,6 +62,7 @@ help:
 	@echo '   upload[*] - Make [*] as above (e.g. "uploadpracs" reqs "pracs") and upload the results'
 	@echo '       extra - Upload all files in extra/ to Canvas'
 	@echo '       clean - Remove cruft in working directly and all _build/ files'
+	@echo '      indent - Reindent all tracked .tex files with latexindent.yaml'
 	@echo '        edit - Edit this Makefile'
 
 test:
@@ -91,6 +92,10 @@ clean:
 	mkdir -p $(BUILD)
 	rm -fv $(BUILD)/*.*
 	echo "The contents of this folder are auto-generated and can be safely deleted." > $(BUILD)/README.md
+
+indent:
+	mkdir -p $(BUILD)
+	latexindent -s -l=latexindent.yaml -wd -c=$(BUILD)/ $$(git ls-files '*.tex')
 
 $(UPLOAD)/%.pdf: $(BUILD)/%.pdf
 	mkdir -p "$(SHAREPOINT)/PDF"

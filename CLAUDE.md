@@ -94,6 +94,7 @@ Run `make help` for a summary. Key targets:
 - `make examples` — PDFs for all worked examples → `_build/worked-examples/`
 - `make all` — all of the above (this is what CI runs)
 - `make clean` — remove LaTeX cruft and `_build/` contents
+- `make indent` — reindent all tracked `.tex` files with `latexindent.yaml` (needs `latexindent`)
 - `make upload<type>` / `make uploadall` — build and push to Canvas (requires `CANVAS_API_TOKEN`)
 - `make extra` — upload everything in `extra/` to Canvas as-is
 
@@ -131,7 +132,8 @@ Run `make help` for a summary. Key targets:
 - Add new references to `control.bib`.
 - Update `CHANGELOG.md` for notable content additions.
 - Indent `.tex` sources with two spaces, no tabs, using the repo's latexindent settings:
-  `latexindent -s -l=latexindent.yaml -wd FILE.tex` (run from the repo root).
+  `make indent` for all tracked files, or `latexindent -s -l=latexindent.yaml -wd FILE.tex`
+  for one (run from the repo root).
 - Number displayed equations with `\begin{equation}` (body on its own indented line);
   `\[…\]` is deliberately an error in `beamer-control-maths.sty`.
 
