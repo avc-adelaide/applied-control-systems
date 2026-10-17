@@ -30,8 +30,8 @@ for texfile in worked-examples/we-*.tex; do
   if [ -d ../pracs ]; then cp -r ../pracs .; fi
   
   # Compile twice for TOC
-  xelatex -interaction=nonstopmode "$filename.tex" || true
-  xelatex -interaction=nonstopmode "$filename.tex" || true
+  lualatex -interaction=nonstopmode "$filename.tex" || true
+  lualatex -interaction=nonstopmode "$filename.tex" || true
   
   # Copy PDF to output directory if it was created
   if [ -f "$filename.pdf" ]; then
