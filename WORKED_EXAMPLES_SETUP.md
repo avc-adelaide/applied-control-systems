@@ -53,7 +53,7 @@ Added support for building worked examples:
 Automated compilation and deployment:
 - **Trigger**: Pushes to main branch affecting worked-examples files or manual dispatch
 - **Process**:
-  1. Installs TeX Live with XeLaTeX support
+  1. Installs TeX Live with LuaLaTeX support
   2. Compiles each worked example twice (for table of contents)
   3. Generates a professional index page for browsing
   4. Deploys PDFs and index to GitHub Pages
@@ -121,7 +121,7 @@ All 9 worked example files are structured and ready to compile. They contain:
 
 ## Technical Details
 
-- **LaTeX Engine**: XeLaTeX (for font support)
+- **LaTeX Engine**: LuaLaTeX (same as `make examples`)
 - **Compilation**: Two passes for TOC generation
 - **Math Symbols**: Shared with slides via `beamer-control-maths.sty`
 - **Figures**: Accessible from topic directories and central figures folder
