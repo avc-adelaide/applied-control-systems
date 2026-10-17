@@ -14,6 +14,8 @@ clc
 close all
 clearvars
 
+if ~isfolder('pdf'), mkdir('pdf'); end
+
 function saveplot(varargin)
   plot_bool = false;
   if plot_bool
