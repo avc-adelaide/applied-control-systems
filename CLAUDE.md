@@ -67,8 +67,8 @@ Other top-level content:
   `we-M-T-C-descr.tex` <-> `acs-M-T-C-descr.tex` (e.g. `we-1-1-1-intro.tex` ↔ `acs-1-1-1-intro.tex`)
 - All use `worked-examples-template.sty`, which auto-loads `beamer-control-maths.sty` for
   consistent notation and configures figure paths back to the main repo directories.
-- Each file compiles independently (two LaTeX passes for the TOC — LuaLaTeX via `make examples`,
-  XeLaTeX in the GitHub Pages script; see Compilation details).
+- Each file compiles independently (two LuaLaTeX passes for the TOC, both via `make examples`
+  and in the GitHub Pages script; see Compilation details).
 - Published to GitHub Pages via `.github/workflows/compile-examples.yml` and
   `.github/scripts/compile-examples.sh` (triggered on pushes to `main` touching
   `worked-examples/**`, the templates, `index.md`, or `_config.yml`).
@@ -103,9 +103,9 @@ Run `make help` for a summary. Key targets:
   `fontspec`/`unicode-math`, so they need a Unicode engine; plain `pdflatex` will not work.
   Slide/prac/workshop/notes targets run lualatex → bibtex → lualatex. Worked examples run
   lualatex twice (no bibliography step).
-- Exception: the GitHub Pages workflow (`compile-examples.yml` → `.github/scripts/compile-examples.sh`)
-  compiles worked examples with **XeLaTeX**, not via the Makefile. Worked examples should
-  therefore compile under both engines.
+- The GitHub Pages workflow (`compile-examples.yml` → `.github/scripts/compile-examples.sh`)
+  compiles worked examples with LuaLaTeX too, but not via the Makefile, and it ignores LaTeX
+  errors (`|| true`), so a green Pages run doesn't prove a clean build — check with `make examples`.
 - Each target copies the source plus all `*.cls`, `*.sty`, `*.bib` and topic files into `_build/`
   and compiles there; build logs are at `_build/<name>.log` (check for `Overfull \vbox` — it means
   slide content runs off the frame).

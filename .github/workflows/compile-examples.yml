@@ -32,7 +32,7 @@ jobs:
       - name: Install TeX Live
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra texlive-science
+          sudo apt-get install -y texlive-luatex texlive-latex-extra texlive-fonts-extra texlive-science
 
       - name: Compile worked examples
         run: bash ./.github/scripts/compile-examples.sh .
