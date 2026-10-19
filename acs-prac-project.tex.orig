@@ -1,0 +1,410 @@
+\documentclass[9pt]{beamer-control}
+\usepackage{beamer-control-prac}
+\begin{document}
+\CONCEPT[7]{Weeks 7--9: Practical project --- Ping pong rig control}
+
+\begin{frame}
+  \frametitle{Introduction}
+  In this practical project, you will apply control theory concepts to design and implement a position controller for a new piece of hardware: the ping pong rig. This plant is more challenging to control than the QUBE used in previous practicals, and it emphasises the versatility of the PID control methodology.
+\end{frame}
+
+
+\SUBCONCEPT{Problem statement}
+
+\begin{frame}{Problem statement}
+  In this project, you are provided with a hardware rig that needs to be controlled.
+  \begin{itemize}
+    \item Using your best engineering judgement, you are required to implement a position controller for the height of the ping pong ball
+    \item As part of the documentation, a complete description of the hardware and interfaces is required
+    \item In order to achieve setpoint following, calibration of the position sensor is required
+    \item No fixed performance criteria are specified; in your documentation you must justify how you tuned the controller and attempted to optimise the performance of the closed-loop system
+    \item While a relatively simple PID controller in its `pure' form will manage to control this plant, we encourage creativity (signal processing, fudge factors, gain scheduling, etc.) to improve performance
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{}
+  The project consists of three parts, preceded by setting up the rig:
+  \begin{itemize}
+    \item Getting started: hardware and software setup
+    \item Part A: System identification and modelling (interfacing, calibration, characterisation)
+    \item Part B: Controller design and tuning
+    \item Part C: Performance evaluation and analysis
+  \end{itemize}
+  Work in groups of around 2--3 (depending on class size and number of rigs). You will be assessed via a formal group report.
+
+  \emph{Once you have formed a group, self-enrol into a Project Group in MyLearning. }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Timing}
+
+  \begin{itemize}
+    \item Each part should take approximately \emph{no more than} one week to complete.
+    \item If you finish one part before the end of a session, don't stop there --- keep going.
+    \item Plan to write up the report as you go, as it will also take time to put together. Each part ends with a checklist of what to record for the report while you still have access to the rig.
+    \item Manage your time and progress carefully. A final (fourth) prac session will be held in the final week of semester to allow for finishing up, but no sessions are planned for SWOTVAC.
+  \end{itemize}
+\end{frame}
+
+
+\SUBCONCEPT{Getting started: Setup}
+
+\begin{frame}{Ping pong rig hardware}
+  \begin{columns}[T]
+    \begin{column}{0.7\textwidth}
+      \vspace{1cm}
+      \begin{itemize}
+        \item \alert{Write down your ping pong rig hardware ID so you can get the same one next time.}
+        \item The input is a voltage supplied to a fan mounted on the base of the system to create an airflow to push the ping pong ball up the vertical cylinder
+        \item The output is a voltage reading from an ultrasonic proximity sensor placed at the bottom of the tube facing upwards, which will need to be converted into units of distance for control purposes
+        \item The ultrasonic sensor is less accurate and noisier than the encoder used in previous practicals, making the rig more of a challenge to control well
+        \item This is only an outline --- your report must include a complete description of the hardware and its interfaces.
+        \item \emph{Do not re-use this photograph. Take your own.}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=2.5cm]{project_pingpongrig}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=yellow!15}
+\begin{frame}{Setting up hardware (CARM)}
+  \begin{columns}
+    \column{0.6\linewidth}
+    \begin{enumerate}
+      \item Do not connect the rig to the power supply
+      \item Connect the ping pong rig output labelled \textsf{Ball Distance} to channel \textsf{AI 0} on the data acquisition board
+      \item Connect the ping pong rig input labelled \textsf{Fan Power Input} to channel \textsf{AO 0} on the data acquisition board
+      \item Ensure the gain knob is rotated to the centre (feel for it)
+      \item Connect the rig to the power supply
+    \end{enumerate}
+
+    \column{0.4\linewidth}
+    \includegraphics[height=0.7\textheight]{ping_pong_CARM_IO.jpg}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Setting up software (CARM)}
+  Open the provided Simulink model:
+
+  \centerline{\includegraphics[width=\linewidth]{ping_pong_CARM.png}}
+
+  Three blocks initialise the hardware and send/receive signals to/from the physical rig:
+  \begin{itemize}
+    \item \textsf{HIL Initialize}: hardware initialisation
+    \item \textsf{HIL Read Analog}: receive analogue signal (voltage)
+    \item \textsf{HIL Write Analog}: send analogue signal (voltage)
+  \end{itemize}
+
+  These blocks are set up to interface with the NI PCIe 6321 I/O board in the PC, selecting analogue input 0 and analogue output 0, and ensure the output is reset to \qty{0}{V} after a run is terminated.
+\end{frame}
+}
+
+{\setbeamercolor{background canvas}{bg=green!15}
+\begin{frame}{Setting up hardware (MyRIO)}
+  \begin{enumerate}
+    \item Do not connect the rig to the power supply
+    \item Connect the ping pong rig output labelled \textsf{Distance} to screw terminals \texttt{AI 0+} and \texttt{AI 0-} on the MyRIO
+    \item Connect the ping pong rig input labelled \textsf{Fan Input} to screw terminals \texttt{AO AGND} and \texttt{AO 0} on the MyRIO
+    \item Ensure the gain knob is rotated to the centre (feel for it)
+    \item Connect the rig to the power supply (\qty{24}{V})
+  \end{enumerate}
+
+  \centering
+  \includegraphics[width=0.5\textwidth]{ping_pong_MyRIO_IO.jpg}
+\end{frame}
+
+
+\begin{frame}{Setting up software (MyRIO)}
+  Open the provided Simulink model:
+
+  \centerline{\includegraphics[width=\linewidth]{ping_pong_MyRIO.png}}
+
+  Three blocks initialise the hardware and send/receive signals to/from the physical rig:
+  \begin{itemize}
+    \item \textsf{HIL Initialize}: hardware initialisation
+    \item \textsf{HIL Read Analog}: receive analogue signal (voltage)
+    \item \textsf{HIL Write Analog}: send analogue signal (voltage)
+  \end{itemize}
+
+  These blocks are set up to interface with the MyRIO controller, selecting analogue input 0 and analogue output 0, and ensure the output is reset to \qty{0}{V} after a run is terminated.
+\end{frame}
+}
+
+
+\begin{frame}{Simulink model notes}
+
+  \begin{itemize}
+    \item The fixed step size (sample time) for the model is set to \qty{0.01}{s} with a solver type of \textsf{Auto}. These settings shouldn't need to be adjusted (but are worth checking).
+
+    \item
+      The Simulink model includes a saturation block to ensure no control signal can exceed the capacity of the voltage output of the system.
+
+    \item
+      The step input is set to \qty{1}{V} at \qty{0}{s} in series with a Slider Gain. The Slider Gain allows you to manually adjust the voltage to get a feel for how the fan behaves and interacts with the ping pong ball.
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Running the system and logging data}
+
+  \begin{itemize}
+    \item When investigating and tuning the system, you likely want to keep the \textsf{Stop Time} set to \texttt{Inf}. Remember you can use manual switches, slider gains, and scopes to monitor and tune the system in real time.
+
+    \item Quarc runs the model in Simulink External Mode, whose data buffer holds 10,000 samples per run by default, so when logging data to calculate identification parameters or to create plots for reporting, with a step size of \qty{0.01}{s} set the \textsf{Stop Time} to (at most) \qty{99.99}{s}
+
+    \item We recommend creating copies of your block diagram rather than continuously iterating the same model. This will make it easy to flip back and forth between open/closed loop, continuous/short runs, different tuning approaches, etc.
+  \end{itemize}
+
+\end{frame}
+
+\SUBCONCEPT{Part A: System identification and modelling}
+
+
+\begin{frame}{Interfacing}
+  Before modelling the plant you need a clear picture of its signals:
+  \begin{itemize}
+    \item[1)] Identify the inputs and outputs, and the range of each electrical signal
+    \item[2)] Regularise the input signal (the fan voltage) so that a signal input range of 0\%--100\% results in a `sensible' fan voltage input range.
+    \item[3)] Calibrate the sensor signal (the plant output) so the controller works in units of distance
+    \item[4)] Filter the sensor signal so the feedback signal is smooth
+  \end{itemize}
+  You have likely already started step 1), no further instructions needed on that step.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{2) Regularisation: fan voltage ranges}
+  \begin{itemize}
+    \item Use the \textsf{Slider Gain} to get a feel for the behaviour of the system, and identify the key voltage inputs of interest. In particular, find the minimum voltage ($v_{\text{min}}$) required before ball lift-off, and maximum useable voltage ($v_{\text{max}}$)
+    \item Note that the maximum useable voltage may be less than the maximum electrical voltage; pick a lower value if you see no qualitative difference with a higher value, or if the higher value results in an unacceptable level of sensor noise/distortion.
+    \item Add a scaling factor and bias to the step input so that a normalised input signal of 0\%--100\% results in a `sensible' fan voltage across the full range.
+    \item Once completed, a step input of \texttt{0.01} should barely lift the ball, and a step input of \texttt{1.0} (the default) should be a nominal maximum `expected' input.
+  \end{itemize}
+
+  \centering
+  \includegraphics[width=0.7\linewidth]{ping_pong_input_norm.png}
+\end{frame}
+
+\begin{frame}{3) Calibration: voltage to distance conversion}
+  After getting the ping pong ball to lift, you may notice that the output is not in units of distance. You will need to calibrate the sensor (i.e.\ convert volts to a unit of distance).
+  \begin{itemize}
+    \item You can use a physical object (we provide a tape measure) to hold the ball steady at a series of positions in the tube
+    \item Record the \emph{sensor output} voltage (not the fan input voltage!) with the ball at known heights, using the \qty{10}{cm} markings on the side of the tube
+    \item Use at least two data points to fit a linear relationship between sensor voltage and distance; more points will show whether the sensor is linear over the full height of the tube
+    \item Implement this conversion with \textsf{Gain} and \textsf{Constant} blocks, as shown below
+  \end{itemize}
+
+  \centering
+  \includegraphics[width=8cm]{ping_pong_output_calib.png}
+\end{frame}
+
+\begin{frame}{4) Conditioning the measurement}
+  Once calibrated, you will notice that the sensor is heavily discretised, making analysis difficult; the discretisation would also cause large spikes in the derivative term, limiting the effectiveness of a controller.
+
+  As in previous practicals, filter the measured height to smooth the signal without introducing too much time lag, using the low-pass filter method from Practicals 1 and 3 to identify an appropriate cut-off frequency. In the example below the signal is smoother, does not have too much lag, and may be suitable for control purposes.
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=4.8cm]{project_filter}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Model subsystem}
+
+  To simplify your model going forwards, select the plant, regularisation, calibration, and filtering stages, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below:
+
+<<<<<<< HEAD
+  \centering
+  \includegraphics[height=3cm]{project_subsystem}
+=======
+\centering
+\includegraphics[height=3cm]{ping_pong_CARM_subsystem.png}
+>>>>>>> e684183 (update figures for project)
+\end{frame}
+
+\begin{frame}{Modelling the ping pong rig}
+  Now that the system has been calibrated and the output conditioned, characterise the dynamics of the plant:
+  \begin{itemize}
+    \item Run a step response on the rig and plot the data in MATLAB using the \textsf{To Workspace} block
+    \item As in Practical 2, fit a straight line to the response to find the Integrator with Time Delay (ITD) parameters $a$ and $\tau$
+    \item As in Practical 4, determine a transfer function and/or state space model for the plant; consider whether another model form (e.g.\ First Order with Time Delay, FOTD) fits your data better, and justify your choice
+    \item Look for nonlinearities: does the response change with the size of the step, or with the height of the ball?
+    \item Optionally, characterise the frequency response, as in Practical 5
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Part A: What to record for your report}
+  Part A provides the evidence for rubric criteria 2 (\emph{Systems overview}) and 3 (\emph{Open loop characterisations}). Before moving on, make sure you have:
+  \begin{itemize}
+    \item A photo or schematic of the rig, and a signal-flow diagram from fan voltage through to sensor voltage, labelled with the board channels and the range of each signal
+    \item Your calibration data, the fitted line and its equation, and a comment on how linear the sensor is
+    \item Raw and filtered measurements on the same axes, the cut-off frequency you chose, and why (noise versus lag)
+    \item Step response plots with your fitted model overlaid, the model parameters (e.g.\ $a$ and $\tau$), and how you obtained them
+    \item Evidence for or against nonlinearity, e.g.\ responses to steps of different sizes or at different heights
+  \end{itemize}
+  Save the data from every run (e.g.\ as a \texttt{.mat} file with a descriptive name) so you can re-plot it later for high quality figures.
+\end{frame}
+
+
+\SUBCONCEPT{Part B: Controller design and tuning}
+
+\begin{frame}{Initial design}
+<<<<<<< HEAD
+  With the system set up, calibrated, filtered and characterised, you will start designing a controller. Controller design must be more than trial and error:
+  \begin{itemize}
+    \item Using your model parameters (i.e., $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g., the ITD tuning laws from Practical 4)
+    \item You may wish to research and test alternative laws in the literature, including state space methods
+    \item Using your chosen control approach(es), implement a closed-loop controller in Simulink
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{project_pid}
+  \end{figure}
+=======
+	With the system set up, calibrated, filtered and characterised, you will start designing a controller. Controller design must be more than trial and error:
+	\begin{itemize}
+		\item Using your model parameters (i.e., $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g., the ITD tuning laws from Practical 4)
+		\item You may wish to research and test alternative laws in the literature, including state space methods
+		\item Using your chosen control approach(es), implement a closed-loop controller in Simulink
+	\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{ping_pong_CARM_PID.png}
+\end{figure}
+>>>>>>> e684183 (update figures for project)
+\end{frame}
+
+
+\begin{frame}{Initial performance}
+  For each of the control approaches explored:
+  \begin{itemize}
+    \item Does the controller stabilise the system?
+    \item Does it achieve setpoint following?
+    \item How does the controller perform in general? Measure initial performance characteristics (settling time, overshoot, etc.)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Part B: What to record for your report}
+  Part B provides the first half of the evidence for rubric criterion 4 (\emph{Control systems}). Before moving on, make sure you have:
+  \begin{itemize}
+    \item The tuning recipe(s) you used, the model parameters it needs, and the calculation of your gains
+    \item A diagram of your closed-loop Simulink model, including the filter and saturation (for the appendix)
+    \item The closed-loop step response with your initial gains, and the measured performance (e.g., settling time, overshoot, steady-state error)
+    \item A statement of the performance you are aiming for, and what you think limits it on this rig (e.g., sensor noise and discretisation, time delay, fan saturation)
+  \end{itemize}
+\end{frame}
+
+
+\SUBCONCEPT{Part C: Performance evaluation and analysis}
+
+\begin{frame}{Improving performance}
+  By this point of the project you should have a well-characterised plant with a functioning, if not optimal, closed loop control system.
+  \begin{itemize}
+    \item Use systematic methods to improve the tuning --- record what you changed, why, and the effect of each change
+    \item Quantify performance improvements against at least two metrics (e.g.\ overshoot, settling time, \dots)
+    \item Beyond `standard' PID or state-space approaches, consider additional signal processing, nonlinearities or fudge factors, gain scheduling, etc., as encouraged in the problem statement
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Analysis and testing}
+  Once you have successfully controlled the ping pong rig, investigate how well your system operates under different conditions. As a minimum:
+  \begin{itemize}
+    \item Test against a variety of step inputs (different amplitudes, different signs)
+    \item Use at least one approach to test the robustness characteristics of the closed loop system
+  \end{itemize}
+  To achieve this, consider investigating: the performance of disturbance rejection (e.g., a ball disturbance, or a flow blockage); the impact of measurement noise;   the limits of stability (or at least usable ranges of feedback gain).
+
+  Another opportunity for investigation is to analyse the impact of the input regularisation step in Part A and whether it substantially affected the results of the control design process.
+
+  This part of the project is purposefully open-ended: what do \emph{you} think are important experiments to test the performance of the ping pong rig controller?
+\end{frame}
+
+\begin{frame}{Part C: What to record for your report}
+  Part C completes rubric criterion 4 (\emph{Control systems}) and provides the evidence for criterion 5 (\emph{Performance and robustness}). Make sure you have:
+  \begin{itemize}
+    \item A record of each tuning change (e.g.\ a table of gains against your chosen metrics) showing how you got from the initial to the final controller
+    \item Initial and final step responses on the same axes, with at least two metrics quantified for each
+    \item Results of the step sweep across different amplitudes and signs
+    \item Your disturbance rejection test: how the disturbance was applied, and how the controller responded
+    \item What else you varied, how the performance changed, and where (if anywhere) the loop became unstable
+  \end{itemize}
+  In the report, explain \emph{why} each result looks the way it does, rather than only presenting the plots.
+\end{frame}
+
+
+\SUBCONCEPT{Report and assessment}
+
+\begin{frame}{Project report}
+  After designing and testing your controller you will describe your process in a formal, professional group report. While the structure is up to you, it must address the rubric criteria (next slide). Suggestions for inclusion are:
+  \begin{itemize}
+    \item An executive summary (required), introduction and conclusion
+    \item A description of the hardware and software, with photo(s) / schematic(s) / flow diagram(s)
+    \item A description of the calibration process
+    \item A discussion of the open-loop response, the model you fitted to it, and any nonlinearities
+    \item An explanation of the tuning process such as what tuning law was used, your method of manual tuning, etc.
+    \item An in-depth discussion of the performance and robustness of the controller
+    \item Diagrams of Simulink models and MATLAB code placed in an appendix
+  \end{itemize}
+  Export your data with the \textsf{To Workspace} block and plot it in MATLAB for high quality figures, rather than using screenshots of Simulink scopes.
+\end{frame}
+
+\begin{frame}{Rubric}
+  The project is assessed via a formal report. The rubric includes the following criteria (equally weighted):
+
+  \small
+  \begin{enumerate}
+    \item \textbf{Writing Style and Report Formatting}:
+      Grammar, spelling, tenses, formality, completeness, flow. Etc. Appropriate introduction and conclusion. Must include executive summary. High quality figures and graphs, typography, typesetting, document structure, tables of contents, figure captions. Etc.
+
+    \item \textbf{Systems overview}:
+      Explanation (and possibly derivation) of dynamics, actuator, interfacing with sensor(s), input signals, output signals, ranges of electrical signals. Photo(s) / schematic(s) / flow diagram(s) needed.
+
+    \item \textbf{Open loop characterisations}:
+      Sensor calibration, signal normalisation, step responses, nonlinearities, frequency responses. Characterisation of plant model (transfer function, ITD/FOTD parameters, etc., as appropriate).
+
+    \item \textbf{Control systems}:
+      Use of at least one tuning recipe, characterising performance (settling time, overshoot, etc.). Manual tuning improvements to improve default response. Discussion of desired performance and obstacles for improving performance.
+
+    \item \textbf{Performance and robustness}:
+      Exploration of system behaviour under varying conditions, including but not limited to robustness to parameter variation (e.g., mass variation), measurement noise, disturbances. Changes in performance vs variations. Limits of stability.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Group work}
+  \begin{itemize}
+    \item As a group assignment it is critical to ensure that all students have met the learning outcomes.
+    \item No student should be included in a group submission if they have not sufficiently contributed.
+    \item It is the responsibility of the whole group to ensure all students have the opportunity to contribute.
+    \item If a student is not contributing, this should be raised early with the student and if the situation does not improve within one week the student should be removed from the group.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Group evaluation / peer assessment}
+  \begin{itemize}
+    \item FeedbackFruits will be used for students to rate the contributions of each student against the following criteria:
+      \begin{itemize}
+        \item Preparation
+        \item Work in lab
+        \item Work outside lab
+        \item Communication and teamwork
+      \end{itemize}
+    \item FeedbackFruits calculates a normalised score it calls the Group Contribution Factor (between zero and two) and this factor will be used to weight the mark awarded for the report.
+    \item Any mark increase from this process will be capped at +10 out of 100 marks, or such that the student receives no more than 99\% for the assignment.
+  \end{itemize}
+\end{frame}
+
+\SUMMARYFRAME
+
+\end{document}

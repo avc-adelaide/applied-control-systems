@@ -124,13 +124,13 @@
   Open the provided Simulink model:
 
   \centerline{\includegraphics[width=\linewidth]{ping_pong_MyRIO.png}}
-
-  Three blocks initialise the hardware and send/receive signals to/from the physical rig:
-  \begin{itemize}
-    \item \textsf{HIL Initialize}: hardware initialisation
-    \item \textsf{HIL Read Analog}: receive analogue signal (voltage)
-    \item \textsf{HIL Write Analog}: send analogue signal (voltage)
-  \end{itemize}
+	
+	Three blocks initialise the hardware and send/receive signals to/from the physical rig:
+	\begin{itemize}
+		\item \textsf{HIL Initialize}: hardware initialisation
+		\item \textsf{HIL Read Analog}: receive analogue signal (voltage)
+		\item \textsf{HIL Write Analog}: send analogue signal (voltage)
+	\end{itemize}
 
   These blocks are set up to interface with the MyRIO controller, selecting analogue input 0 and analogue output 0, and ensure the output is reset to \qty{0}{V} after a run is terminated.
 \end{frame}
@@ -158,9 +158,9 @@
     \item When investigating and tuning the system, you likely want to keep the \textsf{Stop Time} set to \texttt{Inf}. Remember you can use manual switches, slider gains, and scopes to monitor and tune the system in real time.
 
     \item Quarc runs the model in Simulink External Mode, whose data buffer holds 10,000 samples per run by default, so when logging data to calculate identification parameters or to create plots for reporting, with a step size of \qty{0.01}{s} set the \textsf{Stop Time} to (at most) \qty{99.99}{s}
-
-    \item We recommend creating copies of your block diagram rather than continuously iterating the same model. This will make it easy to flip back and forth between open/closed loop, continuous/short runs, different tuning approaches, etc.
-  \end{itemize}
+	
+	\item We recommend creating copies of your block diagram rather than continuously iterating the same model. This will make it easy to flip back and forth between open/closed loop, continuous/short runs, different tuning approaches, etc.
+	\end{itemize}
 
 \end{frame}
 
@@ -221,8 +221,8 @@
 
   To simplify your model going forwards, select the plant, regularisation, calibration, and filtering stages, then right-click and select \textsf{Create Subsystem from Selection}. This is now your ping pong plant, which has an input and an output; you can label them as shown below:
 
-  \centering
-  \includegraphics[height=3cm]{project_subsystem}
+\centering
+\includegraphics[height=3cm]{ping_pong_CARM_subsystem.png}
 \end{frame}
 
 \begin{frame}{Modelling the ping pong rig}
@@ -237,31 +237,31 @@
 \end{frame}
 
 \begin{frame}{Part A: What to record for your report}
-  Part A provides the evidence for rubric criteria 2 (\emph{Systems overview}) and 3 (\emph{Open loop characterisations}). Before moving on, make sure you have:
-  \begin{itemize}
-    \item A photo or schematic of the rig, and a signal-flow diagram from fan voltage through to sensor voltage, labelled with the board channels and the range of each signal
-    \item Your calibration data, the fitted line and its equation, and a comment on how linear the sensor is
-    \item Raw and filtered measurements on the same axes, the cut-off frequency you chose, and why (noise versus lag)
-    \item Step response plots with your fitted model overlaid, the model parameters (e.g.\ $a$ and $\tau$), and how you obtained them
-    \item Evidence for or against nonlinearity, e.g.\ responses to steps of different sizes or at different heights
-  \end{itemize}
-  Save the data from every run (e.g.\ as a \texttt{.mat} file with a descriptive name) so you can re-plot it later for high quality figures.
+Part A provides the evidence for rubric criteria 2 (\emph{Systems overview}) and 3 (\emph{Open loop characterisations}). Before moving on, make sure you have:
+\begin{itemize}
+\item A photo or schematic of the rig, and a signal-flow diagram from fan voltage through to sensor voltage, labelled with the board channels and the range of each signal
+\item Your calibration data, the fitted line and its equation, and a comment on how linear the sensor is
+\item Raw and filtered measurements on the same axes, the cut-off frequency you chose, and why (noise versus lag)
+\item Step response plots with your fitted model overlaid, the model parameters (e.g.\ $a$ and $\tau$), and how you obtained them
+\item Evidence for or against nonlinearity, e.g.\ responses to steps of different sizes or at different heights
+\end{itemize}
+Save the data from every run (e.g.\ as a \texttt{.mat} file with a descriptive name) so you can re-plot it later for high quality figures.
 \end{frame}
 
 
 \SUBCONCEPT{Part B: Controller design and tuning}
 
 \begin{frame}{Initial design}
-  With the system set up, calibrated, filtered and characterised, you will start designing a controller. Controller design must be more than trial and error:
-  \begin{itemize}
-    \item Using your model parameters (i.e., $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g., the ITD tuning laws from Practical 4)
-    \item You may wish to research and test alternative laws in the literature, including state space methods
-    \item Using your chosen control approach(es), implement a closed-loop controller in Simulink
-  \end{itemize}
-  \begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{project_pid}
-  \end{figure}
+	With the system set up, calibrated, filtered and characterised, you will start designing a controller. Controller design must be more than trial and error:
+	\begin{itemize}
+		\item Using your model parameters (i.e., $a$ and $\tau$), find PID gains from at least one tuning recipe (e.g., the ITD tuning laws from Practical 4)
+		\item You may wish to research and test alternative laws in the literature, including state space methods
+		\item Using your chosen control approach(es), implement a closed-loop controller in Simulink
+	\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{ping_pong_CARM_PID.png}
+\end{figure}
 \end{frame}
 
 
