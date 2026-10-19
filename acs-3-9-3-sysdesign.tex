@@ -45,34 +45,63 @@
 \begin{frame}{Strong stabilisability}
   \begin{itemize}
     \item A system is strongly stabilisable if it can be stabilised by a stable controller
-    \item A linear system is strongly stabilisable if and only if it has an even number of real poles between every pair of real zeros in the right half-plane ($\operatorname{Re} s \geq 0$)
+    \item A linear system is strongly stabilisable if and only if it has an even number of real poles (counted with multiplicity) between every pair of real zeros on the non-negative real axis, including a zero at $s=\infty$ if the system is strictly proper
     \item Consider the system
-      \begin{equation}
+      \begin{math}
         P(s) = \frac{(s-1)(s-5)}{(s-4)(s-6)}
-      \end{equation}
-      This system has two real zeros at $s=1$ and $s=5$ and two poles at $s=4$ and $s=6$  $\rightarrow$ not strongly stabilisable
+      \end{math}
+      
+      Two real zeros at $s=1$ and $s=5$ and two poles at $s=4$ and $s=6$  $\rightarrow$ not strongly stabilisable
     \item Consider the system
-      \begin{equation}
+      \begin{math}
         P(s) = \frac{(s-1)(s-3)}{(s-2)^2}
-      \end{equation}
-      This system has two real zeros at $s=1$ and $s=3$ and two poles at $s=2$ $\rightarrow$ strongly stabilisable
+      \end{math}
+      
+      Two real zeros at $s=1$ and $s=3$ and two poles at $s=2$ $\rightarrow$ strongly stabilisable
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example of non-strong stabilisability}
+
+Consider
+\begin{equation}
+P(s) = \frac{s-1}{(s-2)(s+1)}
+\end{equation}
+Would need \emph{two} real poles above $s=1$ (the interval is $s\in[1,\infty]$) $\rightarrow$ not strongly stabilisable
+
+Pole placement to $(s+1)^3$ results in
+\begin{equation}
+C(s) = \frac{9(s+1)}{(s-5)}
+\end{equation}
+
+A physical example is an inverted pendulum (left as an exercise for the reader). 
+
+\begin{itemize}
+\item
+An unstable controller \emph{is indeed realisable} but there are are limitations to how they can be used (e.g., avoiding saturation), and they are less robust
+\end{itemize}
+
 \end{frame}
 
 
 \SUBCONCEPT{RHP zeros and time delays}
 
-\begin{frame}{RHP zeros}
+\begin{frame}{Non-minimum-phase zeros}
   \begin{itemize}
     \item Right half-plane zeros can cause limitations in closed loop performance
     \item While the poles of a system depend on the system dynamics, the zeros depend on how the sensors and actuators connect to the process
     \item Therefore, we may be able to redesign our system to avoid right half-plane zeros
   \end{itemize}
+  \begin{equation}
+    G(s) = C(sI-A)^{-1} B + D = \frac{C \operatorname{adj}(sI-A) B + D \operatorname{det}(sI-A) }{\operatorname{det}(sI-A)}
+  \end{equation}
+  ($\operatorname{adj}(\dot)$ is the \emph{adjugate}, which I don't expect you to know)
 \end{frame}
 
-\begin{frame}{RHP zeros - Example}
+\begin{frame}{RHP zeros --- Example}
 	\begin{itemize}
-		\item Consider the vehicle steering system relating lateral velocity to steering angle (see Concept 2.6.4 \emph{Bode's Relations and Minimum Phase Systems}, which used lateral position, adding a factor of $1/s$)
+		\item Consider the vehicle steering system relating lateral velocity to steering angle\footnote{see Concept 2.6.4 \emph{Bode's Relations and Minimum Phase Systems}, which used lateral position, adding a factor of $1/s$.}
       \begin{equation}
         P(s) = \frac{av_0s+v_0^2}{bs}
       \end{equation}
@@ -96,7 +125,7 @@
 \end{frame}
 
 
-\begin{frame}{Time delays - Pad\'{e} approximation}
+\begin{frame}{Time delays --- Pad\'{e} approximation}
   \begin{itemize}
     \item The Pad\'{e} approximation of a time delay provides a unity gain, rational transfer function whose phase approximates the time delay
     \item The first and second order Pad\'{e} approximations are
