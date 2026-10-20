@@ -34,7 +34,7 @@
 \end{frame}
 
 
-\begin{frame}{Actuation limits - Example}
+\begin{frame}{Actuation limits --- Example}
   \begin{itemize}
     \item Consider a servo system, where the actuator is a current-driven voice coil modelled by
       \begin{equation}
@@ -48,12 +48,12 @@
 
 
 
-\begin{frame}{Actuation limits - Example}
+\begin{frame}{Actuation limits --- Example}
   \begin{itemize}
     \item The problem of moving the mass from one position to another in minimum time is dependent on if the velocity is saturated or not
     \item Without velocity saturation, we can simply apply the maximum acceleration until the midpoint and then apply maximum deceleration
     \item For a scenario with velocity saturation, we are additionally limited by the maximum velocity which increases the minimum time
-    \item The minimum time for a transition over a distance $l$ with zero velocity at start and end is
+    \item The minimum time for a transition over a distance $\ell$ with zero velocity at start and end is
       \begin{equation}
         t= \begin{cases}2 \sqrt{\ell / a_{\max }} & \text { if } \ell \leq v_{\max }^2 / a_{\max } \\ \ell / v_{\max }+v_{\max } / a_{\max } & \text { if } \ell>v_{\max }^2 / a_{\max }\end{cases}
       \end{equation}
@@ -61,7 +61,7 @@
 
 \end{frame}
 
-\begin{frame}{Actuation limits - Example}
+\begin{frame}{Actuation limits --- Example}
   \begin{figure}
     \vspace{-0.5cm}
     \centering
@@ -70,6 +70,23 @@
     \textbf{Figure 14.12:} Minimum time transition for a servo system.
   \end{figure}
 \end{frame}
+
+\begin{frame}
+\frametitle{Where this leads: optimal control}
+\framesubtitle{Russ Tedrake (2024), `Underactuated Robotics:
+Algorithms for Walking, Running, Swimming, Flying, and Manipulation', Chapter 7 URL: \url{https://underactuated.csail.mit.edu/dp.html}}
+
+\begin{align}
+\ddot q(t) &= a\,, & \dot q(t) &= \dot q(0) + at\,, & q(t) &= q(0) + \dot q(0) t + \frac12 a t^2\,,
+\end{align}
+\begin{align}
+\dot q^2 &= \dot q(0)^2 + 2a(q-q(0)), & q &= \frac{ \dot q^2} {2a} + c_a
+\end{align}
+
+\vspace*{5cm}
+
+\end{frame}
+
 
 \begin{frame}{Measurement noise and friction}
   \begin{itemize}
@@ -81,7 +98,7 @@
 
 
 
-\begin{frame}{Friction - Example}
+\begin{frame}{Friction --- Example}
   \begin{itemize}
     \item Consider the cart-pendulum balance system with state feedback but including a friction force given by
       \begin{equation}
@@ -99,12 +116,24 @@
   \end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{Transfer functions and describing functions}
 
-\begin{frame}{Friction - Example}
-  \begin{itemize}
-    \item The results of a simulation of the system are shown below
-  \end{itemize}
+Process transfer function:
+\begin{equation}
+  G(s) = \frac{0.01837 s^3 - 0.08 s}{s^4 + 1.046 s^3 + 0.9109 s^2 + 0.2552 s + 0.03781}
+\end{equation}
 
+Friction `describing function':
+\begin{equation}
+N(a) = \frac{4\mu_{\text{f}}M_{\text{t}}g}{a\pi}
+\end{equation}
+\AMref{10.5}
+
+\end{frame}
+
+
+\begin{frame}{Friction --- Example}
   \begin{figure}
     \vspace{-0.5cm}
     \centering
@@ -112,6 +141,10 @@
     \vspace{-0.2cm}
     \textbf{Figure 14.14:} Time and frequency responses of the cart-pendulum system.
   \end{figure}
+  \begin{itemize}
+  \item $\omega=0.21$ has approx.\ $T_{\text{p}}=\qty{30}{s}$
+  \item $G(0.21)=1/N(a)=0.39$, so ampl.\ approx.\ $a=\qty{0.43}{m/s}$
+  \end{itemize}
 \end{frame}
 
 \SUMMARYFRAME

@@ -82,6 +82,12 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Vehicle steering system w.\ observer --- loop transfer function}
+\centering
+\includegraphics[width=\textwidth]{figure14.10.pdf}
+\end{frame}
+
 
 \begin{frame}{Slow stable process zeros}
   \begin{itemize}
@@ -102,12 +108,19 @@
 \SUBCONCEPT{Design rules}
 
 \begin{frame}{Good, robust pole placement}
+  These examples give us some important insight in designing robust pole placement methods
   \begin{itemize}
-    \item These examples give us some important insight in designing robust pole placement methods
     \item Slow stable zeros should be cancelled by controller poles to avoid peaks in the complementary sensitivity
+      \begin{itemize}
+        \item The cancelled mode remains in the noise sensitivity $CS$; this is acceptable only because the zero is stable
+      \end{itemize}
     \item The peaks in sensitivity of fast stable poles should be minimised by having controller zeros close to the fast poles
-    \item Slow unstable process zeros and fast unstable process poles impose severe limits on the closed loop performance
+      \begin{itemize}
+        \item The cancelled mode remains in the load sensitivity $PS$, but decays quickly
+      \end{itemize}
+    \item Never cancel unstable poles or zeros: the closed loop is then not internally stable
   \end{itemize}
+  Slow unstable process zeros and fast unstable process poles impose severe limits on the closed loop performance
 \end{frame}
 
 \SUMMARYFRAME
